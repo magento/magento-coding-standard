@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<ruleset name="Magento">
+    <description>Magento Coding Standard</description>
+
+    <!-- File extensions to be checked. -->
+    <arg name="extensions" value="php,phtml"/>
+
+    <rule ref="Magento.CodeAnalysis.EmptyBlock">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Templates.ThisInTemplate">
+        <include-pattern>*.phtml</include-pattern>
+    </rule>
+    <rule ref="Magento.Templates.XssTemplate">
+        <include-pattern>*.phtml</include-pattern>
+    </rule>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Classes.DuplicateClassName">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.Commenting.Fixme">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Commenting.Todo">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Generic.Functions.CallTimePassByReference">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Metrics.NestingLevel">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag">
+        <severity>10</severity>
+        <exclude-pattern>*.phtml</exclude-pattern>
+    </rule>
+    <rule ref="Generic.PHP.DeprecatedFunctions">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Generic.PHP.NoSilencedErrors.Discouraged">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Generic.PHP.Syntax">
+        <severity>10</severity>
+    </rule>
+    <rule ref="PEAR.ControlStructures.ControlSignature">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
+    <rule ref="PSR2.Files.ClosingTag">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*.phtml</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Commenting.DocCommentAlignment">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Operators.IncrementDecrementUsage">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.PHP.CommentedOutCode">
+        <severity>6</severity>
+        <properties>
+            <property name="maxPercentage" value="70"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.PHP.Eval.Discouraged">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
+    <rule ref="Squiz.PHP.GlobalKeyword">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.PHP.NonExecutableCode">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Squiz.Scope.MemberVarScope">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.GlobalFunction">
+        <severity>8</severity>
+    </rule>
+</ruleset>
