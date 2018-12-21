@@ -5,16 +5,6 @@
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml"/>
 
-    <rule ref="Magento.CodeAnalysis.EmptyBlock">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento.Templates.ThisInTemplate">
-        <include-pattern>*.phtml</include-pattern>
-    </rule>
-    <rule ref="Magento.Security.XssTemplate">
-        <include-pattern>*.phtml</include-pattern>
-    </rule>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <severity>8</severity>
         <type>warning</type>
@@ -69,6 +59,75 @@
     </rule>
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
+    </rule>
+    <rule ref="Magento.Classes.ObjectInstantiation">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.CodeAnalysis.EmptyBlock">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Exceptions.DirectThrow">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Exceptions.Namespace">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Legacy.MageEntity">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.NamingConvention.InterfaceName">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Magento.Performance.EmptyCheck">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.PHP.DateTime">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Magento.PHP.DiscouragedFunction">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.PHP.Goto">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.PHP.ReturnValueCheck">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.PHP.Var">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Security.IncludeFile">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Security.LanguageConstruct">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.Security.Superglobal.SuperglobalUsageError">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.Security.Superglobal.SuperglobalUsageWarning">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Security.XssTemplate">
+        <include-pattern>*.phtml</include-pattern>
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Strings.RegEx">
+        <severity>10</severity>
+    </rule>
+    <rule ref="Magento.Strings.StringConcat">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Templates.ThisInTemplate">
+        <include-pattern>*.phtml</include-pattern>
+        <severity>6</severity>
+    </rule>
+    <rule ref="Magento.Translation.ConstantUsage">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Magento.Whitespace.MultipleEmptyLines">
+        <severity>6</severity>
     </rule>
     <rule ref="PEAR.ControlStructures.ControlSignature">
         <severity>6</severity>

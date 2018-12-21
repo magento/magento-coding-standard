@@ -13,18 +13,11 @@ use PHP_CodeSniffer\Files\File;
  */
 class MageEntitySniff implements Sniff
 {
-    /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
-    /**
-     * String representation of error.
-     *
-     * @var string
-     */
+   /**
+    * String representation of error.
+    *
+    * @var string
+    */
     protected $errorMessage = 'Possible Magento 2 design violation. Detected typical Magento 1.x construction "%s".';
 
     /**
@@ -94,15 +87,12 @@ class MageEntitySniff implements Sniff
             $entityName = $tokens[$stackPtr]['content'];
             $error = [$tokens[$oldPosition]['content'] . ' ' . $entityName];
         }
-        if ($entityName === $this->legacyEntity ||
-            $this->isPrefixLegacy($entityName)
-        ) {
+        if ($entityName === $this->legacyEntity || $this->isPrefixLegacy($entityName)) {
             $phpcsFile->addError(
                 $this->errorMessage,
                 $stackPtr,
                 $this->errorCode,
-                $error,
-                $this->severity
+                $error
             );
         }
     }

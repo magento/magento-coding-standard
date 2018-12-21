@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class MultipleEmptyLinesSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -64,8 +57,7 @@ class MultipleEmptyLinesSniff implements Sniff
                         $this->warningMessage,
                         $stackPtr,
                         $this->warningCode,
-                        [$lines],
-                        $this->severity
+                        [$lines]
                     );
                 }
             }

@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class ConstantUsageSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -72,9 +65,7 @@ class ConstantUsageSniff implements Sniff
                 $phpcsFile->addWarning(
                     $this->warningMessage,
                     $this->getFirstLineToken($phpcsFile, $currentLine),
-                    $this->warningCode,
-                    [],
-                    $this->severity
+                    $this->warningCode
                 );
             }
         } else {
@@ -84,9 +75,7 @@ class ConstantUsageSniff implements Sniff
                     $phpcsFile->addWarning(
                         $this->warningMessage,
                         $this->getFirstLineToken($phpcsFile, $currentLine - 1),
-                        $this->warningCode,
-                        [],
-                        $this->severity
+                        $this->warningCode
                     );
                 }
             }

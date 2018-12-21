@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class ObjectInstantiationSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -84,8 +77,7 @@ class ObjectInstantiationSniff implements Sniff
                 $this->warningMessage,
                 $classNameStart,
                 $this->warningCode,
-                [$className],
-                $this->severity
+                [$className]
             );
         }
     }

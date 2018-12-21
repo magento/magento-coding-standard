@@ -15,13 +15,6 @@ use PHP_CodeSniffer\Files\File;
 class ThisInTemplateSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -50,7 +43,7 @@ class ThisInTemplateSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === '$this') {
-            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
+            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
         }
     }
 }

@@ -14,18 +14,11 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class IncludeFileSniff implements Sniff
 {
-    /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
-     * Warning violation code.
-     *
-     * @var string
-     */
+   /**
+    * Warning violation code.
+    *
+    * @var string
+    */
     protected $warningCode = 'FoundIncludeFile';
 
     /**
@@ -102,8 +95,7 @@ class IncludeFileSniff implements Sniff
             $message,
             $stackPtr,
             $this->warningCode,
-            [$tokens[$stackPtr]['content']],
-            $this->severity
+            [$tokens[$stackPtr]['content']]
         );
     }
 }

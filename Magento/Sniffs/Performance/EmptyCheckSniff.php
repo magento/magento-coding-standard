@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class EmptyCheckSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * Mapping for function's code and message.
      *
      * @var array
@@ -118,12 +111,12 @@ class EmptyCheckSniff implements Sniff
             $message = $this->map[$this->tokens[$functionPosition]['content']]['message'];
             if ($operatorPosition !== false) {
                 if ($phpcsFile->findNext(T_LNUMBER, $operatorPosition, $endOfStatementPosition, false, '0') !== false) {
-                    $phpcsFile->addWarning($message, $stackPtr, $code, [], $this->severity);
+                    $phpcsFile->addWarning($message, $stackPtr, $code);
                 }
             } else {
                 // phpcs:ignore Generic.Files.LineLength.TooLong
                 if ($phpcsFile->findNext($this->otherComparisonOperators, $functionPosition, $endOfStatementPosition) === false) {
-                    $phpcsFile->addWarning($message, $stackPtr, $code, [], $this->severity);
+                    $phpcsFile->addWarning($message, $stackPtr, $code);
                 }
             }
         }

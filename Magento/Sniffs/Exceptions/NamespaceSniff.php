@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class NamespaceSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
-    /**
      * String representation of error.
      *
      * @var string
@@ -63,8 +56,7 @@ class NamespaceSniff implements Sniff
                     $this->errorMessage,
                     $stackPtr,
                     $this->errorCode,
-                    $exceptionClassName,
-                    $this->severity
+                    $exceptionClassName
                 );
             }
         }

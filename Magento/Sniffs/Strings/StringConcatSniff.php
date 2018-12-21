@@ -15,13 +15,6 @@ use PHP_CodeSniffer\Util\Tokens;
 class StringConcatSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -60,7 +53,7 @@ class StringConcatSniff implements Sniff
             || in_array($tokens[$prev]['code'], $stringTokens)
             || in_array($tokens[$next]['code'], $stringTokens)
         ) {
-            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
+            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
         }
     }
 }

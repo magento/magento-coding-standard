@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class GotoSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -47,6 +40,6 @@ class GotoSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $phpcsFile->addError($this->errorMessage, $stackPtr, $this->errorCode, [], $this->severity);
+        $phpcsFile->addError($this->errorMessage, $stackPtr, $this->errorCode);
     }
 }

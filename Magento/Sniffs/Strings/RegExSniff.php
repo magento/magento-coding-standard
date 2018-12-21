@@ -15,13 +15,6 @@ use PHP_CodeSniffer\Util\Tokens;
 class RegExSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
-    /**
      * String representation of error.
      *
      * @var string
@@ -85,8 +78,7 @@ class RegExSniff implements Sniff
                 $this->errorMessage,
                 $stackPtr,
                 $this->errorCode,
-                [$tokens[$stackPtr]['content']],
-                $this->severity
+                [$tokens[$stackPtr]['content']]
             );
         }
     }

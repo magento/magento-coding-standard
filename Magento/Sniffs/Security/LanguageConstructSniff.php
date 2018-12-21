@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class LanguageConstructSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
-    /**
      * String representation of error.
      *
      * @var string
@@ -79,7 +72,7 @@ class LanguageConstructSniff implements Sniff
             if ($phpcsFile->findNext(T_BACKTICK, $stackPtr + 1)) {
                 return;
             }
-            $phpcsFile->addError($this->errorMessageBacktick, $stackPtr, $this->backtickCode, [], $this->severity);
+            $phpcsFile->addError($this->errorMessageBacktick, $stackPtr, $this->backtickCode);
             return;
         }
         if ($tokens[$stackPtr]['code'] === T_EXIT) {
@@ -87,6 +80,6 @@ class LanguageConstructSniff implements Sniff
         } else {
             $code = $this->directOutput;
         }
-        $phpcsFile->addError($this->errorMessage, $stackPtr, $code, [$tokens[$stackPtr]['content']], $this->severity);
+        $phpcsFile->addError($this->errorMessage, $stackPtr, $code, [$tokens[$stackPtr]['content']]);
     }
 }

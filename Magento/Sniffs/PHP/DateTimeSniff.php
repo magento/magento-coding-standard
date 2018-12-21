@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class DateTimeSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -63,7 +56,7 @@ class DateTimeSniff implements Sniff
         $posOfClassName = $phpcsFile->findNext(T_STRING, $stackPtr);
         $posOfNsSeparator = $phpcsFile->findNext(T_NS_SEPARATOR, $stackPtr, $posOfClassName);
         if ($posOfNsSeparator !== false && in_array($tokens[$posOfClassName]['content'], $this->dateTimeClasses)) {
-            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
+            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
         }
     }
 }

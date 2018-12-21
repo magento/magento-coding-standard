@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class DirectThrowSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * String representation of warning.
      */
     // phpcs:ignore Generic.Files.LineLength.TooLong
@@ -54,8 +47,7 @@ class DirectThrowSniff implements Sniff
                 $this->warningMessage,
                 $stackPtr,
                 $this->warningCode,
-                $posOfException,
-                $this->severity
+                $posOfException
             );
         }
     }

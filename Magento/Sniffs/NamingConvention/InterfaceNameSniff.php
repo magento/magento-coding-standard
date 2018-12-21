@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class InterfaceNameSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -61,7 +54,7 @@ class InterfaceNameSniff implements Sniff
         while ($tokens[$stackPtr]['line'] === $declarationLine) {
             if ($tokens[$stackPtr]['type'] === 'T_STRING') {
                 if (substr($tokens[$stackPtr]['content'], 0 - $suffixLength) !== $this->interfaceSuffix) {
-                    $sourceFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
+                    $sourceFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
                 }
                 break;
             }

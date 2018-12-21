@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
 class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * Pattern flag.
      *
      * @var bool
@@ -254,6 +247,6 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
             $data[] = $this->forbiddenFunctions[$pattern];
             $warningMessage .= '; use %s instead.';
         }
-        $phpcsFile->addWarning($warningMessage, $stackPtr, $warningCode, $data, $this->severity);
+        $phpcsFile->addWarning($warningMessage, $stackPtr, $warningCode, $data);
     }
 }

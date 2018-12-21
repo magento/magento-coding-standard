@@ -14,20 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class SuperglobalSniff implements Sniff
 {
     /**
-     * Violation severity for error.
-     *
-     * @var int
-     */
-    protected $errorSeverity = 10;
-
-    /**
-     * Violation severity for warning.
-     *
-     * @var int
-     */
-    protected $warningSeverity = 6;
-
-    /**
      * String representation of warning.
      *
      * @var string
@@ -96,16 +82,14 @@ class SuperglobalSniff implements Sniff
                 $this->errorMessage,
                 $stackPtr,
                 $this->errorCode,
-                [$var],
-                $this->errorSeverity
+                [$var]
             );
         } elseif (in_array($var, $this->superGlobalWarning)) {
             $phpcsFile->addWarning(
                 $this->warningMessage,
                 $stackPtr,
                 $this->warningCode,
-                [$var],
-                $this->warningSeverity
+                [$var]
             );
         }
     }

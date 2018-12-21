@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento\Sniffs\PHP;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -13,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
  */
 class ReturnValueCheckSniff implements Sniff
 {
-    /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 10;
-
     /**
      * String representation of error.
      *
@@ -131,7 +125,7 @@ class ReturnValueCheckSniff implements Sniff
                 && (!$this->findIdentical($i - 1, $this->findFunctionParenthesisCloser($i) + 1))
             ) {
                 $foundFunctionName = $this->tokens[$i]['content'];
-                $phpcsFile->addError($this->errorMessage, $i, $this->errorCode, [$foundFunctionName], $this->severity);
+                $phpcsFile->addError($this->errorMessage, $i, $this->errorCode, [$foundFunctionName]);
             }
         }
     }

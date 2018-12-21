@@ -14,13 +14,6 @@ use PHP_CodeSniffer\Files\File;
 class XssTemplateSniff implements Sniff
 {
     /**
-     * Violation severity.
-     *
-     * @var int
-     */
-    protected $severity = 8;
-
-    /**
      * String representation of warning.
      *
      * @var string
