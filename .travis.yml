@@ -1,0 +1,10 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+install: composer install --no-interaction --prefer-source
+script:
+  - bin/phpunit
+  - bin/phpcs --standard=PSR2 Magento/ --extensions=php
