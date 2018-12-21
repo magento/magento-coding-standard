@@ -20,10 +20,7 @@ class EmptyBlockSniff extends EmptyStatementSniff
         return array_merge(
             parent::register(),
             [
-                T_CLASS,
-                T_ABSTRACT,
                 T_FUNCTION,
-                T_INTERFACE,
                 T_TRAIT
             ]
         );

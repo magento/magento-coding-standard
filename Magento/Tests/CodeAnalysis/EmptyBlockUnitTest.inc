@@ -71,34 +71,6 @@ try {
 
 if (true) {} elseif (false) {}
 
-class EmptyBlockTestInc { /*Empty class block*/ }
+function emptyFunction () { /*Empty function block*/ }
 
-class EmptyBlockTestIncTrue
-{
-    public $field;
-}
-
-abstract class EmptyBlockTestIncAbstract { /*Empty class block*/ }
-
-abstract class EmptyBlockTestIncTrueAbstract
-{
-    public $field;
-}
-
-function emptyBlock () { /*Empty function block*/ }
-
-function emptyBlockT () { return true; }
-
-interface EmptyBlockInterface { /*Empty interface block*/ }
-
-interface EmptyBlockInterfaceTrue {
-    public function test();
-}
-
-trait EmptyBlockTrait { /*Empty trait block*/ }
-
-trait EmptyBlockTraitTrue {
-    function test() {
-        return true;
-    }
-}
+function nonEmptyFunction () { return true; }

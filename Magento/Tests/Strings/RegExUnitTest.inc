@@ -1,6 +1,6 @@
 <?php
 
-$input = "Bet you want a BMW.";
+$input = "Test Input.";
 echo preg_replace(
     "/([a-z]*)/Xe",
     "strtoupper('\\1')",
@@ -13,7 +13,7 @@ echo preg_replace(
     'get_input'
 );
 
-$html = preg_replace('(<h([1-6])>(.*?)</h\1>)sex', '"<h$1>" . strtoupper("$2") . "</h$1>"', $html);
+$html = preg_replace('(<h([1-6])>(.*?)</h\1>)xes', '"<h$1>" . strtoupper("$2") . "</h$1>"', $html);
 
 $a = preg_replace(
     '#<h([1-6])>(.*?)</h\1>#e',

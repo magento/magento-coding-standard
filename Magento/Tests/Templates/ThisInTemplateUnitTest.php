@@ -28,6 +28,7 @@ class ThisInTemplateUnitTest extends AbstractSniffUnitTest
         return [
             3 => 2,
             4 => 1,
+            5 => 1,
         ];
     }
 }

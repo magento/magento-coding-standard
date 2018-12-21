@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento\Sniffs\Templates;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -35,15 +36,6 @@ class ThisInTemplateSniff implements Sniff
     protected $warningCode = 'FoundThis';
 
     /**
-     * List of methods, allowed to called via $this.
-     *
-     * @var array
-     */
-    protected $allowedMethods = [
-        'helper',
-    ];
-
-    /**
      * @inheritdoc
      */
     public function register()
@@ -58,15 +50,7 @@ class ThisInTemplateSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === '$this') {
-            $endOfStatementPtr = $phpcsFile->findEndOfStatement($stackPtr);
-            $functionPtr = $phpcsFile->findNext(T_STRING, $stackPtr, $endOfStatementPtr);
-            if ($functionPtr !== false) {
-                if (!in_array($tokens[$functionPtr]['content'], $this->allowedMethods)) {
-                    $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
-                }
-            } else {
-                $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
-            }
+            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode, [], $this->severity);
         }
     }
 }

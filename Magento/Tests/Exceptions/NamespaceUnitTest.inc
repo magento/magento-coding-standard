@@ -54,3 +54,9 @@ class TestNamespace
         }
     }
 }
+
+try {
+    doSomethind();
+} catch (\Exception $e) {
+    logException($e->getMessage());
+}

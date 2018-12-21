@@ -12,7 +12,7 @@
     <rule ref="Magento.Templates.ThisInTemplate">
         <include-pattern>*.phtml</include-pattern>
     </rule>
-    <rule ref="Magento.Templates.XssTemplate">
+    <rule ref="Magento.Security.XssTemplate">
         <include-pattern>*.phtml</include-pattern>
     </rule>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
@@ -77,6 +77,7 @@
     <rule ref="PSR2">
         <severity>8</severity>
         <type>warning</type>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose"/>
     </rule>
     <rule ref="PSR1.Classes.ClassDeclaration">
         <severity>10</severity>

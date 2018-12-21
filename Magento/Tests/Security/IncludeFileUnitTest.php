@@ -13,8 +13,8 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 class IncludeFileUnitTest extends AbstractSniffUnitTest
 {
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function getErrorList()
     {
         return [];

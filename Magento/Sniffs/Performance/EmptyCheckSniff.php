@@ -25,7 +25,6 @@ class EmptyCheckSniff implements Sniff
      *
      * @var array
      */
-
     protected $map = [
         'count' => [
             // phpcs:ignore Generic.Files.LineLength.TooLong
@@ -34,11 +33,10 @@ class EmptyCheckSniff implements Sniff
         ],
         'strlen' => [
             // phpcs:ignore Generic.Files.LineLength.TooLong
-            'message' => 'strlen(...) function should not be used to check if string is empty. Consider replace with (=/!)== ""',
+            'message' => 'strlen(...) function should not be used to check if string is empty. Consider replace with (... === "") or (... !== "")',
             'code' => 'FoundStrlen'
         ],
     ];
-
 
     /**
      * All tokens from current file.
