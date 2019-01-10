@@ -3,14 +3,14 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tests\Translation;
+namespace Magento\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Class ConstantUsageUnitTest
+ * Class ObjectManagerUnitTest
  */
-class ConstantUsageUnitTest extends AbstractSniffUnitTest
+class ObjectManagerUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -26,15 +26,15 @@ class ConstantUsageUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
+            3 => 1,
             5 => 1,
             7 => 1,
             9 => 1,
             12 => 1,
-            15 => 1,
-            17 => 1,
-            19 => 1,
-            21 => 1,
-            24 => 1,
+            14 => 1,
+            16 => 1,
+            20 => 1,
+            23 => 1,
         ];
     }
 }

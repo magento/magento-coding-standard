@@ -3,7 +3,6 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento\Sniffs\Templates;
 
 use PHP_CodeSniffer\Sniffs\Sniff;

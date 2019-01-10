@@ -3,14 +3,14 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tests\Translation;
+namespace Magento\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Class ConstantUsageUnitTest
+ * Class ShortEchoSyntaxUnitTest
  */
-class ConstantUsageUnitTest extends AbstractSniffUnitTest
+class ShortEchoSyntaxUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -27,14 +27,6 @@ class ConstantUsageUnitTest extends AbstractSniffUnitTest
     {
         return [
             5 => 1,
-            7 => 1,
-            9 => 1,
-            12 => 1,
-            15 => 1,
-            17 => 1,
-            19 => 1,
-            21 => 1,
-            24 => 1,
         ];
     }
 }

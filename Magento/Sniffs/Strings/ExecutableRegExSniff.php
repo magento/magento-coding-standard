@@ -12,7 +12,7 @@ use PHP_CodeSniffer\Util\Tokens;
 /**
  * Detects executable regular expressions.
  */
-class RegExSniff implements Sniff
+class ExecutableRegExSniff implements Sniff
 {
     /**
      * String representation of error.

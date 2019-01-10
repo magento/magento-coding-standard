@@ -176,6 +176,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^ngettext$' => null,
         '^ob_get_contents$' => null,
         '^ob_get_flush$' => null,
+        '^ob_start$' => null,
         '^rawurldecode$' => null,
         '^shm_get_var$' => null,
         '^stripcslashes$' => null,

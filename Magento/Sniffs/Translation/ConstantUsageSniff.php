@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\Sniffs\Translation;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Make sure that constants are not used as the first argument of translation function.
@@ -14,101 +14,86 @@ use PHP_CodeSniffer\Files\File;
 class ConstantUsageSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Having previous line content allows to process multi-line declaration.
      *
      * @var string
      */
-    // phpcs:ignore Generic.Files.LineLength.TooLong
-    protected $warningMessage = 'Constants are not allowed as the first argument of translation function, use string literal instead.';
-
-    /**
-     * Warning violation code.
-     *
-     * @var string
-     */
-    protected $warningCode = 'VariableTranslation';
-
-    /**
-     * If true, comments will be ignored if they are found in the code.
-     *
-     * @var bool
-     */
-    public $ignoreComments = true;
+    protected $previousLineContent = '';
 
     /**
      * @inheritdoc
      */
     public function register()
     {
-        return [T_DOUBLE_COLON];
+        return [T_OPEN_TAG];
     }
 
     /**
-     * @inheritdoc
+     * Copied from \Generic_Sniffs_Files_LineLengthSniff, minor changes made
+     *
+     * {@inheritdoc}
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile
+     * @param int $stackPtr
+     * @return void|int
      */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $doubleColon = $tokens[$stackPtr];
-        $currentLine = $doubleColon['line'];
-        $lineContent = $this->getLineContent($phpcsFile, $currentLine);
-        $previousLineContent = $this->getLineContent($phpcsFile, $currentLine - 1);
-        $previousLineRegexp = '~__\($|Phrase\($~';
-        $currentLineRegexp = '~__\(.+\)|Phrase\(.+\)~';
-        $currentLineMatch = preg_match($currentLineRegexp, $lineContent) !== 0;
-        $previousLineMatch = preg_match($previousLineRegexp, $previousLineContent) !== 0;
-        $this->previousLineContent = $lineContent;
-        $constantRegexp = '[^\'"]+::[A-Z_0-9]+.*';
-        if ($currentLineMatch) {
-            $variableRegexp = "~__\({$constantRegexp}\)|Phrase\({$constantRegexp}\)~";
-            if (preg_match($variableRegexp, $lineContent) !== 0) {
-                $phpcsFile->addWarning(
-                    $this->warningMessage,
-                    $this->getFirstLineToken($phpcsFile, $currentLine),
-                    $this->warningCode
-                );
-            }
-        } else {
-            if ($previousLineMatch) {
-                $variableRegexp = "~^\s+{$constantRegexp}~";
-                if (preg_match($variableRegexp, $lineContent) !== 0) {
-                    $phpcsFile->addWarning(
-                        $this->warningMessage,
-                        $this->getFirstLineToken($phpcsFile, $currentLine - 1),
-                        $this->warningCode
-                    );
-                }
+
+        // Make sure this is the first open tag
+        $previousOpenTag = $phpcsFile->findPrevious(T_OPEN_TAG, ($stackPtr - 1));
+        if ($previousOpenTag !== false) {
+            return;
+        }
+
+        $tokenCount = 0;
+        $currentLineContent = '';
+        $currentLine = 1;
+
+        for (; $tokenCount < $phpcsFile->numTokens; $tokenCount++) {
+            if ($tokens[$tokenCount]['line'] === $currentLine) {
+                $currentLineContent .= $tokens[$tokenCount]['content'];
+            } else {
+                $this->checkIfFirstArgumentConstant($phpcsFile, ($tokenCount - 1), $currentLineContent);
+                $currentLineContent = $tokens[$tokenCount]['content'];
+                $currentLine++;
             }
         }
+
+        $this->checkIfFirstArgumentConstant($phpcsFile, ($tokenCount - 1), $currentLineContent);
     }
 
     /**
-     * Get line content by it's line number.
+     * Checks if first argument of \Magento\Framework\Phrase or translation function is a constant
      *
      * @param File $phpcsFile
-     * @param int $line
-     * @return string
+     * @param int $stackPtr
+     * @param string $lineContent
+     * @return void
      */
-    private function getLineContent(File $phpcsFile, $line)
-    {
-        $tokens = $phpcsFile->getTokens();
-        return implode('', array_column(array_filter($tokens, function ($item) use ($line) {
-            return $item['line'] == $line;
-        }), 'content'));
-    }
-
-    /**
-     * Get index of first token in line.
-     *
-     * @param File $phpcsFile
-     * @param int $line
-     * @return int
-     */
-    private function getFirstLineToken(File $phpcsFile, $line)
-    {
-        $tokens = $phpcsFile->getTokens();
-        return array_keys(array_filter($tokens, function ($item) use ($line) {
-            return $item['line'] == $line;
-        }))[0];
+    private function checkIfFirstArgumentConstant(
+        File $phpcsFile,
+        $stackPtr,
+        $lineContent
+    ) {
+        $previousLineRegexp = '/(__|Phrase)\($/im';
+        $currentLineRegexp = '/(__|Phrase)\(.+\)/';
+        $currentLineMatch = preg_match($currentLineRegexp, $lineContent) !== 0;
+        $previousLineMatch = preg_match($previousLineRegexp, $this->previousLineContent) !== 0;
+        $this->previousLineContent = $lineContent;
+        $error = 'Constants are not allowed as the first argument of translation function, use string literal instead';
+        $constantRegexp = '[^\$\'"]+::[A-Z_0-9]+.*';
+        if ($currentLineMatch) {
+            $variableRegexp = "/(__|Phrase)\({$constantRegexp}\)/";
+            if (preg_match($variableRegexp, $lineContent) !== 0) {
+                $phpcsFile->addWarning($error, $stackPtr, 'VariableTranslation');
+            }
+        } elseif ($previousLineMatch) {
+            $variableRegexp = "/^{$constantRegexp}/";
+            if (preg_match($variableRegexp, $lineContent) !== 0) {
+                $phpcsFile->addWarning($error, $stackPtr, 'VariableTranslation');
+            }
+        }
     }
 }

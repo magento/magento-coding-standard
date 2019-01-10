@@ -52,7 +52,7 @@ class NamespaceSniff implements Sniff
             $exceptionClassName = trim($tokens[$posOfExceptionClassName]['content']);
             $posOfClassInUse = $phpcsFile->findNext(T_STRING, 0, $stackPtr, false, $exceptionClassName);
             if ($posOfClassInUse === false || $tokens[$posOfClassInUse]['level'] != 0) {
-                $phpcsFile->addError(
+                $phpcsFile->addWarning(
                     $this->errorMessage,
                     $stackPtr,
                     $this->errorCode,
