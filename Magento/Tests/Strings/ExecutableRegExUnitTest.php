@@ -3,14 +3,14 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tests\Exceptions;
+namespace Magento\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Class NamespaceUnitTest
+ * Class ExecutableRegExUnitTest
  */
-class NamespaceUnitTest extends AbstractSniffUnitTest
+class ExecutableRegExUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -18,6 +18,10 @@ class NamespaceUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
+            4 => 1,
+            10 => 1,
+            16 => 1,
+            18 => 1,
         ];
     }
 
@@ -26,10 +30,6 @@ class NamespaceUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [
-            9 => 1,
-            10 => 1,
-            48 => 1,
-        ];
+        return [];
     }
 }

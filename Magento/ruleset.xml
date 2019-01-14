@@ -60,7 +60,13 @@
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
     </rule>
+    <rule ref="Magento.Annotation">
+        <severity>6</severity>
+    </rule>
     <rule ref="Magento.Classes.ObjectInstantiation">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Classes.ObjectManager">
         <severity>8</severity>
     </rule>
     <rule ref="Magento.CodeAnalysis.EmptyBlock">
@@ -73,14 +79,24 @@
     <rule ref="Magento.Exceptions.Namespace">
         <severity>8</severity>
     </rule>
+    <rule ref="Magento.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="120"/>
+        </properties>
+        <severity>6</severity>
+    </rule>
     <rule ref="Magento.Legacy.MageEntity">
         <severity>10</severity>
+    </rule>
+    <rule ref="Magento.Less">
+        <severity>6</severity>
     </rule>
     <rule ref="Magento.NamingConvention.InterfaceName">
         <severity>6</severity>
     </rule>
-    <rule ref="Magento.Performance.EmptyCheck">
-        <severity>8</severity>
+    <rule ref="Magento.NamingConvention.ReservedWords">
+        <severity>10</severity>
     </rule>
     <rule ref="Magento.PHP.DateTime">
         <severity>6</severity>
@@ -91,10 +107,19 @@
     <rule ref="Magento.PHP.Goto">
         <severity>10</severity>
     </rule>
+    <rule ref="Magento.PHP.LiteralNamespaces">
+        <severity>8</severity>
+    </rule>
     <rule ref="Magento.PHP.ReturnValueCheck">
         <severity>10</severity>
     </rule>
+    <rule ref="Magento.PHP.ShortEchoSyntax">
+        <severity>8</severity>
+    </rule>
     <rule ref="Magento.PHP.Var">
+        <severity>8</severity>
+    </rule>
+    <rule ref="Magento.Performance.EmptyCheck">
         <severity>8</severity>
     </rule>
     <rule ref="Magento.Security.IncludeFile">
@@ -113,7 +138,7 @@
         <include-pattern>*.phtml</include-pattern>
         <severity>8</severity>
     </rule>
-    <rule ref="Magento.Strings.RegEx">
+    <rule ref="Magento.Strings.ExecutableRegEx">
         <severity>10</severity>
     </rule>
     <rule ref="Magento.Strings.StringConcat">
@@ -126,7 +151,7 @@
     <rule ref="Magento.Translation.ConstantUsage">
         <severity>6</severity>
     </rule>
-    <rule ref="Magento.Whitespace.MultipleEmptyLines">
+    <rule ref="Magento.Whitespace">
         <severity>6</severity>
     </rule>
     <rule ref="PEAR.ControlStructures.ControlSignature">
@@ -137,6 +162,7 @@
         <severity>8</severity>
         <type>warning</type>
         <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose"/>
+        <exclude name="Generic.Files.LineLength"/>
     </rule>
     <rule ref="PSR1.Classes.ClassDeclaration">
         <severity>10</severity>
