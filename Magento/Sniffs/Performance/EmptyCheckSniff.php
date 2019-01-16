@@ -20,12 +20,12 @@ class EmptyCheckSniff implements Sniff
      */
     protected $map = [
         'count' => [
-            // phpcs:ignore Generic.Files.LineLength.TooLong
+            // phpcs:ignore Magento.Files.LineLength.MaxExceeded
             'message' => 'count(...) function should not be used to check if array is empty. Use empty(...) language construct instead',
             'code' => 'FoundCount'
         ],
         'strlen' => [
-            // phpcs:ignore Generic.Files.LineLength.TooLong
+            // phpcs:ignore Magento.Files.LineLength.MaxExceeded
             'message' => 'strlen(...) function should not be used to check if string is empty. Consider replace with (... === "") or (... !== "")',
             'code' => 'FoundStrlen'
         ],
@@ -114,7 +114,7 @@ class EmptyCheckSniff implements Sniff
                     $phpcsFile->addWarning($message, $stackPtr, $code);
                 }
             } else {
-                // phpcs:ignore Generic.Files.LineLength.TooLong
+                // phpcs:ignore Magento.Files.LineLength.MaxExceeded
                 if ($phpcsFile->findNext($this->otherComparisonOperators, $functionPosition, $endOfStatementPosition) === false) {
                     $phpcsFile->addWarning($message, $stackPtr, $code);
                 }
@@ -130,7 +130,7 @@ class EmptyCheckSniff implements Sniff
      */
     private function findFunctionPosition($index)
     {
-        // phpcs:ignore Generic.Files.LineLength.TooLong
+        // phpcs:ignore Magento.Files.LineLength.MaxExceeded
         for ($i = $this->tokens[$index]['parenthesis_opener'] + 1; $i < $this->tokens[$index]['parenthesis_closer']; $i++) {
             if (array_key_exists($this->tokens[$i]['content'], $this->map)) {
                 return $i;

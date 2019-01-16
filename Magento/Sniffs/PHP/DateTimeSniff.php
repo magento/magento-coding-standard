@@ -18,7 +18,7 @@ class DateTimeSniff implements Sniff
      *
      * @var string
      */
-    // phpcs:ignore Generic.Files.LineLength.TooLong
+    // phpcs:ignore Magento.Files.LineLength.MaxExceeded
     protected $warningMessage = 'Overcomplicated Date/Time handling. Use \Magento\Framework\Stdlib\DateTime\TimezoneInterface instead.';
 
     /**

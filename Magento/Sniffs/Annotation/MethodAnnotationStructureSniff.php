@@ -23,6 +23,7 @@ class MethodAnnotationStructureSniff implements Sniff
      */
     public function __construct()
     {
+        // phpcs:ignore Magento.Classes.ObjectInstantiation.FoundDirectInstantiation
         $this->annotationFormatValidator = new AnnotationFormatValidator();
     }
 

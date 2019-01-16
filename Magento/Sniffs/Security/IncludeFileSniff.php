@@ -38,9 +38,11 @@ class IncludeFileSniff implements Sniff
 
     /**
      * @inheritdoc
+     * phpcs:disable Generic.Metrics.CyclomaticComplexity.TooHigh
      */
     public function process(File $phpcsFile, $stackPtr)
     {
+        // phpcs:enable
         $tokens = $phpcsFile->getTokens();
         $firstToken = $phpcsFile->findNext(Tokens::$emptyTokens, $stackPtr + 1, null, true);
         $message = '"%s" statement detected. File manipulations are discouraged.';

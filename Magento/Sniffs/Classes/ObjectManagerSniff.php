@@ -9,8 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Class ObjectManagerSniff
- * Detects direct ObjectManager usage.
+ * Class ObjectManagerSniff detects direct ObjectManager usage.
  */
 class ObjectManagerSniff implements Sniff
 {
@@ -19,7 +18,7 @@ class ObjectManagerSniff implements Sniff
      *
      * @var string
      */
-    // phpcs:ignore Generic.Files.LineLength.TooLong
+    // phpcs:ignore Magento.Files.LineLength.MaxExceeded
     protected $warningMessage = 'The direct use of ObjectManager is discouraged. Inject necessary dependencies via constructor.';
 
     /**

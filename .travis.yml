@@ -6,4 +6,4 @@ php:
 install: composer install --no-interaction --prefer-source
 script:
   - bin/phpunit
-  - bin/phpcs --standard=PSR2 Magento/ --extensions=php
+  - bin/phpcs --standard=Magento Magento/ --extensions=php

@@ -18,7 +18,8 @@ class ObjectInstantiationSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'Direct object instantiation (object of %s) is discouraged in Magento 2.';
+    // phpcs:ignore Magento.Files.LineLength.MaxExceeded
+    protected $warningMessage = 'Direct %s object instantiation is discouraged in Magento. Use dependency injection or factories instead.';
 
     /**
      * Warning violation code.

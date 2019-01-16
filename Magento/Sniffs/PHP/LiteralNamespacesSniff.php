@@ -62,6 +62,10 @@ class LiteralNamespacesSniff implements Sniff
     }
 
     /**
+     * Checks if class or interface exists.
+     *
+     * ToDo: get rig of this check https://github.com/magento/magento-coding-standard/issues/9
+     *
      * @param string $className
      * @return bool
      */
