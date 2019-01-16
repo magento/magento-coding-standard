@@ -89,9 +89,6 @@
     <rule ref="Magento.Legacy.MageEntity">
         <severity>10</severity>
     </rule>
-    <rule ref="Magento.Less">
-        <severity>6</severity>
-    </rule>
     <rule ref="Magento.NamingConvention.InterfaceName">
         <severity>6</severity>
     </rule>
