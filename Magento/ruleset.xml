@@ -104,6 +104,9 @@
     <rule ref="Magento.PHP.DiscouragedFunction">
         <severity>8</severity>
     </rule>
+    <rule ref="Magento.PHP.FinalImplementation">
+        <severity>10</severity>
+    </rule>
     <rule ref="Magento.PHP.Goto">
         <severity>10</severity>
     </rule>
