@@ -121,7 +121,8 @@ class MethodArgumentsSniff implements Sniff
     private function getMethodParameters(array $paramDefinitions)
     {
         $paramName = [];
-        for ($i = 0; $i < count($paramDefinitions); $i++) {
+        $countParams = count($paramDefinitions);
+        for ($i = 0; $i < $countParams; $i++) {
             if (isset($paramDefinitions[$i]['paramName'])) {
                 $paramName[] = $paramDefinitions[$i]['paramName'];
             }
@@ -368,10 +369,11 @@ class MethodArgumentsSniff implements Sniff
         $parametersCount = count($paramPointers);
         if ($argumentsCount <= $parametersCount && $argumentsCount > 0) {
             $duplicateParameters = [];
-            for ($i = 0; $i < sizeof($paramDefinitions); $i++) {
+            $countParams = count($paramDefinitions);
+            for ($i = 0; $i < $countParams; $i++) {
                 if (isset($paramDefinitions[$i]['paramName'])) {
                     $parameterContent = $paramDefinitions[$i]['paramName'];
-                    for ($j = $i + 1; $j < count($paramDefinitions); $j++) {
+                    for ($j = $i + 1; $j < $countParams; $j++) {
                         if (isset($paramDefinitions[$j]['paramName'])
                             && $parameterContent === $paramDefinitions[$j]['paramName']
                         ) {
@@ -507,7 +509,8 @@ class MethodArgumentsSniff implements Sniff
             $phpcsFile,
             $paramPointers
         );
-        for ($ptr = 0; $ptr < count($methodArguments); $ptr++) {
+        $countArguments = count($methodArguments);
+        for ($ptr = 0; $ptr < $countArguments; $ptr++) {
             $tokens = $phpcsFile->getTokens();
             if (isset($paramPointers[$ptr])) {
                 $this->validateArgumentNameInParameterAnnotationExists(

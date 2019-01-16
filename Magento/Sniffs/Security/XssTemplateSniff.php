@@ -161,9 +161,12 @@ class XssTemplateSniff implements Sniff
      *
      * @param array $statement
      * @return void
+     *
+     * phpcs:disable Generic.Metrics.CyclomaticComplexity.TooHigh
      */
     private function detectUnescapedString($statement)
     {
+        // phpcs:enable
         $posOfFirstElement = $this->file->findNext(
             [T_WHITESPACE, T_COMMENT],
             $statement['start'],

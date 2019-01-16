@@ -19,7 +19,7 @@ class ExecutableRegExSniff implements Sniff
      *
      * @var string
      */
-    // phpcs:ignore Generic.Files.LineLength.TooLong
+    // phpcs:ignore Magento.Files.LineLength.MaxExceeded
     protected $errorMessage = "Possible executable regular expression in %s. Make sure that the pattern doesn't contain 'e' modifier";
 
     /**
