@@ -1,0 +1,4 @@
+Copyright © 2013-present Magento, Inc.
+
+Each Magento source file included in this distribution is licensed under OSL-3.0 license
+Please see LICENSE.txt for the full text of the OSL-3.0 license or visit http://opensource.org/licenses/osl-3.0.php
