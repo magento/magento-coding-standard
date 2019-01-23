@@ -45,3 +45,8 @@ You can verify your code by running
 ```
 $ bin/phpunit
 ```
+
+## License
+Each Magento source file included in this distribution is licensed under OSL-3.0 license.
+
+Please see [LICENSE.txt](https://github.com/magento/magento-coding-standard/blob/master/LICENSE.txt) for the full text of the [Open Software License v. 3.0 (OSL-3.0)](http://opensource.org/licenses/osl-3.0.php).
