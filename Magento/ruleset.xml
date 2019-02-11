@@ -5,158 +5,59 @@
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml"/>
 
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Generic.Classes.DuplicateClassName">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.JumbledIncrementer">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
-        <severity>6</severity>
-    </rule>
+    <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
         <severity>10</severity>
-    </rule>
-    <rule ref="Generic.Metrics.CyclomaticComplexity">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Generic.Metrics.NestingLevel">
-        <severity>8</severity>
+        <type>error</type>
     </rule>
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag">
         <severity>10</severity>
+        <type>error</type>
         <exclude-pattern>*.phtml</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.DeprecatedFunctions">
         <severity>10</severity>
+        <type>error</type>
     </rule>
-    <rule ref="Generic.PHP.NoSilencedErrors.Discouraged">
-        <severity>8</severity>
+    <rule ref="Generic.PHP.NoSilencedErrors">
+        <severity>10</severity>
+        <type>error</type>
     </rule>
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.Annotation">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Magento.Classes.ObjectInstantiation">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Classes.ObjectManager">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.CodeAnalysis.EmptyBlock">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento.Exceptions.DirectThrow">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Exceptions.Namespace">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Files.LineLength">
-        <properties>
-            <property name="lineLimit" value="120"/>
-            <property name="absoluteLineLimit" value="120"/>
-        </properties>
-        <type>warning</type>
-        <severity>6</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.Legacy.MageEntity">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.NamingConvention.InterfaceName">
-        <severity>6</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.NamingConvention.ReservedWords">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.PHP.DateTime">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Magento.PHP.DiscouragedFunction">
-        <severity>8</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.PHP.FinalImplementation">
         <severity>10</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.PHP.Goto">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.PHP.LiteralNamespaces">
-        <severity>8</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.PHP.ReturnValueCheck">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.PHP.ShortEchoSyntax">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.PHP.Var">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Performance.EmptyCheck">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Security.IncludeFile">
-        <severity>8</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.Security.LanguageConstruct">
         <severity>10</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.Security.Superglobal.SuperglobalUsageError">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.Security.Superglobal.SuperglobalUsageWarning">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Security.XssTemplate">
-        <include-pattern>*.phtml</include-pattern>
-        <severity>8</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento.Strings.ExecutableRegEx">
         <severity>10</severity>
-    </rule>
-    <rule ref="Magento.Strings.StringConcat">
-        <severity>8</severity>
-    </rule>
-    <rule ref="Magento.Templates.ThisInTemplate">
-        <include-pattern>*.phtml</include-pattern>
-        <severity>6</severity>
-    </rule>
-    <rule ref="Magento.Translation.ConstantUsage">
-        <severity>6</severity>
-    </rule>
-    <rule ref="Magento.Whitespace">
-        <severity>6</severity>
-    </rule>
-    <rule ref="PEAR.ControlStructures.ControlSignature">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="PSR2">
-        <severity>8</severity>
-        <type>warning</type>
-        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose"/>
-        <exclude name="Generic.Files.LineLength"/>
+        <type>error</type>
     </rule>
     <rule ref="PSR1.Classes.ClassDeclaration">
         <severity>10</severity>
@@ -167,32 +68,305 @@
         <type>error</type>
         <exclude-pattern>*.phtml</exclude-pattern>
     </rule>
-    <rule ref="Squiz.Commenting.DocCommentAlignment">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Squiz.Operators.IncrementDecrementUsage">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Squiz.PHP.CommentedOutCode">
-        <severity>6</severity>
-        <properties>
-            <property name="maxPercentage" value="70"/>
-        </properties>
-    </rule>
-    <rule ref="Squiz.PHP.Eval.Discouraged">
+    <rule ref="Squiz.PHP.Eval">
         <severity>10</severity>
         <type>error</type>
     </rule>
-    <rule ref="Squiz.PHP.GlobalKeyword">
+
+    <!-- Severity 9 warnings: Possible security issues. -->
+    <rule ref="Magento.Security.IncludeFile">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Security.Superglobal.SuperglobalUsageWarning">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Security.XssTemplate">
+        <include-pattern>*.phtml</include-pattern>
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+
+    <!-- Severity 8 warnings: Magento specific code issues. -->
+    <rule ref="Magento.Classes.ObjectInstantiation">
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.Classes.ObjectManager">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Exceptions.DirectThrow">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="120"/>
+        </properties>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.NamingConvention.InterfaceName">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.DateTime">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.ShortEchoSyntax">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Templates.ThisInTemplate">
+        <include-pattern>*.phtml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Translation.ConstantUsage">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+
+    <!-- Severity 7 warnings: General code issues. -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Classes.DuplicateClassName">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Metrics.NestingLevel">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.PHP.DisallowShortOpenTag">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.CodeAnalysis.EmptyBlock">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Exceptions.Namespace">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.DiscouragedFunction">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.LiteralNamespaces">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.Var">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Performance.EmptyCheck">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Strings.StringConcat">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PEAR.Functions.ValidDefaultValue">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.GlobalFunction">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Operators.IncrementDecrementUsage">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.PHP.GlobalKeyword">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
-        <severity>6</severity>
+        <severity>7</severity>
+        <type>warning</type>
     </rule>
     <rule ref="Squiz.Scope.MemberVarScope">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+
+    <!-- Severity 6 warnings: Code style issues. -->
+    <rule ref="Generic.ControlStructures.InlineControlStructure">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Files.ByteOrderMark">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Files.LineEndings">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Formatting.DisallowMultipleStatements">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.PHP.LowerCaseConstant">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.PHP.LowerCaseKeyword">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Whitespace.EmptyLineMissed">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Whitespace.MultipleEmptyLines">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PEAR.ControlStructures.ControlSignature">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR1.Files.SideEffects">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Classes.ClassDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Classes.PropertyDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.ControlStructures.SwitchDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Files.EndFileNewline">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionCallSignature">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionClosingBrace">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Methods.MethodDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Namespaces.NamespaceDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="PSR2.Namespaces.UseDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Classes.ValidClassName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ControlSignature">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.ControlStructures.LowercaseDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.FunctionDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.LowercaseFunctionKeywords">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Scope.MethodScope">
         <severity>6</severity>
         <type>warning</type>
     </rule>
@@ -200,7 +374,33 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Squiz.Functions.GlobalFunction">
-        <severity>8</severity>
+    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+
+    <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
+    <rule ref="Magento.Annotation">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Commenting.DocCommentAlignment">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.PHP.CommentedOutCode">
+        <properties>
+            <property name="maxPercentage" value="70"/>
+        </properties>
+        <severity>5</severity>
+        <type>warning</type>
     </rule>
 </ruleset>
