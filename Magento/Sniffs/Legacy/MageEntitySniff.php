@@ -13,11 +13,11 @@ use PHP_CodeSniffer\Files\File;
  */
 class MageEntitySniff implements Sniff
 {
-   /**
-    * String representation of error.
-    *
-    * @var string
-    */
+    /**
+     * String representation of error.
+     *
+     * @var string
+     */
     protected $errorMessage = 'Possible Magento 2 design violation. Detected typical Magento 1.x construction "%s".';
 
     /**

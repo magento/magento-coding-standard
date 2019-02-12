@@ -235,7 +235,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $function, $pattern = null)
+    protected function addError($phpcsFile, $stackPtr, $function, $pattern=null)
     {
         $data = [$function];
         $warningMessage = 'The use of function %s() is discouraged';

@@ -14,11 +14,11 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class IncludeFileSniff implements Sniff
 {
-   /**
-    * Warning violation code.
-    *
-    * @var string
-    */
+    /**
+     * Warning violation code.
+     *
+     * @var string
+     */
     protected $warningCode = 'FoundIncludeFile';
 
     /**
