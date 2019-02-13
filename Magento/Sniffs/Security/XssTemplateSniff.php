@@ -307,7 +307,7 @@ class XssTemplateSniff implements Sniff
      * @param int|bool $last
      * @return int|bool
      */
-    private function findLastInScope($types, $start, $end, $last=false)
+    private function findLastInScope($types, $start, $end, $last = false)
     {
         $types = (array)$types;
         $nextInScope = $this->findNextInScope($types, $start, $end);
