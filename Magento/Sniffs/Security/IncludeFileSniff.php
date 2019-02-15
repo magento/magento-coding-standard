@@ -93,7 +93,7 @@ class IncludeFileSniff implements Sniff
         if ($hasVariable) {
             $message .= ' Variables inside are insecure.';
         }
-        $phpcsFile->addWarning(
+        $phpcsFile->addError(
             $message,
             $stackPtr,
             $this->warningCode,

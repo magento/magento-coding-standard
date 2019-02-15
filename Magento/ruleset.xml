@@ -47,6 +47,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento.Security.IncludeFile">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <rule ref="Magento.Security.LanguageConstruct">
         <severity>10</severity>
         <type>error</type>
@@ -73,8 +77,16 @@
         <type>error</type>
     </rule>
 
-    <!-- Severity 9 warnings: Possible security issues. -->
-    <rule ref="Magento.Security.IncludeFile">
+    <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
+    <rule ref="Generic.Files.ByteOrderMark">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.DateTime">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.PHP.DiscouragedFunction">
         <severity>9</severity>
         <type>warning</type>
     </rule>
@@ -84,6 +96,10 @@
     </rule>
     <rule ref="Magento.Security.XssTemplate">
         <include-pattern>*.phtml</include-pattern>
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
         <type>warning</type>
     </rule>
@@ -110,10 +126,6 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento.NamingConvention.InterfaceName">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento.PHP.DateTime">
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -183,10 +195,6 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento.PHP.DiscouragedFunction">
-        <severity>7</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Magento.PHP.LiteralNamespaces">
         <severity>7</severity>
         <type>warning</type>
@@ -219,10 +227,6 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Squiz.PHP.NonExecutableCode">
-        <severity>7</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Squiz.Scope.MemberVarScope">
         <severity>7</severity>
         <type>warning</type>
@@ -230,10 +234,6 @@
 
     <!-- Severity 6 warnings: Code style issues. -->
     <rule ref="Generic.ControlStructures.InlineControlStructure">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Generic.Files.ByteOrderMark">
         <severity>6</severity>
         <type>warning</type>
     </rule>
