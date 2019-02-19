@@ -200,6 +200,10 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Squiz.Operators.ValidLogicalOperators">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.Functions.GlobalFunction">
         <severity>8</severity>
     </rule>
