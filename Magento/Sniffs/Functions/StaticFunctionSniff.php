@@ -45,9 +45,7 @@ class StaticFunctionSniff implements Sniff
         $tokens = array_slice($phpcsFile->getTokens(), $stackPtr, $posOfFunction - $stackPtr);
 
         $allowedTypes = [T_STATIC => true, T_WHITESPACE => true, T_FUNCTION => true];
-
         foreach ($tokens as $token) {
-
             $code = $token['code'];
             if (!array_key_exists($code, $allowedTypes)) {
                 break;
