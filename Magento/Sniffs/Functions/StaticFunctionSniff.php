@@ -19,7 +19,7 @@ class StaticFunctionSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'The use of `static` methods is discouraged';
+    protected $warningMessage = 'Static method cannot be intercepted and its use is discouraged.';
 
     /**
      * Warning violation code.

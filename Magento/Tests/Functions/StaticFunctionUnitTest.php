@@ -3,7 +3,6 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
