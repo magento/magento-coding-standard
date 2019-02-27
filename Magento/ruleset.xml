@@ -72,6 +72,9 @@
     <rule ref="Magento.Exceptions.Namespace">
         <severity>8</severity>
     </rule>
+    <rule ref="Magento.Functions.ThrowCatchSniff">
+        <severity>8</severity>
+    </rule>
     <rule ref="Magento.Files.LineLength">
         <properties>
             <property name="lineLimit" value="120"/>
