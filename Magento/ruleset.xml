@@ -75,6 +75,9 @@
     <rule ref="Magento.Functions.ThrowCatchSniff">
         <severity>8</severity>
     </rule>
+    <rule ref="Magento.Functions.StaticFunction">
+        <severity>6</severity>
+    </rule>
     <rule ref="Magento.Files.LineLength">
         <properties>
             <property name="lineLimit" value="120"/>
