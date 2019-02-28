@@ -72,7 +72,7 @@
     <rule ref="Magento.Exceptions.Namespace">
         <severity>8</severity>
     </rule>
-    <rule ref="Magento.Functions.ThrowCatchSniff">
+    <rule ref="Magento.Functions.ThrowCatch">
         <severity>8</severity>
     </rule>
     <rule ref="Magento.Functions.StaticFunction">
