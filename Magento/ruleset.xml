@@ -223,6 +223,10 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Squiz.Operators.ValidLogicalOperators">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.PHP.GlobalKeyword">
         <severity>7</severity>
         <type>warning</type>
@@ -397,10 +401,6 @@
         <type>warning</type>
     </rule>
     <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Squiz.Operators.ValidLogicalOperators">
         <severity>6</severity>
         <type>warning</type>
     </rule>
