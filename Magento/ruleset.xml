@@ -109,10 +109,6 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento.Classes.ObjectManager">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Magento.Exceptions.DirectThrow">
         <severity>8</severity>
         <type>warning</type>
