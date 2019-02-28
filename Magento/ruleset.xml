@@ -104,7 +104,7 @@
         <type>warning</type>
     </rule>
 
-    <!-- Severity 8 warnings: Magento specific code issues. -->
+    <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
     <rule ref="Magento.Classes.ObjectInstantiation">
         <severity>8</severity>
         <type>warning</type>
@@ -118,7 +118,8 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento.Functions.StaticFunction">
-        <severity>6</severity>
+        <severity>8</severity>
+        <type>warning</type>
     </rule>
     <rule ref="Magento.Files.LineLength">
         <properties>
@@ -305,6 +306,7 @@
     <rule ref="PSR2.Classes.PropertyDeclaration">
         <severity>6</severity>
         <type>warning</type>
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
     </rule>
     <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
         <severity>6</severity>
@@ -339,6 +341,7 @@
     <rule ref="PSR2.Methods.MethodDeclaration">
         <severity>6</severity>
         <type>warning</type>
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
     </rule>
     <rule ref="PSR2.Namespaces.NamespaceDeclaration">
         <severity>6</severity>
