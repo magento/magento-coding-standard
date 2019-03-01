@@ -279,10 +279,6 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento.Whitespace.EmptyLineMissed">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Magento.Whitespace.MultipleEmptyLines">
         <severity>6</severity>
         <type>warning</type>
