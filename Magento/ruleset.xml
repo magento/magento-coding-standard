@@ -195,6 +195,10 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.Exceptions.LocalizedThrow">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento.PHP.LiteralNamespaces">
         <severity>7</severity>
         <type>warning</type>
