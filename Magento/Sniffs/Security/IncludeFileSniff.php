@@ -14,11 +14,11 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class IncludeFileSniff implements Sniff
 {
-   /**
-    * Warning violation code.
-    *
-    * @var string
-    */
+    /**
+     * Warning violation code.
+     *
+     * @var string
+     */
     protected $warningCode = 'FoundIncludeFile';
 
     /**
@@ -93,7 +93,7 @@ class IncludeFileSniff implements Sniff
         if ($hasVariable) {
             $message .= ' Variables inside are insecure.';
         }
-        $phpcsFile->addWarning(
+        $phpcsFile->addError(
             $message,
             $stackPtr,
             $this->warningCode,
