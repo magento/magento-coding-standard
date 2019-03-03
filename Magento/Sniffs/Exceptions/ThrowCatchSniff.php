@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Sniffs\Functions;
+namespace Magento\Sniffs\Exceptions;
 
 use function array_slice;
 use PHP_CodeSniffer\Sniffs\Sniff;
