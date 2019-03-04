@@ -99,12 +99,20 @@
         <severity>9</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.SQL.RawQuery">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
         <type>warning</type>
     </rule>
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
+    <rule ref="Magento.Classes.AbstractApi">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento.Classes.ObjectInstantiation">
         <severity>8</severity>
         <type>warning</type>
@@ -118,10 +126,6 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento.Files.LineLength">
-        <properties>
-            <property name="lineLimit" value="120"/>
-            <property name="absoluteLineLimit" value="120"/>
-        </properties>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -139,6 +143,10 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento.Translation.ConstantUsage">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento.Exceptions.ThrowCatch">
         <severity>8</severity>
         <type>warning</type>
     </rule>
