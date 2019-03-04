@@ -22,6 +22,16 @@ class LineLengthSniff extends FilesLineLengthSniff
     /**
      * @inheritdoc
      */
+    public $lineLimit = 120;
+
+    /**
+     * @inheritdoc
+     */
+    public $absoluteLineLimit = 120;
+
+    /**
+     * @inheritdoc
+     */
     protected function checkLineLength($phpcsFile, $stackPtr, $lineContent)
     {
         $previousLineRegexp = '~__\($|\bPhrase\($~';
