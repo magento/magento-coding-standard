@@ -105,6 +105,10 @@
     </rule>
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
+    <rule ref="Magento.Classes.AbstractApi">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento.Classes.ObjectInstantiation">
         <severity>8</severity>
         <type>warning</type>
