@@ -99,6 +99,10 @@
         <severity>9</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.SQL.RawQuery">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
         <type>warning</type>
