@@ -121,6 +121,10 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.Functions.GetterState">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento.Functions.StaticFunction">
         <severity>8</severity>
         <type>warning</type>
