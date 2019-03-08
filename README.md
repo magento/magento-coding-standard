@@ -2,8 +2,22 @@
 
 A set of Magento rules for [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) tool.
 
-### Installation
-For development puposes you can install Magento Coding Standard by cloning this GitHub repo
+#### Installation within a Magento 2 site
+To use within your Magento 2 project you can use:
+````
+composer require --dev magento/magento-coding-standard
+````
+Due to security, when installed this way the Magento standard for phpcs cannot be added automatically.
+You can achieve this by adding the following to your project's `composer.json`:
+````
+"scripts": {
+    "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/",
+    "post-update-cmd": "vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/"
+}
+````
+
+### Installation for development
+You can install Magento Coding Standard by cloning this GitHub repo
 ```
 $ git clone git@github.com:magento/magento-coding-standard.git
 $ cd magento-coding-standard
@@ -13,7 +27,6 @@ It is possible also to install a standalone application via [Composer](https://g
 ```
 $ composer create-project magento/magento-coding-standard --stability=dev magento-coding-standard
 ```
-Or require `magento/magento-coding-standard` inside your project using  `composer require` command.
 
 #### Verify installation
 Command should return the list of installed coding standards including Magento.
