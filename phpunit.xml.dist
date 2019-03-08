@@ -8,4 +8,9 @@
     <php>
         <env name="PHPCS_IGNORE_TESTS" value="Generic,MySource,PEAR,PSR1,PSR2,Squiz,Zend"/>
     </php>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">Magento/Sniffs</directory>
+        </whitelist>
+    </filter>
 </phpunit>
