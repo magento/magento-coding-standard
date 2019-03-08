@@ -23,7 +23,7 @@ $ vendor/bin/phpcs -i
 ### Usage
 Once installed, you can run `phpcs` from the command-line to analyse your code `MyAwesomeExtension`
 ```
-$ bin/phpcs --standard=Magento app/code/MyAwesomeExtension
+$ vendor/bin/phpcs --standard=Magento app/code/MyAwesomeExtension
 ```
 ## Where to contribute
 - Documentation of existing rules. See [ExtDN PHP CodeSniffer rules for Magento 2](https://github.com/extdn/extdn-phpcs) as a good example.
@@ -43,7 +43,7 @@ $ bin/phpcs --standard=Magento app/code/MyAwesomeExtension
 All rules should be covered by unit tests. Each `Test.php` class should be accompanied by a `Test.inc` file to allow for unit testing based upon the PHP CodeSniffer parent class `AbstractSniffUnitTest`.
 You can verify your code by running
 ```
-$ bin/phpunit
+$ vendor/bin/phpunit
 ```
 
 ## License

@@ -5,5 +5,5 @@ php:
   - 7.1
 install: composer install --no-interaction --prefer-source
 script:
-  - bin/phpunit
+  - vendor/bin/phpunit
   - vendor/bin/phpcs --standard=Magento Magento/ --extensions=php
