@@ -18,7 +18,7 @@ Or require `magento/magento-coding-standard` inside your project using  `compose
 #### Verify installation
 Command should return the list of installed coding standards including Magento.
 ```
-$ bin/phpcs -i
+$ vendor/bin/phpcs -i
 ```
 ### Usage
 Once installed, you can run `phpcs` from the command-line to analyse your code `MyAwesomeExtension`
