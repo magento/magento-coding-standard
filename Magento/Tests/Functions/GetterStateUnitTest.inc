@@ -40,6 +40,12 @@ class Foo extends Bar
         return $this->property;
     }
 
+    public function TestigetFoo()
+    {
+        $this->property = 1223;
+        return $this->property;
+    }
+
     /**
      * @return int
      */

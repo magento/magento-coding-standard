@@ -45,7 +45,7 @@ class GetterStateSniff implements Sniff
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
 
-        if ($methodName === null || strpos($methodName, 'get') === false) {
+        if ($methodName === null || strpos($methodName, 'get') !== 0) {
             // Ignore closures and no getters
             return;
         }
