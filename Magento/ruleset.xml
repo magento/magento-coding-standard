@@ -113,6 +113,10 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento.Classes.ConstructorProxyInterceptor">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento.Classes.ObjectInstantiation">
         <severity>8</severity>
         <type>warning</type>
