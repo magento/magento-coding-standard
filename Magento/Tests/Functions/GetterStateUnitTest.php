@@ -30,7 +30,7 @@ class GetterStateUnitTest extends AbstractSniffUnitTest
             28 => 1,
             29 => 1,
             30 => 1,
-            39 => 1,
+            43 => 1,
         ];
     }
 }

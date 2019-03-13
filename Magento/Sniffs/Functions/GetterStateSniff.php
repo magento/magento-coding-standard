@@ -74,7 +74,19 @@ class GetterStateSniff implements Sniff
             }
 
             if ($isObjectScope === true && array_key_exists($token['code'], Tokens::$assignmentTokens)) {
-                $phpcsFile->addWarning($this->warningMessage, $i, $this->warningCode);
+
+                $isWrappedByIf = false;
+                // Detect if the property warped by an if tag.
+                $ifTag = $phpcsFile->findPrevious(T_IF, $i);
+                if ($ifTag !== false) {
+                    $open = $tokens[$ifTag]['scope_opener'];
+                    $close = $tokens[$ifTag]['scope_closer'];
+                    $isWrappedByIf = $open <= $i && $close >= $i;
+                }
+
+                if ($isWrappedByIf === false) {
+                    $phpcsFile->addWarning($this->warningMessage, $i, $this->warningCode);
+                }
             }
         }
     }

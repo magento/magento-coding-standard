@@ -3,9 +3,9 @@
 namespace Foo\Bar;
 
 
-abstract class Bar{
-
-    public static $foobar  = 100;
+abstract class Bar
+{
+    public static $foobar = 100;
 }
 
 class Foo extends Bar
@@ -36,11 +36,27 @@ class Foo extends Bar
      */
     public function getProperty()
     {
+        if (true) {
+
+        }
+
         $this->property = 1223;
         return $this->property;
     }
 
-    public function TestigetFoo()
+    /**
+     * @return int
+     */
+    public function getPropertyCached()
+    {
+        if ($this->property === null) {
+            $this->property = 1223;
+        }
+
+        return $this->property;
+    }
+
+    public function testigetFoo()
     {
         $this->property = 1223;
         return $this->property;
