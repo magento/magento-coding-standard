@@ -15,9 +15,10 @@ class DirectThrowSniff implements Sniff
 {
     /**
      * String representation of warning.
+     * phpcs:disable Generic.Files.LineLength.TooLong
      */
-    // phpcs:ignore Generic.Files.LineLength.TooLong
     protected $warningMessage = 'Direct throw of generic Exception is discouraged. Use context specific instead.';
+    //phpcs:enable
 
     /**
      * Warning violation code.

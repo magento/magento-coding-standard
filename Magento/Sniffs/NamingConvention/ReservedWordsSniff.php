@@ -15,9 +15,8 @@ class ReservedWordsSniff implements Sniff
 {
     /**
      * The following words cannot be used to name a class, interface or trait,
-     * and they are also prohibited from being used in namespaces.
-     *
-     * @link http://php.net/manual/en/reserved.other-reserved-words.php
+     * and they are also prohibited from being used in namespaces
+     * http://php.net/manual/en/reserved.other-reserved-words.php
      *
      * @var string[]
      */
