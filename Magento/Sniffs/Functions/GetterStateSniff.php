@@ -51,21 +51,29 @@ class GetterStateSniff implements Sniff
         }
 
         $tokens = $phpcsFile->getTokens();
+        if (!isset($tokens[$stackPtr]['scope_closer'])) {
+            // Probably an interface method no check
+            return;
+        }
+
         $open = $tokens[$stackPtr]['scope_opener'];
         $close = $tokens[$stackPtr]['scope_closer'];
 
         $isObjectScope = false;
         $isObjectScopeToken = [T_SELF => T_SELF, T_PARENT => T_PARENT, T_STATIC => T_STATIC];
+        $thisScopeCloser = array_merge(Tokens::$bracketTokens,
+            [T_SEMICOLON => T_SEMICOLON, T_COMMA => T_COMMA, T_COLON => T_COLON]);
 
         for ($i = ($open + 1); $i < $close; $i++) {
             $token = $tokens[$i];
+            $code = $token['code'];
 
-            if (T_SEMICOLON === $token['code']) {
+            if (array_key_exists($code, $thisScopeCloser)) {
                 // Detect line end scope change to function scope.
                 $isObjectScope = false;
             }
 
-            if (array_key_exists($token['code'], $isObjectScopeToken)) {
+            if (array_key_exists($code, $isObjectScopeToken)) {
                 $isObjectScope = true;
             }
 
@@ -73,7 +81,9 @@ class GetterStateSniff implements Sniff
                 $isObjectScope = true;
             }
 
-            if ($isObjectScope === true && array_key_exists($token['code'], Tokens::$assignmentTokens)) {
+            $isRelevant = $isObjectScope === true && $code !== T_DOUBLE_ARROW;
+
+            if ($isRelevant && array_key_exists($code, Tokens::$assignmentTokens)) {
 
                 $isWrappedByIf = false;
                 // Detect if the property warped by an if tag.
