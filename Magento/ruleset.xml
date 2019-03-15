@@ -434,17 +434,24 @@
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
-    <rule ref="Magento.Annotation">
+    <rule ref="Squiz.Commenting.DocCommentAlignment">
         <severity>5</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Squiz.Commenting.DocCommentAlignment">
+    <rule ref="Squiz.Commenting.ClassComment">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Squiz.Commenting.ClassComment.TagNotAllowed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
         <severity>5</severity>
         <type>warning</type>
     </rule>
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
-            <property name="maxPercentage" value="70"/>
+            <property name="maxPercentage" value="80"/>
         </properties>
         <severity>5</severity>
         <type>warning</type>

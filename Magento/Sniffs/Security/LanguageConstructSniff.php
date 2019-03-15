@@ -23,10 +23,12 @@ class LanguageConstructSniff implements Sniff
     /**
      * String representation of backtick error.
      *
+     * phpcs:disable Magento.Files.LineLength.MaxExceeded
+     *
      * @var string
      */
-    // phpcs:ignore Magento.Files.LineLength.MaxExceeded
     protected $errorMessageBacktick = 'Incorrect usage of back quote string constant. Back quotes should be always inside strings.';
+    //phpcs:enable
 
     /**
      * Backtick violation code.
