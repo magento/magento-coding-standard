@@ -3,7 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\PHP;
+namespace Magento2\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
@@ -26,7 +26,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            3 => 1,
             6 => 1,
             7 => 1,
             9 => 1,
@@ -63,7 +62,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             65 => 1,
             67 => 1,
             69 => 1,
-            71 => 1,
             73 => 1,
             74 => 1,
             76 => 1,
@@ -122,7 +120,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             166 => 1,
             169 => 1,
             171 => 1,
-            173 => 1,
             175 => 1,
             177 => 1,
             179 => 1,
@@ -152,7 +149,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             229 => 1,
             231 => 1,
             233 => 1,
-            235 => 1,
             237 => 1,
             239 => 1,
             241 => 1,
@@ -162,7 +158,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             247 => 1,
             249 => 1,
             251 => 1,
-            253 => 1,
             255 => 1,
             258 => 1,
             261 => 1,
@@ -257,7 +252,6 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             458 => 1,
             460 => 1,
             462 => 1,
-            464 => 1,
         ];
     }
 }
