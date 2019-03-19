@@ -3,7 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Functions;
+namespace Magento2\Tests\Security;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
@@ -34,6 +34,10 @@ class InsecureFunctionUnitTest extends AbstractSniffUnitTest
             13 => 1,
             15 => 1,
             17 => 1,
+            19 => 1,
+            21 => 1,
+            23 => 1,
+            25 => 1,
         ];
     }
 }

@@ -3,7 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Sniffs\Functions;
+namespace Magento2\Sniffs\Security;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
 
@@ -26,12 +26,16 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
      */
     public $forbiddenFunctions = [
         'assert' => null,
+        'create_function' => null,
         'exec' => null,
+        'md5' => 'improved hash functions (SHA-256, SHA-512 etc.)',
         'passthru' => null,
+        'pcntl_exec' => null,
+        'popen' => null,
+        'proc_open' => null,
+        'serialize' => 'json_encode',
         'shell_exec' => null,
         'system' => null,
-        'md5' => 'improved hash functions (SHA-256, SHA-512 etc.)',
-        'serialize' => 'json_encode',
         'unserialize' => 'json_decode',
     ];
 }

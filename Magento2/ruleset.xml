@@ -59,6 +59,7 @@
     <rule ref="Magento2.Security.Superglobal.SuperglobalUsageError">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Strings.ExecutableRegEx">
         <severity>10</severity>
@@ -86,6 +87,7 @@
     <rule ref="Magento2.PHP.DateTime">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.InsecureFunction">
         <severity>9</severity>
@@ -94,6 +96,7 @@
     <rule ref="Magento2.Security.Superglobal.SuperglobalUsageWarning">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.XssTemplate">
         <include-pattern>*.phtml</include-pattern>
@@ -137,6 +140,7 @@
         <severity>8</severity>
         <type>warning</type>
         <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*/Setup/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Files.LineLength">
         <severity>8</severity>
