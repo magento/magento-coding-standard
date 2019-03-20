@@ -60,6 +60,7 @@
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*/lib/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Strings.ExecutableRegEx">
         <severity>10</severity>
@@ -97,6 +98,7 @@
         <severity>9</severity>
         <type>warning</type>
         <exclude-pattern>*/lib/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.XssTemplate">
         <include-pattern>*.phtml</include-pattern>
@@ -252,6 +254,7 @@
     <rule ref="Squiz.PHP.GlobalKeyword">
         <severity>7</severity>
         <type>warning</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.Scope.MemberVarScope">
         <severity>7</severity>
