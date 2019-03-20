@@ -1,5 +1,5 @@
 <!--unsafe-->
-<?php /* @noEscape */ echo $code; ?>
+
 <?php $block->getSomeData(); echo $block->getSomeData(); /* @escapeNotVerified */ echo $block->getSomeData();?>
 <?=  $block->getTitle();?>
 <?php echo $object->getSomeMethod($block->getHtmlId());?>
@@ -56,3 +56,4 @@ echo $var;
 <?php echo $block->escapeJs($js); ?>
 <?php echo $block->escapeCss($css); ?>
 <?php echo $block->getJsLayout($jsLayout); ?>
+<?= /* @noEscape */ json_encode($config) ?>

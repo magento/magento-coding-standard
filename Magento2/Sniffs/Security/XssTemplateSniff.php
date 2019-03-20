@@ -151,6 +151,10 @@ class XssTemplateSniff implements Sniff
             $startOfStatement = $this->file->findPrevious(T_OPEN_TAG, $stackPtr);
             return $this->file->findPrevious(T_COMMENT, $stackPtr, $startOfStatement);
         }
+        if ($this->tokens[$stackPtr]['code'] === T_OPEN_TAG_WITH_ECHO) {
+            $endOfStatement = $this->file->findNext(T_CLOSE_TAG, $stackPtr);
+            return $this->file->findNext(T_COMMENT, $stackPtr, $endOfStatement);
+        }
         return false;
     }
 
