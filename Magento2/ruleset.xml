@@ -230,6 +230,10 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Performance.ForeachArrayMerge">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.Strings.StringConcat">
         <severity>7</severity>
         <type>warning</type>
