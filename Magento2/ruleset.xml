@@ -189,10 +189,6 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Generic.Metrics.CyclomaticComplexity">
-        <severity>7</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Generic.Metrics.NestingLevel">
         <severity>7</severity>
         <type>warning</type>
