@@ -86,12 +86,6 @@
         <severity>9</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento2.PHP.DateTime">
-        <severity>9</severity>
-        <type>warning</type>
-        <exclude-pattern>*/lib/*</exclude-pattern>
-        <exclude-pattern>*/Test/*</exclude-pattern>
-    </rule>
     <rule ref="Magento2.Security.InsecureFunction">
         <severity>9</severity>
         <type>warning</type>
