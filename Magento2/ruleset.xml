@@ -104,6 +104,8 @@
     <rule ref="Magento2.SQL.RawQuery">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
