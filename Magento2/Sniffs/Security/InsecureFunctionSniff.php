@@ -33,9 +33,11 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'pcntl_exec' => null,
         'popen' => null,
         'proc_open' => null,
-        'serialize' => 'json_encode',
+        'serialize' => '\Magento\Framework\Serialize\SerializerInterface::serialize',
         'shell_exec' => null,
         'system' => null,
-        'unserialize' => 'json_decode',
+        'unserialize' => '\Magento\Framework\Serialize\SerializerInterface::unserialize',
+        'srand' => null,
+        'mt_srand'=> null,
     ];
 }
