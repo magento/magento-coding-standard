@@ -67,7 +67,6 @@ class LineLengthSniff extends FilesLineLengthSniff
         $this->updateLineBuffer($phpcsFile, $tokens, $stackPtr);
     }
 
-
     /**
      * Checks whether the previous line is part of a translation.
      *
