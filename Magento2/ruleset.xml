@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Magento">
+<ruleset name="Magento2">
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
