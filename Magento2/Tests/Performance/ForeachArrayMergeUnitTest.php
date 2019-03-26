@@ -26,8 +26,8 @@ class ForeachArrayMergeUnitTest  extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            9 => 1,
-            16 => 1,
+            11 => 1,
+            19 => 1,
         ];
     }
 }

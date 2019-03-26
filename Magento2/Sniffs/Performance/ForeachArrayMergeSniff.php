@@ -16,7 +16,7 @@ class ForeachArrayMergeSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'Array merge is slow in each functions. ';
+    protected $warningMessage = 'array_merge(...) is used in a loop and is a resources greedy construction.';
 
     /**
      * Warning violation code.
@@ -24,6 +24,11 @@ class ForeachArrayMergeSniff implements Sniff
      * @var string
      */
     protected $warningCode = 'ForeachArrayMerge';
+
+    /**
+     * @var array
+     */
+    protected $foreachCache = [];
 
     /**
      * @inheritdoc
@@ -41,15 +46,19 @@ class ForeachArrayMergeSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         $scopeOpener = $tokens[$stackPtr]['scope_opener'];
-        $scopeCloser = $tokens[$stackPtr]['scope_closer'] ;
+        $scopeCloser = $tokens[$stackPtr]['scope_closer'];
 
-        for ($i = $scopeOpener; $i <  $scopeCloser; $i++)
-        {
+        for ($i = $scopeOpener; $i < $scopeCloser; $i++) {
             $tag = $tokens[$i];
             if ($tag['code'] !== T_STRING) {
                 continue;
             }
             if ($tag['content'] !== 'array_merge') {
+                continue;
+            }
+
+            $cacheKey = $phpcsFile->getFilename() . $i;
+            if (isset($this->foreachCache[$cacheKey])) {
                 continue;
             }
 
