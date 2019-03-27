@@ -62,6 +62,7 @@ class ForeachArrayMergeSniff implements Sniff
                 continue;
             }
 
+            $this->foreachCache[$cacheKey] = '';
             $phpcsFile->addWarning($this->warningMessage, $i, $this->warningCode);
         }
     }

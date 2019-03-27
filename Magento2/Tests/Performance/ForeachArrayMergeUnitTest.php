@@ -27,7 +27,7 @@ class ForeachArrayMergeUnitTest  extends AbstractSniffUnitTest
     {
         return [
             11 => 1,
-            19 => 1,
+            19 => 1
         ];
     }
 }

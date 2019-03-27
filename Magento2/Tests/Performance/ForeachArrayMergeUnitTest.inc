@@ -19,16 +19,25 @@ for ($i = 0; $i <= $itemCount; $i++) {
     $options = array_merge($options, $source));
 }
 
-class CSV
+class SelectBuilder
 {
-    public static function getColumns()
+    private $columns = [];
+
+    public function getColumns()
     {
-        return [];
+        return $this->columns;
+    }
+
+    public function setColumns(array $columns)
+    {
+        $this->columns = $columns;
     }
 }
 
+$selectBuilder = new SelectBuilder();
+
 foreach ([] as $collection) {
     foreach ($configurationSources as $source) {
-        $options = array_merge(CSV::getColumns(), $source);
+        $selectBuilder->setColumns(array_merge($selectBuilder->getColumns(), $source));
     }
 }
