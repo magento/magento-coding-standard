@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Tests\Performance;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
@@ -10,7 +11,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 /**
  * Class EmptyCheckUnitTest
  */
-class ForeachArrayMergeUnitTest  extends AbstractSniffUnitTest
+class ForeachArrayMergeUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -27,7 +28,8 @@ class ForeachArrayMergeUnitTest  extends AbstractSniffUnitTest
     {
         return [
             11 => 1,
-            19 => 1
+            19 => 1,
+            41 => 1
         ];
     }
 }

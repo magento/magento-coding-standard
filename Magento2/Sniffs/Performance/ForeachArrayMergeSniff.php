@@ -9,6 +9,9 @@ namespace Magento2\Sniffs\Performance;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
+/**
+ * Detects array_merge(...) is used in a loop and is a resources greedy construction.
+ */
 class ForeachArrayMergeSniff implements Sniff
 {
     /**

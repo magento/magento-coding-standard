@@ -16,7 +16,7 @@ $options = [];
 $itemCount = count($configurationSources);
 for ($i = 0; $i <= $itemCount; $i++) {
     $source = $options[$itemCount];
-    $options = array_merge($options, $source));
+    $options = array_merge($options, $source);
 }
 
 class SelectBuilder
