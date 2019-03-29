@@ -27,6 +27,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento.Classes.DiscouragedDependencies">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <rule ref="Magento.Legacy.MageEntity">
         <severity>10</severity>
         <type>error</type>
