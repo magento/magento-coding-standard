@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Magento">
+<ruleset name="Magento2">
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
@@ -22,6 +22,7 @@
     <rule ref="Generic.PHP.NoSilencedErrors">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
@@ -85,11 +86,6 @@
         <severity>9</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento2.PHP.DateTime">
-        <severity>9</severity>
-        <type>warning</type>
-        <exclude-pattern>*/lib/*</exclude-pattern>
-    </rule>
     <rule ref="Magento2.Security.InsecureFunction">
         <severity>9</severity>
         <type>warning</type>
@@ -108,6 +104,8 @@
     <rule ref="Magento2.SQL.RawQuery">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*/lib/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
@@ -118,11 +116,6 @@
     <rule ref="Magento2.Classes.AbstractApi">
         <severity>8</severity>
         <type>warning</type>
-    </rule>
-    <rule ref="Magento2.Classes.ObjectInstantiation">
-        <severity>8</severity>
-        <type>warning</type>
-        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Exceptions.DirectThrow">
         <severity>8</severity>
@@ -141,8 +134,9 @@
     <rule ref="Magento2.Functions.StaticFunction">
         <severity>8</severity>
         <type>warning</type>
-        <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Setup/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Files.LineLength">
         <severity>8</severity>
@@ -195,10 +189,6 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Generic.Metrics.CyclomaticComplexity">
-        <severity>7</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Generic.Metrics.NestingLevel">
         <severity>7</severity>
         <type>warning</type>
@@ -213,10 +203,7 @@
     <rule ref="Magento2.CodeAnalysis.EmptyBlock">
         <severity>7</severity>
         <type>warning</type>
-    </rule>
-    <rule ref="Magento2.Exceptions.Namespace">
-        <severity>7</severity>
-        <type>warning</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.LiteralNamespaces">
         <severity>7</severity>

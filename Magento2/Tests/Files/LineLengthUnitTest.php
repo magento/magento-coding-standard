@@ -18,7 +18,8 @@ class LineLengthUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            7 => 1
+            9 => 1,
+            19 => 1,
         ];
     }
 
