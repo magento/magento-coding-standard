@@ -27,6 +27,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento.Classes.DiscouragedDependencies">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <rule ref="Magento.Legacy.MageEntity">
         <severity>10</severity>
         <type>error</type>
@@ -110,10 +114,6 @@
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
     <rule ref="Magento.Classes.AbstractApi">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento.Classes.ConstructorProxyInterceptor">
         <severity>8</severity>
         <type>warning</type>
     </rule>

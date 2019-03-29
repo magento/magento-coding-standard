@@ -1,11 +1,11 @@
 <?php
 
-namespace Vendor\Module\Proxy;
+namespace Vendor\Module\Anyname;
 
-use \Vendor\Module\Proxy\AnyName as ProxAlias;
+use \Vendor\Module\AnyName\Proxy as ProxAlias;
 use \Exception as SafeAlias;
 
-class AnyName {}
+class Proxy {}
 
 /**
  * // Rule find: constructor use of proxy class
@@ -14,15 +14,16 @@ class Foo
 {
     public function __construct(
             $first,
-            \Vendor\Module\Proxy\AnyName $anything,
-            $proxy,
+            \Vendor\Module\AnyName\Proxy $anything,
+            $proxyOnlyInName,
+            ProxAliasNope $notAProblem, // should not match
             $another = []
     )
     {
 
     }
     public function notAConstruct(
-        \Vendor\Module\Proxy\AnyName $anything
+        \Vendor\Module\Anyname\Proxy $anything
     )
     {
 
@@ -33,14 +34,14 @@ class Foo
  * // Rule find: constructor use of proxy class with alias
  */
 class Foo2 {
-    public function __construct(ProxAlias $anything, $aProxy) {}
+    public function __construct(ProxAlias $anything, $aProxyInName) {}
 }
 
 /**
  * // Rule find: constructor use of proxy class with use statement
  */
 class Foo3 {
-    public function __construct(AnyName $anything) {}
+    public function __construct(Proxy $anything, InterAlias $oldAliasInName) {}
 }
 
 /**

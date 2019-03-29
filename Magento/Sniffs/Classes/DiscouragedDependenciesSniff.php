@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * Search is in variable names and namespaces, including indirect namespaces from use statements
  */
-class ConstructorProxyInterceptorSniff implements Sniff
+class DiscouragedDependenciesSniff implements Sniff
 {
     const CONSTRUCT_METHOD_NAME = '__construct';
 
@@ -33,17 +33,25 @@ class ConstructorProxyInterceptorSniff implements Sniff
     protected $warningCode = 'ConstructorProxyInterceptor';
 
     /**
-     * @var array Aliases of proxies or plugins from use statements
+     * Aliases of proxies or plugins from use statements
+     *
+     * @var string[]
      */
     private $aliases = [];
 
     /**
-     * @var array Terms to search for in variables and namespaces
+     * The current file - used for clearing USE aliases when file changes
+     *
+     * @var null|string
      */
-    private $warnNames = [
-        'proxy',
-        'plugin'
-    ];
+    private $currentFile = null;
+
+    /**
+     * Terms to search for in variables and namespaces
+     *
+     * @var string[]
+     */
+    public $incorrectClassNames = ['proxy','interceptor'];
 
     /**
      * @inheritDoc
@@ -61,8 +69,17 @@ class ConstructorProxyInterceptorSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        // Match use statements and constructor (latter matches T_FUNCTION to find constructors
+        // Clear down aliases when file under test changes
+        $currentFileName = $phpcsFile->getFilename();
+        if ($this->currentFile != $currentFileName) {
+            // Clear aliases
+            $this->aliases = [];
+            $this->currentFile = $currentFileName;
+        }
+
+        // Match use statements and constructor (latter matches T_FUNCTION to find constructors)
         $tokens = $phpcsFile->getTokens();
+
         if ($tokens[$stackPtr]['code'] == T_USE) {
             $this->processUse($phpcsFile, $stackPtr, $tokens);
         } elseif ($tokens[$stackPtr]['code'] == T_FUNCTION) {
@@ -123,7 +140,7 @@ class ConstructorProxyInterceptorSniff implements Sniff
             return;
         }
         $positionInConstrSig = $openParenth;
-        $skipTillAfterVariable = false;
+        $lastName = null;
         do {
             // Find next part of namespace (string) or variable name
             $positionInConstrSig = $phpcsFile->findNext(
@@ -131,23 +148,28 @@ class ConstructorProxyInterceptorSniff implements Sniff
                 $positionInConstrSig + 1,
                 $closeParenth
             );
+
             $currentTokenIsString = $tokens[$positionInConstrSig]['code'] == T_STRING;
-            // If we've already found a match, continue till after variable
-            if ($skipTillAfterVariable) {
-                if (!$currentTokenIsString) {
-                    $skipTillAfterVariable = false;
+
+            if ($currentTokenIsString) {
+                // Remember string in case this is last before variable
+                $lastName = strtolower($tokens[$positionInConstrSig]['content']);
+            } else {
+                // If this is a variable, check last word for matches as was end of classname/alias
+                if ($lastName !== null) {
+                    $namesToWarn = $this->mergedNamesToWarn(true);
+                    if ($this->containsWord($namesToWarn, $lastName)) {
+                        $phpcsFile->addError(
+                            $this->warningMessage,
+                            $positionInConstrSig,
+                            $this->warningCode,
+                            [$lastName]
+                        );
+                    }
+                    $lastName = null;
                 }
-                continue;
             }
-            // If match in namespace or variable then add warning
-            $name = strtolower($tokens[$positionInConstrSig]['content']);
-            $namesToWarn = $this->mergedNamesToWarn($currentTokenIsString);
-            if ($this->containsWord($namesToWarn, $name)) {
-                $phpcsFile->addWarning($this->warningMessage, $positionInConstrSig, $this->warningCode, [$name]);
-                if ($currentTokenIsString) {
-                    $skipTillAfterVariable = true;
-                }
-            }
+
         } while ($positionInConstrSig !== false && $positionInConstrSig < $closeParenth);
     }
 
@@ -190,7 +212,7 @@ class ConstructorProxyInterceptorSniff implements Sniff
     }
 
     /**
-     * Whether $name is contained in any of $haystacks
+     * Whether $name exactly matches any of $haystacks
      *
      * @param array $haystacks
      * @param string $name
@@ -199,15 +221,7 @@ class ConstructorProxyInterceptorSniff implements Sniff
      */
     private function containsWord($haystacks, $name)
     {
-        $matchWarnWord = false;
-        foreach ($haystacks as $warn) {
-            if (strpos($name, $warn) !== false) {
-                $matchWarnWord = true;
-                break;
-            }
-        }
-
-        return $matchWarnWord;
+        return in_array($name, $haystacks);
     }
 
     /**
@@ -257,7 +271,7 @@ class ConstructorProxyInterceptorSniff implements Sniff
      */
     private function mergedNamesToWarn($includeAliases = false)
     {
-        $namesToWarn = $this->warnNames;
+        $namesToWarn = $this->incorrectClassNames;
         if ($includeAliases) {
             $namesToWarn = array_merge($namesToWarn, $this->aliases);
         }
