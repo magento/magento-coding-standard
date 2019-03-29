@@ -4,12 +4,12 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tests\Classes;
+namespace Magento2\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Class DiscouragedDependenciesInterceptorUnitTest
+ * Class DiscouragedDependenciesUnitTest
  *
  * Tests for interceptors in constructors
  */

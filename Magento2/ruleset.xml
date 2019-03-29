@@ -28,7 +28,7 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
-    <rule ref="Magento.Classes.DiscouragedDependencies">
+    <rule ref="Magento2.Classes.DiscouragedDependencies">
         <severity>10</severity>
         <type>error</type>
     </rule>
