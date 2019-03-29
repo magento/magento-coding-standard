@@ -3,7 +3,8 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
 install: composer install --no-interaction --prefer-source
 script:
   - vendor/bin/phpunit
-  - vendor/bin/phpcs --standard=Magento Magento/ --extensions=php
+  - vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php

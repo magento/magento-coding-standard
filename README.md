@@ -29,7 +29,7 @@ $ composer create-project magento/magento-coding-standard --stability=dev magent
 ```
 
 #### Verify installation
-Command should return the list of installed coding standards including Magento.
+Command should return the list of installed coding standards including Magento2.
 ```
 $ vendor/bin/phpcs -i
 ```
