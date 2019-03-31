@@ -3,7 +3,6 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\Performance;
 
 use PHP_CodeSniffer\Files\File;
