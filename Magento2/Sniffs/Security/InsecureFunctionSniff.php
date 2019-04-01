@@ -39,5 +39,6 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'unserialize' => '\Magento\Framework\Serialize\SerializerInterface::unserialize',
         'srand' => null,
         'mt_srand'=> null,
+        'mt_rand' => 'random_int',
     ];
 }
