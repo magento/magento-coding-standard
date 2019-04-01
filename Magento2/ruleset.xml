@@ -120,6 +120,7 @@
     <rule ref="Magento2.Exceptions.DirectThrow">
         <severity>8</severity>
         <type>warning</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Exceptions.ThrowCatch">
         <severity>8</severity>
@@ -213,10 +214,6 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento2.Performance.EmptyCheck">
-        <severity>7</severity>
-        <type>warning</type>
-    </rule>
     <rule ref="Magento2.Strings.StringConcat">
         <severity>7</severity>
         <type>warning</type>
@@ -302,6 +299,7 @@
     <rule ref="PSR1.Files.SideEffects">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="PSR1.Methods.CamelCapsMethodName">
         <severity>6</severity>
@@ -448,10 +446,6 @@
     </rule>
     <rule ref="Squiz.Commenting.ClassComment.TagNotAllowed">
         <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
-        <severity>5</severity>
-        <type>warning</type>
     </rule>
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
