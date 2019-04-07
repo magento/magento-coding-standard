@@ -6,7 +6,7 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "require": {
         "php": ">=5.6.0",
         "squizlabs/php_codesniffer": "~3.3.0"

@@ -36,7 +36,7 @@ $ vendor/bin/phpcs -i
 ### Usage
 Once installed, you can run `phpcs` from the command-line to analyse your code `MyAwesomeExtension`
 ```
-$ vendor/bin/phpcs --standard=Magento app/code/MyAwesomeExtension
+$ vendor/bin/phpcs --standard=Magento2 app/code/MyAwesomeExtension
 ```
 ## Where to contribute
 - Documentation of existing rules. See [ExtDN PHP CodeSniffer rules for Magento 2](https://github.com/extdn/extdn-phpcs) as a good example.
