@@ -6,7 +6,7 @@ use Exception;
 
 class StreamHandler
 {
-    public function handleExpection()
+    public function handleException()
     {
         try {
             $strChar = stream_get_contents(STDIN, 1);
@@ -15,7 +15,7 @@ class StreamHandler
         }
     }
 
-    public function exetcute()
+    public function execute()
     {
         // Rule find: Try block detected when processing system resources
         $strChar = stream_get_contents(STDIN, 1);

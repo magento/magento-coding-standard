@@ -3,7 +3,6 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\Exceptions;
 
 use function array_slice;
@@ -20,7 +19,7 @@ class TryProcessSystemResourcesSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'All resources SHOULD be properly released.';
+    protected $warningMessage = 'The code MUST be wrapped with a try block if the method uses system resources .';
 
     /**
      * Warning violation code.

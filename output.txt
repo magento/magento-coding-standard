@@ -1,4 +1,0 @@
-ERROR: The specified sniff code "Magento2.Exceptions" is invalid
-
-Run "phpcs --help" for usage information
-
