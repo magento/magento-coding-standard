@@ -31,6 +31,7 @@
     <rule ref="Magento2.Classes.DiscouragedDependencies">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.MageEntity">
         <severity>10</severity>
