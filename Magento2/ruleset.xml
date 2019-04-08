@@ -31,7 +31,10 @@
     <rule ref="Magento2.Classes.DiscouragedDependencies">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.MageEntity">
         <severity>10</severity>
@@ -57,6 +60,7 @@
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
@@ -68,6 +72,7 @@
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
@@ -103,6 +108,7 @@
         <severity>9</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
@@ -116,6 +122,7 @@
         <severity>9</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
@@ -134,6 +141,7 @@
         <severity>8</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
@@ -145,6 +153,7 @@
         <severity>8</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
@@ -153,6 +162,7 @@
         <severity>8</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Setup/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
@@ -224,6 +234,7 @@
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
@@ -251,6 +262,7 @@
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
@@ -266,6 +278,7 @@
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
@@ -329,6 +342,7 @@
         <severity>6</severity>
         <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
