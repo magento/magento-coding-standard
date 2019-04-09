@@ -28,6 +28,11 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Classes.DiscouragedDependencies">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*/Test/*</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Legacy.MageEntity">
         <severity>10</severity>
         <type>error</type>
@@ -227,6 +232,10 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.PHP.Var">
+        <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Performance.ForeachArrayMerge">
         <severity>7</severity>
         <type>warning</type>
     </rule>
