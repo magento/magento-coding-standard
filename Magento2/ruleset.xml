@@ -61,12 +61,16 @@
         <type>error</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
+        <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.LanguageConstruct">
         <severity>10</severity>
         <type>error</type>
+    </rule>
+    <rule ref="Magento2.Security.LanguageConstruct.DirectOutput">
+        <exclude-pattern>*.phtml</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.Superglobal.SuperglobalUsageError">
         <severity>10</severity>
