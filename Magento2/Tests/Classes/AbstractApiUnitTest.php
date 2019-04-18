@@ -33,7 +33,5 @@ class AbstractApiUnitTest extends AbstractSniffUnitTest
         }
 
         return [];
-
-
     }
 }
