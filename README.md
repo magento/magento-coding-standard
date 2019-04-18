@@ -63,6 +63,11 @@ You can verify your code by running
 $ vendor/bin/phpunit
 ```
 
+Also, verify that the sniffer code itself is written according to the Magento Coding Standard:
+```
+$ vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php
+```
+
 ## License
 Each Magento source file included in this distribution is licensed under OSL-3.0 license.
 
