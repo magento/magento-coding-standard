@@ -23,11 +23,15 @@ class AbstractApiUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [
-            14 => 1,
-            23 => 1
-        ];
+        if ($testFile === 'AbstractApiUnitTest.1.inc') {
+            return [
+                14 => 1,
+                23 => 1
+            ];
+        }
+
+        return [];
     }
 }

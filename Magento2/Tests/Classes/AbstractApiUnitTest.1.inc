@@ -28,7 +28,6 @@ class FooBar implements FooInterface
 
 }
 
-
 /**
  * Class Bar
  */
