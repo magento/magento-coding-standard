@@ -52,28 +52,12 @@ class LiteralNamespacesSniff implements Sniff
             $content = preg_replace('|\\\{2,}|', '\\', $content);
         }
 
-        if (preg_match($this->literalNamespacePattern, $content) === 1 && $this->classExists($content)) {
+        if (preg_match($this->literalNamespacePattern, $content) === 1) {
             $sourceFile->addWarning(
                 "Use ::class notation instead.",
                 $stackPtr,
                 'LiteralClassUsage'
             );
         }
-    }
-
-    /**
-     * Checks if class or interface exists.
-     *
-     * ToDo: get rig of this check https://github.com/magento/magento-coding-standard/issues/9
-     *
-     * @param string $className
-     * @return bool
-     */
-    private function classExists($className)
-    {
-        if (!isset($this->classNames[$className])) {
-            $this->classNames[$className] = class_exists($className) || interface_exists($className);
-        }
-        return $this->classNames[$className];
     }
 }

@@ -245,6 +245,10 @@
     <rule ref="Magento2.PHP.LiteralNamespaces">
         <severity>7</severity>
         <type>warning</type>
+        <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Fixtures/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.Var">
         <severity>7</severity>
