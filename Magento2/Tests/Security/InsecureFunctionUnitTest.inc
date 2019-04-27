@@ -27,3 +27,7 @@ pcntl_exec('path/goes/here');
 srand();
 
 mt_srand();
+
+json_encode([]);
+
+json_decode('[]');
