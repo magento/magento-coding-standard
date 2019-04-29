@@ -40,6 +40,7 @@ class InsecureFunctionUnitTest extends AbstractSniffUnitTest
             25 => 1,
             27 => 1,
             29 => 1,
+            31 => 1,
         ];
     }
 }
