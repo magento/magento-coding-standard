@@ -48,6 +48,9 @@ class AbstractApiSniff implements Sniff
         }
 
         $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, 0);
+        if ($commentStartPtr === false) {
+            return;
+        }
         $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
 
         for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {

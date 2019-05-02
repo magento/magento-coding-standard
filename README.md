@@ -11,8 +11,12 @@ Due to security, when installed this way the Magento standard for phpcs cannot b
 You can achieve this by adding the following to your project's `composer.json`:
 ````
 "scripts": {
-    "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/",
-    "post-update-cmd": "vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/"
+    "post-install-cmd": [
+      "[ $COMPOSER_DEV_MODE -eq 1 ] && vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/"
+    ],
+    "post-update-cmd": [
+      "[ $COMPOSER_DEV_MODE -eq 1 ] && vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/"
+    ]
 }
 ````
 
@@ -57,6 +61,11 @@ All rules should be covered by unit tests. Each `Test.php` class should be accom
 You can verify your code by running
 ```
 $ vendor/bin/phpunit
+```
+
+Also, verify that the sniffer code itself is written according to the Magento Coding Standard:
+```
+$ vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php
 ```
 
 ## License
