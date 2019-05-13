@@ -462,3 +462,5 @@ $int = intval($int);
 $str = chop($text, 'ttt');
 
 md5($text);
+
+htmlspecialchars('text');

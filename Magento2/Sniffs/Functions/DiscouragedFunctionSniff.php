@@ -218,5 +218,6 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^is_null$' => 'strict comparison "=== null"',
         '^intval$' => '(int) construction',
         '^strval$' => '(string) construction',
+        '^htmlspecialchars$' => '\Magento\Framework\Escaper->escapeHtml',
     ];
 }
