@@ -53,7 +53,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^dcngettext$' => null,
         '^dgettext$' => null,
         '^dio_.*$' => null,
-        '^dirname$' => '\Magento\Framework\Filesystem\Io\File::getPathInfo [\'dirname\']',
+        '^dirname$' => '\Magento\Framework\Filesystem\Io\File::getPathInfo($filePath)[\'dirname\']',
         '^dngettext$' => null,
         '^domxml_.*$' => null,
         '^fbsql_.*$' => null,
