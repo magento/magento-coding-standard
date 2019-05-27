@@ -1,5 +1,5 @@
 {
-    "name": "magento/magento-coding-standard",
+    "name": "atheotsky/magento-coding-standard",
     "description": "A set of Magento specific PHP CodeSniffer rules.",
     "license": [
         "OSL-3.0",
