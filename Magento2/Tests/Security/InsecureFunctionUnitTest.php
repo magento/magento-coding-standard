@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Tests\Security;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
@@ -16,14 +17,6 @@ class InsecureFunctionUnitTest extends AbstractSniffUnitTest
      * @inheritdoc
      */
     public function getErrorList()
-    {
-        return [];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getWarningList()
     {
         return [
             3 => 1,
@@ -42,5 +35,13 @@ class InsecureFunctionUnitTest extends AbstractSniffUnitTest
             29 => 1,
             31 => 1,
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getWarningList()
+    {
+        return [];
     }
 }

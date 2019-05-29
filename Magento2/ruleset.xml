@@ -65,6 +65,10 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Security.InsecureFunction">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <rule ref="Magento2.Security.LanguageConstruct">
         <severity>10</severity>
         <type>error</type>
@@ -101,10 +105,6 @@
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
-        <severity>9</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento2.Security.InsecureFunction">
         <severity>9</severity>
         <type>warning</type>
     </rule>
