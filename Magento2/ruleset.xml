@@ -493,13 +493,6 @@
         <severity>5</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Squiz.Commenting.ClassComment">
-        <severity>5</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Squiz.Commenting.ClassComment.TagNotAllowed">
-        <severity>0</severity>
-    </rule>
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
             <property name="maxPercentage" value="80"/>
