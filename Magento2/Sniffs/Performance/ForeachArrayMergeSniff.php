@@ -47,6 +47,10 @@ class ForeachArrayMergeSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
+        // If it's inline control structure we do nothing. PSR2 issue will be raised.
+        if (!array_key_exists('scope_opener', $tokens[$stackPtr])) {
+            return;
+        }
         $scopeOpener = $tokens[$stackPtr]['scope_opener'];
         $scopeCloser = $tokens[$stackPtr]['scope_closer'];
 
