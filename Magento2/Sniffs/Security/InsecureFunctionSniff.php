@@ -13,13 +13,6 @@ use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
 class InsecureFunctionSniff extends ForbiddenFunctionsSniff
 {
     /**
-     * If true, an error will be thrown; otherwise a warning.
-     *
-     * @var boolean
-     */
-    public $error = false;
-
-    /**
      * List of patterns for forbidden functions.
      *
      * @var array
@@ -38,6 +31,7 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'system' => null,
         'unserialize' => '\Magento\Framework\Serialize\SerializerInterface::unserialize',
         'srand' => null,
-        'mt_srand'=> null,
+        'mt_srand' => null,
+        'mt_rand' => 'random_int',
     ];
 }

@@ -41,3 +41,11 @@ foreach ([] as $collection) {
         $selectBuilder->setColumns(array_merge($selectBuilder->getColumns(), $source));
     }
 }
+
+foreach ([] as $item)
+    // inline foreach
+    $a = array_merge([], []);
+
+foreach ([] as $item)
+// array_merge after inline foreach
+$a = array_merge([], []);
