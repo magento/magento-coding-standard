@@ -36,7 +36,6 @@ class TryProcessSystemResourcesSniff implements Sniff
     protected $functions = [
         'stream_',
         'socket_',
-        'curl_'
     ];
 
     /**
