@@ -44,6 +44,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Commenting.ConstantsPHPDocFormatting">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.PHP.FinalImplementation">
         <severity>10</severity>
         <type>error</type>
