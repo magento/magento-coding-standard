@@ -496,6 +496,10 @@
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
+    <rule ref="Magento2.Commenting.ConstantsPHPDocFormatting">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.Commenting.DocCommentAlignment">
         <severity>5</severity>
         <type>warning</type>
