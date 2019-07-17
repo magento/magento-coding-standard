@@ -31,8 +31,8 @@ class ConstantsPHPDocFormattingSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if ($tokens[$stackPtr]['code'] != T_CONST
-            && !($tokens[$stackPtr]['content'] == 'define' && $tokens[$stackPtr+1]['code'] == T_OPEN_PARENTHESIS)
+        if ($tokens[$stackPtr]['code'] !== T_CONST
+            && !($tokens[$stackPtr]['content'] === 'define' && $tokens[$stackPtr + 1]['code'] === T_OPEN_PARENTHESIS)
         ) {
             return;
         }
