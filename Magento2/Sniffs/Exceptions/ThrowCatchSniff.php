@@ -78,7 +78,7 @@ class ThrowCatchSniff implements Sniff
             }
         } while (isset($tokens[$nextToken]['scope_closer']) === true);
 
-        if (empty($catchClassName)) {
+        if (empty($catchClassNames)) {
             return; // is not relevant no catch found
         }
 
@@ -101,7 +101,9 @@ class ThrowCatchSniff implements Sniff
     {
         $fullName = "";
         $endOfClassName = [T_SEMICOLON => 0, T_CLOSE_PARENTHESIS => 0];
-        for ($i = $startPos; $i <= count($tokens); $i++) {
+
+        $tokenCount = count($tokens);
+        for ($i = $startPos; $i <= $tokenCount; $i++) {
             $type = $tokens[$i]['code'];
 
             if ($type === T_STRING || $type === T_NS_SEPARATOR) {
