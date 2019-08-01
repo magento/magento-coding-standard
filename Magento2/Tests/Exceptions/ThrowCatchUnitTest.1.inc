@@ -1,6 +1,6 @@
 <?php
 
-// This file contains all false positive cases that we head with this implementation
+// This file contains all false positive cases that were found with previous implementation
 // Check  Exceptions MUST NOT handled in same function should fin nothing there
 
 /**
