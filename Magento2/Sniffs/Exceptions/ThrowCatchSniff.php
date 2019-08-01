@@ -97,7 +97,7 @@ class ThrowCatchSniff implements Sniff
      * @param int $startPos
      * @return string
      */
-    private function getFullClassName(array $tokens, int $startPos)
+    private function getFullClassName(array $tokens, $startPos)
     {
         $fullName = "";
         $endOfClassName = [T_SEMICOLON => 0, T_CLOSE_PARENTHESIS => 0];
