@@ -7,9 +7,6 @@ namespace Magento2\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class EmptyBlockUnitTest
- */
 class EmptyBlockUnitTest extends AbstractSniffUnitTest
 {
     /**

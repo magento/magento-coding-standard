@@ -1,13 +1,14 @@
 <?php
+
 /**
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Exceptions;
+namespace Magento2\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DirectThrowUnitTest extends AbstractSniffUnitTest
+class ClassAndInterfacePHPDocFormattingUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -20,11 +21,17 @@ class DirectThrowUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
         return [
-            10 => 1,
-            17 => 1,
+            19 => 1,
+            27 => 1,
+            35 => 1,
+            44 => 1,
+            52 => 1,
+            63 => 1,
+            64 => 1,
+            65 => 1,
         ];
     }
 }

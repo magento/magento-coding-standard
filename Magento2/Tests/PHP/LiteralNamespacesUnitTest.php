@@ -7,9 +7,6 @@ namespace Magento2\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class LiteralNamespacesUnitTest
- */
 class LiteralNamespacesUnitTest extends AbstractSniffUnitTest
 {
     /**
