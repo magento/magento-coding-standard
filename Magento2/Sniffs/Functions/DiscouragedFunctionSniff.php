@@ -96,7 +96,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^parse_str$' => null,
         '^parse_url$' => null,
         '^parsekit_compile_string$' => null,
-        '^pathinfo$' => null,
+        '^pathinfo$' => 'Magento\Framework\Filesystem\Io\File->getPathInfo()',
         '^pcntl_.*$' => null,
         '^posix_.*$' => null,
         '^pfpro_.*$' => null,
