@@ -5,6 +5,7 @@
  */
 namespace Magento2\Sniffs\CodeAnalysis;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff;
 
 /**
@@ -25,4 +26,19 @@ class EmptyBlockSniff extends EmptyStatementSniff
             ]
         );
     }
+    /**
+     * @inheritDoc
+     */
+    public function process(File $phpcsFile, $stackPtr)
+    {
+        $posOfFunction = $phpcsFile->findNext([T_FUNCTION], $stackPtr);
+        $functionName = $phpcsFile->getDeclarationName($posOfFunction);
+        // Skip for around function
+        if (strpos($functionName, 'around') !== false) {
+            return;
+        }
+
+        parent::process($phpcsFile, $stackPtr);
+
+    }//end process()
 }
