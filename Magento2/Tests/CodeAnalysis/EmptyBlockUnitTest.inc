@@ -75,6 +75,4 @@ function emptyFunction () { /*Empty function block*/ }
 
 function nonEmptyFunction () { return true; }
 
-function aroundEmptyFunction ($foo, $bar) {
-
-}
+function aroundEmptyFunction ($foo, $bar) { }
