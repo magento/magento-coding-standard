@@ -39,7 +39,8 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^call_user_func_array$' => null,
         '^chdir$' => null,
         '^chgrp$' => null,
-        '^chmod$' => '\Magento\Framework\Filesystem\DriverInterface::changePermissions() or \Magento\Framework\Filesystem\DriverInterface::changePermissionsRecursively()',
+        '^chmod$' => '\Magento\Framework\Filesystem\DriverInterface::changePermissions() 
+        or \Magento\Framework\Filesystem\DriverInterface::changePermissionsRecursively()',
         '^chown$' => null,
         '^chroot$' => null,
         '^com_load_typelib$' => null,
