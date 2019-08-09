@@ -31,10 +31,13 @@ class EmptyBlockSniff extends EmptyStatementSniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $posOfFunction = $phpcsFile->findNext([T_FUNCTION], $stackPtr);
-        $functionName = $phpcsFile->getDeclarationName($posOfFunction);
-        // Skip for around function
-        if (strpos($functionName, 'around') !== false) {
+        $tokens = $phpcsFile->getTokens();
+        $posOfString = $phpcsFile->findNext(T_STRING, $stackPtr);
+        $stringContent = $tokens[$posOfString]['content'];
+        /** Check if function starts with around and also checked if string length
+          * greater than 6 so that exact blank function name 'around()' give us warning
+          */
+        if (substr($stringContent, 0, 6) === "around" && strlen($stringContent) > 6) {
             return;
         }
 
