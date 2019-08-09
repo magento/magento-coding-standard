@@ -32,12 +32,8 @@ class EmptyBlockSniff extends EmptyStatementSniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $posOfString = $phpcsFile->findNext(T_STRING, $stackPtr);
-        $stringContent = $tokens[$posOfString]['content'];
-        /** Check if function starts with around and also checked if string length
-          * greater than 6 so that exact blank function name 'around()' give us warning
-          */
-        if (substr($stringContent, 0, 6) === "around" && strlen($stringContent) > 6) {
+        if ($tokens[$stackPtr]['code'] === T_FUNCTION &&
+            strpos($phpcsFile->getDeclarationName($stackPtr), 'around') === 0) {
             return;
         }
 
