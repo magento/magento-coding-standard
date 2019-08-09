@@ -42,6 +42,5 @@ class EmptyBlockSniff extends EmptyStatementSniff
         }
 
         parent::process($phpcsFile, $stackPtr);
-
     }//end process()
 }
