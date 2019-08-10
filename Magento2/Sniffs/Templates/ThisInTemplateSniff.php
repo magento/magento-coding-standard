@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Templates;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -18,14 +19,28 @@ class ThisInTemplateSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'Usage of $this in template files is deprecated.';
+    protected $warningMessageFoundHelper = 'Usage of helpers in templates is discouraged.';
 
     /**
      * Warning violation code.
      *
      * @var string
      */
-    protected $warningCode = 'FoundThis';
+    protected $warningCodeFoundHelper = 'FoundHelper';
+
+    /**
+     * String representation of warning.
+     *
+     * @var string
+     */
+    protected $warningMessageFoundThis = 'Usage of $this in template files is deprecated.';
+
+    /**
+     * Warning violation code.
+     *
+     * @var string
+     */
+    protected $warningCodeFoundThis = 'FoundThis';
 
     /**
      * @inheritdoc
@@ -42,7 +57,10 @@ class ThisInTemplateSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === '$this') {
-            $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
+            $phpcsFile->addWarning($this->warningMessageFoundThis, $stackPtr, $this->warningCodeFoundThis);
+        }
+        if ($tokens[$stackPtr]['content'] === 'helper(') {
+            $phpcsFile->addWarning($this->warningMessageFoundHelper, $stackPtr, $this->warningCodeFoundHelper);
         }
     }
 }
