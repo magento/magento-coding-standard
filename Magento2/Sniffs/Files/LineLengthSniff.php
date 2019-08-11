@@ -28,6 +28,20 @@ class LineLengthSniff extends FilesLineLengthSniff
     protected $lastLineRegExp = '~__\(.+\)|\bPhrase\(.+\)~';
 
     /**
+     * Regular expression for finding a __ keyword added in the translation string.
+     *
+     * @var string
+     */
+    protected $underscoreKeywordRegExp = '~\'[^\']+\'(*SKIP)(*F)| __~';
+
+    /**
+     * Regular expression for finding a Phrase keyword added in the translation string.
+     *
+     * @var string
+     */
+    protected $phaseKeywordRegExp = '~\'[^\']+\'(*SKIP)(*F)| \bPhrase~';
+
+    /**
      * Having the next-to-last line content allows to ignore long lines in case of translations.
      *
      * @var string
@@ -77,10 +91,14 @@ class LineLengthSniff extends FilesLineLengthSniff
      */
     protected function doesPreviousLineContainTranslationString()
     {
-        $lastLineMatch       = preg_match($this->lastLineRegExp, $this->lastLineContent) !== 0;
-        $nextToLastLineMatch = preg_match($this->nextToLastLineRegexp, $this->nextToLastLineContent) !== 0;
+        if (preg_match($this->phaseKeywordRegExp, $this->lastLineContent) == 0
+            || preg_match($this->underscoreKeywordRegExp, $this->lastLineContent) == 0
+        ) {
+            $lastLineMatch       = preg_match($this->lastLineRegExp, $this->lastLineContent) !== 0;
+            $nextToLastLineMatch = preg_match($this->nextToLastLineRegexp, $this->nextToLastLineContent) !== 0;
+            return $lastLineMatch || $nextToLastLineMatch;
+        }
 
-        return $lastLineMatch || $nextToLastLineMatch;
     }
 
     /**

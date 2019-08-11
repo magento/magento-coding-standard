@@ -20,6 +20,7 @@ class LineLengthUnitTest extends AbstractSniffUnitTest
         return [
             9 => 1,
             19 => 1,
+            32 => 1,
         ];
     }
 
