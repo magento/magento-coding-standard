@@ -98,7 +98,6 @@ class LineLengthSniff extends FilesLineLengthSniff
             $nextToLastLineMatch = preg_match($this->nextToLastLineRegexp, $this->nextToLastLineContent) !== 0;
             return $lastLineMatch || $nextToLastLineMatch;
         }
-
     }
 
     /**
