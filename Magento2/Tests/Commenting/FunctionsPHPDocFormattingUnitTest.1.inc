@@ -2,7 +2,14 @@
 
 class EverythingIsGoodHere
 {
+
+    private function executeSimpleFunctionNoDoc(): void
+    {
+    }
+
     /**
+     * We have an wounderfull meaning desciption there also
+     *
      * @param string $arg1
      * @param bool $arg2
      */
@@ -26,7 +33,7 @@ class EverythingIsGoodHere
      */
     private function throwsAnException(): void
     {
-        throw new \Exception();
+        throw new Exception();
     }
 
     /**
@@ -36,5 +43,15 @@ class EverythingIsGoodHere
      */
     private function presentGoodDescription(string $arg1, bool $arg2)
     {
+    }
+
+    /**
+     * @param bool $arg1
+     * @return string
+     */
+    private function docBlockIsEquels(bool $arg1): string
+    {
+
+        return '';
     }
 }

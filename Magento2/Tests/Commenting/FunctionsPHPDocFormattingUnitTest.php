@@ -10,7 +10,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 /**
  * Class ConstantsPHPDocFormattingUnitTest
  */
-class PHPDocFormattingUnitTest extends AbstractSniffUnitTest
+class FunctionsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -25,10 +25,6 @@ class PHPDocFormattingUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile = '')
     {
-        if ($testFile === 'PHPDocFormattingUnitTest.1.inc') {
-            return [];
-        }
-
 
         return [];
     }
