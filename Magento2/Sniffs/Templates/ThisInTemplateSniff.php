@@ -15,13 +15,6 @@ use PHP_CodeSniffer\Files\File;
 class ThisInTemplateSniff implements Sniff
 {
     /**
-     * String representation of warning.
-     *
-     * @var string
-     */
-    protected $warningMessageFoundHelper = 'Usage of helpers in templates is discouraged.';
-
-    /**
      * Warning violation code.
      *
      * @var string
@@ -33,7 +26,7 @@ class ThisInTemplateSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessageFoundThis = 'Usage of $this in template files is deprecated.';
+    protected $warningMessageFoundHelper = 'Usage of helpers in templates is discouraged.';
 
     /**
      * Warning violation code.
@@ -43,11 +36,21 @@ class ThisInTemplateSniff implements Sniff
     protected $warningCodeFoundThis = 'FoundThis';
 
     /**
+     * String representation of warning.
+     *
+     * @var string
+     */
+    protected $warningMessageFoundThis = 'Usage of $this in template files is deprecated.';
+
+    /**
      * @inheritdoc
      */
     public function register()
     {
-        return [T_VARIABLE];
+        return [
+            T_VARIABLE,
+            T_STRING,
+        ];
     }
 
     /**
@@ -59,7 +62,7 @@ class ThisInTemplateSniff implements Sniff
         if ($tokens[$stackPtr]['content'] === '$this') {
             $phpcsFile->addWarning($this->warningMessageFoundThis, $stackPtr, $this->warningCodeFoundThis);
         }
-        if ($tokens[$stackPtr]['content'] === 'helper(') {
+        if ($tokens[$stackPtr]['content'] === 'helper') {
             $phpcsFile->addWarning($this->warningMessageFoundHelper, $stackPtr, $this->warningCodeFoundHelper);
         }
     }
