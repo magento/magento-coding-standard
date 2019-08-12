@@ -7,9 +7,6 @@ namespace Magento2\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class LineLengthUnitTest
- */
 class LineLengthUnitTest extends AbstractSniffUnitTest
 {
     /**

@@ -7,9 +7,6 @@ namespace Magento2\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class FinalImplementationUnitTest
- */
 class FinalImplementationUnitTest extends AbstractSniffUnitTest
 {
     /**
