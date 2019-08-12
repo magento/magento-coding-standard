@@ -8,9 +8,6 @@ namespace Magento2\Tests\Exceptions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ThrowCatchUnitTest
- */
 class ThrowCatchUnitTest extends AbstractSniffUnitTest
 {
     /**
