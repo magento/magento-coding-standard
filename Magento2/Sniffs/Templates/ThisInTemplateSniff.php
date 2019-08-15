@@ -60,10 +60,12 @@ class ThisInTemplateSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === '$this') {
-            $phpcsFile->addWarning($this->warningMessageFoundThis, $stackPtr, $this->warningCodeFoundThis);
-        }
-        if ($tokens[$stackPtr]['content'] === 'helper') {
-            $phpcsFile->addWarning($this->warningMessageFoundHelper, $stackPtr, $this->warningCodeFoundHelper);
+            $position = $phpcsFile->findNext(T_STRING, $stackPtr, null, false, 'helper', true);
+            if ($position !== false) {
+                $phpcsFile->addWarning($this->warningMessageFoundHelper, $position, $this->warningCodeFoundHelper);
+            } else {
+                $phpcsFile->addWarning($this->warningMessageFoundThis, $stackPtr, $this->warningCodeFoundThis);
+            }
         }
     }
 }
