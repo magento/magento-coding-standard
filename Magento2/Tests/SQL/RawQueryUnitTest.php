@@ -7,9 +7,6 @@ namespace Magento2\Tests\SQL;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class RawQueryUnitTest
- */
 class RawQueryUnitTest extends AbstractSniffUnitTest
 {
     /**

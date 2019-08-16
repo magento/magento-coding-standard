@@ -7,9 +7,6 @@ namespace Magento2\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ExecutableRegExUnitTest
- */
 class ExecutableRegExUnitTest extends AbstractSniffUnitTest
 {
     /**

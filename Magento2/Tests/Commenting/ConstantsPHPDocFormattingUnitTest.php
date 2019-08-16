@@ -7,9 +7,6 @@ namespace Magento2\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ConstantsPHPDocFormattingUnitTest
- */
 class ConstantsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
 {
     /**
