@@ -3,7 +3,6 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\Templates;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -26,7 +25,7 @@ class ThisInTemplateSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessageFoundHelper = 'Usage of helpers in templates is discouraged.';
+    protected $warningMessageFoundHelper = 'The use of helpers in templates is discouraged. Use ViewModel instead.';
 
     /**
      * Warning violation code.
@@ -40,17 +39,14 @@ class ThisInTemplateSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessageFoundThis = 'Usage of $this in template files is deprecated.';
+    protected $warningMessageFoundThis = 'The use of $this in templates is deprecated. Use $block instead.';
 
     /**
      * @inheritdoc
      */
     public function register()
     {
-        return [
-            T_VARIABLE,
-            T_STRING,
-        ];
+        return [T_VARIABLE];
     }
 
     /**
