@@ -23,7 +23,7 @@ class LanguageConstructSniff implements Sniff
     /**
      * String representation of backtick error.
      *
-     * phpcs:disable Magento2.Files.LineLength.MaxExceeded
+     * phpcs:disable Generic.Files.LineLength
      *
      * @var string
      */
