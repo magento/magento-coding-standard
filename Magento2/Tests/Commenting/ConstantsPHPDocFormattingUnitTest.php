@@ -3,11 +3,11 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Strings;
+namespace Magento2\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class StringConcatUnitTest extends AbstractSniffUnitTest
+class ConstantsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -20,15 +20,17 @@ class StringConcatUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
+        if ($testFile === 'ConstantsPHPDocFormattingUnitTest.1.inc') {
+            return [];
+        }
+
         return [
-            3 => 1,
-            4 => 1,
-            6 => 1,
-            10 => 1,
-            11 => 1,
+            5 => 1,
+            8 => 1,
             15 => 1,
+            20 => 1
         ];
     }
 }

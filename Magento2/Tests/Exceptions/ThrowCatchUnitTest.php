@@ -3,13 +3,11 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Tests\Exceptions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ThrowCatchUnitTest
- */
 class ThrowCatchUnitTest extends AbstractSniffUnitTest
 {
     /**
@@ -23,8 +21,13 @@ class ThrowCatchUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    protected function getWarningList()
+    protected function getWarningList($testFile = '')
     {
+
+        if ($testFile === 'ThrowCatchUnitTest.1.inc') {
+            return [];
+        }
+
         return [
             41 => 1,
             120 => 1,

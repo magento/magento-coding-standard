@@ -7,9 +7,6 @@ namespace Magento2\Tests\Translation;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ConstantUsageUnitTest
- */
 class ConstantUsageUnitTest extends AbstractSniffUnitTest
 {
     /**
