@@ -154,7 +154,7 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Exceptions.TryProcessSystemResources">
-        <severity>7</severity>
+        <severity>8</severity>
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Functions.DiscouragedFunction">

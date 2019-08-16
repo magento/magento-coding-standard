@@ -10,7 +10,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Detects no try block detected when processing system resources
+ * Detects missing try-catch block when processing system resources.
  */
 class TryProcessSystemResourcesSniff implements Sniff
 {
@@ -19,17 +19,17 @@ class TryProcessSystemResourcesSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = 'The code MUST be wrapped with a try block if the method uses system resources .';
+    protected $warningMessage = 'The code must be wrapped with a try block if the method uses system resources.';
 
     /**
      * Warning violation code.
      *
      * @var string
      */
-    protected $warningCode = ' TryProcessSystem';
+    protected $warningCode = 'MissingTryCatch';
 
     /**
-     * Searched functions.
+     * Search for functions that start with.
      *
      * @var array
      */
@@ -51,41 +51,29 @@ class TryProcessSystemResourcesSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $isSystemResource = false;
-
         $tokens = $phpcsFile->getTokens();
-        $match = $tokens[$stackPtr]['content'];
 
         foreach ($this->functions as $function) {
-            if (strpos($match, $function) === false) {
+            if (strpos($tokens[$stackPtr]['content'], $function) !== 0) {
                 continue;
             }
+            $tryPosition = $phpcsFile->findPrevious(T_TRY, $stackPtr - 1);
 
-            $isSystemResource = true;
-            break;
-        }
-
-        if (false === $isSystemResource) {
-            // Probably no a system resource no check
-            return;
-        }
-
-        $tryPosition = $phpcsFile->findPrevious(T_TRY, $stackPtr - 1);
-
-        if ($tryPosition !== false) {
-            $tryTag = $tokens[$tryPosition];
-            $start = $tryTag['scope_opener'];
-            $end = $tryTag['scope_closer'];
-            if ($stackPtr > $start && $stackPtr < $end) {
-                // element is warped by try no check required
-                return;
+            if ($tryPosition !== false) {
+                $tryTag = $tokens[$tryPosition];
+                $start = $tryTag['scope_opener'];
+                $end = $tryTag['scope_closer'];
+                if ($stackPtr > $start && $stackPtr < $end) {
+                    // element is warped by try no check required
+                    return;
+                }
             }
-        }
 
-        $phpcsFile->addWarning(
-            $this->warningMessage,
-            $stackPtr,
-            $this->warningCode
-        );
+            $phpcsFile->addWarning(
+                $this->warningMessage,
+                $stackPtr,
+                $this->warningCode
+            );
+        }
     }
 }
