@@ -431,6 +431,9 @@
     <rule ref="Squiz.ControlStructures.ControlSignature">
         <severity>6</severity>
         <type>warning</type>
+        <properties>
+            <property name="requiredSpacesBeforeColon" value="0"/>
+        </properties>
     </rule>
     <rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
         <exclude-pattern>*.phtml</exclude-pattern>
