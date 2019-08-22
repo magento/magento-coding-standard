@@ -71,4 +71,54 @@ class PHPDocFormattingValidator
 
         return false;
     }
+
+    /**
+     * In case comment has deprecated tag, it must be explained and followed by see tag with details
+     *
+     * @param int $commentStartPtr
+     * @param array $tokens
+     * @return bool
+     */
+    public function hasDeprecatedWellFormatted($commentStartPtr, $tokens)
+    {
+        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
+
+        $hasDeprecated = false;
+        $hasSee = false;
+
+        for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {
+            $token = $tokens[$i];
+
+            // Not interesting
+            if ($token['code'] !== T_DOC_COMMENT_TAG) {
+                continue;
+            }
+
+            $tag = $token['content'];
+
+            // Not an interesting tag
+            if ($tag !== '@deprecated' && $tag !== '@see') {
+                continue;
+            }
+
+            if ($tag === '@deprecated') {
+                $hasDeprecated = true;
+            }
+
+            if ($tag === '@see') {
+                $hasSee = true;
+            }
+
+            // Tag not followed by description
+            if ($tokens[$i + 2]['code'] !== T_DOC_COMMENT_STRING) {
+                return false;
+            }
+        }
+
+        if ($hasDeprecated === true && $hasSee !== true) {
+            return false;
+        }
+
+        return true;
+    }
 }
