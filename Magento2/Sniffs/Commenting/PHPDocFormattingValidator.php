@@ -6,11 +6,47 @@
  */
 namespace Magento2\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Helper class for common DocBlock validations
  */
 class PHPDocFormattingValidator
 {
+    /**
+     * Finds matching PHPDoc for current pointer
+     *
+     * @param int $startPtr
+     * @param File $phpcsFile
+     * @return int
+     */
+    public function findPHPDoc($startPtr, $phpcsFile)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        $commentStartPtr = $phpcsFile->findPrevious(
+            [
+                T_WHITESPACE,
+                T_DOC_COMMENT_STAR,
+                T_DOC_COMMENT_WHITESPACE,
+                T_DOC_COMMENT_TAG,
+                T_DOC_COMMENT_STRING,
+                T_DOC_COMMENT_CLOSE_TAG
+            ],
+            $startPtr - 1,
+            null,
+            true,
+            null,
+            true
+        );
+
+        if ($tokens[$commentStartPtr]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
+            return -1;
+        }
+
+        return $commentStartPtr;
+    }
+
     /**
      * Determines if the comment identified by $commentStartPtr provides additional meaning to origin at $namePtr
      *
