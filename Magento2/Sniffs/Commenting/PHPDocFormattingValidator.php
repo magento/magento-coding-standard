@@ -6,11 +6,47 @@
  */
 namespace Magento2\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Helper class for common DocBlock validations
  */
 class PHPDocFormattingValidator
 {
+    /**
+     * Finds matching PHPDoc for current pointer
+     *
+     * @param int $startPtr
+     * @param File $phpcsFile
+     * @return int
+     */
+    public function findPHPDoc($startPtr, $phpcsFile)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        $commentStartPtr = $phpcsFile->findPrevious(
+            [
+                T_WHITESPACE,
+                T_DOC_COMMENT_STAR,
+                T_DOC_COMMENT_WHITESPACE,
+                T_DOC_COMMENT_TAG,
+                T_DOC_COMMENT_STRING,
+                T_DOC_COMMENT_CLOSE_TAG
+            ],
+            $startPtr - 1,
+            null,
+            true,
+            null,
+            true
+        );
+
+        if ($tokens[$commentStartPtr]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
+            return -1;
+        }
+
+        return $commentStartPtr;
+    }
+
     /**
      * Determines if the comment identified by $commentStartPtr provides additional meaning to origin at $namePtr
      *
@@ -81,44 +117,49 @@ class PHPDocFormattingValidator
      */
     public function hasDeprecatedWellFormatted($commentStartPtr, $tokens)
     {
-        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
+        $deprecatedPtr = $this->getTagPosition('@deprecated', $commentStartPtr, $tokens);
+        if ($deprecatedPtr === -1) {
+            return true;
+        }
 
-        $hasDeprecated = false;
-        $hasSee = false;
+        if ($tokens[$deprecatedPtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
+            return false;
+        }
+
+        $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
+        if ($seePtr === -1) {
+            return true;
+        }
+        if ($tokens[$seePtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Searches for tag within comment
+     *
+     * @param string $tag
+     * @param int $commentStartPtr
+     * @param array $tokens
+     * @return int
+     */
+    private function getTagPosition($tag, $commentStartPtr, $tokens)
+    {
+        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
 
         for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {
             $token = $tokens[$i];
 
             // Not interesting
-            if ($token['code'] !== T_DOC_COMMENT_TAG) {
+            if ($token['code'] !== T_DOC_COMMENT_TAG || $token['content'] !== $tag) {
                 continue;
             }
 
-            $tag = $token['content'];
-
-            // Not an interesting tag
-            if ($tag !== '@deprecated' && $tag !== '@see') {
-                continue;
-            }
-
-            if ($tag === '@deprecated') {
-                $hasDeprecated = true;
-            }
-
-            if ($tag === '@see') {
-                $hasSee = true;
-            }
-
-            // Tag not followed by description
-            if ($tokens[$i + 2]['code'] !== T_DOC_COMMENT_STRING) {
-                return false;
-            }
+            return $i;
         }
 
-        if ($hasDeprecated === true && $hasSee !== true) {
-            return false;
-        }
-
-        return true;
+        return -1;
     }
 }

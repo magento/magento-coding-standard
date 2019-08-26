@@ -59,8 +59,8 @@ class ConstantsPHPDocFormattingSniff implements Sniff
             true
         );
 
-        $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, null, false, null, true);
-        if ($commentStartPtr === false) {
+        $commentStartPtr = $this->PHPDocFormattingValidator->findPHPDoc($stackPtr, $phpcsFile);
+        if ($commentStartPtr === -1) {
             return;
         }
 
@@ -75,7 +75,8 @@ class ConstantsPHPDocFormattingSniff implements Sniff
         if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
                 'Motivation behind the added @deprecated tag MUST be explained. '
-                    . '@see tag MUST be used with reference to new implementation.',
+                    . '@see tag MUST be used with reference to new implementation when code is deprecated '
+                    . 'and there is a new alternative.',
                 $stackPtr,
                 'InvalidDeprecatedTagUsage'
             );

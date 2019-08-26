@@ -145,3 +145,11 @@ interface SomethingHandler
 {
 
 }
+
+/**
+ * @see
+ */
+interface DoNotCareHandler
+{
+
+}

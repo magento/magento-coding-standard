@@ -14,11 +14,6 @@ define('NUMBER_ONE', 1);
 define('A', 65);
 
 /**
- * @deprecated Slightly better, but no see tag
- */
-define('B', 66);
-
-/**
  * @deprecated
  * @see
  */
@@ -46,11 +41,6 @@ class Profiler
      * @deprecated
      */
     const a = 97;
-
-    /**
-     * @deprecated Slightly better, but no see tag
-     */
-    const b = 98;
 
     /**
      * @deprecated

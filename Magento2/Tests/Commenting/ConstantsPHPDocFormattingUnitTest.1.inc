@@ -8,6 +8,11 @@ define('DS', DIRECTORY_SEPARATOR);
 define('BP', dirname(__FILE__));
 
 /**
+ * @deprecated It is a lie
+ */
+define('THERE IS', 'cake');
+
+/**
  * @deprecated New implementation available
  * @see \Ascii\Asterisk
  */
@@ -23,8 +28,18 @@ class Profiler
     const NUMBER_TWO = 2;
 
     /**
+     * @deprecated Why not
+     */
+    const YES = false;
+
+    /**
      * @deprecated Unable to identify the question, replaced
      * @see \ComputationalMatrix\Earth
      */
     const COMPUTER = 'Deep Thought';
+
+    /**
+     * @see
+     */
+    const SOMETHING = 'else';
 }

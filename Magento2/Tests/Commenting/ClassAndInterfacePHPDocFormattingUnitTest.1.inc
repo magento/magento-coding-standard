@@ -141,8 +141,15 @@ class OldHandler
 /**
  * @see Magento\Framework\NewHandler
  */
-interface SomethingHandler
+class SomethingHandler
 {
 
 }
 
+/**
+ * @see
+ */
+class DoNotCareHandler
+{
+
+}
