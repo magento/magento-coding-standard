@@ -59,8 +59,8 @@ class ConstantsPHPDocFormattingSniff implements Sniff
             true
         );
 
-        $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, null, false, null, true);
-        if ($commentStartPtr === false) {
+        $commentStartPtr = $this->PHPDocFormattingValidator->findPHPDoc($stackPtr, $phpcsFile);
+        if ($commentStartPtr === -1) {
             return;
         }
 

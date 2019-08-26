@@ -22,7 +22,7 @@ class ConstantsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile = '')
     {
-        if ($testFile === 'ConstantsPHPDocFormattingUnitTest.1.inc') {
+        if ($testFile !== 'ConstantsPHPDocFormattingUnitTest.2.inc') {
             return [];
         }
 

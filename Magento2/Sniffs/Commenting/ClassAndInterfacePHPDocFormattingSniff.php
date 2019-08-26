@@ -56,23 +56,8 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
 
         $namePtr = $phpcsFile->findNext(T_STRING, $stackPtr + 1, null, false, null, true);
 
-        $commentStartPtr = $phpcsFile->findPrevious(
-            [
-                T_WHITESPACE,
-                T_DOC_COMMENT_STAR,
-                T_DOC_COMMENT_WHITESPACE,
-                T_DOC_COMMENT_TAG,
-                T_DOC_COMMENT_STRING,
-                T_DOC_COMMENT_CLOSE_TAG
-            ],
-            $stackPtr - 1,
-            null,
-            true,
-            null,
-            true
-        );
-
-        if ($tokens[$commentStartPtr]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
+        $commentStartPtr = $this->PHPDocFormattingValidator->findPHPDoc($stackPtr, $phpcsFile);
+        if ($commentStartPtr === -1) {
             return;
         }
 
