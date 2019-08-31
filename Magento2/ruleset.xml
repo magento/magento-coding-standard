@@ -35,6 +35,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.MageEntity">
         <severity>10</severity>
@@ -64,6 +65,7 @@
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.InsecureFunction">
         <severity>10</severity>
@@ -84,6 +86,7 @@
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Strings.ExecutableRegEx">
         <severity>10</severity>
@@ -116,6 +119,7 @@
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.XssTemplate">
         <include-pattern>*.phtml</include-pattern>
@@ -130,6 +134,7 @@
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
@@ -148,6 +153,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Exceptions.ThrowCatch">
         <severity>8</severity>
@@ -160,6 +166,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Functions.DiscouragedFunction">
         <severity>8</severity>
@@ -169,6 +176,7 @@
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Functions.StaticFunction">
         <severity>8</severity>
@@ -179,6 +187,7 @@
         <exclude-pattern>*/Setup/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.NamingConvention.InterfaceName">
         <severity>8</severity>
@@ -245,6 +254,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.LiteralNamespaces">
         <severity>7</severity>
@@ -253,6 +263,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.Var">
         <severity>7</severity>
@@ -277,6 +288,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.Operators.IncrementDecrementUsage">
         <severity>7</severity>
@@ -294,6 +306,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.Scope.MemberVarScope">
         <severity>7</severity>
@@ -367,6 +380,7 @@
         <exclude-pattern>*/Fixtures/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="PSR1.Methods.CamelCapsMethodName">
         <severity>6</severity>
