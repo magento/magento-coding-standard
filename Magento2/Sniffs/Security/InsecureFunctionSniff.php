@@ -21,7 +21,6 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'assert' => null,
         'create_function' => null,
         'exec' => null,
-        'md5' => 'improved hash functions (SHA-256, SHA-512 etc.)',
         'passthru' => null,
         'pcntl_exec' => null,
         'popen' => null,
