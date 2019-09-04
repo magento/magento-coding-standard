@@ -107,4 +107,59 @@ class PHPDocFormattingValidator
 
         return false;
     }
+
+    /**
+     * In case comment has deprecated tag, it must be explained and followed by see tag with details
+     *
+     * @param int $commentStartPtr
+     * @param array $tokens
+     * @return bool
+     */
+    public function hasDeprecatedWellFormatted($commentStartPtr, $tokens)
+    {
+        $deprecatedPtr = $this->getTagPosition('@deprecated', $commentStartPtr, $tokens);
+        if ($deprecatedPtr === -1) {
+            return true;
+        }
+
+        if ($tokens[$deprecatedPtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
+            return false;
+        }
+
+        $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
+        if ($seePtr === -1) {
+            return true;
+        }
+        if ($tokens[$seePtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Searches for tag within comment
+     *
+     * @param string $tag
+     * @param int $commentStartPtr
+     * @param array $tokens
+     * @return int
+     */
+    private function getTagPosition($tag, $commentStartPtr, $tokens)
+    {
+        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
+
+        for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {
+            $token = $tokens[$i];
+
+            // Not interesting
+            if ($token['code'] !== T_DOC_COMMENT_TAG || $token['content'] !== $tag) {
+                continue;
+            }
+
+            return $i;
+        }
+
+        return -1;
+    }
 }

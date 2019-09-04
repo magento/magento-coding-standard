@@ -71,5 +71,15 @@ class ConstantsPHPDocFormattingSniff implements Sniff
                 'MissingConstantPHPDoc'
             );
         }
+
+        if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
+            $phpcsFile->addWarning(
+                'Motivation behind the added @deprecated tag MUST be explained. '
+                    . '@see tag MUST be used with reference to new implementation when code is deprecated '
+                    . 'and there is a new alternative.',
+                $stackPtr,
+                'InvalidDeprecatedTagUsage'
+            );
+        }
     }
 }
