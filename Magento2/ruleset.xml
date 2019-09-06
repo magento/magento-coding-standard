@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -521,6 +521,10 @@
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
         <severity>0</severity>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidTypeName">
+        <severity>6</severity>
+        <type>warning</type>
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
