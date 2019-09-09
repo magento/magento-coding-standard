@@ -528,6 +528,10 @@
         <severity>5</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Commenting.ClassPropertyPHPDocFormatting">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.Commenting.ConstantsPHPDocFormatting">
         <severity>5</severity>
         <type>warning</type>
