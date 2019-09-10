@@ -6,32 +6,12 @@
 namespace Magento2\Tests\GraphQL;
 
 use PHP_CodeSniffer\Config;
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Covers {@link \agento2\Sniffs\GraphQL\ValidTypeNameSniff}.
+ * Covers {@link \Magento2\Sniffs\GraphQL\ValidTypeNameSniff}.
  */
-class ValidTypeNameUnitTest extends AbstractSniffUnitTest
+class ValidTypeNameUnitTest extends AbstractGraphQLSniffUnitTestCase
 {
-
-    protected function setUp()
-    {
-        //let parent do its job
-        parent::setUp();
-
-        //generate a config that allows ro use our GraphQL tokenizer
-        $config = new Config();
-        $config->extensions = array_merge(
-            $config->extensions,
-            [
-                'graphqls' => 'GraphQL'
-            ]
-        );
-
-        //and write back to a global that is used in base class
-        $GLOBALS['PHP_CODESNIFFER_CONFIG'] = $config;
-    }
-
     /**
      * Returns the lines where errors should occur.
      *

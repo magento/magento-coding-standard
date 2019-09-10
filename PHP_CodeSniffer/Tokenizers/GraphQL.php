@@ -3,19 +3,14 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace PHP_CodeSniffer\Tokenizers;
 
 use GraphQL\Language\Lexer;
 use GraphQL\Language\Source;
 use GraphQL\Language\Token;
-use PHP_CodeSniffer\Config;
-use PHP_CodeSniffer\Exceptions\TokenizerException;
 
 /**
  * Implements a tokenizer for GraphQL files.
- *
- * @todo Reimplement using the official GraphQL implementation
  */
 class GraphQL extends Tokenizer
 {
@@ -26,9 +21,9 @@ class GraphQL extends Tokenizer
      * @var array
      */
     private $tokenTypeMap = [
-        Token::AMP          => null, //TODO
+        Token::AMP          => null, //TODO Should we map this to a specific type
         Token::AT           => 'T_DOC_COMMENT_TAG',
-        Token::BANG         => null, //TODO
+        Token::BANG         => null, //TODO Should we map this to a specific type
         Token::BLOCK_STRING => 'T_COMMENT',
         Token::BRACE_L      => 'T_OPEN_CURLY_BRACKET',
         Token::BRACE_R      => 'T_CLOSE_CURLY_BRACKET',
@@ -39,12 +34,12 @@ class GraphQL extends Tokenizer
         Token::DOLLAR       => 'T_DOLLAR',
         Token::EOF          => 'T_CLOSE_TAG',
         Token::EQUALS       => 'T_EQUAL',
-        Token::FLOAT        => null, //TODO
-        Token::INT          => null, //TODO
+        Token::FLOAT        => null, //TODO Should we map this to a specific type
+        Token::INT          => null, //TODO Should we map this to a specific type
         Token::NAME         => 'T_STRING',
         Token::PAREN_L      => 'T_OPEN_PARENTHESIS',
         Token::PAREN_R      => 'T_CLOSE_PARENTHESIS',
-        Token::PIPE         => null, //TODO
+        Token::PIPE         => null, //TODO Should we map this to a specific type
         Token::SPREAD       => 'T_ELLIPSIS',
         Token::SOF          => 'T_OPEN_TAG',
         Token::STRING       => 'T_STRING',
@@ -62,37 +57,45 @@ class GraphQL extends Tokenizer
         'implements' => 'T_IMPLEMENTS',
         'type'       => 'T_CLASS',
         'union'      => 'T_CLASS',
-        //TODO Add further types
+        //TODO We may have to add further types
     ];
-
-    /**
-     * Constructor.
-     *
-     * @param string $content
-     * @param Config $config
-     * @param string $eolChar
-     * @throws TokenizerException
-     */
-    public function __construct($content, Config $config, $eolChar = '\n')
-    {
-        //TODO We might want to delete this unless we need the constructor to work totally different
-
-        //let parent do its job
-        parent::__construct($content, $config, $eolChar);
-    }
 
     /**
      * @inheritDoc
      */
     public function processAdditional()
     {
-        //NOP: Does nothing intentionally
+        $this->logVerbose('*** START ADDITIONAL GRAPHQL PROCESSING ***');
+
+        $processingEntity = false;
+        $numTokens        = count($this->tokens);
+        $entityTypes      = [T_CLASS, T_INTERFACE];
+
+        for ($i = 0; $i < $numTokens; ++$i) {
+            $tokenCode = $this->tokens[$i]['code'];
+
+            //have we found a new entity or its end?
+            if (in_array($tokenCode, $entityTypes) && $this->tokens[$i]['content'] !== 'enum') {
+                $processingEntity = true;
+                continue;
+            } elseif ($tokenCode === T_CLOSE_CURLY_BRACKET) {
+                $processingEntity = false;
+                continue;
+            }
+
+            //if we are processing an entity, are we currently seeing a field?
+            if ($processingEntity && $this->isFieldToken($i)) {
+                $this->tokens[$i]['code'] = T_VARIABLE;
+                $this->tokens[$i]['type'] = 'T_VARIABLE';
+                continue;
+            }
+        }
+
+        $this->logVerbose('*** END ADDITIONAL GRAPHQL PROCESSING ***');
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @throws TokenizerException
+     * @inheritDoc
      */
     protected function tokenize($string)
     {
@@ -125,6 +128,7 @@ class GraphQL extends Tokenizer
                 case Token::BRACE_R:
                 case Token::PAREN_L:
                 case Token::PAREN_R:
+                case Token::COLON:
                     $value = $kind;
                     break;
                 default:
@@ -142,12 +146,12 @@ class GraphQL extends Tokenizer
             $lexer->advance();
 
             //if line has changed (and we're not on start of file) we have to append at least one line break to current
-            //tokens content otherwise PHP_CodeSniffer will screw up line numbers
+            //token's content otherwise PHP_CodeSniffer will screw up line numbers
             if ($lexer->token->line !== $line && $kind !== Token::SOF) {
                 $token['content'] .= $this->eolChar;
             }
             $tokens[] = $token;
-            $tokens = array_merge(
+            $tokens   = array_merge(
                 $tokens,
                 $this->getNewLineTokens($line, $lexer->token->line)
             );
@@ -178,6 +182,39 @@ class GraphQL extends Tokenizer
         }
 
         return $tokens;
+    }
+
+    /**
+     * Returns whether the token under <var>$stackPointer</var> is a field.
+     *
+     * We consider a token to be a field if:
+     * <ul>
+     *   <li>its direct successor is of type {@link T_COLON}</li>
+     *   <li>it has a list of arguments followed by a {@link T_COLON}</li>
+     * </ul>
+     *
+     * @param int $stackPointer
+     * @return bool
+     */
+    private function isFieldToken($stackPointer)
+    {
+        $nextToken = $this->tokens[$stackPointer + 1];
+
+        //if next token is an opening parenthesis, we seek for the closing parenthesis
+        if ($nextToken['code'] === T_OPEN_PARENTHESIS) {
+            $nextPointer = $stackPointer + 1;
+            $numTokens = count($this->tokens);
+
+            for ($i=$nextPointer; $i<$numTokens; ++$i) {
+                if ($this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
+                    $nextToken = $this->tokens[$i + 1];
+                    break;
+                }
+            }
+        }
+
+        //return whether next token is a colon
+        return $nextToken['code'] === T_COLON;
     }
 
     /**
