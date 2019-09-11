@@ -22,7 +22,6 @@ class GraphQL extends Tokenizer
      * @var array
      */
     private $tokenTypeMap = [
-        Token::AMP          => null, //TODO Should we map this to a specific type
         Token::AT           => 'T_DOC_COMMENT_TAG',
         Token::BANG         => null, //TODO Should we map this to a specific type
         Token::BLOCK_STRING => 'T_COMMENT',
