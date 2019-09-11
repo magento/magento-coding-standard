@@ -58,6 +58,8 @@ class GraphQL extends Tokenizer
         'implements' => 'T_IMPLEMENTS',
         'type'       => 'T_CLASS',
         'union'      => 'T_CLASS',
+        'query'      => 'T_FUNCTION',
+        'mutation'   => 'T_FUNCTION',
         //TODO We may have to add further types
     ];
 

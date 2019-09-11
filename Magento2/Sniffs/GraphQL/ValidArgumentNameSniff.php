@@ -3,24 +3,15 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects argument names that are not specified in <kbd>cameCase</kbd>.
  */
-class ValidArgumentNameSniff implements Sniff
+class ValidArgumentNameSniff extends AbstractGraphQLSniff
 {
-
-    /**
-     * Defines the tokenizers that this sniff is using.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = ['GraphQL'];
 
     /**
      * @inheritDoc
@@ -132,14 +123,4 @@ class ValidArgumentNameSniff implements Sniff
         return false;
     }
 
-    /**
-     * Returns whether <var>$name</var> starts with a lower case character and is written in camel case.
-     *
-     * @param string $argumentName
-     * @return bool
-     */
-    private function isCamelCase($argumentName)
-    {
-        return (preg_match('/^[a-z][a-zA-Z0-9]+$/', $argumentName) !== 0);
-    }
 }

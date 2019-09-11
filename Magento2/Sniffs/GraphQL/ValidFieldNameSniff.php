@@ -6,20 +6,12 @@
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects field names the are not specified in <kbd>snake_case</kbd>.
  */
-class ValidFieldNameSniff implements Sniff
+class ValidFieldNameSniff extends AbstractGraphQLSniff
 {
-
-    /**
-     * Defines the tokenizers that this sniff is using.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = ['GraphQL'];
 
     /**
      * @inheritDoc
@@ -51,14 +43,4 @@ class ValidFieldNameSniff implements Sniff
         }
     }
 
-    /**
-     * Returns whether <var>$name</var> is strictly lower case, potentially separated by underscores.
-     *
-     * @param string $name
-     * @return bool
-     */
-    private function isSnakeCase($name)
-    {
-        return preg_match('/^[a-z][a-z0-9_]*$/', $name);
-    }
 }

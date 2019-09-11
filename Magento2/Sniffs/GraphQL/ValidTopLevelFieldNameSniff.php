@@ -6,13 +6,11 @@
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Common;
 
 /**
- * Detects types (<kbd>type</kbd>, <kbd>interface</kbd> and <kbd>enum</kbd>) that are not specified in
- * <kbd>UpperCamelCase</kbd>.
+ * Detects top level field names that are not specified in <kbd>cameCase</kbd>.
  */
-class ValidTypeNameSniff extends AbstractGraphQLSniff
+class ValidTopLevelFieldNameSniff extends AbstractGraphQLSniff
 {
 
     /**
@@ -20,7 +18,7 @@ class ValidTypeNameSniff extends AbstractGraphQLSniff
      */
     public function register()
     {
-        return [T_CLASS, T_INTERFACE];
+        return [T_FUNCTION];
     }
 
     /**
@@ -30,25 +28,24 @@ class ValidTypeNameSniff extends AbstractGraphQLSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        //compose entity name by making use of the next strings that we find until we hit a non-string token
+        //compose function name by making use of the next strings that we find until we hit a non-string token
         $name = '';
         for ($i=$stackPtr+1; $tokens[$i]['code'] === T_STRING; ++$i) {
             $name .= $tokens[$i]['content'];
         }
 
-        $valid = Common::isCamelCaps($name, true, true, false);
-
-        if ($valid === false) {
+        if (strlen($name) > 0 && !$this->isCamelCase($name)) {
             $type  = ucfirst($tokens[$stackPtr]['content']);
             $error = '%s name "%s" is not in PascalCase format';
             $data  = [
                 $type,
                 $name,
             ];
-            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
-            $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'no');
+            $phpcsFile->addError($error, $stackPtr, 'NotCamelCase', $data);
+            $phpcsFile->recordMetric($stackPtr, 'CamelCase top level field name', 'no');
         } else {
-            $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'yes');
+            $phpcsFile->recordMetric($stackPtr, 'CamelCase top level field name', 'yes');
         }
     }
+
 }
