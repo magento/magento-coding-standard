@@ -2,11 +2,17 @@
 namespace Magento2\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 
-class ClassPropertyPHPDocFormattingSniff implements Sniff
+/**
+ * Class ClassPropertyPHPDocFormattingSniff
+ */
+class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 {
 
+    /**
+     * @var array
+     */
     private $ignoreTokens = [
         T_PUBLIC,
         T_PRIVATE,
@@ -17,19 +23,11 @@ class ClassPropertyPHPDocFormattingSniff implements Sniff
     ];
 
     /**
-     * @inheritDoc
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return int|void
      */
-    public function register()
-    {
-        return [
-            T_VARIABLE
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function process(File $phpcsFile, $stackPtr)
+    public function processMemberVar(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -68,5 +66,25 @@ class ClassPropertyPHPDocFormattingSniff implements Sniff
             $phpcsFile->addWarning($error, $foundVar, 'EmptyVar');
             return;
         }
+    }
+
+    /**
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return int|void
+     * phpcs:disable Magento2.CodeAnalysis.EmptyBlock
+     */
+    protected function processVariable(File $phpcsFile, $stackPtr)
+    {
+    }
+
+    /**
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return int|void
+     * phpcs:disable Magento2.CodeAnalysis.EmptyBlock
+     */
+    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    {
     }
 }
