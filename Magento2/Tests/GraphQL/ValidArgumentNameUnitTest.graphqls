@@ -1,0 +1,32 @@
+type Foo {
+    bar(
+        # Valid argument names
+        validArgumentName: Int
+        validArgumentNameWith1Number: Int
+        validArgumentNameWith12345Numbers: Int
+        validArgumentNameEndingWithNumber5: Int
+        validArgumentNameWithUPPERCASE: Int
+        validargumentwithlowercase: Int
+        # Invalid argument names
+        InvalidArgumentNameUpperCamelCase: Int
+        INVALIDARGUMENTNAMEUPPERCASE: Int
+        invalid_argument_name_snake_case: Int
+        5invalidArgumentNameStatingWithNumber: Int
+    ): String
+}
+interface Foo {
+    bar(
+        # Valid argument names
+        validArgumentName: Int
+        validArgumentNameWith1Number: Int
+        validArgumentNameWith12345Numbers: Int
+        validArgumentNameEndingWithNumber5: Int
+        validArgumentNameWithUPPERCASE: Int
+        validargumentwithlowercase: Int
+        # Invalid argument names
+        InvalidArgumentNameUpperCamelCase: Int
+        INVALIDARGUMENTNAMEUPPERCASE: Int
+        invalid_argument_name_snake_case: Int
+        5invalidArgumentNameStatingWithNumber: Int
+    ): String
+}

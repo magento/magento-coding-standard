@@ -7,7 +7,6 @@ namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Common;
 
 /**
  * Detects field names the are not specified in <kbd>snake_case</kbd>.

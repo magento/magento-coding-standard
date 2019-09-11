@@ -6,9 +6,9 @@
 namespace Magento2\Tests\GraphQL;
 
 /**
- * Covers {@link \Magento2\Sniffs\GraphQL\ValidFieldNameSniff}.
+ * Covers {@link \Magento2\Sniffs\GraphQL\ValidArgumentNameSniff}.
  */
-class ValidFieldNameUnitTest extends AbstractGraphQLSniffUnitTestCase
+class ValidArgumentNameUnitTest extends AbstractGraphQLSniffUnitTestCase
 {
 
     /**
@@ -17,12 +17,10 @@ class ValidFieldNameUnitTest extends AbstractGraphQLSniffUnitTestCase
     protected function getErrorList()
     {
         return [
-            10 => 1,
             11 => 1,
             12 => 1,
             13 => 1,
             14 => 1,
-            26 => 1,
             27 => 1,
             28 => 1,
             29 => 1,
@@ -38,3 +36,4 @@ class ValidFieldNameUnitTest extends AbstractGraphQLSniffUnitTestCase
         return [];
     }
 }
+

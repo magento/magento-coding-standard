@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace PHP_CodeSniffer\Tokenizers;
 
 use GraphQL\Language\Lexer;
@@ -67,29 +68,7 @@ class GraphQL extends Tokenizer
     {
         $this->logVerbose('*** START ADDITIONAL GRAPHQL PROCESSING ***');
 
-        $processingEntity = false;
-        $numTokens        = count($this->tokens);
-        $entityTypes      = [T_CLASS, T_INTERFACE];
-
-        for ($i = 0; $i < $numTokens; ++$i) {
-            $tokenCode = $this->tokens[$i]['code'];
-
-            //have we found a new entity or its end?
-            if (in_array($tokenCode, $entityTypes) && $this->tokens[$i]['content'] !== 'enum') {
-                $processingEntity = true;
-                continue;
-            } elseif ($tokenCode === T_CLOSE_CURLY_BRACKET) {
-                $processingEntity = false;
-                continue;
-            }
-
-            //if we are processing an entity, are we currently seeing a field?
-            if ($processingEntity && $this->isFieldToken($i)) {
-                $this->tokens[$i]['code'] = T_VARIABLE;
-                $this->tokens[$i]['type'] = 'T_VARIABLE';
-                continue;
-            }
-        }
+        $this->processFields();
 
         $this->logVerbose('*** END ADDITIONAL GRAPHQL PROCESSING ***');
     }
@@ -203,9 +182,9 @@ class GraphQL extends Tokenizer
         //if next token is an opening parenthesis, we seek for the closing parenthesis
         if ($nextToken['code'] === T_OPEN_PARENTHESIS) {
             $nextPointer = $stackPointer + 1;
-            $numTokens = count($this->tokens);
+            $numTokens   = count($this->tokens);
 
-            for ($i=$nextPointer; $i<$numTokens; ++$i) {
+            for ($i = $nextPointer; $i < $numTokens; ++$i) {
                 if ($this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
                     $nextToken = $this->tokens[$i + 1];
                     break;
@@ -213,8 +192,8 @@ class GraphQL extends Tokenizer
             }
         }
 
-        //return whether next token is a colon
-        return $nextToken['code'] === T_COLON;
+        //return whether current token is a string and next token is a colon
+        return $this->tokens[$stackPointer]['code'] === T_STRING && $nextToken['code'] === T_COLON;
     }
 
     /**
@@ -227,6 +206,52 @@ class GraphQL extends Tokenizer
     {
         if (PHP_CODESNIFFER_VERBOSITY > $level) {
             printf("\t%s" . PHP_EOL, $message);
+        }
+    }
+
+    /**
+     * Processes field tokens, setting their type to {@link T_VARIABLE}.
+     */
+    private function processFields()
+    {
+        $processingArgumentList = false;
+        $processingEntity       = false;
+        $numTokens              = count($this->tokens);
+        $entityTypes            = [T_CLASS, T_INTERFACE];
+        $skipTypes              = [T_COMMENT, T_WHITESPACE];
+
+        for ($i = 0; $i < $numTokens; ++$i) {
+            $tokenCode = $this->tokens[$i]['code'];
+
+            //process current token
+            switch (true) {
+                case in_array($tokenCode, $skipTypes):
+                    //we have hit a token that needs to be skipped -> NOP
+                    break;
+                case in_array($tokenCode, $entityTypes) && $this->tokens[$i]['content'] !== 'enum':
+                    //we have hit an entity declaration
+                    $processingEntity = true;
+                    break;
+                case $tokenCode === T_CLOSE_CURLY_BRACKET:
+                    //we have hit the end of an entity declaration
+                    $processingEntity = false;
+                    break;
+                case $tokenCode === T_OPEN_PARENTHESIS:
+                    //we have hit an argument list
+                    $processingArgumentList = true;
+                    break;
+                case $tokenCode === T_CLOSE_PARENTHESIS:
+                    //we have hit an argument list end
+                    $processingArgumentList = false;
+                    break;
+                case $processingEntity && !$processingArgumentList && $this->isFieldToken($i):
+                    //we have hit a field
+                    $this->tokens[$i]['code'] = T_VARIABLE;
+                    $this->tokens[$i]['type'] = 'T_VARIABLE';
+                    break;
+                default:
+                    //NOP All operations have already been executed
+            }
         }
     }
 }
