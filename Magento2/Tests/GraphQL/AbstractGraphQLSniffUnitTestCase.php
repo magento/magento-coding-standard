@@ -13,7 +13,6 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  */
 abstract class AbstractGraphQLSniffUnitTestCase extends AbstractSniffUnitTest
 {
-
     protected function setUp()
     {
         //let parent do its job
@@ -31,5 +30,4 @@ abstract class AbstractGraphQLSniffUnitTestCase extends AbstractSniffUnitTest
         //and write back to a global that is used in base class
         $GLOBALS['PHP_CODESNIFFER_CONFIG'] = $config;
     }
-
 }

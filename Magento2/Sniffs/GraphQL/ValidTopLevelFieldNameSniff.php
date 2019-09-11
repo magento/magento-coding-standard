@@ -12,7 +12,6 @@ use PHP_CodeSniffer\Files\File;
  */
 class ValidTopLevelFieldNameSniff extends AbstractGraphQLSniff
 {
-
     /**
      * @inheritDoc
      */
@@ -47,5 +46,4 @@ class ValidTopLevelFieldNameSniff extends AbstractGraphQLSniff
             $phpcsFile->recordMetric($stackPtr, 'CamelCase top level field name', 'yes');
         }
     }
-
 }

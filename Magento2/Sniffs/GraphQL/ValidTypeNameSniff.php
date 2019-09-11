@@ -14,7 +14,6 @@ use PHP_CodeSniffer\Util\Common;
  */
 class ValidTypeNameSniff extends AbstractGraphQLSniff
 {
-
     /**
      * @inheritDoc
      */

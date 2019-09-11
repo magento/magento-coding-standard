@@ -12,7 +12,6 @@ use PHP_CodeSniffer\Files\File;
  */
 class ValidFieldNameSniff extends AbstractGraphQLSniff
 {
-
     /**
      * @inheritDoc
      */
@@ -42,5 +41,4 @@ class ValidFieldNameSniff extends AbstractGraphQLSniff
             $phpcsFile->recordMetric($stackPtr, 'SnakeCase field name', 'yes');
         }
     }
-
 }

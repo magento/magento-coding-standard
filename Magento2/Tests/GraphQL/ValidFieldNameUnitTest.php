@@ -10,7 +10,6 @@ namespace Magento2\Tests\GraphQL;
  */
 class ValidFieldNameUnitTest extends AbstractGraphQLSniffUnitTestCase
 {
-
     /**
      * @inheritDoc
      */

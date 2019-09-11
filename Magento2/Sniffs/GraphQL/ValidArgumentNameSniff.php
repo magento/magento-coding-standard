@@ -12,7 +12,6 @@ use PHP_CodeSniffer\Files\File;
  */
 class ValidArgumentNameSniff extends AbstractGraphQLSniff
 {
-
     /**
      * @inheritDoc
      */
@@ -122,5 +121,4 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
         //if we came here we could not find the closing parenthesis
         return false;
     }
-
 }

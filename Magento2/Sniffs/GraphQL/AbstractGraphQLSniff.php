@@ -19,7 +19,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 abstract class AbstractGraphQLSniff implements Sniff
 {
-
     /**
      * Defines the tokenizers that this sniff is using.
      *
@@ -48,5 +47,4 @@ abstract class AbstractGraphQLSniff implements Sniff
     {
         return preg_match('/^[a-z][a-z0-9_]*$/', $name);
     }
-
 }
