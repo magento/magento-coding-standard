@@ -35,4 +35,3 @@ class ValidArgumentNameUnitTest extends AbstractGraphQLSniffUnitTestCase
         return [];
     }
 }
-
