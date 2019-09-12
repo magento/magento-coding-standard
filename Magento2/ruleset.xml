@@ -526,10 +526,11 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento2.GraphQL.ValidFieldName">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
+    <!-- Field name validation deactivated as per request https://github.com/magento/magento-coding-standard/pull/141#discussion_r323349939 -->
+<!--    <rule ref="Magento2.GraphQL.ValidFieldName">-->
+<!--        <severity>6</severity>-->
+<!--        <type>warning</type>-->
+<!--    </rule>-->
     <rule ref="Magento2.GraphQL.ValidArgumentName">
         <severity>6</severity>
         <type>warning</type>
