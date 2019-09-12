@@ -1,16 +1,8 @@
 <?php
 /**
- * NOTICE OF LICENSE
- *
- * Copyright (c) 2019 TechDivision GmbH <info@techdivision.com> - TechDivision GmbH
- * All rights reserved
- *
- * This product includes proprietary software developed at TechDivision GmbH, Germany
- * For more information see https://www.techdivision.com/
- *
- * To obtain a valid license for using this software please contact us at license@techdivision.com
+ * Copyright © Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
