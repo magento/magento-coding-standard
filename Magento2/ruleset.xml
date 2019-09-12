@@ -539,6 +539,10 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.GraphQL.ValidEnumValue">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
     <rule ref="Magento2.Commenting.ClassAndInterfacePHPDocFormatting">
