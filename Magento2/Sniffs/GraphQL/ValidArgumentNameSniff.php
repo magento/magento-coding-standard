@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
@@ -64,7 +65,7 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
     }
 
     /**
-     * Finds all argument names contained in <var>$tokens</var> range <var>$startPointer</var> and
+     * Finds all argument names contained in <var>$tokens</var> in range <var>$startPointer</var> to
      * <var>$endPointer</var>.
      *
      * @param int $startPointer
@@ -80,7 +81,7 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
         $skipTypes            = [T_COMMENT, T_WHITESPACE];
 
         for ($i = $startPointer + 1; $i < $endPointer; ++$i) {
-            //skip comment tokens
+            //skip some tokens
             if (in_array($tokens[$i]['code'], $skipTypes)) {
                 continue;
             }
@@ -110,15 +111,6 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
      */
     private function getCloseParenthesisPointer($stackPointer, array $tokens)
     {
-        $numTokens = count($tokens);
-
-        for ($i = $stackPointer + 1; $i < $numTokens; ++$i) {
-            if ($tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
-                return $i;
-            }
-        }
-
-        //if we came here we could not find the closing parenthesis
-        return false;
+        return $this->seekToken(T_CLOSE_PARENTHESIS, $tokens, $stackPointer);
     }
 }
