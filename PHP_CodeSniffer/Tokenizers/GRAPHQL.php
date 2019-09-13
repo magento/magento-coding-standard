@@ -7,7 +7,6 @@
 namespace PHP_CodeSniffer\Tokenizers;
 
 use GraphQL\Language\Lexer;
-use GraphQL\Language\Parser;
 use GraphQL\Language\Source;
 use GraphQL\Language\Token;
 
@@ -70,6 +69,7 @@ class GRAPHQL extends Tokenizer
     {
         $this->logVerbose('*** START ADDITIONAL GRAPHQL PROCESSING ***');
 
+        $this->fixErroneousKeywordTokens();
         $this->processFields();
 
         $this->logVerbose('*** END ADDITIONAL GRAPHQL PROCESSING ***');
@@ -82,10 +82,10 @@ class GRAPHQL extends Tokenizer
     {
         $this->logVerbose('*** START GRAPHQL TOKENIZING ***');
 
-        $string   = str_replace($this->eolChar, "\n", $string);
-        $tokens   = [];
-        $source   = new Source($string);
-        $lexer    = new Lexer($source);
+        $string = str_replace($this->eolChar, "\n", $string);
+        $tokens = [];
+        $source = new Source($string);
+        $lexer  = new Lexer($source);
 
         do {
             $kind  = $lexer->token->kind;
@@ -139,6 +139,41 @@ class GRAPHQL extends Tokenizer
 
         $this->logVerbose('*** END GRAPHQL TOKENIZING ***');
         return $tokens;
+    }
+
+    /**
+     * Fixes that keywords may be used as field, argument etc. names and could thus have been marked as special tokens
+     * while tokenizing.
+     */
+    private function fixErroneousKeywordTokens()
+    {
+        $processingCodeBlock = false;
+        $numTokens           = count($this->tokens);
+
+        for ($i = 0; $i < $numTokens; ++$i) {
+            $tokenCode    = $this->tokens[$i]['code'];
+            $tokenContent = $this->tokens[$i]['content'];
+
+            switch (true) {
+                case $tokenCode === T_OPEN_CURLY_BRACKET:
+                    //we have hit the beginning of a code block
+                    $processingCodeBlock = true;
+                    break;
+                case $tokenCode === T_CLOSE_CURLY_BRACKET:
+                    //we have hit the end of a code block
+                    $processingCodeBlock = false;
+                    break;
+                case $processingCodeBlock
+                     && $tokenCode !== T_STRING
+                     && isset($this->keywordTokenTypeMap[$tokenContent]):
+                    //we have hit a keyword within a code block that is of wrong token type
+                    $this->tokens[$i]['code'] = T_STRING;
+                    $this->tokens[$i]['type'] = 'T_STRING';
+                    break;
+                default:
+                    //NOP All operations have already been executed
+            }
+        }
     }
 
     /**
@@ -213,10 +248,10 @@ class GRAPHQL extends Tokenizer
      */
     private function processFields()
     {
-        $processingEntity       = false;
-        $numTokens              = count($this->tokens);
-        $entityTypes            = [T_CLASS, T_INTERFACE];
-        $skipTypes              = [T_COMMENT, T_WHITESPACE];
+        $processingEntity = false;
+        $numTokens        = count($this->tokens);
+        $entityTypes      = [T_CLASS, T_INTERFACE];
+        $skipTypes        = [T_COMMENT, T_WHITESPACE];
 
         for ($i = 0; $i < $numTokens; ++$i) {
             $tokenCode = $this->tokens[$i]['code'];
