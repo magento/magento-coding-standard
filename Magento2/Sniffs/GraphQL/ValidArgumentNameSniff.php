@@ -6,6 +6,8 @@
 
 namespace Magento2\Sniffs\GraphQL;
 
+use GraphQL\Error\SyntaxError;
+use GraphQL\Language\AST\DocumentNode;
 use PHP_CodeSniffer\Files\File;
 
 /**
@@ -13,12 +15,13 @@ use PHP_CodeSniffer\Files\File;
  */
 class ValidArgumentNameSniff extends AbstractGraphQLSniff
 {
+
     /**
      * @inheritDoc
      */
     public function register()
     {
-        return [T_OPEN_PARENTHESIS];
+        return [T_VARIABLE];
     }
 
     /**
@@ -26,11 +29,17 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens                  = $phpcsFile->getTokens();
-        $closeParenthesisPointer = $this->getCloseParenthesisPointer($stackPtr, $tokens);
+        $tokens = $phpcsFile->getTokens();
 
-        //if we could not find the closing parenthesis pointer, we add a warning and terminate
-        if ($closeParenthesisPointer === false) {
+        //get the pointer to the argument list opener or bail out if none was found since then the field does not have arguments
+        $openArgumentListPointer = $this->getArgumentListOpenPointer($stackPtr, $tokens);
+        if ($openArgumentListPointer === false) {
+            return;
+        }
+
+        //get the pointer to the argument list closer or add a warning and terminate as we have an unbalanced file
+        $closeArgumentListPointer = $this->getArgumentListClosePointer($openArgumentListPointer, $tokens);
+        if ($closeArgumentListPointer === false) {
             $error = 'Possible parse error: Missing closing parenthesis for argument list in line %d';
             $data  = [
                 $tokens[$stackPtr]['line'],
@@ -39,18 +48,15 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
             return;
         }
 
-        $arguments = $this->getArguments($stackPtr, $closeParenthesisPointer, $tokens);
+        $arguments = $this->getArguments($openArgumentListPointer, $closeArgumentListPointer, $tokens);
 
-        foreach ($arguments as $argument) {
-            $pointer = $argument[0];
-            $name    = $argument[1];
-
-            if (!$this->isCamelCase($name)) {
+        foreach ($arguments as $pointer => $argument) {
+            if (!$this->isCamelCase($argument)) {
                 $type  = 'Argument';
                 $error = '%s name "%s" is not in CamelCase format';
                 $data  = [
                     $type,
-                    $name,
+                    $argument,
                 ];
 
                 $phpcsFile->addError($error, $pointer, 'NotCamelCase', $data);
@@ -61,17 +67,95 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
         }
 
         //return stack pointer of closing parenthesis
-        return $closeParenthesisPointer;
+        return $closeArgumentListPointer;
+    }
+
+    /**
+     * Seeks the last token of an argument definition and returns its pointer.
+     *
+     * Arguments are defined as follows:
+     * <noformat>
+     *   {ArgumentName}: {ArgumentType}[ = {DefaultValue}][{Directive}]*
+     * </noformat>
+     *
+     * @param int $argumentDefinitionStartPointer
+     * @param array $tokens
+     * @return int
+     */
+    private function getArgumentDefinitionEndPointer($argumentDefinitionStartPointer, array $tokens)
+    {
+        $colonPointer = $this->seekToken(T_COLON, $tokens, $argumentDefinitionStartPointer);
+
+        //the colon is always followed by a type so we can consume the token after the colon
+        $endPointer = $colonPointer + 1;
+
+        //if argument has a default value, we advance to the default definition end
+        if ($tokens[$endPointer + 1]['code'] === T_EQUAL) {
+            $endPointer += 2;
+        }
+
+        //while next token starts a directive, we advance to the end of the directive
+        while ($tokens[$endPointer + 1]['code'] === T_DOC_COMMENT_TAG) {
+            //consume next two tokens
+            $endPointer += 2;
+
+            //if next token is an opening parenthesis, we consume everything up to the closing parenthesis
+            if ($tokens[$endPointer + 1]['code'] === T_OPEN_PARENTHESIS) {
+                $endPointer = $tokens[$endPointer + 1]['parenthesis_closer'];
+            }
+        }
+
+        return $endPointer;
+    }
+
+    /**
+     * Returns the closing parenthesis for the token found at <var>$openParenthesisPointer</var> in <var>$tokens</var>.
+     *
+     * @param int $openParenthesisPointer
+     * @param array $tokens
+     * @return bool|int
+     */
+    private function getArgumentListClosePointer($openParenthesisPointer, array $tokens)
+    {
+        $openParenthesisToken = $tokens[$openParenthesisPointer];
+        return $openParenthesisToken['parenthesis_closer'];
+    }
+
+    /**
+     * Seeks the next available {@link T_OPEN_PARENTHESIS} token that comes directly after <var>$stackPointer</var>.
+     * token.
+     *
+     * @param int $stackPointer
+     * @param array $tokens
+     * @return bool|int
+     */
+    private function getArgumentListOpenPointer($stackPointer, array $tokens)
+    {
+        //get next open parenthesis pointer or bail out if none was found
+        $openParenthesisPointer = $this->seekToken(T_OPEN_PARENTHESIS, $tokens, $stackPointer);
+        if ($openParenthesisPointer === false) {
+            return false;
+        }
+
+        //bail out if open parenthesis does not directly come after current stack pointer
+        if ($openParenthesisPointer !== $stackPointer + 1) {
+            return false;
+        }
+
+        //we have found the appropriate opening parenthesis
+        return $openParenthesisPointer;
     }
 
     /**
      * Finds all argument names contained in <var>$tokens</var> in range <var>$startPointer</var> to
      * <var>$endPointer</var>.
      *
+     * The returned array uses token pointers as keys and argument names as values.
+     *
      * @param int $startPointer
      * @param int $endPointer
      * @param array $tokens
-     * @return array[]
+     * @return array<int, string>
      */
     private function getArguments($startPointer, $endPointer, array $tokens)
     {
@@ -81,36 +165,33 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
         $skipTypes            = [T_COMMENT, T_WHITESPACE];
 
         for ($i = $startPointer + 1; $i < $endPointer; ++$i) {
-            //skip some tokens
-            if (in_array($tokens[$i]['code'], $skipTypes)) {
-                continue;
-            }
-            $argument .= $tokens[$i]['content'];
+            $tokenCode = $tokens[$i]['code'];
 
-            if ($argumentTokenPointer === null) {
-                $argumentTokenPointer = $i;
-            }
+            switch (true) {
+                case in_array($tokenCode, $skipTypes):
+                    //NOP This is a toke that we have to skip
+                    break;
+                case $tokenCode === T_COLON:
+                    //we have reached the end of the argument name, thus we store its pointer and value
+                    $names[$argumentTokenPointer] = $argument;
 
-            if (preg_match('/^.+:.+$/', $argument)) {
-                list($name, $type) = explode(':', $argument);
-                $names[]              = [$argumentTokenPointer, $name];
-                $argument             = '';
-                $argumentTokenPointer = null;
+                    //advance to end of argument definition
+                    $i = $this->getArgumentDefinitionEndPointer($argumentTokenPointer, $tokens);
+
+                    //and reset temporary variables
+                    $argument             = '';
+                    $argumentTokenPointer = null;
+                    break;
+                default:
+                    //this seems to be part of the argument name
+                    $argument .= $tokens[$i]['content'];
+
+                    if ($argumentTokenPointer === null) {
+                        $argumentTokenPointer = $i;
+                    }
             }
         }
 
         return $names;
-    }
-
-    /**
-     * Seeks the next available token of type {@link T_CLOSE_PARENTHESIS} in <var>$tokens</var> and returns its pointer.
-     *
-     * @param int $stackPointer
-     * @param array $tokens
-     * @return bool|int
-     */
-    private function getCloseParenthesisPointer($stackPointer, array $tokens)
-    {
-        return $this->seekToken(T_CLOSE_PARENTHESIS, $tokens, $stackPointer);
     }
 }

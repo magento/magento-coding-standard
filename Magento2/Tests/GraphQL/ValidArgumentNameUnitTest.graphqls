@@ -30,3 +30,20 @@ interface Foo {
         5invalidArgumentNameStatingWithNumber: Int
     ): String
 }
+
+#
+# Make sure that directives on arguments do not lead to false positives
+#
+type Foo @doc(descripton: "Foo Bar Baz") {
+    myfield (
+        # Valid arguments
+        validArgument: String = "My fair lady" @doc(
+            # A comment
+            description: "This is a valid argument, spanned over multiple lines."
+        ) @foo
+        varlidArgumentWithDefaultValue: Int = 20 @doc(description: "This is another valid argument with a default value.")
+        # Invalid argument
+        invalid_argument: String @doc(description: "This is an invalid argument."),
+        invalid_argument_with_default_value: Int = 20 @doc(description: "This is another invalid argument with a default value")
+    ): String @doc(description: "Foo Bar")
+}

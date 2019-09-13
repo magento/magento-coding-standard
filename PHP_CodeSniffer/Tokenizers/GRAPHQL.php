@@ -7,6 +7,7 @@
 namespace PHP_CodeSniffer\Tokenizers;
 
 use GraphQL\Language\Lexer;
+use GraphQL\Language\Parser;
 use GraphQL\Language\Source;
 use GraphQL\Language\Token;
 
@@ -81,11 +82,10 @@ class GRAPHQL extends Tokenizer
     {
         $this->logVerbose('*** START GRAPHQL TOKENIZING ***');
 
-        $string = str_replace($this->eolChar, "\n", $string);
-        $tokens = [];
-        $lexer  = new Lexer(
-            new Source($string)
-        );
+        $string   = str_replace($this->eolChar, "\n", $string);
+        $tokens   = [];
+        $source   = new Source($string);
+        $lexer    = new Lexer($source);
 
         do {
             $kind  = $lexer->token->kind;
@@ -178,19 +178,17 @@ class GRAPHQL extends Tokenizer
      */
     private function isFieldToken($stackPointer)
     {
+        //bail out if current token is nested in a parenthesis, since fields cannot be contained in parenthesises
+        if (isset($this->tokens[$stackPointer]['nested_parenthesis'])) {
+            return false;
+        }
+
         $nextToken = $this->tokens[$stackPointer + 1];
 
-        //if next token is an opening parenthesis, we seek for the closing parenthesis
+        //if next token is an opening parenthesis, we advance to the token after the closing parenthesis
         if ($nextToken['code'] === T_OPEN_PARENTHESIS) {
-            $nextPointer = $stackPointer + 1;
-            $numTokens   = count($this->tokens);
-
-            for ($i = $nextPointer; $i < $numTokens; ++$i) {
-                if ($this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
-                    $nextToken = $this->tokens[$i + 1];
-                    break;
-                }
-            }
+            $nextPointer = $nextToken['parenthesis_closer'] + 1;
+            $nextToken   = $this->tokens[$nextPointer];
         }
 
         //return whether current token is a string and next token is a colon
@@ -215,7 +213,6 @@ class GRAPHQL extends Tokenizer
      */
     private function processFields()
     {
-        $processingArgumentList = false;
         $processingEntity       = false;
         $numTokens              = count($this->tokens);
         $entityTypes            = [T_CLASS, T_INTERFACE];
@@ -237,15 +234,7 @@ class GRAPHQL extends Tokenizer
                     //we have hit the end of an entity declaration
                     $processingEntity = false;
                     break;
-                case $tokenCode === T_OPEN_PARENTHESIS:
-                    //we have hit an argument list
-                    $processingArgumentList = true;
-                    break;
-                case $tokenCode === T_CLOSE_PARENTHESIS:
-                    //we have hit an argument list end
-                    $processingArgumentList = false;
-                    break;
-                case $processingEntity && !$processingArgumentList && $this->isFieldToken($i):
+                case $processingEntity && $this->isFieldToken($i):
                     //we have hit a field
                     $this->tokens[$i]['code'] = T_VARIABLE;
                     $this->tokens[$i]['type'] = 'T_VARIABLE';
