@@ -17,7 +17,7 @@ abstract class AbstractGraphQLSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = ['GraphQL'];
+    public $supportedTokenizers = ['GRAPHQL'];
 
     /**
      * Returns whether <var>$name</var> starts with a lower case character and is written in camel case.

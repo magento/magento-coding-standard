@@ -13,7 +13,7 @@ use GraphQL\Language\Token;
 /**
  * Implements a tokenizer for GraphQL files.
  */
-class GraphQL extends Tokenizer
+class GRAPHQL extends Tokenizer
 {
 
     /**

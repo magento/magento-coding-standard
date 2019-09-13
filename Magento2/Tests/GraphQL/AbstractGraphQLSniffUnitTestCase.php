@@ -23,7 +23,7 @@ abstract class AbstractGraphQLSniffUnitTestCase extends AbstractSniffUnitTest
         $config->extensions = array_merge(
             $config->extensions,
             [
-                'graphqls' => 'GraphQL'
+                'graphqls' => 'GRAPHQL'
             ]
         );
 
