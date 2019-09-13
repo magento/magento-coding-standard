@@ -31,7 +31,8 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        //get the pointer to the argument list opener or bail out if none was found since then the field does not have arguments
+        //get the pointer to the argument list opener or bail out if none was found
+        //since then the field does not have arguments
         $openArgumentListPointer = $this->getArgumentListOpenPointer($stackPtr, $tokens);
         if ($openArgumentListPointer === false) {
             return;
