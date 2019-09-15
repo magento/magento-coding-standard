@@ -69,15 +69,4 @@ class EverythingIsBadHere
     private function dockBlockIsEmpty(string $arg1, bool $arg2): bool
     {
     }
-
-    /**
-     *
-     *
-     * @param string $arg1
-     * @param bool $arg2
-     *
-     */
-    private function redundantLines($arg1, $arg2): bool
-    {
-    }
 }

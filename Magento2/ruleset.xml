@@ -532,6 +532,10 @@
         <severity>5</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Commenting.FunctionsPHPDocFormattingSniff">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Squiz.Commenting.DocCommentAlignment">
         <severity>5</severity>
         <type>warning</type>

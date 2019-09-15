@@ -47,7 +47,7 @@ class FunctionsPHPDocFormattingSniff implements Sniff
         $funcReturnType = $this->analysePhp7ReturnDeclaration($phpcsFile, $stackPtr);
         $funcParamTypeList = $this->analysePhp7ParamDeclarations($phpcsFile, $stackPtr);
         $phpDocTokens = $this->getPhpDocTokens($phpcsFile, $stackPtr);
-        $hasPhp7TypeDeclarations = $funcReturnType !== false || count($funcParamTypeList['missing_type']) === 0;
+        $hasPhp7TypeDeclarations = $funcReturnType !== false && count($funcParamTypeList['missing_type']) === 0;
 
         if ($phpDocTokens === false && $hasPhp7TypeDeclarations === true) {
             // NO check it use all php 7 type declarations and no php doc docblock
@@ -59,21 +59,44 @@ class FunctionsPHPDocFormattingSniff implements Sniff
 
             return;
         }
-
+        $tokens = $phpcsFile->getTokens();
         $phpDocTokensList = $this->functionPHPDocBlock->execute(
-            $phpcsFile->getTokens(),
+            $tokens,
             $phpDocTokens[0],
             $phpDocTokens[1]
         );
 
+        if ($phpDocTokensList['is_empty']) {
+            $phpcsFile->addWarning('Empty Docblock SHOULD NOT be used', $stackPtr, $this->warningCode);
+            return;
+        }
+
+        $description = $phpDocTokensList['description'];
+
+        if ($description !== false) {
+            $functionNameToken = $phpcsFile->findNext(T_STRING, $stackPtr, $tokens[$stackPtr]['parenthesis_opener']);
+            $functionName = str_replace(['_', ' ', '.', ','], '', strtolower($tokens[$functionNameToken]['content']));
+            $description = str_replace(['_', ' ', '.', ','], '', strtolower($description));
+
+            if ($functionName === $description) {
+                $phpcsFile->addWarning(
+                    sprintf(
+                        '%s description should contain additional information beyond the name already supplies.',
+                        ucfirst($phpDocTokensList['description'])
+                    ),
+                    $stackPtr,
+                    'InvalidDescription'
+                );
+            }
+        }
+
         if (array_key_exists('@inheritdoc', array_flip($phpDocTokensList['tags']))) {
             $phpcsFile->addWarning('The @inheritdoc tag SHOULD NOT be used', $stackPtr, $this->warningCode);
-
             return;
         }
 
         if (count($phpDocTokensList['parameters']) > 0) {
-            $phpcsFile = $this->comparePhp7WithDocBlock(
+          $this->comparePhp7WithDocBlock(
                 $funcParamTypeList,
                 $phpDocTokensList['parameters'],
                 $phpcsFile,
@@ -219,7 +242,7 @@ class FunctionsPHPDocFormattingSniff implements Sniff
                     $stackPtr,
                     $this->warningCode
                 );
-                return $phpcsFile;
+               return;
             }
 
             $parsedDocToken[$parameterName] = $token['type'];
@@ -231,24 +254,32 @@ class FunctionsPHPDocFormattingSniff implements Sniff
                 $stackPtr,
                 $this->warningCode
             );
-            return $phpcsFile;
+            return;
         }
 
-        $parsedDocTokenKeys = array_keys($parsedDocToken);
         $hasMissingTypes = count($php7Tokens['missing_type']) > 0;
-        if ($hasMissingTypes === true && array_keys($php7Tokens['missing_type']) !== $parsedDocTokenKeys) {
+        if ($hasMissingTypes === false) {
+            return;
+        }
+
+        $php7ParamKey =  array_keys($php7Tokens['missing_type']);
+        $parsedDocTokenKeys = array_keys($parsedDocToken);
+        if ($php7ParamKey !== $parsedDocTokenKeys) {
             $phpcsFile->addWarning(
                 'Documented parameter and real function parameter dont match',
                 $stackPtr,
                 $this->warningCode
             );
-
-            return $phpcsFile;
         }
 
-        $t = 12;
-
-
-        return $phpcsFile;
+        foreach ($php7ParamKey as $parameter) {
+            if (!isset($parsedDocToken[$parameter]) || $parsedDocToken[$parameter] === false) {
+                $phpcsFile->addWarning(
+                    sprintf('Type for parameter %s is missing', $parameter),
+                    $stackPtr,
+                    $this->warningCode
+                );
+            }
+        }
     }
 }

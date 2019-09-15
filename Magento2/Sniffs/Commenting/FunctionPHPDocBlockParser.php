@@ -17,6 +17,7 @@ class FunctionPHPDocBlockParser
      */
     public function execute(array $tokens, $docStart, $docEnd)
     {
+        $is_empty = true;
         $description = false;
         for ($i = $docStart; $i <= $docEnd; $i++) {
             $token = $tokens[$i];
@@ -29,10 +30,12 @@ class FunctionPHPDocBlockParser
 
             if ($code === T_DOC_COMMENT_STRING && $content !== "\n") {
                 $description = $content;
+                $is_empty = false;
             }
         }
 
         $functionDeclarations = [
+            'is_empty' =>  $is_empty,
             'description' => $description,
             'tags' => [],
             'return' => '',
@@ -114,7 +117,7 @@ class FunctionPHPDocBlockParser
         }
 
         $functionDeclarations['parameters'][] = ['content' => $content, 'type' => $type,];
-
+        $functionDeclarations['is_empty'] = false;
         return $functionDeclarations;
     }
 
@@ -126,6 +129,7 @@ class FunctionPHPDocBlockParser
     private function addReturnTagValue(array $tokens, array $functionDeclarations)
     {
         $functionDeclarations['return'] = $tokens[0];
+        $functionDeclarations['is_empty'] = false;
         return $functionDeclarations;
     }
 
@@ -137,6 +141,7 @@ class FunctionPHPDocBlockParser
     private function addThrowsTagValue(array $tokens, array $functionDeclarations)
     {
         $functionDeclarations['throws'][] = $tokens[0];
+        $functionDeclarations['is_empty'] = false;
         return $functionDeclarations;
     }
 }
