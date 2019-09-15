@@ -56,7 +56,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 
         if ($foundVar === null) {
             $error = 'Missing @var tag in class property comment';
-            $phpcsFile->addWarning($error, $commentEnd, 'MissingVar');
+            $phpcsFile->addWarning($error, $stackPtr, 'MissingVar');
             return;
         }
 

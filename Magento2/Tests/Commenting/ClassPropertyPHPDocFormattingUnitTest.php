@@ -23,7 +23,7 @@ class ClassPropertyPHPDocFormattingUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            12 => 1,
+            13 => 1,
             23 => 1,
             30 => 1,
             34 => 1

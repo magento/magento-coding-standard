@@ -10,14 +10,14 @@ class Foo
     /**
      * Foo
      */
-    private $_withoutClassAttribute = '';
+    public $_withoutClassAttribute = '';
 
     /**
      * @var Test
      *
      * Short Description
      */
-    private $_classAttributeWithShortDescription = '';
+    protected $_classAttributeWithShortDescription = '';
 
     /**
      * @var
@@ -32,4 +32,28 @@ class Foo
     private $_multipleClassAttribute = '';
 
     private $_missingDocBlockClassAttribute = '';
+}
+
+class Bar {
+
+    /**
+     * @var correctlyFormattedPublicClassMember
+     *
+     * Short Description
+     */
+    public $correctlyFormattedPublicClassMember;
+
+    /**
+     * @var correctlyFormattedPrivateClassMember
+     *
+     * Short Description
+     */
+    private $correctlyFormattedPrivateClassMember;
+
+    /**
+     * @var correctlyFormattedProtectedClassMember
+     *
+     * Short Description
+     */
+    protected $correctlyFormattedProtectedClassMember;
 }
