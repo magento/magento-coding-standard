@@ -27,7 +27,7 @@ class FinalImplementationSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $phpcsFile->addError(
-            // phpcs:ignore Magento2.Files.LineLength.MaxExceeded
+            // phpcs:ignore Generic.Files.LineLength
             'Final keyword is prohibited in Magento. It decreases extensibility and is not compatible with plugins and proxies.',
             $stackPtr,
             'FoundFinal'

@@ -14,6 +14,19 @@ use PHP_CodeSniffer\Files\File;
 class ConstantsPHPDocFormattingSniff implements Sniff
 {
     /**
+     * @var PHPDocFormattingValidator
+     */
+    private $PHPDocFormattingValidator;
+
+    /**
+     * Helper initialisation
+     */
+    public function __construct()
+    {
+        $this->PHPDocFormattingValidator = new PHPDocFormattingValidator();
+    }
+
+    /**
      * @inheritDoc
      */
     public function register()
@@ -45,42 +58,28 @@ class ConstantsPHPDocFormattingSniff implements Sniff
             null,
             true
         );
-        $constName = strtolower(trim($tokens[$constNamePtr]['content'], " '\""));
 
-        $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, null, false, null, true);
-        if ($commentStartPtr === false) {
+        $commentStartPtr = $this->PHPDocFormattingValidator->findPHPDoc($stackPtr, $phpcsFile);
+        if ($commentStartPtr === -1) {
             return;
         }
 
-        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
-        for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {
-            $token = $tokens[$i];
-
-            // Not an interesting string
-            if ($token['code'] !== T_DOC_COMMENT_STRING) {
-                continue;
-            }
-
-            // Comment is the same as constant name
-            $docComment = trim(strtolower($token['content']), ',.');
-            if ($docComment === $constName) {
-                continue;
-            }
-
-            // Comment is exactly the same as constant name
-            $docComment = str_replace(' ', '_', $docComment);
-            if ($docComment === $constName) {
-                continue;
-            }
-
-            // We have found at lease one meaningful line in comment description
-            return;
+        if ($this->PHPDocFormattingValidator->providesMeaning($constNamePtr, $commentStartPtr, $tokens) !== true) {
+            $phpcsFile->addWarning(
+                'Constants must have short description if they add information beyond what the constant name supplies.',
+                $stackPtr,
+                'MissingConstantPHPDoc'
+            );
         }
 
-        $phpcsFile->addWarning(
-            'Constants must have short description if they add information beyond what the constant name supplies.',
-            $stackPtr,
-            'MissingConstantPHPDoc'
-        );
+        if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
+            $phpcsFile->addWarning(
+                'Motivation behind the added @deprecated tag MUST be explained. '
+                    . '@see tag MUST be used with reference to new implementation when code is deprecated '
+                    . 'and there is a new alternative.',
+                $stackPtr,
+                'InvalidDeprecatedTagUsage'
+            );
+        }
     }
 }

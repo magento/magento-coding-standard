@@ -7,9 +7,6 @@ namespace Magento2\Tests\NamingConvention;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-/**
- * Class ReservedWordsUnitTest
- */
 class ReservedWordsUnitTest extends AbstractSniffUnitTest
 {
     /**

@@ -7,12 +7,15 @@ namespace Magento2\Tests\Exceptions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DirectThrowUnitTest extends AbstractSniffUnitTest
+/**
+ * Class ThrowCatchUnitTest
+ */
+class TryProcessSystemResourcesUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
      */
-    public function getErrorList()
+    protected function getErrorList()
     {
         return [];
     }
@@ -20,11 +23,13 @@ class DirectThrowUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    protected function getWarningList()
     {
         return [
-            10 => 1,
-            17 => 1,
+            22 => 1,
+            24 => 1,
+            26 => 1,
+            28 => 1
         ];
     }
 }
