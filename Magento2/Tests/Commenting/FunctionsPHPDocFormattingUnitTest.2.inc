@@ -1,14 +1,23 @@
 <?php
 
+
 class EverythingIsBadHere
 {
+
+
+    /**
+     * @param string $arg1
+     */
+    private function removeParam ()
+    {
+    }
+
     /**
      * @param bool $arg2
      * @param string $arg1
      */
     private function wrongParamOrder($arg1, $arg2): bool
     {
-
     }
 
     /**
@@ -16,7 +25,6 @@ class EverythingIsBadHere
      */
     private function missingParamAnnotation($arg1, $arg2): bool
     {
-
     }
 
     private function missingArgumentAnnotations($arg1, $arg2): bool
@@ -31,7 +39,6 @@ class EverythingIsBadHere
      */
     private function paramDuplication($arg1, $arg2): bool
     {
-
     }
 
     /**
@@ -39,7 +46,6 @@ class EverythingIsBadHere
      */
     private function inheritDocShouldNotBeUsed(string $arg1, bool $arg2)
     {
-
     }
 
     /**
@@ -48,7 +54,6 @@ class EverythingIsBadHere
      */
     private function missingParamType($arg1, $arg2): bool
     {
-
     }
 
     /**
@@ -56,7 +61,6 @@ class EverythingIsBadHere
      */
     private function uselessDescription(string $arg1, bool $arg2): bool
     {
-
     }
 
     /**
@@ -64,7 +68,6 @@ class EverythingIsBadHere
      */
     private function dockBlockIsEmpty(string $arg1, bool $arg2): bool
     {
-
     }
 
     /**
@@ -76,6 +79,5 @@ class EverythingIsBadHere
      */
     private function redundantLines($arg1, $arg2): bool
     {
-
     }
 }

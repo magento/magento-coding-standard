@@ -6,7 +6,7 @@
 
 namespace Magento2\Sniffs\Commenting;
 
-class FunctionPHPDocBlock
+class FunctionPHPDocBlockParser
 {
 
     /**
@@ -33,10 +33,10 @@ class FunctionPHPDocBlock
         }
 
         $functionDeclarations = [
-            'warning' => false,
             'description' => $description,
+            'tags' => [],
             'return' => '',
-            'parameter' => [],
+            'parameters' => [],
             'throws' => [],
         ];
 
@@ -48,14 +48,13 @@ class FunctionPHPDocBlock
             $line = $token['line'];
             $content = $token['content'];
 
-            preg_match('/@inheritdoc*/', $content, $inheritdoc);
-            if (isset($inheritdoc[0])) {
-                $functionDeclarations['warning'] = ['The @inheritdoc tag SHOULD NOT be used.', $i];
-
-                return $functionDeclarations;
-            }
 
             if ($code === T_DOC_COMMENT_TAG) {
+                // add php tokens also without comment to tag list
+                if (preg_match('/@[a-z]++/', $content, $output_array)) {
+                    $functionDeclarations['tags'][] = $content;
+                }
+
                 $lastDocLine = $line;
                 $docType = $token['content'];
                 continue;
@@ -73,17 +72,22 @@ class FunctionPHPDocBlock
             preg_match_all('/[A-Za-z0-9$]*/', $content, $docTokens);
             $docTokens = array_values(array_filter($docTokens[0]));
 
+            if (count($docTokens) === 0) {
+                // ignore empty parameter declaration
+                continue;
+            }
+
             switch ($docType) {
                 case '@param':
-                    $functionDeclarations = self::addParamTagValue($docTokens, $functionDeclarations);
+                    $functionDeclarations = $this->addParamTagValue($docTokens, $functionDeclarations);
                     break;
 
                 case '@return':
-                    $functionDeclarations = self::addReturnTagValue($docTokens, $functionDeclarations);
+                    $functionDeclarations = $this->addReturnTagValue($docTokens, $functionDeclarations);
                     break;
 
                 case '@throws':
-                    $functionDeclarations = self::addThrowsTagValue($docTokens, $functionDeclarations);
+                    $functionDeclarations = $this->addThrowsTagValue($docTokens, $functionDeclarations);
                     break;
             }
         }
@@ -98,10 +102,6 @@ class FunctionPHPDocBlock
      */
     private function addParamTagValue(array $tokens, array $functionDeclarations)
     {
-        if (count($tokens) === 0) {
-            return $functionDeclarations; // empty parameter declaration
-        }
-
         $type = false;
         $content = false;
 
@@ -113,7 +113,7 @@ class FunctionPHPDocBlock
             $type = $token;
         }
 
-        $functionDeclarations['parameter'][] = ['content' => $content, 'type' => $type,];
+        $functionDeclarations['parameters'][] = ['content' => $content, 'type' => $type,];
 
         return $functionDeclarations;
     }
@@ -123,9 +123,9 @@ class FunctionPHPDocBlock
      * @param array $functionDeclarations
      * @return array
      */
-    private function addReturnTagValue(array $docTokens, array $functionDeclarations)
+    private function addReturnTagValue(array $tokens, array $functionDeclarations)
     {
-        // @todo imepelement me
+        $functionDeclarations['return'] = $tokens[0];
         return $functionDeclarations;
     }
 
@@ -134,9 +134,9 @@ class FunctionPHPDocBlock
      * @param array $functionDeclarations
      * @return array
      */
-    private function addThrowsTagValue(array $docTokens, array $functionDeclarations)
+    private function addThrowsTagValue(array $tokens, array $functionDeclarations)
     {
-        // @todo imepelement me
+        $functionDeclarations['throws'][] = $tokens[0];
         return $functionDeclarations;
     }
 }

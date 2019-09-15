@@ -3,6 +3,10 @@
 class EverythingIsGoodHere
 {
 
+    public function __construct(string $arg1)
+    {
+    }
+
     private function executeSimpleFunctionNoDoc(): void
     {
     }

@@ -26,6 +26,22 @@ class FunctionsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
     public function getWarningList($testFile = '')
     {
 
+        if($testFile === 'FunctionsPHPDocFormattingUnitTest.2.inc')
+        {
+            return [
+                11,
+                19,
+                26,
+                30,
+                40,
+                47,
+                55,
+                62,
+                69,
+                80
+            ];
+        }
+
         return [];
     }
 }
