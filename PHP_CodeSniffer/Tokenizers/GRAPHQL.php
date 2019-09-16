@@ -19,11 +19,15 @@ class GRAPHQL extends Tokenizer
     /**
      * Defines how GraphQL token types are mapped to PHP token types.
      *
+     * This is a complete list of all token types supported by <kbd>webonyx/graphql-php</var>. <knd>null</kbd> values
+     * are automatically mapped to <kbd>T_STRING</kbd> but are noted as <kbd>null</kbd> in this list to improve
+     * maintenance at a glance.
+     *
      * @var array
      */
     private $tokenTypeMap = [
         Token::AT           => 'T_DOC_COMMENT_TAG',
-        Token::BANG         => null, //TODO Should we map this to a specific type
+        Token::BANG         => null,
         Token::BLOCK_STRING => 'T_COMMENT',
         Token::BRACE_L      => 'T_OPEN_CURLY_BRACKET',
         Token::BRACE_R      => 'T_CLOSE_CURLY_BRACKET',
@@ -34,12 +38,12 @@ class GRAPHQL extends Tokenizer
         Token::DOLLAR       => 'T_DOLLAR',
         Token::EOF          => 'T_CLOSE_TAG',
         Token::EQUALS       => 'T_EQUAL',
-        Token::FLOAT        => null, //TODO Should we map this to a specific type
-        Token::INT          => null, //TODO Should we map this to a specific type
+        Token::FLOAT        => null,
+        Token::INT          => null,
         Token::NAME         => 'T_STRING',
         Token::PAREN_L      => 'T_OPEN_PARENTHESIS',
         Token::PAREN_R      => 'T_CLOSE_PARENTHESIS',
-        Token::PIPE         => null, //TODO Should we map this to a specific type
+        Token::PIPE         => null,
         Token::SPREAD       => 'T_ELLIPSIS',
         Token::SOF          => 'T_OPEN_TAG',
         Token::STRING       => 'T_STRING',
@@ -52,14 +56,13 @@ class GRAPHQL extends Tokenizer
      */
     private $keywordTokenTypeMap = [
         'enum'       => 'T_CLASS',
-        'extend'     => 'T_EXTENDS', //TODO This might not be the appropriate equivalent
+        'extend'     => 'T_EXTENDS',
         'interface'  => 'T_INTERFACE',
         'implements' => 'T_IMPLEMENTS',
         'type'       => 'T_CLASS',
         'union'      => 'T_CLASS',
         'query'      => 'T_FUNCTION',
         'mutation'   => 'T_FUNCTION',
-        //TODO We may have to add further types
     ];
 
     /**
