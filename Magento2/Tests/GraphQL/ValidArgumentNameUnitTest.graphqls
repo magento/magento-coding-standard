@@ -40,7 +40,7 @@ type Foo @doc(descripton: "Foo Bar Baz") {
         validArgument: String = "My fair lady" @doc(
             # A comment
             description: "This is a valid argument, spanned over multiple lines."
-        ) @foo
+        ) @unparametrizedDirective
         validArgumentWithDefaultValue: Int = 20 @doc(description: "This is another valid argument with a default value.")
         validArgumentListType: [String] @doc(description: "This is a valid argument that uses a list type.")
         validArgumentNonNullType: String! @doc(description: "This is a valid argument that uses a non null type.")

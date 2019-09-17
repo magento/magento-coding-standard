@@ -44,6 +44,30 @@ abstract class AbstractGraphQLSniff implements Sniff
     }
 
     /**
+     * Returns the pointer to the last token of a directive if the token at <var>$startPointer</var> starts a directive.
+     *
+     * @param array $tokens
+     * @param int $startPointer
+     * @return int The end of the directive if one is found, the start pointer otherwise
+     */
+    protected function seekEndOfDirective(array $tokens, $startPointer)
+    {
+        $endPointer = $startPointer;
+
+        if ($tokens[$startPointer]['code'] === T_DOC_COMMENT_TAG) {
+            //advance to next token
+            $endPointer += 1;
+
+            //if next token is an opening parenthesis, we consume everything up to the closing parenthesis
+            if ($tokens[$endPointer + 1]['code'] === T_OPEN_PARENTHESIS) {
+                $endPointer = $tokens[$endPointer + 1]['parenthesis_closer'];
+            }
+        }
+
+        return $endPointer;
+    }
+
+    /**
      * Searches for the first token that has <var>$tokenCode</var> in <var>$tokens</var> from position
      * <var>$startPointer</var> (excluded).
      *

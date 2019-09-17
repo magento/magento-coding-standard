@@ -3,6 +3,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\GraphQL;
 
 use PHP_CodeSniffer\Files\File;
@@ -46,16 +47,14 @@ class ValidEnumValueSniff extends AbstractGraphQLSniff
 
         $values = $this->getValues($openingCurlyPointer, $closingCurlyPointer, $tokens, $phpcsFile->eolChar);
 
-        foreach ($values as $value) {
-            $pointer = $value[0];
-            $name    = $value[1];
+        foreach ($values as $pointer => $value) {
 
-            if (!$this->isSnakeCase($name, true)) {
+            if (!$this->isSnakeCase($value, true)) {
                 $type  = 'Enum value';
                 $error = '%s "%s" is not in SCREAMING_SNAKE_CASE format';
                 $data  = [
                     $type,
-                    $name,
+                    $value,
                 ];
 
                 $phpcsFile->addError($error, $pointer, 'NotScreamingSnakeCase', $data);
@@ -98,11 +97,13 @@ class ValidEnumValueSniff extends AbstractGraphQLSniff
      * Finds all enum values contained in <var>$tokens</var> in range <var>$startPointer</var> to
      * <var>$endPointer</var>.
      *
+     * The returned array uses token pointers as keys and value names as values.
+     *
      * @param int $startPointer
      * @param int $endPointer
      * @param array $tokens
      * @param string $eolChar
-     * @return array[]
+     * @return array<int,string>
      */
     private function getValues($startPointer, $endPointer, array $tokens, $eolChar)
     {
@@ -112,20 +113,31 @@ class ValidEnumValueSniff extends AbstractGraphQLSniff
         $skipTypes         = [T_COMMENT, T_WHITESPACE];
 
         for ($i = $startPointer + 1; $i < $endPointer; ++$i) {
-            //skip some tokens
             if (in_array($tokens[$i]['code'], $skipTypes)) {
+                //NOP This is a token that we have to skip
                 continue;
             }
-            $enumValue .= $tokens[$i]['content'];
 
-            if ($valueTokenPointer === null) {
-                $valueTokenPointer = $i;
+            //add current tokens content to enum value if we have a string
+            if ($tokens[$i]['code'] === T_STRING) {
+                $enumValue .= $tokens[$i]['content'];
+
+                //and store the pointer if we have not done it already
+                if ($valueTokenPointer === null) {
+                    $valueTokenPointer = $i;
+                }
             }
 
-            if (strpos($enumValue, $eolChar) !== false) {
-                $values[]          = [$valueTokenPointer, rtrim($enumValue, $eolChar)];
-                $enumValue         = '';
-                $valueTokenPointer = null;
+            //consume directive if we have found one
+            if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG) {
+                $i = $this->seekEndOfDirective($tokens, $i);
+            }
+
+            //if current token has a line break, we have found the end of the value definition
+            if (strpos($tokens[$i]['content'], $eolChar) !== false) {
+                $values[$valueTokenPointer] = trim($enumValue);
+                $enumValue                  = '';
+                $valueTokenPointer          = null;
             }
         }
 

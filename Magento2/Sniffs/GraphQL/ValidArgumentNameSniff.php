@@ -108,13 +108,7 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
 
         //while next token starts a directive, we advance to the end of the directive
         while ($tokens[$endPointer + 1]['code'] === T_DOC_COMMENT_TAG) {
-            //consume next two tokens
-            $endPointer += 2;
-
-            //if next token is an opening parenthesis, we consume everything up to the closing parenthesis
-            if ($tokens[$endPointer + 1]['code'] === T_OPEN_PARENTHESIS) {
-                $endPointer = $tokens[$endPointer + 1]['parenthesis_closer'];
-            }
+            $endPointer = $this->seekEndOfDirective($tokens, $endPointer + 1);
         }
 
         return $endPointer;
@@ -181,7 +175,7 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
 
             switch (true) {
                 case in_array($tokenCode, $skipTypes):
-                    //NOP This is a toke that we have to skip
+                    //NOP This is a token that we have to skip
                     break;
                 case $tokenCode === T_COLON:
                     //we have reached the end of the argument name, thus we store its pointer and value
