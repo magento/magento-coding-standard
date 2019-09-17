@@ -85,10 +85,21 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
      */
     private function getArgumentDefinitionEndPointer($argumentDefinitionStartPointer, array $tokens)
     {
-        $colonPointer = $this->seekToken(T_COLON, $tokens, $argumentDefinitionStartPointer);
+        $endPointer = $this->seekToken(T_COLON, $tokens, $argumentDefinitionStartPointer);
 
-        //the colon is always followed by a type so we can consume the token after the colon
-        $endPointer = $colonPointer + 1;
+        //the colon is always followed by the type, which we can consume. it could be a list type though, thus we check
+        if ($tokens[$endPointer + 1]['code'] === T_OPEN_SQUARE_BRACKET) {
+            //consume everything up to closing bracket
+            $endPointer = $tokens[$endPointer + 1]['bracket_closer'];
+        } else {
+            //consume everything up to type
+            ++$endPointer;
+        }
+
+        //the type may be non null, meaning that it is followed by an exclamation mark, which we consume
+        if ($tokens[$endPointer + 1]['code'] === T_BOOLEAN_NOT) {
+            ++$endPointer;
+        }
 
         //if argument has a default value, we advance to the default definition end
         if ($tokens[$endPointer + 1]['code'] === T_EQUAL) {

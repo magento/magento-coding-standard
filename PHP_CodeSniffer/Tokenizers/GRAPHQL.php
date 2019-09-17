@@ -27,12 +27,12 @@ class GRAPHQL extends Tokenizer
      */
     private $tokenTypeMap = [
         Token::AT           => 'T_DOC_COMMENT_TAG',
-        Token::BANG         => null,
+        Token::BANG         => 'T_BOOLEAN_NOT',
         Token::BLOCK_STRING => 'T_COMMENT',
         Token::BRACE_L      => 'T_OPEN_CURLY_BRACKET',
         Token::BRACE_R      => 'T_CLOSE_CURLY_BRACKET',
         Token::BRACKET_L    => 'T_OPEN_SQUARE_BRACKET',
-        Token::BRACKET_R    => 'T_CLOSE_CURLY_BRACKET',
+        Token::BRACKET_R    => 'T_CLOSE_SQUARE_BRACKET',
         Token::COLON        => 'T_COLON',
         Token::COMMENT      => 'T_COMMENT',
         Token::DOLLAR       => 'T_DOLLAR',
@@ -112,6 +112,9 @@ class GRAPHQL extends Tokenizer
                 case Token::PAREN_L:
                 case Token::PAREN_R:
                 case Token::COLON:
+                case Token::BRACKET_L:
+                case Token::BRACKET_R:
+                case Token::BANG:
                     $value = $kind;
                     break;
                 default:

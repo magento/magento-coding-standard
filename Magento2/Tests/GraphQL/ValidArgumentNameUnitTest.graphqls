@@ -41,9 +41,19 @@ type Foo @doc(descripton: "Foo Bar Baz") {
             # A comment
             description: "This is a valid argument, spanned over multiple lines."
         ) @foo
-        varlidArgumentWithDefaultValue: Int = 20 @doc(description: "This is another valid argument with a default value.")
+        validArgumentWithDefaultValue: Int = 20 @doc(description: "This is another valid argument with a default value.")
+        validArgumentListType: [String] @doc(description: "This is a valid argument that uses a list type.")
+        validArgumentNonNullType: String! @doc(description: "This is a valid argument that uses a non null type.")
+        validArgumentNonNullListType: [String]! @doc(description: "This is a valid argument that uses a non null type.")
+        validArgumentNonNullTypeInListType: [String!] @doc(description: "This is a valid argument that uses a non null type within a list.")
+        validArgumentNonNullTypeInNonNullListType: [String!]! @doc(description: "This is a valid argument that uses a non null type within a non null list type.")
         # Invalid argument
         invalid_argument: String @doc(description: "This is an invalid argument."),
         invalid_argument_with_default_value: Int = 20 @doc(description: "This is another invalid argument with a default value")
+        invalid_argument_list_type: [String] @doc(description: "This is an invalid argument that uses a list type.")
+        invalid_argument_non_null_type: String! @doc(description: "This is an invalid argument that uses a non null type.")
+        invalid_argument_non_null_list_type: [String]! @doc(description: "This is an invalid argument that uses a non null type.")
+        invalid_argument_non_null_type_in_list_type: [String!] @doc(description: "This is an invalid argument that uses a non null type within a list.")
+        invalid_argument_non_null_type_in_non_null_list_type: [String!]! @doc(description: "This is a valid argument that uses a non null type within a non null list type.")
     ): String @doc(description: "Foo Bar")
 }

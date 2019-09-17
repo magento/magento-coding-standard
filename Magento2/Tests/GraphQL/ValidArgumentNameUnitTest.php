@@ -24,8 +24,13 @@ class ValidArgumentNameUnitTest extends AbstractGraphQLSniffUnitTestCase
             28 => 1,
             29 => 1,
             30 => 1,
-            46 => 1,
-            47 => 1,
+            51 => 1,
+            52 => 1,
+            53 => 1,
+            54 => 1,
+            55 => 1,
+            56 => 1,
+            57 => 1,
         ];
     }
 
