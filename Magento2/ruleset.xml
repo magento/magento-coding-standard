@@ -364,6 +364,30 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.GraphQL.ValidArgumentName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidEnumValue">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidFieldName">
+        <!--
+         * Field name validation deactivated as per request
+         * https://github.com/magento/magento-coding-standard/pull/141#discussion_r323349939
+        -->
+        <severity>0</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidTopLevelFieldName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidTypeName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.Whitespace.MultipleEmptyLines">
         <severity>6</severity>
         <type>warning</type>
@@ -521,31 +545,6 @@
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
         <severity>0</severity>
-    </rule>
-    <rule ref="Magento2.GraphQL.ValidTypeName">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento2.GraphQL.ValidFieldName">
-        <!--
-         * Field name validation deactivated as per request
-         * https://github.com/magento/magento-coding-standard/pull/141#discussion_r323349939
-        -->
-        <exclude name="Magento2.GraphQL.ValidFieldName" />
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento2.GraphQL.ValidArgumentName">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento2.GraphQL.ValidTopLevelFieldName">
-        <severity>6</severity>
-        <type>warning</type>
-    </rule>
-    <rule ref="Magento2.GraphQL.ValidEnumValue">
-        <severity>6</severity>
-        <type>warning</type>
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
