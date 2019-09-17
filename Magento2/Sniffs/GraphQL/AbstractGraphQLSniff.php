@@ -56,7 +56,7 @@ abstract class AbstractGraphQLSniff implements Sniff
 
         if ($tokens[$startPointer]['code'] === T_DOC_COMMENT_TAG) {
             //advance to next token
-            $endPointer += 1;
+            ++$endPointer;
 
             //if next token is an opening parenthesis, we consume everything up to the closing parenthesis
             if ($tokens[$endPointer + 1]['code'] === T_OPEN_PARENTHESIS) {
