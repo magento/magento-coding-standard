@@ -75,9 +75,9 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
      * Seeks the last token of an argument definition and returns its pointer.
      *
      * Arguments are defined as follows:
-     * <noformat>
+     * <pre>
      *   {ArgumentName}: {ArgumentType}[ = {DefaultValue}][{Directive}]*
-     * </noformat>
+     * </pre>
      *
      * @param int $argumentDefinitionStartPointer
      * @param array $tokens
