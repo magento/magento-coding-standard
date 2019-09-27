@@ -18,7 +18,10 @@
     "autoload": {
         "classmap": [
             "PHP_CodeSniffer/Tokenizers/"
-        ]
+        ],
+        "psr-4": {
+            "Magento2\\": "Magento2/"
+        }
     },
     "scripts": {
         "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..",
