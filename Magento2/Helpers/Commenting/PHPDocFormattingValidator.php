@@ -4,7 +4,7 @@
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Sniffs\Commenting;
+namespace Magento2\Helpers\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 
