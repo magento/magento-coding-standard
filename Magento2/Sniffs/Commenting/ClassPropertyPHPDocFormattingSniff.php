@@ -66,6 +66,14 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             $phpcsFile->addWarning($error, $foundVar, 'EmptyVar');
             return;
         }
+
+        // Check if class has already have meaningful description
+        $isShortDescription = $phpcsFile->findPrevious(T_DOC_COMMENT_STRING, $commentEnd, $foundVar, false);
+        if ($tokens[$string]['line'] !==  $tokens[$isShortDescription]['line']) {
+            $error = 'Variable member already have meaningful name';
+            $phpcsFile->addWarning($error, $isShortDescription, 'AlreadyMeaningFulNameVar');
+            return;
+        }
     }
 
     /**
