@@ -1,0 +1,27 @@
+enum Foo {
+    # Valid values
+    VALID_SCREAMING_SNAKE_CASE_VALUE
+    VALID_SCREAMING_SNAKE_CASE_VALUE_WITH_1_NUMBER
+    VALID_SCREAMING_SNAKE_CASE_VALUE_WITH_12345_NUMBERS
+    VALID_SCREAMING_SNAKE_CASE_VALUE_ENDING_WITH_NUMBER_5
+    VALIDUPPERCASEVALUE
+    VALID_SCREMING_CASE_VALUE_WITH_DIRECTIVE @doc(description: "This is a valid enum value with a directive")
+    VALID_SCREMING_CASE_VALUE_WITH_TWO_DIRECTIVES @doc(
+        description: "This is a valid enum value with a directive"
+    ) @unparametrizedDirective
+
+    # Invalid values
+    1_INVALID_SCREAMING_SNAKE_CASE_VALUE_STARTING_WITH_NUMBER
+    invalidCamelCaseValue
+    InvalidCamelCaseCapsValue
+    invalidlowercasevalue
+    invalidCamelCaseValueWithDirective @doc(description: "This is an invalid enum value with a directive")
+    invalidCamelCaseValueWithTwoDirectives @doc(
+        description: "This is an invalid enum value with a directive"
+    ) @unparametrizedDirective
+}
+
+# Ignored although it triggers a T_CLASS token
+type Bar {
+    some_field: String
+}
