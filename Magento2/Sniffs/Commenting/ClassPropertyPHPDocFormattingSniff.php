@@ -29,7 +29,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     private $PHPDocFormattingValidator;
 
     /**
-     * Constructs an AbstractVariableTest.
+     * Constructs an ClassPropertyPHPDocFormattingSniff.
      */
     public function __construct()
     {
@@ -42,7 +42,6 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         ];
 
         parent::__construct($scopes, $listen, true);
-
     }
 
     /**
