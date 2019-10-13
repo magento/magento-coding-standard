@@ -189,6 +189,10 @@
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Namespaces.UseDeclaration">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.NamingConvention.InterfaceName">
         <severity>8</severity>
         <type>warning</type>
