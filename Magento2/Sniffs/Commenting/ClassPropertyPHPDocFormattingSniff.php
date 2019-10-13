@@ -3,6 +3,7 @@ namespace Magento2\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Class ClassPropertyPHPDocFormattingSniff
@@ -23,6 +24,28 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     ];
 
     /**
+     * @var PHPDocFormattingValidator
+     */
+    private $PHPDocFormattingValidator;
+
+    /**
+     * Constructs an AbstractVariableTest.
+     */
+    public function __construct()
+    {
+        $scopes = Tokens::$ooScopeTokens;
+        $this->PHPDocFormattingValidator = new PHPDocFormattingValidator();
+        $listen = [
+            T_VARIABLE,
+            T_DOUBLE_QUOTED_STRING,
+            T_HEREDOC,
+        ];
+
+        parent::__construct($scopes, $listen, true);
+
+    }
+
+    /**
      * @param File $phpcsFile
      * @param int $stackPtr
      * @return int|void
@@ -39,9 +62,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             $phpcsFile->addWarning('Missing class property doc comment', $stackPtr, 'Missing');
             return;
         }
-
         $commentStart = $tokens[$commentEnd]['comment_opener'];
-
         $foundVar = null;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             if ($tokens[$tag]['content'] === '@var') {
@@ -69,9 +90,9 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 
         // Check if class has already have meaningful description
         $isShortDescription = $phpcsFile->findPrevious(T_DOC_COMMENT_STRING, $commentEnd, $foundVar, false);
-        if ($tokens[$string]['line'] !==  $tokens[$isShortDescription]['line']) {
+        if ($this->PHPDocFormattingValidator->providesMeaning($isShortDescription, $commentStart, $tokens) !== true) {
             $error = 'Variable member already have meaningful name';
-            $phpcsFile->addWarning($error, $isShortDescription, 'AlreadyMeaningFulNameVar');
+            $phpcsFile->addWarning($error, $isShortDescription, 'AlreadyHaveMeaningFulNameVar');
             return;
         }
     }
