@@ -42,6 +42,14 @@ Once installed, you can run `phpcs` from the command-line to analyse your code `
 ```
 $ vendor/bin/phpcs --standard=Magento2 app/code/MyAwesomeExtension
 ```
+
+### Fixing issues automatically
+Also you can run `phpcbf` from the command-line to fix your code `MyAwesomeExtension` for warnings like
+ "PHPCBF CAN FIX THE [0-9]+ MARKED SNIFF VIOLATIONS AUTOMATICALLY"
+```
+$ vendor/bin/phpcbf --standard=Magento2 app/code/MyAwesomeExtension
+``` 
+ 
 ## Where to contribute
 - Documentation of existing rules. See [ExtDN PHP CodeSniffer rules for Magento 2](https://github.com/extdn/extdn-phpcs) as a good example.
 - Bug fixes and improvements of existing rules.
