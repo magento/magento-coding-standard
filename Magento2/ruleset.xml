@@ -198,7 +198,8 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Templates.ThisInTemplate">
-        <include-pattern>*.phtml</include-pattern>
+        <exclude-pattern>*\.php$</exclude-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -395,7 +396,7 @@
     <rule ref="PEAR.ControlStructures.ControlSignature">
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="PSR1.Files.SideEffects">
         <severity>6</severity>
@@ -474,7 +475,7 @@
         </properties>
     </rule>
     <rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration">
         <severity>6</severity>
@@ -524,7 +525,7 @@
     <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing">
         <severity>6</severity>
