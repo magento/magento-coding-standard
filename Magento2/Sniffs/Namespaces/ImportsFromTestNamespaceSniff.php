@@ -11,23 +11,23 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Detects static test namespace.
  */
-class UseDeclarationSniff implements Sniff
+class ImportsFromTestNamespaceSniff implements Sniff
 {
 
     /**
      * @var string
      */
-    private $_prohibitNamespace = 'Magento\Tests';
+    private $prohibitNamespace = 'Magento\Tests';
 
     /**
      * @var string
      */
-    protected $warningMessage = 'Incorrect namespace has been imported.';
+    protected $warningMessage = 'Application modules should not use classed from test modules.';
 
     /**
      * @var string
      */
-    protected $warningCode = 'WrongImportNamespaces';
+    protected $warningCode = 'WrongImport';
 
     /**
      * @inheritdoc
@@ -44,7 +44,7 @@ class UseDeclarationSniff implements Sniff
     {
         $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON, T_OPEN_USE_GROUP, T_CLOSE_TAG], ($stackPtr + 1));
         $getTokenAsContent = $phpcsFile->getTokensAsString($stackPtr, ($next - $stackPtr));
-        if (strpos($getTokenAsContent, $this->_prohibitNamespace) !== false) {
+        if (strpos($getTokenAsContent, $this->prohibitNamespace) !== false) {
             $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
         }
     }

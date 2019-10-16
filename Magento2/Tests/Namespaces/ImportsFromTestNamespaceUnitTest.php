@@ -10,7 +10,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 /**
  * Class InterfaceNameUnitTest
  */
-class UseDeclarationUnitTest extends AbstractSniffUnitTest
+class ImportsFromTestNamespaceUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
