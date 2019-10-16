@@ -37,25 +37,32 @@ class Foo
 class Bar {
 
     /**
-     * @var variablehasAlreadyhaveProtectedClassMember
+     * @var variableHasAlreadyHaveProtectedClassMember
      *
      * Short Description
      */
-    public $variablehasAlreadyhavePublicClassMember;
+    public $variableHasAlreadyHavePublicClassMember;
 
     /**
-     * @var variablehasAlreadyhavePrivateClassMember
+     * @var variableHasAlreadyHavePrivateClassMember
      *
      * Short Description
      */
-    private $variablehasAlreadyhavePrivateClassMember;
+    private $variableHasAlreadyHavePrivateClassMember;
 
     /**
-     * @var variablehasAlreadyhaveProtectedClassMember
+     * @var variableHasAlreadyHaveProtectedClassMember
      *
      * Short Description
      */
-    protected $variablehasAlreadyhaveProtectedClassMember;
+    protected $variableHasAlreadyHaveProtectedClassMember;
+
+    /**
+     * @var className
+     *
+     * Variable name
+     */
+    private $variableName;
 }
 
 class correctlyFormattedClassMemberDocBlock
