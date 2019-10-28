@@ -4,6 +4,7 @@ namespace Magento2\Sniffs\Commenting;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Tokens;
+use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
 
 /**
  * Class ClassPropertyPHPDocFormattingSniff
