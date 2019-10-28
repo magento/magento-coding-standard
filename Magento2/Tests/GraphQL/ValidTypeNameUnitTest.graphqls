@@ -1,0 +1,44 @@
+# Valid type names.
+type ValidCamelCaseType {}
+interface ValidCamelCaseInterface {}
+enum ValidCamelCaseEnum {}
+
+# Incorrect usage of camel case.
+type invalidCamelCaseType {}
+type Invalid_Camel_Case_Type_With_Underscores {}
+interface invalidCamelCaseInterface {}
+interface Invalid_Camel_Case_Interface_With_Underscores {}
+enum invalidCamelCaseEnum {}
+enum Invalid_Camel_Case_Enum_With_Underscores {}
+
+# All lowercase
+type invalidlowercasetype {}
+interface invalidlowercaseinterface {}
+enum invalidlowercaseenum {}
+
+# All uppercase
+type VALIDUPPERCASETYPE {}
+type INVALID_UPPERCASE_TYPE_WITH_UNDERSCORES {}
+interface VALIDUPPERCASEINTERFACE {}
+interface INVALID_UPPERCASE_INTERFACE_WITH_UNDERSCORES {}
+enum VALIDUPPERCASECENUM {}
+enum INVALID_UPPERCASE_ENUM_WITH_UNDERSCORES {}
+
+# Mix camel case with uppercase
+type ValidCamelCaseTypeWITHUPPERCASE {}
+interface ValidCamelCaseInterfaceWITHUPPERCASE {}
+enum ValidCamelCaseEnumWITHUPPERCASE {}
+
+# Usage of numeric characters
+type ValidCamelCaseTypeWith1Number {}
+type ValidCamelCaseTypeWith12345Numbers {}
+type 5InvalidCamelCaseTypeStartingWithNumber {}
+type ValidCamelCaseTypeEndingWithNumber4 {}
+interface ValidCamelCaseInterfaceWith1Number {}
+interface ValidCamelCaseInterfaceWith12345Numbers {}
+interface 5InvalidCamelCaseInterfaceStartingWithNumber {}
+interface ValidCamelCaseInterfaceEndingWithNumber4 {}
+enum ValidCamelCaseEnumWith1Number {}
+enum ValidCamelCaseEnumWith12345Numbers {}
+enum 5InvalidCamelCaseEnumStartingWithNumber {}
+enum ValidCamelCaseEnumEndingWithNumber4 {}

@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -361,6 +361,30 @@
                 <element value="T_DOC_COMMENT_OPEN_TAG"/>
             </property>
         </properties>
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidArgumentName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidEnumValue">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidFieldName">
+        <!--
+         * Field name validation deactivated as per request
+         * https://github.com/magento/magento-coding-standard/pull/141#discussion_r323349939
+        -->
+        <severity>0</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidTopLevelFieldName">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.GraphQL.ValidTypeName">
         <severity>6</severity>
         <type>warning</type>
     </rule>

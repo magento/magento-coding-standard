@@ -1,0 +1,35 @@
+# Valid names
+query validCamelCaseQuery {}
+mutation validCamelCaseMutation {}
+
+# Incorrect use of camel cyse
+query InvalidCamelCaseQuery {}
+query invalid_Camel_Case_Query_With_Underscores {}
+mutation InvalidCamelCaseMutation {}
+mutation invalid_Camel_Case_Mutation_With_Underscores {}
+
+# All lower case
+query validlowercasequery {}
+mutation validlowercasemutation {}
+
+# All upper case
+query INVALIDUPPERCASEQUERY {}
+mutation INVALIDUPPERCASEMUTATION {}
+
+# Mix camel case with uppercase
+query validCamelCaseQueryWithUPPERCASE {}
+mutation validCamelCaseMutationWithUPPERCASE {}
+
+# Usage of numeric characters
+query validCamelCaseQueryWith1Number {}
+query validCamelCaseQueryWith12345Numbers {}
+query validCamelCaseQueryEndingWithNumber4 {}
+query 5invalidCamelCaseQueryStartingWithNumber {}
+mutation validCamelCaseMutationWith1Number {}
+mutation validCamelCaseMutationWith12345Numbers {}
+mutation validCamelCaseMutationEndingWithNumber4 {}
+mutation 5invalidCamelCaseMutationStartingWithNumber {}
+
+# Empty names (valid by definition of GraphQL)
+query {}
+mutation {}
