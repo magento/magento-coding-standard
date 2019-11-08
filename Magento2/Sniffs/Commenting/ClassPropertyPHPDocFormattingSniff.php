@@ -59,7 +59,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             || ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
                 && $tokens[$commentEnd]['code'] !== T_COMMENT)
         ) {
-            $phpcsFile->addWarning('Missing class property doc comment', $stackPtr, 'Missing');
+            $phpcsFile->addWarning('Missing PHP DocBlock for class property.', $stackPtr, 'Missing');
             return;
         }
         $commentStart = $tokens[$commentEnd]['comment_opener'];
@@ -67,7 +67,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             if ($tokens[$tag]['content'] === '@var') {
                 if ($foundVar !== null) {
-                    $error = 'Only one @var tag is allowed in a class property comment';
+                    $error = 'Only one @var tag is allowed for class property declaration.';
                     $phpcsFile->addWarning($error, $tag, 'DuplicateVar');
                 } else {
                     $foundVar = $tag;
@@ -76,14 +76,14 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         }
 
         if ($foundVar === null) {
-            $error = 'Missing @var tag in class property comment';
+            $error = 'Class properties must have type declaration using @var tag.';
             $phpcsFile->addWarning($error, $stackPtr, 'MissingVar');
             return;
         }
 
         $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $foundVar, $commentEnd);
         if ($string === false || $tokens[$string]['line'] !== $tokens[$foundVar]['line']) {
-            $error = 'Content missing for @var tag in class property comment';
+            $error = 'Content missing for @var tag in class property declaration.';
             $phpcsFile->addWarning($error, $foundVar, 'EmptyVar');
             return;
         }
@@ -91,7 +91,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         // Check if class has already have meaningful description
         $isShortDescription = $phpcsFile->findPrevious(T_DOC_COMMENT_STRING, $commentEnd, $foundVar, false);
         if ($this->PHPDocFormattingValidator->providesMeaning($isShortDescription, $commentStart, $tokens) !== true) {
-            $error = 'Variable member already have meaningful name';
+            $error = 'Short description duplicates class property name.';
             $phpcsFile->addWarning($error, $isShortDescription, 'AlreadyHaveMeaningFulNameVar');
             return;
         }
