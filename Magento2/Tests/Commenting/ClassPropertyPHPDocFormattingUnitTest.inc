@@ -63,6 +63,13 @@ class Bar {
      * Variable name
      */
     private $variableName;
+
+    /**
+     * Some more invalid description
+     *
+     * @var test
+     */
+    protected $test;
 }
 
 class correctlyFormattedClassMemberDocBlock
@@ -81,4 +88,15 @@ class correctlyFormattedClassMemberDocBlock
      * @var correctlyFormattedProtectedClassMember
      */
     protected $correctlyFormattedProtectedClassMember;
+
+    /**
+     * @var Array|\Foo_BAR
+     */
+    protected $array;
+
+    /**
+     * @var \FOO\BAR\TEST\Class\\FooBarInterface|
+     *      \FooObject_TEST_C
+     */
+    private $testObject;
 }
