@@ -7,6 +7,7 @@ namespace Magento2\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Detects static test namespace.
@@ -43,9 +44,27 @@ class ImportsFromTestNamespaceSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON, T_OPEN_USE_GROUP, T_CLOSE_TAG], ($stackPtr + 1));
+        $tokens = $phpcsFile->getTokens();
         $getTokenAsContent = $phpcsFile->getTokensAsString($stackPtr, ($next - $stackPtr));
         if (strpos($getTokenAsContent, $this->prohibitNamespace) !== false) {
             $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
+        }
+        if ($next !== false
+            && $tokens[$next]['code'] !== T_SEMICOLON
+            && $tokens[$next]['code'] !== T_CLOSE_TAG
+        ) {
+            $baseUse           = rtrim($phpcsFile->getTokensAsString($stackPtr, ($next - $stackPtr)));
+            $baseUse = str_replace('use \\', '', $baseUse);
+            $closingCurly = $phpcsFile->findNext(T_CLOSE_USE_GROUP, ($next + 1));
+            do {
+                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), $closingCurly, true);
+                $groupedAsContent = $baseUse. $tokens[$next]['content'];
+                $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $closingCurly);
+                if (strpos($groupedAsContent, $this->prohibitNamespace) !== false) {
+                    $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
+                    return;
+                }
+            } while ($next != false);
         }
     }
 }

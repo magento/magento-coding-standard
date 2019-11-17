@@ -25,6 +25,9 @@ class ImportsFromTestNamespaceUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [2 => 1];
+        return [
+            2 => 1,
+            5 => 1
+        ];
     }
 }
