@@ -113,7 +113,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^readlink$' => null,
         '^register_shutdown_function$' => null,
         '^register_tick_function$' => null,
-        '^rename$' => 'Magento\Framework\Filesystem\DriverInterface::raname()',
+        '^rename$' => 'Magento\Framework\Filesystem\DriverInterface::rename()',
         '^rmdir$' => 'Magento\Framework\Filesystem\DriverInterface::deleteDirectory()',
         '^scandir$' => null,
         '^session_.*$' => null,
