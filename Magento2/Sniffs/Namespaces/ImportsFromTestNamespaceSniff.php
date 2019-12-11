@@ -14,7 +14,6 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class ImportsFromTestNamespaceSniff implements Sniff
 {
-
     /**
      * @var string
      */
@@ -53,7 +52,7 @@ class ImportsFromTestNamespaceSniff implements Sniff
             && $tokens[$next]['code'] !== T_SEMICOLON
             && $tokens[$next]['code'] !== T_CLOSE_TAG
         ) {
-            $baseUse           = rtrim($phpcsFile->getTokensAsString($stackPtr, ($next - $stackPtr)));
+            $baseUse  = rtrim($phpcsFile->getTokensAsString($stackPtr, ($next - $stackPtr)));
             $baseUse = str_replace('use \\', '', $baseUse);
             $closingCurly = $phpcsFile->findNext(T_CLOSE_USE_GROUP, ($next + 1));
             do {
@@ -64,7 +63,7 @@ class ImportsFromTestNamespaceSniff implements Sniff
                     $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
                     return;
                 }
-            } while ($next != false);
+            } while ($next !== false);
         }
     }
 }
