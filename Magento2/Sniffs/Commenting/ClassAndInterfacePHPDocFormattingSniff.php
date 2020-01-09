@@ -24,7 +24,7 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
      * @var string[] List of tags that can not be used in comments
      */
     public $forbiddenTags = [
-		'@author',
+        '@author',
         '@category',
         '@package',
         '@subpackage'
