@@ -161,7 +161,7 @@ class XssTemplateSniff implements Sniff
     /**
      * Find unescaped statement by following rules:
      *
-     * See http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/templates/template-security.html
+     * See https://devdocs.magento.com/guides/v2.3/extension-dev-guide/xss-protection.html
      *
      * @param array $statement
      * @return void
