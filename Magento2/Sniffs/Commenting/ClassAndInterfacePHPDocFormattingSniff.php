@@ -65,7 +65,7 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
         if ($this->PHPDocFormattingValidator->providesMeaning($namePtr, $commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
                 sprintf(
-                    '%s description must contain meaningful information beyond what the class name provides or be removed.',
+                    '%s description must contain meaningful information beyond what its name provides or be removed.',
                     ucfirst($tokens[$stackPtr]['content'])
                 ),
                 $stackPtr,
