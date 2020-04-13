@@ -13,7 +13,7 @@
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag">
         <severity>10</severity>
         <type>error</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.DeprecatedFunctions">
         <severity>10</severity>
@@ -76,7 +76,7 @@
         <type>error</type>
     </rule>
     <rule ref="Magento2.Security.LanguageConstruct.DirectOutput">
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.Superglobal.SuperglobalUsageError">
         <severity>10</severity>
@@ -99,7 +99,7 @@
     <rule ref="PSR2.Files.ClosingTag">
         <severity>10</severity>
         <type>error</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.PHP.Eval">
         <severity>10</severity>
@@ -122,7 +122,7 @@
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.XssTemplate">
-        <include-pattern>*.phtml</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>9</severity>
         <type>warning</type>
     </rule>
@@ -207,7 +207,7 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Templates.ThisInTemplate">
-        <include-pattern>*.phtml</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -302,7 +302,7 @@
     <rule ref="Squiz.Operators.IncrementDecrementUsage">
         <severity>7</severity>
         <type>warning</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.Operators.ValidLogicalOperators">
         <severity>7</severity>
@@ -404,7 +404,7 @@
     <rule ref="PEAR.ControlStructures.ControlSignature">
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="PSR1.Files.SideEffects">
         <severity>6</severity>
@@ -483,7 +483,7 @@
         </properties>
     </rule>
     <rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration">
         <severity>6</severity>
@@ -533,7 +533,7 @@
     <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing">
         <severity>6</severity>
