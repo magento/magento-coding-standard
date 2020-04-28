@@ -129,11 +129,7 @@ class PHPDocFormattingValidator
 
         $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
         if ($seePtr === -1) {
-            if ($seeTagRequired) {
-                return false;
-            } else {
-                return true;
-            }
+            return !$seeTagRequired;
         }
         if ($tokens[$seePtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
             return false;
