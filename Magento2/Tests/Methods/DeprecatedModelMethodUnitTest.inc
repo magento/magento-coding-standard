@@ -1,4 +1,7 @@
 <?php
-$model->getResource()->save();
-$model->getResource()->load();
-$model->getResource()->delete();
+
+$model->getResource()->save($model);
+
+$model->getResource()->load($model, $id);
+
+$model->getResource()->delete($model);

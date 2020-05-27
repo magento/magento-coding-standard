@@ -23,9 +23,9 @@ class DeprecatedModelMethodUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            2 => 1,
             3 => 1,
-            4 => 1
+            5 => 1,
+            7 => 1,
         ];
     }
 }

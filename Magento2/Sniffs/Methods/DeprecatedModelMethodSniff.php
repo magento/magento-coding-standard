@@ -14,6 +14,8 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class DeprecatedModelMethodSniff implements Sniff
 {
+    const RESOURCE_METHOD = "getResource";
+
     /**
      * String representation of warning.
      *
@@ -48,8 +50,7 @@ class DeprecatedModelMethodSniff implements Sniff
     public function register()
     {
         return [
-            T_OBJECT_OPERATOR,
-            T_DOUBLE_COLON
+            T_OBJECT_OPERATOR
         ];
     }
     /**
@@ -58,21 +59,22 @@ class DeprecatedModelMethodSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $methodPosition = $phpcsFile->findNext(T_STRING, $stackPtr + 1);
-
-        if ($methodPosition !== false &&
-            in_array($tokens[$methodPosition]['content'], $this->methods)
-        ) {
-            $resourcePosition = $phpcsFile->findPrevious([T_STRING, T_VARIABLE], $stackPtr - 1);
-            if ($resourcePosition !== false) {
-                $methodName = $tokens[$resourcePosition]['content'];
-                if ($methodName === "getResource") {
-                    $phpcsFile->addWarning(
-                        sprintf($this->warningMessage, $tokens[$methodPosition]['content']),
-                        $stackPtr,
-                        $this->warningCode
-                    );
-                }
+        $endOfStatement = $phpcsFile->findEndOfStatement($stackPtr);
+        $resourcePosition = $phpcsFile->findNext(
+            T_STRING,
+            $stackPtr + 1,
+            $endOfStatement,
+            false,
+            self::RESOURCE_METHOD
+        );
+        if ($resourcePosition !== false) {
+            $methodPosition = $phpcsFile->findNext([T_STRING, T_VARIABLE], $resourcePosition + 1, $endOfStatement);
+            if ($methodPosition !== false && in_array($tokens[$methodPosition]['content'], $this->methods)) {
+                $phpcsFile->addWarning(
+                    sprintf($this->warningMessage, $tokens[$methodPosition]['content']),
+                    $stackPtr,
+                    $this->warningCode
+                );
             }
         }
     }
