@@ -20,7 +20,7 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
     public $forbiddenFunctions = [
         'assert' => null,
         'create_function' => null,
-        'exec' => null,
+        'exec' => '\Magento\Framework\Shell::execute',
         'md5' => 'improved hash functions (SHA-256, SHA-512 etc.)',
         'passthru' => null,
         'pcntl_exec' => null,
