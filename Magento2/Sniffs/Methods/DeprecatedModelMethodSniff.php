@@ -7,7 +7,6 @@ namespace Magento2\Sniffs\Methods;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Detects possible use of deprecated model methods.
@@ -21,8 +20,7 @@ class DeprecatedModelMethodSniff implements Sniff
      *
      * @var string
      */
-    protected $warningMessage = "Possible use of the deprecated model method 'getResource()'" .
-    " to '%s' the data detected.";
+    protected $warningMessage = "The use of the deprecated method 'getResource()' to '%s' the data detected.";
 
     /**
      * Warning violation code.
@@ -69,7 +67,7 @@ class DeprecatedModelMethodSniff implements Sniff
         );
         if ($resourcePosition !== false) {
             $methodPosition = $phpcsFile->findNext([T_STRING, T_VARIABLE], $resourcePosition + 1, $endOfStatement);
-            if ($methodPosition !== false && in_array($tokens[$methodPosition]['content'], $this->methods)) {
+            if ($methodPosition !== false && in_array($tokens[$methodPosition]['content'], $this->methods, true)) {
                 $phpcsFile->addWarning(
                     sprintf($this->warningMessage, $tokens[$methodPosition]['content']),
                     $stackPtr,
