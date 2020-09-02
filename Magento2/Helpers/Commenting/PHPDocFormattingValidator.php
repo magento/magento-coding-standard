@@ -122,19 +122,15 @@ class PHPDocFormattingValidator
             return true;
         }
 
+        $seeTagRequired = false;
         if ($tokens[$deprecatedPtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
-            return false;
+            $seeTagRequired = true;
         }
-
         $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
         if ($seePtr === -1) {
-            return true;
+            return !$seeTagRequired;
         }
-        if ($tokens[$seePtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
-            return false;
-        }
-
-        return true;
+        return $tokens[$seePtr + 2]['code'] === T_DOC_COMMENT_STRING;
     }
 
     /**
