@@ -2,7 +2,7 @@
 
 ## Reason
 
-[getimagesize()](https://www.php.net/manual/en/function.getimagesize.php) function works only with local and supported streams. 
+[getimagesize](https://www.php.net/manual/en/function.getimagesize.php) function works only with local and supported streams. 
 With introduction of more advanced storages, like AWS S3 or Azure Blob Storage this function will cause issues where file is not accessible.
 
 ## How to fix
