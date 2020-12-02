@@ -39,6 +39,12 @@ class Profiler
     const COMPUTER = 'Deep Thought';
 
     /**
+     * @deprecated
+     * @see \ComputationalMatrix\Mars
+     */
+    const KEYBOARD = 'Ergonomic';
+
+    /**
      * @see
      */
     const SOMETHING = 'else';

@@ -15,12 +15,11 @@ Typical example when `array_merge` is being used in the loop:
 
 In order to reduce execution time `array_merge` can be called only once:
 ``` php
-    $options = [[]];
+    $options = [];
     foreach ($configurationSources as $source) {
         // code here
         $options[] = $source->getOptions();
     }
 
-    // PHP 5.6+
-    $options = array_merge(...$options);
+    $options = array_merge([], ...$options);
 ```
