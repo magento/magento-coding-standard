@@ -228,5 +228,6 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^intval$' => '(int) construction',
         '^strval$' => '(string) construction',
         '^htmlspecialchars$' => '\Magento\Framework\Escaper->escapeHtml',
+        '^getimagesize$' => 'getimagesizefromstring',
     ];
 }
