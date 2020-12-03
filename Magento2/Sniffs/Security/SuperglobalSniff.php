@@ -42,7 +42,7 @@ class SuperglobalSniff implements Sniff
     protected $errorCode = 'SuperglobalUsageError';
 
     /**
-     * @inheritdoc
+     * @var array
      */
     protected $superGlobalErrors = [
         '$GLOBALS',
@@ -55,7 +55,7 @@ class SuperglobalSniff implements Sniff
     ];
 
     /**
-     * @inheritdoc
+     * @var array
      */
     protected $superGlobalWarning = [
         '$_COOKIE', //sometimes need to get list of all cookies array and there are no methods to do that in M2
