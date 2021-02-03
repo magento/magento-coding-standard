@@ -249,8 +249,10 @@ class XssTemplateSniff implements Sniff
         $posOfLastInlineThen = $this->findLastInScope(T_INLINE_THEN, $start, $end);
         if ($posOfLastInlineThen !== false) {
             $posOfInlineElse = $this->file->findNext(T_INLINE_ELSE, $posOfLastInlineThen, $end);
-            $this->addStatement($posOfLastInlineThen + 1, $posOfInlineElse);
-            $this->addStatement($posOfInlineElse + 1, $end);
+            if ($posOfInlineElse !== false) {
+                $this->addStatement($posOfLastInlineThen + 1, $posOfInlineElse);
+                $this->addStatement($posOfInlineElse + 1, $end);
+            }
             $parsed = true;
         } else {
             do {
