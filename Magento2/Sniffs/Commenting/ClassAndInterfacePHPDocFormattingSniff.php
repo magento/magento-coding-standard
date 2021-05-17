@@ -137,7 +137,8 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
                     $startPtr = $i;
                     while (!$startFound) {
                         $startPtr--;
-                        if ($tokens[$startPtr]['code'] === T_DOC_COMMENT_WHITESPACE && $tokens[$startPtr]['content'] === "\n") {
+                        $token = $tokens[$startPtr];
+                        if ($token['code'] === T_DOC_COMMENT_WHITESPACE && $token['content'] === "\n") {
                             $startFound = true;
                         }
                     }
@@ -145,7 +146,8 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
                     $endPtr = $i;
                     while (!$endFound) {
                         $endPtr++;
-                        if ($tokens[$endPtr]['code'] === T_DOC_COMMENT_WHITESPACE && $tokens[$endPtr]['content'] === "\n") {
+                        $token = $tokens[$startPtr];
+                        if ($token['code'] === T_DOC_COMMENT_WHITESPACE && $token['content'] === "\n") {
                             $endFound = true;
                             $endPtr--;
                         }
