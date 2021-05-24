@@ -77,7 +77,7 @@ class MageEntitySniff implements Sniff
                 return;
             }
             $entityName = $tokens[$stackPtr]['content'];
-            $error = [$entityName . $tokens[$oldPosition]['content']];
+            $error = $entityName . $tokens[$oldPosition]['content'];
         } else {
             $oldPosition = $stackPtr;
             $stackPtr = $phpcsFile->findNext(T_STRING, $oldPosition + 1, null, false, null, true);
@@ -85,14 +85,14 @@ class MageEntitySniff implements Sniff
                 return;
             }
             $entityName = $tokens[$stackPtr]['content'];
-            $error = [$tokens[$oldPosition]['content'] . ' ' . $entityName];
+            $error = $tokens[$oldPosition]['content'] . ' ' . $entityName;
         }
         if ($entityName === $this->legacyEntity || $this->isPrefixLegacy($entityName)) {
             $phpcsFile->addError(
                 $this->errorMessage,
                 $stackPtr,
                 $this->errorCode,
-                $error
+                [$error]
             );
         }
     }
