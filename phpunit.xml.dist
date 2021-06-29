@@ -8,4 +8,5 @@
     <php>
         <env name="PHPCS_IGNORE_TESTS" value="Generic,MySource,PEAR,PSR1,PSR2,Squiz,Zend"/>
     </php>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
 </phpunit>
