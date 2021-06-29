@@ -33,5 +33,19 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'srand' => null,
         'mt_srand' => null,
         'mt_rand' => 'random_int',
+        // Custom Rules - MTS-2096
+        'eval' => null,
+        'preg_replace' => null,
+        'preg_replace_callback' => null,
+        'preg_replace_callback_array' => null,
+        'include' => null,
+        'include_once' => null,
+        'require' => null,
+        'require_once' => null,
+        'proc_nice' => null,
+        'proc_open' => null,
+        'proc_close' => null,
+        'proc_terminate' => null,
+        'proc_get_status' => null,
     ];
 }
