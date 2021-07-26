@@ -1,0 +1,31 @@
+type FooType {
+    # Valid snake case field names
+    valid_snake_case_field: String
+    validlowercasefield: String
+    valid_snake_case_field_ending_with_number_5: String
+    valid_snake_case_field_with_ending_numbers_12345: String
+    valid_snake_case_field_5_with_number5_inline: String
+
+    # Incorrect use of snake case
+    INVALIDUPPERCASEFIELD: String
+    INVALID_SCREAMING_SNAKE_CASE_FIELD: String
+    Invalid_Upper_Snake_Case_Field: String
+    invalid_mixed_case_FIELD: String
+    InvalidCameCaseFieldName: String
+}
+
+interface FooInterface {
+    # Valid snake case field names
+    valid_snake_case_field: String
+    validlowercasefield: String
+    valid_snake_case_field_ending_with_number_5: String
+    valid_snake_case_field_with_ending_numbers_12345: String
+    valid_snake_case_field_5_with_number5_inline: String
+
+    # Incorrect use of snake case
+    INVALIDUPPERCASEFIELD: String
+    INVALID_SCREAMING_SNAKE_CASE_FIELD: String
+    Invalid_Upper_Snake_Case_Field: String
+    invalid_mixed_case_FIELD: String
+    InvalidCameCaseFieldName: String
+}

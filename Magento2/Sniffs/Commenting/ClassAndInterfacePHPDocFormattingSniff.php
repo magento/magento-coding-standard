@@ -6,6 +6,7 @@
  */
 namespace Magento2\Sniffs\Commenting;
 
+use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -64,11 +65,21 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
         if ($this->PHPDocFormattingValidator->providesMeaning($namePtr, $commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
                 sprintf(
-                    '%s description should contain additional information beyond the name already supplies.',
+                    '%s description must contain meaningful information beyond what its name provides or be removed.',
                     ucfirst($tokens[$stackPtr]['content'])
                 ),
                 $stackPtr,
                 'InvalidDescription'
+            );
+        }
+
+        if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
+            $phpcsFile->addWarning(
+                'Motivation behind the added @deprecated tag MUST be explained. '
+                    . '@see tag MUST be used with reference to new implementation when code is deprecated '
+                    . 'and there is a new alternative.',
+                $stackPtr,
+                'InvalidDeprecatedTagUsage'
             );
         }
 

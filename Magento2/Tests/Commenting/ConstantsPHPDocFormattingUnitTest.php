@@ -27,10 +27,16 @@ class ConstantsPHPDocFormattingUnitTest extends AbstractSniffUnitTest
         }
 
         return [
-            5 => 1,
-            8 => 1,
-            15 => 1,
-            20 => 1
+            6 => 1,
+            9 => 1,
+            14 => 1,
+            20 => 1,
+            26 => 1,
+            33 => 1,
+            38 => 1,
+            43 => 1,
+            49 => 1,
+            55 => 1
         ];
     }
 }

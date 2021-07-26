@@ -5,7 +5,11 @@ php:
   - 7.1
   - 7.2
   - 7.3
-install: composer install --no-interaction --prefer-source
+  - 7.4
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+install: composer install --no-interaction --prefer-dist
 script:
   - vendor/bin/phpunit
   - vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php

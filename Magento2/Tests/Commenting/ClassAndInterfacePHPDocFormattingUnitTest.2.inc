@@ -59,6 +59,7 @@ interface EmptyHandler
  *
  * @api is ok here
  * @deprecated can be used in this context
+ * @see is ok here
  * @author is actually ok
  * @category is irrelevant
  * @package is not ment to be used
@@ -89,5 +90,66 @@ interface AsyncApiHandler
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class GroupRepositoryHandler
-{}
+interface GroupRepositoryHandler
+{
+
+}
+
+/**
+ * @deprecated
+ */
+interface DeprecatedHandler
+{
+
+}
+
+/**
+ * @deprecated Should not be used
+ */
+interface AncientHandler
+{
+
+}
+
+/**
+ * @deprecated
+ * @see
+ */
+interface AgedHandler
+{
+
+}
+
+/**
+ * @deprecated Should not be used
+ * @see
+ */
+interface ArhaicHandler
+{
+
+}
+
+/**
+ * @deprecated Should not be used
+ * @see Magento\Framework\NewHandler
+ */
+interface OldHandler
+{
+
+}
+
+/**
+ * @see Magento\Framework\NewHandler
+ */
+interface SomethingHandler
+{
+
+}
+
+/**
+ * @see
+ */
+interface DoNotCareHandler
+{
+
+}
