@@ -10,11 +10,25 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.2', '7.3', '7.4']
-    name: Tests with PHP ${{ matrix.php-versions }}
+        php-version:
+          - "7.2"
+          - "7.3"
+          - "7.4"
+        dependencies:
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
+        include:
+          - php-version: "8.0"
+            dependencies: "highest"
+            composer-options: "--ignore-platform-reqs"
+            experimental: true
+    name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:
     - uses: actions/checkout@v2
@@ -22,24 +36,18 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-versions }}
+        php-version: ${{ matrix.php-version }}
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Validate composer
       run: composer validate
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
+    - name: Composer install
+      uses: "ramsey/composer-install@v1"
       with:
-        path: vendor
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-interaction
+        dependency-versions: "${{ matrix.dependencies }}"
+        composer-options: "${{ matrix.composer-options }}"
 
     - name: Run unit tests suite
       run: vendor/bin/phpunit
