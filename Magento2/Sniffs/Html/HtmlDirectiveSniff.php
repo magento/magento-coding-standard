@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Magento\Sniffs\Html;
+namespace Magento2\Sniffs\Html;
 
 use Magento\Framework\Filter\Template;
 use PHP_CodeSniffer\Sniffs\Sniff;

@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magento\Sniffs\Annotation;
+namespace Magento2\Sniffs\Annotation;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
