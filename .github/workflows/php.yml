@@ -10,7 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +26,6 @@ jobs:
           - php-version: "8.0"
             dependencies: "highest"
             composer-options: "--ignore-platform-reqs"
-            experimental: true
     name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:
