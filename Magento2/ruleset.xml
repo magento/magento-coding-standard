@@ -580,4 +580,9 @@
         <severity>5</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Annotation">
+        <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*Test.php</exclude-pattern>
+    </rule>
 </ruleset>
