@@ -128,8 +128,7 @@ class ValidArgumentNameSniff extends AbstractGraphQLSniff
     }
 
     /**
-     * Seeks the next available {@link T_OPEN_PARENTHESIS} token that comes directly after <var>$stackPointer</var>.
-     * token.
+     * Seeks the next available {@link T_OPEN_PARENTHESIS} token that comes directly after <var>$stackPointer</var> token.
      *
      * @param int $stackPointer
      * @param array $tokens
