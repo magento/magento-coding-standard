@@ -589,4 +589,8 @@
     </rule>
     <rule ref="Magento2.Less">
     </rule>
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.CSS.NamedColours"/>
 </ruleset>
