@@ -68,7 +68,10 @@ class ValidEnumValueSniff extends AbstractGraphQLSniff
     }
 
     /**
-     * Seeks the next available token of type {@link T_CLOSE_CURLY_BRACKET} in <var>$tokens</var> and returns its pointer.
+     * Find the closing curly bracket pointer
+     *
+     * Seeks the next available token of type {@link T_CLOSE_CURLY_BRACKET}
+     * in <var>$tokens</var> and returns its pointer.
      *
      * @param int $startPointer
      * @param array $tokens
@@ -80,7 +83,10 @@ class ValidEnumValueSniff extends AbstractGraphQLSniff
     }
 
     /**
-     * Seeks the next available token of type {@link T_OPEN_CURLY_BRACKET} in <var>$tokens</var> and returns its pointer.
+     * Find the opening curly bracket pointer
+     *
+     * Seeks the next available token of type {@link T_OPEN_CURLY_BRACKET}
+     * in <var>$tokens</var> and returns its pointer.
      *
      * @param int $startPointer
      * @param array $tokens
