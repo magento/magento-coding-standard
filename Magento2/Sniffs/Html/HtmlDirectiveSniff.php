@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Magento2\Sniffs\Html;
 
-use Magento\Framework\Filter\Template;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -17,6 +16,11 @@ use PHP_CodeSniffer\Files\File;
  */
 class HtmlDirectiveSniff implements Sniff
 {
+    const CONSTRUCTION_DEPEND_PATTERN = '/{{depend\s*(.*?)}}(.*?){{\\/depend\s*}}/si';
+    const CONSTRUCTION_IF_PATTERN = '/{{if\s*(.*?)}}(.*?)({{else}}(.*?))?{{\\/if\s*}}/si';
+    const LOOP_PATTERN = '/{{for(?P<loopItem>.*? )(in)(?P<loopData>.*?)}}(?P<loopBody>.*?){{\/for}}/si';
+    const CONSTRUCTION_PATTERN = '/{{([a-z]{0,10})(.*?)}}(?:(.*?)(?:{{\/(?:\\1)}}))?/si';
+    
     /**
      * @var array
      */
@@ -73,7 +77,7 @@ class HtmlDirectiveSniff implements Sniff
      */
     private function processIfDirectives(string $html, File $phpcsFile): string
     {
-        if (preg_match_all(Template::CONSTRUCTION_IF_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
+        if (preg_match_all(self::CONSTRUCTION_IF_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
             foreach ($constructions as $construction) {
                 // validate {{if <var>}}
                 $this->validateVariableUsage($phpcsFile, $construction[1]);
@@ -93,7 +97,7 @@ class HtmlDirectiveSniff implements Sniff
      */
     private function processDependDirectives(string $html, File $phpcsFile): string
     {
-        if (preg_match_all(Template::CONSTRUCTION_DEPEND_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
+        if (preg_match_all(self::CONSTRUCTION_DEPEND_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
             foreach ($constructions as $construction) {
                 // validate {{depend <var>}}
                 $this->validateVariableUsage($phpcsFile, $construction[1]);
@@ -113,7 +117,7 @@ class HtmlDirectiveSniff implements Sniff
      */
     private function processForDirectives(string $html, File $phpcsFile): string
     {
-        if (preg_match_all(Template::LOOP_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
+        if (preg_match_all(self::LOOP_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
             foreach ($constructions as $construction) {
                 // validate {{for in <var>}}
                 $this->validateVariableUsage($phpcsFile, $construction['loopData']);
@@ -133,7 +137,7 @@ class HtmlDirectiveSniff implements Sniff
      */
     private function processVarDirectivesAndParams(string $html, File $phpcsFile): string
     {
-        if (preg_match_all(Template::CONSTRUCTION_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
+        if (preg_match_all(self::CONSTRUCTION_PATTERN, $html, $constructions, PREG_SET_ORDER)) {
             foreach ($constructions as $construction) {
                 if (empty($construction[2])) {
                     continue;
