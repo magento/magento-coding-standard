@@ -105,6 +105,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Legacy.AbstractBlock">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
