@@ -10,8 +10,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class AbstractBlockSniff implements Sniff
 {
-    const CHILD_HTML_METHOD = 'getChildHtml';
-    const CHILD_CHILD_HTML_METHOD = 'getChildChildHtml';
+    private const CHILD_HTML_METHOD = 'getChildHtml';
+    private const CHILD_CHILD_HTML_METHOD = 'getChildChildHtml';
 
     /**
      * Warning violation code.
@@ -38,18 +38,13 @@ class AbstractBlockSniff implements Sniff
         if (!isset($phpcsFile->getTokens()[$stackPtr + 1]['content'])) {
             return;
         }
+
         $content = $phpcsFile->getTokens()[$stackPtr + 1]['content'];
-        $isTheNextMethodGetChildSomething = in_array(
-            $content,
-            [
-                self::CHILD_HTML_METHOD,
-                self::CHILD_CHILD_HTML_METHOD
-            ]
-        );
-        if (!$isTheNextMethodGetChildSomething) {
+
+        if (!$this->isApplicable($content)) {
             return;
         }
-
+        
         $paramsCount = $this->getParametersCount($phpcsFile, $stackPtr + 1);
         if ($content === self::CHILD_HTML_METHOD && $paramsCount >= 3) {
             $phpcsFile->addError(
@@ -65,6 +60,17 @@ class AbstractBlockSniff implements Sniff
                 $this->errorCode
             );
         }
+    }
+
+    /**
+     * Return if it is applicable to do the check
+     *
+     * @param String $content
+     * @return bool
+     */
+    private function isApplicable(String $content): bool
+    {
+        return in_array($content, [self::CHILD_HTML_METHOD, self::CHILD_CHILD_HTML_METHOD]);
     }
 
     /**
