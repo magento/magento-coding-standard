@@ -16,7 +16,7 @@ class AbstractBlockSniff implements Sniff
     private const CHILD_CHILD_HTML_METHOD = 'getChildChildHtml';
 
     /**
-     * Warning violation code.
+     * Error violation code.
      *
      * @var string
      */
