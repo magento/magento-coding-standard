@@ -1,9 +1,10 @@
 <?php
-declare( strict_types = 1 );
 /**
  * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+declare(strict_types = 1);
+
 namespace Magento2\Sniffs\Legacy;
 
 use PHP_CodeSniffer\Files\File;
@@ -66,10 +67,10 @@ class AbstractBlockSniff implements Sniff
     /**
      * Return if it is applicable to do the check
      *
-     * @param String $content
+     * @param string $content
      * @return bool
      */
-    private function isApplicable(String $content): bool
+    private function isApplicable(string $content): bool
     {
         return in_array($content, [self::CHILD_HTML_METHOD, self::CHILD_CHILD_HTML_METHOD]);
     }
