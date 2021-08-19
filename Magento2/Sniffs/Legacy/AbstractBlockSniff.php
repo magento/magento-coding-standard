@@ -68,6 +68,8 @@ class AbstractBlockSniff implements Sniff
     }
 
     /**
+     * Get the quantity of parameters on a method
+     *
      * @param File $phpcsFile
      * @param int $methodHtmlPosition
      * @return int
@@ -76,11 +78,11 @@ class AbstractBlockSniff implements Sniff
     {
         $closePosition = $phpcsFile->getTokens()[$methodHtmlPosition +1]['parenthesis_closer'];
         $getTokenAsContent = $phpcsFile->getTokensAsString(
-            $methodHtmlPosition + 2, 
+            $methodHtmlPosition + 2,
             ($closePosition - $methodHtmlPosition) - 2
         );
         if ($getTokenAsContent) {
-            $parameters = explode(',' , $getTokenAsContent);
+            $parameters = explode(',', $getTokenAsContent);
             return count($parameters);
         }
         return 0;
