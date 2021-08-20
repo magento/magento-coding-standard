@@ -14,18 +14,14 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "7.2"
           - "7.3"
           - "7.4"
+          - "8.0"
         dependencies:
           - "lowest"
           - "highest"
         experimental:
           - false
-        include:
-          - php-version: "8.0"
-            dependencies: "highest"
-            composer-options: "--ignore-platform-reqs"
     name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:

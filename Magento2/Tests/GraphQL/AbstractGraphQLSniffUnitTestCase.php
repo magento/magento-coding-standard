@@ -16,7 +16,7 @@ abstract class AbstractGraphQLSniffUnitTestCase extends AbstractSniffUnitTest
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         //let parent do its job
         parent::setUp();
