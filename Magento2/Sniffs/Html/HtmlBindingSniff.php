@@ -83,7 +83,7 @@ class HtmlBindingSniff implements Sniff
                     . ' - "' . $htmlBinding . '" doesn\'t,' . PHP_EOL
                     . 'consider using text binding if the value is supposed to be text',
                     null,
-                    'UIComponentTemplate.KnockoutBinding.HtmlSuffix'
+                    'KnockoutBindingHtmlSuffix'
                 );
             }
         }
