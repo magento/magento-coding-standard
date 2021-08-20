@@ -47,4 +47,4 @@ jobs:
       run: vendor/bin/phpunit
 
     - name: Run code style suite
-      run: vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php
+      run: vendor/bin/phpcs --standard=Magento2 Magento2/Helpers/ Magento2/Sniffs

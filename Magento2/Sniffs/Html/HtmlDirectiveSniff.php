@@ -20,7 +20,7 @@ class HtmlDirectiveSniff implements Sniff
     const CONSTRUCTION_IF_PATTERN = '/{{if\s*(.*?)}}(.*?)({{else}}(.*?))?{{\\/if\s*}}/si';
     const LOOP_PATTERN = '/{{for(?P<loopItem>.*? )(in)(?P<loopData>.*?)}}(?P<loopBody>.*?){{\/for}}/si';
     const CONSTRUCTION_PATTERN = '/{{([a-z]{0,10})(.*?)}}(?:(.*?)(?:{{\/(?:\\1)}}))?/si';
-    
+
     /**
      * @var array
      */
@@ -162,7 +162,7 @@ class HtmlDirectiveSniff implements Sniff
      */
     private function validateDirectiveBody(File $phpcsFile, string $body): void
     {
-        $parameterTokenizer = new Template\Tokenizer\Parameter();
+        $parameterTokenizer = new \Magento2\Helpers\Tokenizer\Parameter();
         $parameterTokenizer->setString($body);
         $params = $parameterTokenizer->tokenize();
 
@@ -185,7 +185,7 @@ class HtmlDirectiveSniff implements Sniff
         if (strpos($body, '|') !== false) {
             $this->unfilteredVariables[] = 'var ' . trim(explode('|', $body, 2)[0]);
         }
-        $variableTokenizer = new Template\Tokenizer\Variable();
+        $variableTokenizer = new \Magento2\Helpers\Tokenizer\Variable();
         $variableTokenizer->setString($body);
         $stack = $variableTokenizer->tokenize();
 
