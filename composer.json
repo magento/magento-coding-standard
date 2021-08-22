@@ -6,14 +6,14 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "6",
+    "version": "7",
     "require": {
-        "php": ">=5.6.0",
-        "squizlabs/php_codesniffer": "^3.5",
-        "webonyx/graphql-php": ">=0.12.6 <1.0"
+        "php": ">=7.3",
+        "squizlabs/php_codesniffer": "^3.6",
+        "webonyx/graphql-php": "^14.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+        "phpunit/phpunit": "^9.5.8"
     },
     "autoload": {
         "classmap": [
@@ -21,7 +21,10 @@
         ],
         "psr-4": {
             "Magento2\\": "Magento2/"
-        }
+        },
+        "files": [
+            "PHP_CodeSniffer/Tests/Standards/AbstractSniffUnitTest.php"
+        ]
     },
     "scripts": {
         "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..",

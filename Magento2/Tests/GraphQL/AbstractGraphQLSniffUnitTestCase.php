@@ -13,7 +13,10 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  */
 abstract class AbstractGraphQLSniffUnitTestCase extends AbstractSniffUnitTest
 {
-    protected function setUp()
+    /**
+     * @inheritDoc
+     */
+    protected function setUp(): void
     {
         //let parent do its job
         parent::setUp();

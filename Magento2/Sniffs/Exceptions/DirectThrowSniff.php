@@ -49,7 +49,7 @@ class DirectThrowSniff implements Sniff
                 $this->warningMessage,
                 $stackPtr,
                 $this->warningCode,
-                $posOfException
+                [$posOfException]
             );
         }
     }

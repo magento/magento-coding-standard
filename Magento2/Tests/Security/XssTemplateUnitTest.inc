@@ -57,3 +57,6 @@ echo $var;
 <?php echo $block->escapeCss($css); ?>
 <?php echo $block->getJsLayout($jsLayout); ?>
 <?= /* @noEscape */ json_encode($config) ?>
+
+<!-- intentional parse error -->
+<?= $block->escapeUrl($block->getUrl('no-route')) <?= $block->getBaseUrl() ?>
