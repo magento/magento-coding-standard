@@ -46,9 +46,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     }
 
     /**
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     * @return int|void
+     * @inheritDoc
      */
     public function processMemberVar(File $phpcsFile, $stackPtr)
     {
@@ -143,9 +141,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     }
 
     /**
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     * @return int|void
+     * @inheritDoc
      * phpcs:disable Magento2.CodeAnalysis.EmptyBlock
      */
     protected function processVariable(File $phpcsFile, $stackPtr)
@@ -153,9 +149,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     }
 
     /**
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     * @return int|void
+     * @inheritDoc
      * phpcs:disable Magento2.CodeAnalysis.EmptyBlock
      */
     protected function processVariableInString(File $phpcsFile, $stackPtr)
