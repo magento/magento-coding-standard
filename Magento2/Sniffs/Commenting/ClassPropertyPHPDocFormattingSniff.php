@@ -89,11 +89,24 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         }
 
         // Check if class has already have meaningful description after @var tag
-        $isShortDescriptionAfterVar = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $foundVar + 4, $commentEnd, false,
+        $isShortDescriptionAfterVar = $phpcsFile->findNext(
+            T_DOC_COMMENT_STRING,
+            $foundVar + 4,
+            $commentEnd,
+            false,
             null,
-            false);
-        if ($this->PHPDocFormattingValidator->providesMeaning($isShortDescriptionAfterVar, $commentStart, $tokens) !== true) {
-            preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i', $tokens[($foundVar + 2)]['content'], $varParts);
+            false
+        );
+        if ($this->PHPDocFormattingValidator->providesMeaning(
+            $isShortDescriptionAfterVar,
+            $commentStart,
+            $tokens
+        ) !== true) {
+            preg_match(
+                '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
+                $tokens[($foundVar + 2)]['content'],
+                $varParts
+            );
             if ($varParts[1]) {
                 return;
             }
@@ -102,11 +115,24 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             return;
         }
         // Check if class has already have meaningful description before @var tag
-        $isShortDescriptionPreviousVar = $phpcsFile->findPrevious(T_DOC_COMMENT_STRING, $foundVar, $commentStart, false,
+        $isShortDescriptionPreviousVar = $phpcsFile->findPrevious(
+            T_DOC_COMMENT_STRING,
+            $foundVar,
+            $commentStart,
+            false,
             null,
-            false);
-        if ($this->PHPDocFormattingValidator->providesMeaning($isShortDescriptionPreviousVar, $commentStart, $tokens) !== true) {
-            preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i', $tokens[($foundVar + 2)]['content'], $varParts);
+            false
+        );
+        if ($this->PHPDocFormattingValidator->providesMeaning(
+            $isShortDescriptionPreviousVar,
+            $commentStart,
+            $tokens
+        ) !== true) {
+            preg_match(
+                '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
+                $tokens[($foundVar + 2)]['content'],
+                $varParts
+            );
             if ($varParts[1]) {
                 return;
             }

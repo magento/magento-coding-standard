@@ -50,8 +50,6 @@ class XssTemplateSniff implements Sniff
     ];
 
     /**
-     * Allowed method name - {suffix}Html{postfix}()
-     *
      * @var string
      */
     protected $methodNameContains = 'html';

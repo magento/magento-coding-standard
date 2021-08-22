@@ -40,8 +40,6 @@ class DeprecatedModelMethodSniff implements Sniff
         'delete'
     ];
 
-    protected $severity = 0;
-
     /**
      * @inheritdoc
      */
