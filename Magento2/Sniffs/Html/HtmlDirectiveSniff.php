@@ -200,7 +200,7 @@ class HtmlDirectiveSniff implements Sniff
                     'Template directives may not invoke methods. Only scalar array access is allowed.' . PHP_EOL
                     . 'Found "' . trim($body) . '"',
                     null,
-                    'HtmlTemplates.DirectiveUsage.ProhibitedMethodCall'
+                    'HtmlTemplatesProhibitedMethodCall'
                 );
             }
         }
@@ -224,7 +224,7 @@ class HtmlDirectiveSniff implements Sniff
                 $phpcsFile->addError(
                     'Template @vars comment block contains invalid JSON.',
                     null,
-                    'HtmlTemplates.DirectiveUsage.InvalidVarsJSON'
+                    'HtmlTemplatesInvalidVarsJSON'
                 );
                 return;
             }
@@ -235,7 +235,7 @@ class HtmlDirectiveSniff implements Sniff
                         'Template @vars comment block contains invalid label.' . PHP_EOL
                         . 'Label for variable "' . $var . '" is empty.',
                         null,
-                        'HtmlTemplates.DirectiveUsage.InvalidVariableLabel'
+                        'HtmlTemplatesInvalidVariableLabel'
                     );
                 }
             }
@@ -254,7 +254,7 @@ class HtmlDirectiveSniff implements Sniff
                 'Template @vars comment block is missing a variable used in the template.' . PHP_EOL
                  . 'Missing variable: ' . $undefinedVariable,
                 null,
-                'HtmlTemplates.DirectiveUsage.UndefinedVariable'
+                'HtmlTemplatesUndefinedVariable'
             );
         }
     }
