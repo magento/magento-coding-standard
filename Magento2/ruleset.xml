@@ -223,6 +223,13 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Legacy.ModuleXML">
+        <exclude-pattern>*\.php$</exclude-pattern>
+        <include-pattern>module.xml</include-pattern>
+        <include-pattern>ModuleXMLUnitTest.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
