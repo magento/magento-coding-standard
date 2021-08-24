@@ -65,7 +65,7 @@ class ModuleXMLSniff implements Sniff
             if (property_exists($element->attributes(), 'active')) {
                 $phpcsFile->addWarning(
                     'The "active" attribute is obsolete. The list of active modules '.
-                            'is defined in deployment configuration.',
+                    'is defined in deployment configuration.',
                     $stackPtr,
                     $this->warningCode
                 );
@@ -75,7 +75,7 @@ class ModuleXMLSniff implements Sniff
 
     /**
      * Check if the element passed is in the currently sniffed line
-     * 
+     *
      * @param SimpleXMLElement $element
      * @param int $stackPtr
      * @return bool
