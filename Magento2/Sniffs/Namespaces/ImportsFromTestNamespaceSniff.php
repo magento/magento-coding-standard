@@ -57,11 +57,13 @@ class ImportsFromTestNamespaceSniff implements Sniff
             $closingCurly = $phpcsFile->findNext(T_CLOSE_USE_GROUP, ($next + 1));
             do {
                 $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), $closingCurly, true);
-                $groupedAsContent = $baseUse. $tokens[$next]['content'];
-                $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $closingCurly);
-                if (strpos($groupedAsContent, $this->prohibitNamespace) !== false) {
-                    $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
-                    return;
+                if ($next !== false) {
+                    $groupedAsContent = $baseUse. $tokens[$next]['content'];
+                    $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $closingCurly);
+                    if (strpos($groupedAsContent, $this->prohibitNamespace) !== false) {
+                        $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
+                        return;
+                    }
                 }
             } while ($next !== false);
         }
