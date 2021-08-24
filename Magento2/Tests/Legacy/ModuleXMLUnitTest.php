@@ -23,7 +23,7 @@ class ModuleXMLUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            1 => 2
+            9 => 2
         ];
     }
 }
