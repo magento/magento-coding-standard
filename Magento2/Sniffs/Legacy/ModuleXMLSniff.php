@@ -6,6 +6,7 @@
 
 namespace Magento2\Sniffs\Legacy;
 
+use DOMDocument;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SimpleXMLElement;
@@ -15,10 +16,8 @@ use SimpleXMLElement;
  */
 class ModuleXMLSniff implements Sniff
 {
-    /**
-     * Error violation code.
-     */
-    const WARNING_CODE = 'FoundObsoleteAttribute';
+    private const WARNING_CODE = 'FoundObsoleteAttribute';
+    private const ERROR_CODE = 'WrongXML';
     
     /**
      * @inheritdoc
@@ -36,11 +35,11 @@ class ModuleXMLSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $line = $phpcsFile->getTokens()[$stackPtr]['content'];
-        if (strpos(trim($line), '<module ') === false) {
+        if (strpos(trim($line), '<module') === false) {
             return;
         }
-        
-        $xml = simplexml_load_string($phpcsFile->getTokensAsString(0, 999999));
+
+        $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
             $phpcsFile->addError(
                 sprintf(
@@ -48,7 +47,7 @@ class ModuleXMLSniff implements Sniff
                     $phpcsFile->getFilename(),
                 ),
                 $stackPtr,
-                self::WARNING_CODE
+                self::ERROR_CODE
             );
         }
 
@@ -95,5 +94,17 @@ class ModuleXMLSniff implements Sniff
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param File $phpcsFile
+     * @return false|string
+     */
+    private function getFormattedXML(File $phpcsFile)
+    {
+        $doc = new DomDocument('1.0');
+        $doc->formatOutput = true;
+        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
+        return $doc->saveXML();
     }
 }
