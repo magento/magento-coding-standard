@@ -105,6 +105,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Legacy.AbstractBlock">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
@@ -580,4 +584,15 @@
         <severity>5</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Annotation">
+        <exclude-pattern>*/_files/*</exclude-pattern>
+        <exclude-pattern>*/Test/*</exclude-pattern>
+        <exclude-pattern>*Test.php</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Html"/>
+    <rule ref="Magento2.Less"/>
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.CSS.NamedColours"/>
 </ruleset>
