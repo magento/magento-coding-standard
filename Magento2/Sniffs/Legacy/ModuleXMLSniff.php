@@ -97,6 +97,9 @@ class ModuleXMLSniff implements Sniff
     }
 
     /**
+     * We need to format the incoming XML to avoid tags split into several lines. In that case, PHP's DOMElement
+     * returns the position of the closing /> as the position of the tag.
+     *
      * @param File $phpcsFile
      * @return false|string
      */
