@@ -39,6 +39,8 @@ class ModuleXMLSniff implements Sniff
             return;
         }
 
+        // We need to format the incoming XML to avoid tags split into several lines. In that case, PHP's DOMElement
+        // returns the position of the closing /> as the position of the tag.
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
             $phpcsFile->addError(
@@ -97,8 +99,7 @@ class ModuleXMLSniff implements Sniff
     }
 
     /**
-     * We need to format the incoming XML to avoid tags split into several lines. In that case, PHP's DOMElement
-     * returns the position of the closing /> as the position of the tag.
+     * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
      * @return false|string
