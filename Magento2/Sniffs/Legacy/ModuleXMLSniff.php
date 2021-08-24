@@ -45,7 +45,7 @@ class ModuleXMLSniff implements Sniff
             $phpcsFile->addError(
                 sprintf(
                     "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    basename($phpcsFile->getFilename()),
+                    $phpcsFile->getFilename(),
                 ),
                 $stackPtr,
                 self::WARNING_CODE
