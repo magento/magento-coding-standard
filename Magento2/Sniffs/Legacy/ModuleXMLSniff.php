@@ -17,10 +17,8 @@ class ModuleXMLSniff implements Sniff
 {
     /**
      * Error violation code.
-     *
-     * @var string
      */
-    protected $warningCode = 'FoundObsoleteAttribute';
+    const WARNING_CODE = 'FoundObsoleteAttribute';
     
     /**
      * @inheritdoc
@@ -43,6 +41,16 @@ class ModuleXMLSniff implements Sniff
         }
         
         $xml = simplexml_load_string($phpcsFile->getTokensAsString(0, 999999));
+        if ($xml === false) {
+            $phpcsFile->addError(
+                sprintf(
+                    "Couldn't parse contents of '%s', check that they are in valid XML format",
+                    basename($phpcsFile->getFilename()),
+                ),
+                $stackPtr,
+                self::WARNING_CODE
+            );
+        }
 
         $foundElements = $xml->xpath('/config/module');
         if ($foundElements === false) {
@@ -58,7 +66,7 @@ class ModuleXMLSniff implements Sniff
                 $phpcsFile->addWarning(
                     'The "version" attribute is obsolete. Use "setup_version" instead.',
                     $stackPtr,
-                    $this->warningCode
+                    self::WARNING_CODE
                 );
             }
 
@@ -67,7 +75,7 @@ class ModuleXMLSniff implements Sniff
                     'The "active" attribute is obsolete. The list of active modules '.
                     'is defined in deployment configuration.',
                     $stackPtr,
-                    $this->warningCode
+                    self::WARNING_CODE
                 );
             }
         }
