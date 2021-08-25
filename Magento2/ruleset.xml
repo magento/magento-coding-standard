@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">

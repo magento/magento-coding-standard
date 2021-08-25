@@ -5,9 +5,7 @@
  */
 namespace Magento2\Tests\Less;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-
-class AvoidIdUnitTest extends AbstractSniffUnitTest
+class AvoidIdUnitTest extends AbstractLessSniffUnitTestCase
 {
     /**
      * @inheritdoc
@@ -30,7 +28,7 @@ class AvoidIdUnitTest extends AbstractSniffUnitTest
             18 => 1,
             19 => 1,
             20 => 1,
-            21 => 3,
+            21 => 1,
             22 => 1,
             26 => 1,
             27 => 1,
