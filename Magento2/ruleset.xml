@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml,graphqls/GraphQL"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -595,7 +595,9 @@
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
     <rule ref="Magento2.Html"/>
-    <rule ref="Magento2.Less"/>
+    <rule ref="Magento2.Less">
+        <include-pattern>*\.less$</include-pattern>
+    </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
