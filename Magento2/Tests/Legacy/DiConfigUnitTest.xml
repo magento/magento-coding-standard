@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<root>
+    <instance>
+        <param name="param1" new_attribute="2">
+            <array key="amounts">
+                <item key="item1" new_attribute="3">
+                    <value new_attribute="4">scalar20</value>
+                </item>
+                <item>50.00</item>
+            </array>
+        </param>
+    </instance>
+</root>
