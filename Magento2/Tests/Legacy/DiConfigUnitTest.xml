@@ -5,15 +5,19 @@
  * See COPYING.txt for license details.
  */
 -->
-<root>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type>
+        <arguments>
+            <argument name="prices" xsi:type="array">
+                <item key="regular_price" xsi:type="string">Magento\Catalog\Pricing\Price\RegularPrice</item>
+            </argument>
+        </arguments>
+    </type>
     <instance>
-        <param name="param1" new_attribute="2">
-            <array key="amounts">
-                <item key="item1" new_attribute="3">
-                    <value new_attribute="4">scalar20</value>
-                </item>
-                <item>50.00</item>
-            </array>
-        </param>
+        <array key="params">
+            <param name="default_value" new_attribute="0">
+                <value new_attribute="5">scalar5</value>
+            </param>
+        </array>
     </instance>
-</root>
+</config>
