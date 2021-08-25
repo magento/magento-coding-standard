@@ -51,6 +51,7 @@ class AvoidIdSniff implements Sniff
         T_PLUS,
         T_NS_SEPARATOR,
         T_LNUMBER,
+        T_BITWISE_NOT
     ];
 
     /**
