@@ -38,7 +38,7 @@ class DiConfigSniff implements Sniff
         ];
     }
 
-    public function process(File $phpcsFile, $stackPtr): int
+    public function process(File $phpcsFile, $stackPtr)
     {
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
