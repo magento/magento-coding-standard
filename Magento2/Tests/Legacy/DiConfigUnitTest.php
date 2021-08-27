@@ -23,12 +23,11 @@ class DiConfigUnitTest extends AbstractSniffUnitTest
     public function getWarningList(): array
     {
         return [
-            9 => 1,
-            10 => 1,
-            11 => 1,
             12 => 1,
-            13 => 1,
-            15 => 1
+            16 => 1,
+            17 => 1,
+            18 => 1,
+            19 => 1
         ];
     }
 }
