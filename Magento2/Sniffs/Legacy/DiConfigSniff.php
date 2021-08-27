@@ -21,6 +21,9 @@ class DiConfigSniff implements Sniff
         '<value' => 'The <value> node is obsolete. Instead, provide the actual value as a text literal.'
     ];
 
+    /**
+     * @inheritDoc
+     */
     public function register(): array
     {
         return [
@@ -28,11 +31,14 @@ class DiConfigSniff implements Sniff
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $lineContent = $phpcsFile->getTokensAsString($stackPtr, 1);
 
-        foreach ($this->xpathObsoleteElems as $elem => $message ) {
+        foreach ($this->xpathObsoleteElems as $elem => $message) {
             if (strpos($lineContent, $elem) !== false) {
                 $phpcsFile->addWarning(
                     $message,
