@@ -13,7 +13,10 @@ class DiConfigSniff implements Sniff
 {
     private const WARNING_CODE = 'FoundObsoleteAttribute';
 
-    private $xpathObsoleteElems = [
+    /**
+     * @var string[] Associative array containing the obsolete nodes and the message to display when they are found.
+     */
+    private $obsoleteDiNodes = [
         '<param' => 'The <param> node is obsolete. Instead, use the <argument name="..." xsi:type="...">',
         '<instance' => 'The <instance> node is obsolete. Instead, use the <argument name="..." xsi:type="object">',
         '<array' => 'The <array> node is obsolete. Instead, use the <argument name="..." xsi:type="array">',
@@ -38,8 +41,8 @@ class DiConfigSniff implements Sniff
     {
         $lineContent = $phpcsFile->getTokensAsString($stackPtr, 1);
 
-        foreach ($this->xpathObsoleteElems as $elem => $message) {
-            if (strpos($lineContent, $elem) !== false) {
+        foreach ($this->obsoleteDiNodes as $element => $message) {
+            if (strpos($lineContent, $element) !== false) {
                 $phpcsFile->addWarning(
                     $message,
                     $stackPtr,
