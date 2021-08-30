@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -223,6 +223,11 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Legacy.DiConfig">
+        <include-pattern>*\/di.xml$</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
@@ -258,6 +263,7 @@
         <type>warning</type>
     </rule>
     <rule ref="Generic.PHP.DisallowShortOpenTag">
+        <exclude-pattern>*\.xml$</exclude-pattern>
         <severity>7</severity>
         <type>warning</type>
     </rule>
