@@ -21,10 +21,7 @@ use PHP_CodeSniffer\Files\File;
  */
 class ClassNamingSniff implements Sniff
 {
-
-    const STRING_HELPER_CLASSES_PREFIX = '_';
-
-    const STRING_ALLOWED_UNDERSCORES = '__';
+    private const STRING_HELPER_CLASSES_PREFIX = '_';
 
     /**
      * A list of tokenizers this sniff supports.
@@ -62,7 +59,20 @@ class ClassNamingSniff implements Sniff
 
         $className = $tokens[$stackPtr + 1]['content'];
         if (preg_match_all('/[^a-z0-9\-_]/U', $className, $matches)) {
-            $phpcsFile->addError('Class name contains not allowed symbols', $stackPtr, 'NotAllowedSymbol', $matches);
+            $phpcsFile->addError(
+                'CSS class name contains not allowed symbols',
+                $stackPtr,
+                'NotAllowedSymbol',
+                $matches
+            );
+        }
+        if (strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false) {
+            $phpcsFile->addError(
+                'CSS class names should be separated "-" (dash) instead of "_" (underscore)',
+                $stackPtr,
+                'NotAllowedSymbol',
+                $matches
+            );
         }
     }
 }
