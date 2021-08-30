@@ -12,7 +12,7 @@ use PHP_CodeSniffer\Util\Tokens;
 /**
  * Class ColonSpacingSniff
  *
- * Ensure that single quotes are used
+ * Ensure that colon spacing is right
  *
  * @link https://devdocs.magento.com/guides/v2.4/coding-standards/code-standard-less.html#properties-colon-indents
  */
@@ -101,7 +101,7 @@ class ColonSpacingSniff implements Sniff
             if (false === strpos($content, $phpcsFile->eolChar)) {
                 $length  = strlen($content);
                 if ($length !== 1) {
-                    $error = 'Expected 1 space after colon in style definition; %s found';
+                    $error = sprintf('Expected 1 space after colon in style definition; %s found', $length);
                     $phpcsFile->addError($error, $stackPtr, 'After');
                 }
             } else {
