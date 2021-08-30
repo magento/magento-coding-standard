@@ -60,18 +60,17 @@ class ClassNamingSniff implements Sniff
         $className = $tokens[$stackPtr + 1]['content'];
         if (preg_match_all('/[^a-z0-9\-_]/U', $className, $matches)) {
             $phpcsFile->addError(
-                'CSS class name contains not allowed symbols',
+                'CSS class name does not follow class naming requirements: %s',
                 $stackPtr,
                 'NotAllowedSymbol',
-                $matches
+                implode("", $matches[0])
             );
         }
         if (strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false) {
             $phpcsFile->addError(
-                'CSS class names should be separated "-" (dash) instead of "_" (underscore)',
+                'CSS class names should be separated with "-" (dash) instead of "_" (underscore)',
                 $stackPtr,
-                'NotAllowedSymbol',
-                $matches
+                'NotAllowedSymbol'
             );
         }
     }
