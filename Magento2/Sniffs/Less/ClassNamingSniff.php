@@ -63,7 +63,7 @@ class ClassNamingSniff implements Sniff
                 'CSS class name does not follow class naming requirements: %s',
                 $stackPtr,
                 'NotAllowedSymbol',
-                implode("", $matches[0])
+                [implode("", $matches[0])]
             );
         }
         if (strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false) {
