@@ -64,7 +64,7 @@ class AnnotationFormatValidator
             && $tokens[$shortPtrEnd]['code'] !== T_DOC_COMMENT_TAG
         ) {
             $error = 'Short description should not be in multi lines';
-            $phpcsFile->addFixableError($error, $shortPtrEnd + 1, 'MethodAnnotation');
+            $phpcsFile->addError($error, $shortPtrEnd + 1, 'MethodAnnotation');
         }
     }
 
@@ -95,7 +95,7 @@ class AnnotationFormatValidator
             && $tokens[$shortPtrEnd]['code'] !== T_DOC_COMMENT_TAG
         ) {
             $error = 'There must be exactly one blank line between lines short and long descriptions';
-            $phpcsFile->addFixableError($error, $shortPtrEnd + 1, 'MethodAnnotation');
+            $phpcsFile->addError($error, $shortPtrEnd + 1, 'MethodAnnotation');
         }
         if ($shortPtrEnd != $shortPtr) {
             $this->validateLongDescriptionFormat($phpcsFile, $shortPtrEnd, $commentEndPtr, $emptyTypeTokens);
@@ -123,16 +123,16 @@ class AnnotationFormatValidator
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$shortPtr]['line'] !== $tokens[$stackPtr]['line'] + 1) {
             $error = 'No blank lines are allowed before short description';
-            $phpcsFile->addFixableError($error, $shortPtr, 'MethodAnnotation');
+            $phpcsFile->addError($error, $shortPtr, 'MethodAnnotation');
         }
         if (strtolower($tokens[$shortPtr]['content']) === '{@inheritdoc}') {
             $error = 'If the @inheritdoc not inline it shouldn’t have braces';
-            $phpcsFile->addFixableError($error, $shortPtr, 'MethodAnnotation');
+            $phpcsFile->addError($error, $shortPtr, 'MethodAnnotation');
         }
         $shortPtrContent = $tokens[$shortPtr]['content'];
         if (preg_match('/^\p{Ll}/u', $shortPtrContent) === 1) {
             $error = 'Short description must start with a capital letter';
-            $phpcsFile->addFixableError($error, $shortPtr, 'MethodAnnotation');
+            $phpcsFile->addError($error, $shortPtr, 'MethodAnnotation');
         }
         $this->validateNoExtraNewLineBeforeShortDescription(
             $phpcsFile,
@@ -171,16 +171,16 @@ class AnnotationFormatValidator
         $longPtr = $phpcsFile->findNext($emptyTypeTokens, $shortPtrEnd + 1, $commentEndPtr - 1, true);
         if (strtolower($tokens[$longPtr]['content']) === '@inheritdoc') {
             $error = '@inheritdoc imports only short description, annotation must have long description';
-            $phpcsFile->addFixableError($error, $longPtr, 'MethodAnnotation');
+            $phpcsFile->addError($error, $longPtr, 'MethodAnnotation');
         }
         if ($longPtr !== false && $tokens[$longPtr]['code'] === T_DOC_COMMENT_STRING) {
             if ($tokens[$longPtr]['line'] !== $tokens[$shortPtrEnd]['line'] + 2) {
                 $error = 'There must be exactly one blank line between descriptions';
-                $phpcsFile->addFixableError($error, $longPtr, 'MethodAnnotation');
+                $phpcsFile->addError($error, $longPtr, 'MethodAnnotation');
             }
             if (preg_match('/^\p{Ll}/u', $tokens[$longPtr]['content']) === 1) {
                 $error = 'Long description must start with a capital letter';
-                $phpcsFile->addFixableError($error, $longPtr, 'MethodAnnotation');
+                $phpcsFile->addError($error, $longPtr, 'MethodAnnotation');
             }
         }
     }
@@ -203,7 +203,7 @@ class AnnotationFormatValidator
                 && strtolower($commentTagPtrContent) !== '@inheritdoc'
             ) {
                 $error = 'There must be exactly one blank line before tags';
-                $phpcsFile->addFixableError($error, $firstTagPtr, 'MethodAnnotation');
+                $phpcsFile->addError($error, $firstTagPtr, 'MethodAnnotation');
             }
         }
     }
@@ -240,7 +240,7 @@ class AnnotationFormatValidator
                 if ($paramGroupId !== null
                     && $paramGroupId !== $groupId) {
                     $error = 'Parameter tags must be grouped together';
-                    $phpcsFile->addFixableError($error, $tag, 'MethodAnnotation');
+                    $phpcsFile->addError($error, $tag, 'MethodAnnotation');
                 }
                 if ($paramGroupId === null) {
                     $paramGroupId = $groupId;
@@ -273,7 +273,7 @@ class AnnotationFormatValidator
 
         if (!$this->allTagsAligned($actualPositions)
             && !$this->noneTagsAligned($actualPositions, $noAlignmentPositions)) {
-            $phpcsFile->addFixableError(
+            $phpcsFile->addError(
                 'Tags visual alignment must be consistent',
                 $stackPtr,
                 'MethodArguments'
@@ -322,7 +322,7 @@ class AnnotationFormatValidator
         $prevPtr = $phpcsFile->findPrevious($emptyTypeTokens, $commentEndPtr - 1, $commentStartPtr, true);
         if ($tokens[$prevPtr]['line'] < ($tokens[$commentEndPtr]['line'] - 1)) {
             $error = 'Additional blank lines found at end of the annotation block';
-            $phpcsFile->addFixableError($error, $commentEndPtr, 'MethodAnnotation');
+            $phpcsFile->addError($error, $commentEndPtr, 'MethodAnnotation');
         }
     }
 
@@ -351,7 +351,7 @@ class AnnotationFormatValidator
                 && strtolower($commentTagPtrContent) !== '@inheritdoc'
             ) {
                 $error = 'Missing short description';
-                $phpcsFile->addFixableError($error, $commentStartPtr, 'MethodAnnotation');
+                $phpcsFile->addError($error, $commentStartPtr, 'MethodAnnotation');
             } else {
                 $this->validateShortDescriptionFormat(
                     $phpcsFile,
