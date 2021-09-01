@@ -42,7 +42,7 @@ class ColourDefinitionSniff implements Sniff
 
         $variablePtr = $phpcsFile->findPrevious(T_ASPERAND, $stackPtr);
         if ((false === $variablePtr) || ($tokens[$stackPtr]['line'] !== $tokens[$variablePtr]['line'])) {
-            $phpcsFile->addError('Hexadecimal value should be used for variable', $stackPtr, 'NotInVariable');
+            $phpcsFile->addError('A variable should be used for a CSS colour', $stackPtr, 'NotInVariable');
         }
 
         $expected = strtolower($colour);
