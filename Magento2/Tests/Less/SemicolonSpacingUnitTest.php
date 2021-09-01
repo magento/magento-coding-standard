@@ -13,7 +13,8 @@ class SemicolonSpacingUnitTest extends AbstractLessSniffUnitTestCase
     public function getErrorList()
     {
         return [
-            11 => 1
+            11 => 1,
+            12 => 1
         ];
     }
 

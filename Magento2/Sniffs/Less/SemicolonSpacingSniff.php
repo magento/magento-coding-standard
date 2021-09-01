@@ -83,7 +83,7 @@ class SemicolonSpacingSniff implements Sniff
     {
         if ((false === $semicolonPtr || $tokens[$semicolonPtr]['line'] !== $tokens[$stackPtr]['line'])
             && (isset($tokens[$stackPtr - 1]) && !in_array($tokens[$stackPtr - 1]['code'], $this->styleCodesToSkip))
-            && (T_COLON !== $tokens[$stackPtr + 1]['code'])
+            && (T_COLON !== $tokens[$stackPtr]['code'])
         ) {
             $error = 'Style definitions must end with a semicolon';
             $phpcsFile->addError($error, $stackPtr, 'NotAtEnd');
