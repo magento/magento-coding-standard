@@ -15,7 +15,7 @@ class ColourDefinitionUnitTest extends AbstractLessSniffUnitTestCase
         return [
             6 => 1,
             7 => 1,
-            15 => 1,
+            16 => 1,
         ];
     }
 
