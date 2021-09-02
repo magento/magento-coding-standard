@@ -609,8 +609,6 @@ class MethodArgumentsSniff implements Sniff
      * @param File $phpcsFile
      * @param array $paramPointers
      *
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
-     *
      * @see https://devdocs.magento.com/guides/v2.4/coding-standards/docblock-standard-general.html#format-consistency
      */
     private function validateFormattingConsistency(
@@ -626,7 +624,9 @@ class MethodArgumentsSniff implements Sniff
             if (isset($paramPointers[$ptr])) {
                 $paramContent = $tokens[$paramPointers[$ptr] + 2]['content'];
                 $paramDefinition = $paramDefinitions[$ptr];
-                $argumentPositions[] = strpos($paramContent, $paramDefinition['paramName']);
+                if (isset($paramDefinition['paramName'])) {
+                    $argumentPositions[] = strpos($paramContent, $paramDefinition['paramName']);
+                }
                 $commentPositions[] = $paramDefinition['comment']
                     ? strrpos($paramContent, $paramDefinition['comment']) : null;
             }
