@@ -20,11 +20,18 @@ class ModuleXMLUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [
-            9 => 2,
-            10 => 2
-        ];
+        if ($testFile === 'ModuleXMLUnitTest.1.xml') {
+            return [
+                9 => 2,
+            ];
+        }
+        if ($testFile === 'ModuleXMLUnitTest.2.xml') {
+            return [
+                9 => 2,
+            ];
+        }
+        return [];
     }
 }
