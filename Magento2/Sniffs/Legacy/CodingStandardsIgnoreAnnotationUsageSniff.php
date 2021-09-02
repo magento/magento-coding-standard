@@ -6,33 +6,43 @@
 
 namespace Magento2\Sniffs\Legacy;
 
-use PHPUnit\Framework\TestCase;
-use Magento\Framework\App\Utility\Files;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
-class CodingStandardsIgnoreAnnotationUsageSniff extends TestCase
+class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
 {
-    public function testAnnotationUsage()
+    private const CODING_STANDARDS_IGNORE_FILE = '@codingStandardsIgnoreFile';
+
+    private const WARNING_CODE = self::CODING_STANDARDS_IGNORE_FILE . ' annotation must be avoided. ';
+
+    private const WARNING_MESSAGE =
+        self::WARNING_CODE
+        . 'Use codingStandardsIgnoreStart/codingStandardsIgnoreEnd to suppress code fragment '
+        . 'or use codingStandardsIgnoreLine to suppress line. ';
+
+    /**
+     * @inheritDoc
+     */
+    public function register(): array
     {
-        $invoker = new \Magento\Framework\App\Utility\AggregateInvoker($this);
-        $invoker(
-            function ($filename) {
-                $fileText = file_get_contents($filename);
-                if (strpos($fileText, '@codingStandardsIgnoreFile') !== false) {
-                    $this->fail(
-                        '@codingStandardsIgnoreFile annotation must be avoided. '
-                        . 'Use codingStandardsIgnoreStart/codingStandardsIgnoreEnd to suppress code fragment '
-                        . 'or use codingStandardsIgnoreLine to suppress line. '
-                        . $filename
-                    );
-                }
-            },
-            Files::init()->getPhpFiles(
-                Files::INCLUDE_APP_CODE
-                | Files::INCLUDE_PUB_CODE
-                | Files::INCLUDE_LIBS
-                | Files::AS_DATA_SET
-                | Files::INCLUDE_NON_CLASSES
-            )
-        );
+        return [
+            T_INLINE_HTML
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function process(File $phpcsFile, $stackPtr)
+    {
+        $content = $phpcsFile->getTokensAsString($stackPtr, 999999);
+
+        if (strpos($content, self::CODING_STANDARDS_IGNORE_FILE) !== false) {
+            $phpcsFile->addWarning(
+                self::WARNING_MESSAGE . $phpcsFile->getFilename(),
+                $stackPtr,
+                self::WARNING_CODE
+            );
+        }
     }
 }
