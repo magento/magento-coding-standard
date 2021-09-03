@@ -26,7 +26,7 @@ class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
     public function register(): array
     {
         return [
-            T_INLINE_HTML
+            T_OBJECT_OPERATOR
         ];
     }
 
@@ -35,9 +35,9 @@ class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $content = $phpcsFile->getTokensAsString($stackPtr, 999999);
+        $lineContent = $phpcsFile->getTokensAsString($stackPtr, 1);
 
-        if (strpos($content, self::CODING_STANDARDS_IGNORE_FILE) !== false) {
+        if (strpos($lineContent, self::CODING_STANDARDS_IGNORE_FILE) !== false) {
             $phpcsFile->addWarning(
                 self::WARNING_MESSAGE . $phpcsFile->getFilename(),
                 $stackPtr,

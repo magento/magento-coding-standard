@@ -111,6 +111,10 @@
     </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
+    <rule ref="Magento2.Legacy.CodingStandardsIgnoreAnnotationUsageSniff">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Generic.Files.ByteOrderMark">
         <severity>9</severity>
         <type>warning</type>
