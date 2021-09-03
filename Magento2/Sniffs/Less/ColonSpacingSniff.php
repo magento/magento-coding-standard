@@ -39,7 +39,7 @@ class ColonSpacingSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        
+
         if ($this->needValidateSpaces($phpcsFile, $stackPtr, $tokens)) {
             $this->validateSpaces($phpcsFile, $stackPtr, $tokens);
         }
@@ -75,7 +75,10 @@ class ColonSpacingSniff implements Sniff
     }
 
     /**
-     * Validate Colon Spacing according to requirements
+     * Validate Colon Spacing according to requirements:
+     * - No spaces before colon
+     * - Exactly 1 space after colon
+     * - No property definition scattered among several lines
      *
      * @param File $phpcsFile
      * @param int $stackPtr
