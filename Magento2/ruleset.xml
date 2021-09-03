@@ -144,6 +144,10 @@
         <severity>9</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Html.HtmlBinding">
+        <severity>9</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
     <rule ref="Magento2.Classes.AbstractApi">
@@ -230,6 +234,10 @@
     </rule>
     <rule ref="Magento2.Legacy.DiConfig">
         <include-pattern>*\/di.xml$</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Html.HtmlDirective">
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -565,6 +573,15 @@
         <severity>6</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Squiz.CSS.NamedColours">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Less">
+        <severity>6</severity>
+        <type>warning</type>
+        <include-pattern>*\.less$</include-pattern>
+    </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
         <severity>0</severity>
     </rule>
@@ -596,16 +613,13 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Annotation">
+        <severity>5</severity>
+        <type>warning</type>
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Html"/>
-    <rule ref="Magento2.Less">
-        <include-pattern>*\.less$</include-pattern>
-    </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.CSS.NamedColours"/>
 </ruleset>
