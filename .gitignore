@@ -6,3 +6,5 @@
 .project/
 .settings/
 .vscode/
+
+.phpunit.result.cache
