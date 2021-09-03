@@ -111,7 +111,7 @@
     </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
-    <rule ref="Magento2.Legacy.CodingStandardsIgnoreAnnotationUsageSniff">
+    <rule ref="Magento2.Legacy.CodingStandardsIgnoreAnnotationUsage">
         <severity>9</severity>
         <type>warning</type>
     </rule>
