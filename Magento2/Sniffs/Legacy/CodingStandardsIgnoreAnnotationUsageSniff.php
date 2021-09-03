@@ -13,10 +13,9 @@ class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
 {
     private const CODING_STANDARDS_IGNORE_FILE = '@codingStandardsIgnoreFile';
 
-    private const WARNING_CODE = self::CODING_STANDARDS_IGNORE_FILE . ' annotation must be avoided. ';
+    private const WARNING_CODE = 'avoidAnnotation';
 
-    private const WARNING_MESSAGE =
-        self::WARNING_CODE
+    private const WARNING_MESSAGE = '@codingStandardsIgnoreFile annotation must be avoided. '
         . 'Use codingStandardsIgnoreStart/codingStandardsIgnoreEnd to suppress code fragment '
         . 'or use codingStandardsIgnoreLine to suppress line. ';
 
@@ -26,7 +25,7 @@ class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
     public function register(): array
     {
         return [
-            T_OBJECT_OPERATOR
+            T_COMMENT
         ];
     }
 
@@ -35,9 +34,9 @@ class CodingStandardsIgnoreAnnotationUsageSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $lineContent = $phpcsFile->getTokensAsString($stackPtr, 1);
+        $tokens = $phpcsFile->getTokens();
 
-        if (strpos($lineContent, self::CODING_STANDARDS_IGNORE_FILE) !== false) {
+        if (strpos($tokens[$stackPtr - 1]['content'], self::CODING_STANDARDS_IGNORE_FILE) !== false) {
             $phpcsFile->addWarning(
                 self::WARNING_MESSAGE . $phpcsFile->getFilename(),
                 $stackPtr,

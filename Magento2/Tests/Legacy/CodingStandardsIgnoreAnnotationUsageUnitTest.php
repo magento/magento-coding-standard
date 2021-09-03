@@ -19,6 +19,8 @@ class CodingStandardsIgnoreAnnotationUsageUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [];
+        return [
+            7 => 1
+        ];
     }
 }
