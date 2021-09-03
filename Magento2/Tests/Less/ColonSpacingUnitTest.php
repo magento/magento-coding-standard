@@ -16,6 +16,7 @@ class ColonSpacingUnitTest extends AbstractLessSniffUnitTestCase
             8 => 1,
             12 => 1,
             16 => 2,
+            20 => 1,
         ];
     }
 
