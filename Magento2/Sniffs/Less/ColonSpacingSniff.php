@@ -39,12 +39,6 @@ class ColonSpacingSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-
-        $nextSemicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
-        if (false !== $nextSemicolon && ($tokens[$nextSemicolon]['line'] !== $tokens[$stackPtr]['line'])) {
-            $error = 'Expected 1 space after colon in style definition; newline found';
-            $phpcsFile->addError($error, $stackPtr, 'AfterNewline');
-        }
         
         if ($this->needValidateSpaces($phpcsFile, $stackPtr, $tokens)) {
             $this->validateSpaces($phpcsFile, $stackPtr, $tokens);
@@ -93,6 +87,12 @@ class ColonSpacingSniff implements Sniff
     {
         if (T_WHITESPACE === $tokens[($stackPtr - 1)]['code']) {
             $phpcsFile->addError('There must be no space before a colon in a style definition', $stackPtr, 'Before');
+        }
+
+        $nextSemicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
+        if (false !== $nextSemicolon && ($tokens[$nextSemicolon]['line'] !== $tokens[$stackPtr]['line'])) {
+            $error = 'Expected 1 space after colon in style definition; newline found';
+            $phpcsFile->addError($error, $stackPtr, 'AfterNewline');
         }
 
         if (T_WHITESPACE !== $tokens[($stackPtr + 1)]['code']) {
