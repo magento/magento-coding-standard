@@ -56,12 +56,7 @@ class ColonSpacingSniff implements Sniff
      */
     private function needValidateSpaces(File $phpcsFile, $stackPtr, $tokens)
     {
-        $nextSemicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
-
-        if (false === $nextSemicolon
-            || ($tokens[$nextSemicolon]['line'] !== $tokens[$stackPtr]['line'])
-            || TokenizerSymbolsInterface::BITWISE_AND === $tokens[$stackPtr - 1]['content']
-        ) {
+        if (TokenizerSymbolsInterface::BITWISE_AND === $tokens[$stackPtr - 1]['content']) {
             return false;
         }
 
@@ -80,7 +75,10 @@ class ColonSpacingSniff implements Sniff
     }
 
     /**
-     * Validate Colon Spacing according to requirements
+     * Validate Colon Spacing according to requirements:
+     * - No spaces before colon
+     * - Exactly 1 space after colon
+     * - No property definition scattered among several lines
      *
      * @param File $phpcsFile
      * @param int $stackPtr
@@ -94,19 +92,22 @@ class ColonSpacingSniff implements Sniff
             $phpcsFile->addError('There must be no space before a colon in a style definition', $stackPtr, 'Before');
         }
 
+        $nextSemicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
+        if (false !== $nextSemicolon && ($tokens[$nextSemicolon]['line'] !== $tokens[$stackPtr]['line'])) {
+            $error = 'Expected 1 space after colon in style definition; newline found';
+            $phpcsFile->addError($error, $stackPtr, 'AfterNewline');
+        }
+
         if (T_WHITESPACE !== $tokens[($stackPtr + 1)]['code']) {
             $phpcsFile->addError('Expected 1 space after colon in style definition; 0 found', $stackPtr, 'NoneAfter');
         } else {
             $content = $tokens[($stackPtr + 1)]['content'];
-            if (false === strpos($content, $phpcsFile->eolChar)) {
+            if (false !== strpos($content, ' ')) {
                 $length  = strlen($content);
                 if ($length !== 1) {
                     $error = sprintf('Expected 1 space after colon in style definition; %s found', $length);
                     $phpcsFile->addError($error, $stackPtr, 'After');
                 }
-            } else {
-                $error = 'Expected 1 space after colon in style definition; newline found';
-                $phpcsFile->addError($error, $stackPtr, 'AfterNewline');
             }
         }
     }
