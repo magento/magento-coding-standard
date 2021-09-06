@@ -11,9 +11,9 @@ use PHP_CodeSniffer\Files\File;
 class ClassesPHPSniff implements Sniff
 {
 
-    private const errorMessage = 'Obsolete factory name(s) detected';
+    private const ERROR_MESSAGE = 'Obsolete factory name(s) detected';
     
-    private const errorCode = 'ObsoleteFactoryName';
+    private const ERROR_CODE = 'ObsoleteFactoryName';
 
     private $methodsThatReceiveClassNameAsFirstArgument = [
         'getModel', 'getSingleton', 'getResourceModel', 'getResourceSingleton',
@@ -32,7 +32,6 @@ class ClassesPHPSniff implements Sniff
             T_DOUBLE_COLON,
         ];
     }
-    
 
     /**
      * @inheritdoc
@@ -60,9 +59,9 @@ class ClassesPHPSniff implements Sniff
             $name = $tokens[$firstArgumentStackPtr]['content'];
             if (!$this->isAValidNonFactoryName($name)) {
                 $phpcsFile->addError(
-                    self::errorMessage,
+                    self::ERROR_MESSAGE,
                     $methodNameStackPtr + 1,
-                    self::errorCode,
+                    self::ERROR_CODE,
                 );
             }
         }
