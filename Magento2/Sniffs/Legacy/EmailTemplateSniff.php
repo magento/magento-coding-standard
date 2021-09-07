@@ -38,7 +38,7 @@ class EmailTemplateSniff implements Sniff
     {
         $content = $phpcsFile->getTokens()[$stackPtr]['content'];
         foreach (self::OBSOLETE_EMAIL_DIRECTIVES as $directiveRegex => $errorMessage) {
-            if(preg_match($directiveRegex, $content)) {
+            if (preg_match($directiveRegex, $content)) {
                 $phpcsFile->addWarning(
                     $errorMessage,
                     $stackPtr,
