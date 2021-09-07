@@ -19,7 +19,7 @@ class EmailTemplateSniff implements Sniff
         '/\{\{escapehtml.*?\}\}/i' => 'Directive {{escapehtml}} is obsolete. Use {{var}} instead.',
     ];
 
-    private const WARNING_CODE = 'FoundObsoleteEmailDirective';
+    private const ERROR_CODE = 'FoundObsoleteEmailDirective';
 
     /**
      * @inheritdoc
@@ -39,10 +39,10 @@ class EmailTemplateSniff implements Sniff
         $content = $phpcsFile->getTokens()[$stackPtr]['content'];
         foreach (self::OBSOLETE_EMAIL_DIRECTIVES as $directiveRegex => $errorMessage) {
             if (preg_match($directiveRegex, $content)) {
-                $phpcsFile->addWarning(
+                $phpcsFile->addError(
                     $errorMessage,
                     $stackPtr,
-                    self::WARNING_CODE
+                    self::ERROR_CODE
                 );
             }
         }

@@ -13,15 +13,7 @@ class EmailTemplateUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getErrorList()
-    {
-        return [];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getWarningList($testFile = '')
+    public function getErrorList($testFile = '')
     {
         if ($testFile === 'EmailTemplateUnitTest.1.html') {
             return [];
@@ -34,6 +26,14 @@ class EmailTemplateUnitTest extends AbstractSniffUnitTest
             ];
         }
 
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getWarningList($testFile = '')
+    {
         return [];
     }
 }
