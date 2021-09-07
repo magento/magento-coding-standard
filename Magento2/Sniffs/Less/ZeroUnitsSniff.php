@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
  * Ensure that units for 0 is not specified
  * Omit leading "0"s in values, use dot instead
  *
- * @link https://devdocs.magento.com/guides/v2.4/coding-standards/code-standard-less.html#and-units
+ * @link https://devdocs.magento.com/guides/v2.4/coding-standards/code-standard-less.html#0-and-units
  * @link https://devdocs.magento.com/guides/v2.4/coding-standards/code-standard-less.html#floating-values
  */
 class ZeroUnitsSniff implements Sniff
@@ -24,8 +24,6 @@ class ZeroUnitsSniff implements Sniff
     const CSS_PROPERTY_UNIT_REM = 'rem';
 
     /**
-     * List of available CSS Property units
-     *
      * @var array
      */
     private $units = [

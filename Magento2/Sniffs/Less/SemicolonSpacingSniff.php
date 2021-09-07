@@ -25,8 +25,6 @@ class SemicolonSpacingSniff implements Sniff
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS];
 
     /**
-     * Skip symbols that can be detected by sniffer incorrectly
-     *
      * @var array
      */
     private $styleSymbolsToSkip = [
@@ -36,8 +34,7 @@ class SemicolonSpacingSniff implements Sniff
         TokenizerSymbolsInterface::CLOSE_PARENTHESIS,
     ];
 
-    /** Skip codes that can be detected by sniffer incorrectly
-     *
+    /**
      * @var array
      */
     private $styleCodesToSkip = [T_ASPERAND, T_COLON, T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS];
@@ -83,7 +80,7 @@ class SemicolonSpacingSniff implements Sniff
     {
         if ((false === $semicolonPtr || $tokens[$semicolonPtr]['line'] !== $tokens[$stackPtr]['line'])
             && (isset($tokens[$stackPtr - 1]) && !in_array($tokens[$stackPtr - 1]['code'], $this->styleCodesToSkip))
-            && (T_COLON !== $tokens[$stackPtr + 1]['code'])
+            && (T_COLON !== $tokens[$stackPtr]['code'])
         ) {
             $error = 'Style definitions must end with a semicolon';
             $phpcsFile->addError($error, $stackPtr, 'NotAtEnd');

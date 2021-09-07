@@ -32,22 +32,16 @@ class DiscouragedDependenciesSniff implements Sniff
     protected $warningCode = 'ConstructorProxyInterceptor';
 
     /**
-     * Aliases of proxies or plugins from use statements
-     *
      * @var string[]
      */
     private $aliases = [];
 
     /**
-     * The current file - used for clearing USE aliases when file changes
-     *
      * @var null|string
      */
     private $currentFile = null;
 
     /**
-     * Terms to search for in variables and namespaces
-     *
      * @var string[]
      */
     public $incorrectClassNames = ['proxy','interceptor'];

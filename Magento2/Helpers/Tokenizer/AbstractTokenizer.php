@@ -11,15 +11,11 @@ namespace Magento2\Helpers\Tokenizer;
 abstract class AbstractTokenizer
 {
     /**
-     * Current index in string
-     *
      * @var int
      */
     protected $_currentIndex;
 
     /**
-     * String for tokenize
-     *
      * @var string
      */
     protected $_string;
