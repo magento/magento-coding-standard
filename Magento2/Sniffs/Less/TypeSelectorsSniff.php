@@ -23,8 +23,6 @@ use PHP_CodeSniffer\Files\File;
 class TypeSelectorsSniff implements Sniff
 {
     /**
-     * Tags that are not allowed as type selector
-     *
      * @var array
      */
     private $tags = [

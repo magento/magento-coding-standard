@@ -12,8 +12,6 @@ namespace Magento2\Helpers\Tokenizer;
 class Variable extends AbstractTokenizer
 {
     /**
-     * Internal counter used to keep track of how deep in array parsing we are
-     *
      * @var int
      */
     protected $arrayDepth = 0;

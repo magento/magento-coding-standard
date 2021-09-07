@@ -25,8 +25,6 @@ class AvoidIdSniff implements Sniff
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS];
 
     /**
-     * Tokens that can appear in a selector
-     *
      * @var array
      */
     private $selectorTokens = [
