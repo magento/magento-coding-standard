@@ -244,7 +244,7 @@
     <rule ref="Magento2.Legacy.EmailTemplate.FoundObsoleteEmailDirective">
         <include-pattern>view/email/*.html</include-pattern>
         <include-pattern>view/*/email/*.html</include-pattern>
-        <severity>8</severity>
+        <severity>10</severity>
         <type>error</type>
     </rule>
 
