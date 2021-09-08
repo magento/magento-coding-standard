@@ -109,6 +109,12 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Legacy.EmailTemplate.FoundObsoleteEmailDirective">
+        <include-pattern>view/email/*.html</include-pattern>
+        <include-pattern>view/*/email/*.html</include-pattern>
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
