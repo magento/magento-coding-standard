@@ -85,6 +85,8 @@ class WidgetXMLSniff implements Sniff
     }
 
     /**
+     * Adds an invalid XML error
+     *
      * @param File $phpcsFile
      * @param int $stackPtr
      */
