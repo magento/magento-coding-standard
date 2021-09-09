@@ -8,14 +8,13 @@ namespace Magento2\Sniffs\Legacy;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
-class ClassesPHPSniff implements Sniff
+class ObsoleteMethodsUsageSniff implements Sniff
 {
-
-    private const ERROR_MESSAGE = 'Obsolete factory name(s) detected';
+    private const ERROR_MESSAGE = 'Obsolete methods usage detected';
     
-    private const ERROR_CODE = 'ObsoleteFactoryName';
+    private const ERROR_CODE = 'ObsoleteMethodsUsage';
 
-    private $methodsThatReceiveClassNameAsFirstArgument = [
+    private $obsoleteStaticMethods = [
         'getModel', 'getSingleton', 'getResourceModel', 'getResourceSingleton',
         'addBlock', 'createBlock', 'getBlockSingleton',
         'initReport', 'setEntityModelClass', 'setAttributeModel', 'setBackendModel', 'setFrontendModel',
@@ -28,7 +27,6 @@ class ClassesPHPSniff implements Sniff
     public function register(): array
     {
         return [
-            T_OBJECT,
             T_DOUBLE_COLON,
         ];
     }
@@ -44,20 +42,19 @@ class ClassesPHPSniff implements Sniff
             return;
         }
         $name = $tokens[$methodNameStackPtr]['content'];
-        if (in_array($name, $this->methodsThatReceiveClassNameAsFirstArgument)) {
-            $firstArgumentStackPtr = $phpcsFile->findNext(
-                [T_CONSTANT_ENCAPSED_STRING],
-                $methodNameStackPtr + 1,
+        if (in_array($name, $this->obsoleteStaticMethods)) {
+            $classNameStackPtr = $phpcsFile->findPrevious(
+                [T_STRING],
+                $methodNameStackPtr - 1,
                 null,
                 false,
                 null,
                 true
             );
-            if ($firstArgumentStackPtr === false) {
+            if ($classNameStackPtr === false) {
                 return;
             }
-            $name = $tokens[$firstArgumentStackPtr]['content'];
-            if (!$this->isAValidNonFactoryName($name)) {
+            if ($tokens[$classNameStackPtr]['content'] === 'Mage') {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE,
                     $methodNameStackPtr + 1,
@@ -65,28 +62,5 @@ class ClassesPHPSniff implements Sniff
                 );
             }
         }
-    }
-
-    /**
-     * Check whether specified classes or module names correspond to a file according PSR-1 Standard.
-     *
-     * @param string $name
-     * @return bool
-     */
-    private function isAValidNonFactoryName(string $name): bool
-    {
-        if (strpos($name, 'Magento') === false) {
-            return true;
-        }
-
-        if (false === strpos($name, '\\')) {
-            return false;
-        }
-
-        if (preg_match('/^([A-Z\\\\][A-Za-z\d\\\\]+)+$/', $name) !== 1) {
-            return false;
-        }
-
-        return true;
     }
 }

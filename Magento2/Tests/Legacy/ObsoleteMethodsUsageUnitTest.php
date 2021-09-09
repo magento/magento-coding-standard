@@ -7,7 +7,7 @@ namespace Magento2\Tests\Legacy;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ClassesPHPUnitTest extends AbstractSniffUnitTest
+class ObsoleteMethodsUsageUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -15,8 +15,9 @@ class ClassesPHPUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            7 => 1,
-            9 => 1,
+            3 => 1,
+            5 => 1,
+            6 => 1,
         ];
     }
 
