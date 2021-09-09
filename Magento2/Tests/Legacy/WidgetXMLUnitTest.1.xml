@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets>
+    <widget type="/Deprecated">
+        <label translate="true">Catalog New Products List</label>
+        <description translate="true">List of Products that are set as New</description>
+        <supported_blocks>Deprecated
+            <block>
+                <block_name>Deprecated</block_name>
+            </block>
+        </supported_blocks>
+    </widget>
+</widgets>
+
