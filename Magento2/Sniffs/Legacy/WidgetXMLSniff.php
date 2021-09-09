@@ -11,7 +11,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
- * Test for obsolete nodes/attributes in the module.xml
+ * Test for obsolete nodes/attributes in the widget.xml
  */
 class WidgetXMLSniff implements Sniff
 {
@@ -39,29 +39,19 @@ class WidgetXMLSniff implements Sniff
         }
 
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
-        if ($xml === false) {
-            $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
-                1,
-                self::ERROR_CODE_XML
-            );
-        }
 
         $foundElements = $xml->xpath('/widgets/*[@type]');
-
         foreach ($foundElements as $element) {
-            if (property_exists($element->attributes(), 'type')) {
-                $type = $element['type'];
-                if (preg_match('/\//', $type)) {
-                    $phpcsFile->addError(
-                        "Factory name detected: {$type}.",
-                        dom_import_simplexml($element)->getLineNo() - 1,
-                        self::ERROR_CODE_FACTORY
-                    );
-                }
+            if (!property_exists($element->attributes(), 'type')) {
+                continue;
+            }
+            $type = $element['type'];
+            if (preg_match('/\//', $type)) {
+                $phpcsFile->addError(
+                    "Factory name detected: {$type}.",
+                    dom_import_simplexml($element)->getLineNo() - 1,
+                    self::ERROR_CODE_FACTORY
+                );
             }
         }
 
