@@ -38,7 +38,7 @@ class WidgetXMLSniff implements Sniff
             return;
         }
 
-        try{
+        try {
             $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         } catch (\Exception $e) {
             $phpcsFile->addError(
