@@ -41,14 +41,11 @@ class WidgetXMLSniff implements Sniff
         try {
             $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         } catch (\Exception $e) {
-            $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
-                $stackPtr,
-                self::ERROR_CODE_XML
-            );
+            $this->invalidXML($phpcsFile, $stackPtr);
+            return;
+        }
+        if ($xml === false) {
+            $this->invalidXML($phpcsFile, $stackPtr);
             return;
         }
 
@@ -85,6 +82,22 @@ class WidgetXMLSniff implements Sniff
                 self::ERROR_CODE_OBSOLETE
             );
         }
+    }
+
+    /**
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     */
+    protected function invalidXML(File $phpcsFile, int $stackPtr): void
+    {
+        $phpcsFile->addError(
+            sprintf(
+                "Couldn't parse contents of '%s', check that they are in valid XML format",
+                $phpcsFile->getFilename(),
+            ),
+            $stackPtr,
+            self::ERROR_CODE_XML
+        );
     }
 
     /**
