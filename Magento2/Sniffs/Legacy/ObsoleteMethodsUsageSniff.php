@@ -14,6 +14,9 @@ class ObsoleteMethodsUsageSniff implements Sniff
     
     private const ERROR_CODE = 'ObsoleteMethodsUsage';
 
+    /**
+     * @var string[]
+     */
     private $obsoleteStaticMethods = [
         'getModel', 'getSingleton', 'getResourceModel', 'getResourceSingleton',
         'addBlock', 'createBlock', 'getBlockSingleton',
