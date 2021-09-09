@@ -34,7 +34,7 @@ class WidgetXMLSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        if($stackPtr > 0) {
+        if ($stackPtr > 0) {
             return;
         }
 
