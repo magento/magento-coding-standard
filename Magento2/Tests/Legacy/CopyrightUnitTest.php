@@ -22,7 +22,7 @@ class CopyrightUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile = ''): array
     {
-        if ($testFile === 'CopyrightUnitTest.4.inc') {
+        if ($testFile === 'CopyrightUnitTest.4.inc' || $testFile === 'CopyrightUnitTest.5.inc') {
             return [];
         }
         
@@ -31,7 +31,7 @@ class CopyrightUnitTest extends AbstractSniffUnitTest
                 1 => 1,
             ];
         }
-        if ($testFile === 'CopyrightUnitTest.2.inc' || 'CopyrightUnitTest.3.inc') {
+        if ($testFile === 'CopyrightUnitTest.2.inc' || $testFile === 'CopyrightUnitTest.3.inc') {
             return [
                 3 => 1,
             ];
