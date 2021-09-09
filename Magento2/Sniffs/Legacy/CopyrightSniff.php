@@ -25,11 +25,14 @@ class CopyrightSniff implements Sniff
         return [T_OPEN_TAG];
     }
     
+    /**
+     * @inheritDoc
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $positionOpenTag = $phpcsFile->findPrevious(T_OPEN_TAG, $stackPtr - 1);
        
-        if ($positionOpenTag === false){
+        if ($positionOpenTag === false) {
             $positionComment = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $stackPtr);
             $contentFile = $phpcsFile->getTokens()[$positionComment]['content'];
             $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $contentFile);

@@ -629,6 +629,10 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Legacy.Copyright">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
