@@ -40,7 +40,7 @@ class CopyrightSniff implements Sniff
             if (strpos($contentFile, self::COPYRIGHT_MAGENTO_TEXT) === false || $adobeCopyrightFound === false) {
                 $phpcsFile->addWarningOnLine(
                     'Copyright is missing or has wrong format',
-                    null,
+                    $phpcsFile->getTokens()[$positionComment]['line'],
                     self::WARNING_CODE
                 );
             }
