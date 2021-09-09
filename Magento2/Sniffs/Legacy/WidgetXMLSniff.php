@@ -38,9 +38,22 @@ class WidgetXMLSniff implements Sniff
             return;
         }
 
-        $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
+        try{
+            $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
+        } catch (\Exception $e) {
+            $phpcsFile->addError(
+                sprintf(
+                    "Couldn't parse contents of '%s', check that they are in valid XML format",
+                    $phpcsFile->getFilename(),
+                ),
+                $stackPtr,
+                self::ERROR_CODE_XML
+            );
+            return;
+        }
 
         $foundElements = $xml->xpath('/widgets/*[@type]');
+
         foreach ($foundElements as $element) {
             if (!property_exists($element->attributes(), 'type')) {
                 continue;

@@ -14,11 +14,19 @@ class WidgetXMLUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList($testFile = '')
     {
-        return [
-            9 => 1,
-            12 => 1,
-            14 => 1,
-        ];
+        if ($testFile === 'WidgetXMLUnitTest.1.xml') {
+            return [
+                9 => 1,
+                12 => 1,
+                14 => 1,
+            ];
+        }
+        if ($testFile === 'WidgetXMLUnitTest.2.xml') {
+            return [
+                1 => 1
+            ];
+        }
+        return [];
     }
 
     /**
