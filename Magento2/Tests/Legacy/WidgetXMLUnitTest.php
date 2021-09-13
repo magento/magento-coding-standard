@@ -23,7 +23,9 @@ class WidgetXMLUnitTest extends AbstractSniffUnitTest
         }
         if ($testFile === 'WidgetXMLUnitTest.2.xml') {
             return [
-                1 => 1
+                9 => 1,
+                17 => 1,
+                24 => 1,
             ];
         }
         return [];

@@ -38,12 +38,8 @@ class WidgetXMLSniff implements Sniff
             return;
         }
 
-        try {
-            $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
-        } catch (\Exception $e) {
-            $this->invalidXML($phpcsFile, $stackPtr);
-            return;
-        }
+        $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
+
         if ($xml === false) {
             $this->invalidXML($phpcsFile, $stackPtr);
             return;
@@ -100,20 +96,6 @@ class WidgetXMLSniff implements Sniff
             $stackPtr,
             self::ERROR_CODE_XML
         );
-    }
-
-    /**
-     * Check if the element passed is in the currently sniffed line
-     *
-     * @param SimpleXMLElement $element
-     * @param int $stackPtr
-     * @return bool
-     */
-    private function elementIsCurrentlySniffedLine(SimpleXMLElement $element, int $stackPtr): bool
-    {
-        $node = dom_import_simplexml($element);
-
-        return $node->getLineNo() === $stackPtr + 1;
     }
 
     /**
