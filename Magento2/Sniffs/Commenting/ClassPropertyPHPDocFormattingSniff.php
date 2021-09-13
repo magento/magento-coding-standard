@@ -112,10 +112,11 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             if ($varParts[1]) {
                 return;
             }
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionAfterVar, 'AlreadyHaveMeaningFulNameVar');
+            $error = 'Short description must be before @var tag.';
+            $phpcsFile->addWarning($error, $isShortDescriptionAfterVar, 'ShortDescriptionAfterVar');
             return;
         }
+
         // Check if class has already have meaningful description before @var tag
         $isShortDescriptionPreviousVar = $phpcsFile->findPrevious(
             T_DOC_COMMENT_STRING,
@@ -125,23 +126,28 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             null,
             false
         );
-        if ($this->PHPDocFormattingValidator->providesMeaning(
-            $isShortDescriptionPreviousVar,
-            $commentStart,
-            $tokens
-        ) !== true) {
-            preg_match(
-                '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
-                $tokens[($foundVar + 2)]['content'],
-                $varParts
-            );
-            if ($varParts[1]) {
-                return;
-            }
+
+        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], $tokens[$string]['content']) !== false) {
             $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningFulNameVar');
+            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
             return;
         }
+        $re = '/
+                # Split camelCase "words". Two global alternatives. Either g1of2:
+                  (?<=[a-z])      # Position is after a lowercase,
+                  (?=[A-Z])       # and before an uppercase letter.
+                | (?<=[A-Z])      # Or g2of2; Position is after uppercase,
+                  (?=[A-Z][a-z])  # and before upper-then-lower case.
+                /x';
+        $varTagParts = preg_split($re, $tokens[$string]['content']);
+
+        foreach ($varTagParts as $part) {
+            if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], $part) === false) {
+                return;
+            }
+        }
+        $error = 'Short description duplicates class property name.';
+        $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
     }
 
     /**
