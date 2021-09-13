@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml,js/PHP"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -633,6 +633,10 @@
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
+        <severity>5</severity>
+        <type>warning</type>
     </rule>
     <rule ref="Magento2.Legacy.Copyright">
         <severity>5</severity>
