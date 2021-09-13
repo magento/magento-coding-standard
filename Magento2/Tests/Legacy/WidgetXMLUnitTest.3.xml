@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets>
+    <widget
+    >
+        <label
+                translate="true"
+        />
+        <description
+                translate="true"
+        >
+            List of Products that are set as New
+        </description>
+
+    </widget>
+</widgets>
+
