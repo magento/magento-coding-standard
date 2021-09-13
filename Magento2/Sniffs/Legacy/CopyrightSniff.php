@@ -30,22 +30,32 @@ class CopyrightSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $positionOpenTag = $phpcsFile->findPrevious(T_OPEN_TAG, $stackPtr - 1);
-       
-        if ($positionOpenTag === false) {
-            $positionComment = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $stackPtr);
-            $contentFile = $phpcsFile->getTokens()[$positionComment]['content'];
-            $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $contentFile);
-            
-            if (strpos($contentFile, self::COPYRIGHT_MAGENTO_TEXT) !== false || $adobeCopyrightFound) {
-                return;
-            } else {
-                $phpcsFile->addWarningOnLine(
-                    'Copyright is missing or has wrong format',
-                    $phpcsFile->getTokens()[$positionComment]['line'],
-                    self::WARNING_CODE
-                );
-            }
+        if ($phpcsFile->findPrevious(T_OPEN_TAG, $stackPtr - 1) !== false) {
+            return;
         }
+
+        $positionComment = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $stackPtr);
+
+        if ($positionComment === false) {
+            $phpcsFile->addWarning(
+                'Copyright is missing',
+                $stackPtr,
+                self::WARNING_CODE
+            );
+            return;
+        }
+
+        $content = $phpcsFile->getTokens()[$positionComment]['content'];
+        $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $content);
+
+        if (strpos($content, self::COPYRIGHT_MAGENTO_TEXT) !== false || $adobeCopyrightFound) {
+            return;
+        }
+
+        $phpcsFile->addWarningOnLine(
+            'Copyright is missing or has wrong format',
+            $phpcsFile->getTokens()[$positionComment]['line'],
+            self::WARNING_CODE
+        );
     }
 }
