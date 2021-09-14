@@ -131,16 +131,21 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             return;
         }
 
-        $regularExpression = '/
-                # Split camelCase "words". Two global alternatives. Either g1of2:
-                  (?<=[a-z])      # Position is after a lowercase,
-                  (?=[A-Z])       # and before an uppercase letter.
-                | (?<=[A-Z])      # Or g2of2; Position is after uppercase,
-                  (?=[A-Z][a-z])  # and before upper-then-lower case.
-                /x';
-        $varTagParts = preg_split($regularExpression, $tokens[$string]['content']);
+        $propertyNamePosition = $phpcsFile->findNext(
+            T_VARIABLE,
+            $foundVar,
+            null,
+            false,
+            null,
+            false
+        );
+        if ($propertyNamePosition === false) {
+            return;
+        };
+        $propertyName = trim($tokens[$propertyNamePosition]['content'], '$');
+        $propertyNameParts = array_filter(preg_split('/(?=[A-Z])/', $propertyName));
 
-        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode('', $varTagParts)) !== false) {
+        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode('', $propertyNameParts)) !== false) {
             $error = 'Short description duplicates class property name.';
             $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
         }
