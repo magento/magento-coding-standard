@@ -3,7 +3,7 @@
     <description>Magento Coding Standard</description>
 
     <!-- File extensions to be checked. -->
-    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml"/>
+    <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml,js/PHP"/>
 
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.Functions.CallTimePassByReference">
@@ -106,6 +106,12 @@
         <type>error</type>
     </rule>
     <rule ref="Magento2.Legacy.AbstractBlock">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
+    <rule ref="Magento2.Legacy.EmailTemplate.FoundObsoleteEmailDirective">
+        <include-pattern>view/email/*.html</include-pattern>
+        <include-pattern>view/*/email/*.html</include-pattern>
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -238,6 +244,11 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Html.HtmlDirective">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.WidgetXML.FoundObsoleteNode">
+        <include-pattern>*\/widget.xml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -622,6 +633,14 @@
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.Copyright">
+        <severity>5</severity>
+        <type>warning</type>
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>

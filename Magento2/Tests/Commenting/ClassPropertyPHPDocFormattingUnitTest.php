@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Tests\Commenting;
@@ -32,7 +32,8 @@ class ClassPropertyPHPDocFormattingUnitTest extends AbstractSniffUnitTest
             49 => 1,
             56 => 1,
             63 => 1,
-            68 => 1
+            68 => 1,
+            75 => 1,
         ];
     }
 }
