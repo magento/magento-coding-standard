@@ -65,14 +65,7 @@ class Bar {
     private $variableName;
 
     /**
-     * Some more invalid description with test which is the same name as the variable and is not allowed
-     *
-     * @var test
-     */
-    protected $test;
-
-    /**
-     * Formatted Correctly Protected Class Member
+     * Correctly Formatted Protected Class Member
      *
      * @var correctlyFormattedProtectedClassMember
      */
@@ -120,4 +113,11 @@ class correctlyFormattedClassMemberDocBlock
      * @var RulePool
      */
     protected $rulePool;
+
+    /**
+     * A description that includes test which is the same name as the variable is allowed
+     *
+     * @var test
+     */
+    protected $test;
 }
