@@ -14,14 +14,14 @@ use PHP_CodeSniffer\Files\File;
 class SuperglobalSniff implements Sniff
 {
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */
     protected $warningMessage = 'Direct use of %s Superglobal detected.';
 
     /**
-     * Representation of error.
+     * String representation of error.
      *
      * @var string
      */

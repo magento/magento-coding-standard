@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class ReturnValueCheckSniff implements Sniff
 {
     /**
-     * Representation of error.
+     * String representation of error.
      *
      * @var string
      */
@@ -46,6 +46,8 @@ class ReturnValueCheckSniff implements Sniff
     protected $tokens = [];
 
     /**
+     * PHP_CodeSniffer file.
+     *
      * @var File
      */
     protected $file;

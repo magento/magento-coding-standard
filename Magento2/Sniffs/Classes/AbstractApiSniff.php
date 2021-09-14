@@ -15,7 +15,7 @@ class AbstractApiSniff implements Sniff
 {
 
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */

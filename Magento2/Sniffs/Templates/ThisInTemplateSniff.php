@@ -21,7 +21,7 @@ class ThisInTemplateSniff implements Sniff
     protected $warningCodeFoundHelper = 'FoundHelper';
 
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */
@@ -35,7 +35,7 @@ class ThisInTemplateSniff implements Sniff
     protected $warningCodeFoundThis = 'FoundThis';
 
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */

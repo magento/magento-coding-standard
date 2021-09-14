@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class StaticFunctionSniff implements Sniff
 {
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */

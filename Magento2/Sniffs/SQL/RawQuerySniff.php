@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Util\Tokens;
 class RawQuerySniff implements Sniff
 {
     /**
-     * Representation of warning.
+     * String representation of warning.
      *
      * @var string
      */

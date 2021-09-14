@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class MageEntitySniff implements Sniff
 {
     /**
-     * Representation of error.
+     * String representation of error.
      *
      * @var string
      */
