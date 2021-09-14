@@ -65,11 +65,18 @@ class Bar {
     private $variableName;
 
     /**
-     * Some more invalid description
+     * Correctly Formatted Protected Class Member
      *
-     * @var test
+     * @var correctlyFormattedProtectedClassMember
      */
-    protected $test;
+    protected $correctlyFormattedProtectedClassMember;
+
+    /**
+     * anotherCorrectlyFormattedProtectedClassMember
+     *
+     * @var anotherCorrectlyFormattedProtectedClassMember
+     */
+    protected $anotherCorrectlyFormattedProtectedClassMember;
 }
 
 class correctlyFormattedClassMemberDocBlock
@@ -99,4 +106,18 @@ class correctlyFormattedClassMemberDocBlock
      *      \FooObject_TEST_C
      */
     private $testObject;
+
+    /**
+     * Fallback factory
+     *
+     * @var RulePool
+     */
+    protected $rulePool;
+
+    /**
+     * A description that includes test which is the same name as the variable is allowed
+     *
+     * @var test
+     */
+    protected $test;
 }

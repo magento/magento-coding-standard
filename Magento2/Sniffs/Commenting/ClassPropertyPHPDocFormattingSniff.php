@@ -112,10 +112,11 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             if ($varParts[1]) {
                 return;
             }
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionAfterVar, 'AlreadyHaveMeaningFulNameVar');
+            $error = 'Short description must be before @var tag.';
+            $phpcsFile->addWarning($error, $isShortDescriptionAfterVar, 'ShortDescriptionAfterVar');
             return;
         }
+
         // Check if class has already have meaningful description before @var tag
         $isShortDescriptionPreviousVar = $phpcsFile->findPrevious(
             T_DOC_COMMENT_STRING,
@@ -125,22 +126,36 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             null,
             false
         );
-        if ($this->PHPDocFormattingValidator->providesMeaning(
-            $isShortDescriptionPreviousVar,
-            $commentStart,
-            $tokens
-        ) !== true) {
-            preg_match(
-                '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
-                $tokens[($foundVar + 2)]['content'],
-                $varParts
-            );
-            if ($varParts[1]) {
-                return;
-            }
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningFulNameVar');
+
+        if ($isShortDescriptionPreviousVar === false) {
             return;
+        }
+
+        $propertyNamePosition = $phpcsFile->findNext(
+            T_VARIABLE,
+            $foundVar,
+            null,
+            false,
+            null,
+            false
+        );
+        if ($propertyNamePosition === false) {
+            return;
+        };
+        $propertyName = trim($tokens[$propertyNamePosition]['content'], '$');
+        $shortDescription = strtolower($tokens[$isShortDescriptionPreviousVar]['content']);
+
+        if ($shortDescription === strtolower($propertyName)) {
+            $error = 'Short description duplicates class property name.';
+            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
+            return;
+        }
+
+        $propertyNameParts = array_filter(preg_split('/(?=[A-Z])/', $propertyName));
+
+        if ($shortDescription === strtolower(implode(' ', $propertyNameParts))) {
+            $error = 'Short description duplicates class property name.';
+            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
         }
     }
 
