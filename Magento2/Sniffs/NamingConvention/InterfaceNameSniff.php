@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class InterfaceNameSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Representation of warning.
      *
      * @var string
      */

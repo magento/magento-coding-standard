@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Util\Tokens;
 class StringConcatSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Representation of  warning.
      *
      * @var string
      */

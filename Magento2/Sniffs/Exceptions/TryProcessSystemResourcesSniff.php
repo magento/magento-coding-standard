@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Files\File;
 class TryProcessSystemResourcesSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Representation of  warning.
      *
      * @var string
      */

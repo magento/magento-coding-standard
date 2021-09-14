@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class DirectThrowSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Representation of  warning.
      * phpcs:disable Generic.Files.LineLength.TooLong
      * @var string
      */

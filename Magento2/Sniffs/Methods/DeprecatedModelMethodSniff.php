@@ -16,7 +16,7 @@ class DeprecatedModelMethodSniff implements Sniff
     const RESOURCE_METHOD = "getResource";
 
     /**
-     * String representation of warning.
+     * Representation of  warning.
      *
      * @var string
      */

@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Util\Tokens;
 class ExecutableRegExSniff implements Sniff
 {
     /**
-     * String representation of error.
+     * Representation of  error.
      *
      * phpcs:disable Generic.Files.LineLength
      *

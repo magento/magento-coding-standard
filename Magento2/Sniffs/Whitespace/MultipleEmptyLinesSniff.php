@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class MultipleEmptyLinesSniff implements Sniff
 {
     /**
-     * String representation of warning.
+     * Representation of  warning.
      *
      * @var string
      */
