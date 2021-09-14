@@ -140,11 +140,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
                 /x';
         $varTagParts = preg_split($regularExpression, $tokens[$string]['content']);
 
-        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode('', $varTagParts)) === false) {
-            return;
+        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode('', $varTagParts)) !== false) {
+            $error = 'Short description duplicates class property name.';
+            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
         }
-        $error = 'Short description duplicates class property name.';
-        $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
     }
 
     /**
