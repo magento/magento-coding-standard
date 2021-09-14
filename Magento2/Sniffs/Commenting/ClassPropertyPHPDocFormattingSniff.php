@@ -127,6 +127,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             false
         );
 
+        if ($isShortDescriptionPreviousVar === false) {
+            return;
+        }
+
         if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], $tokens[$string]['content']) !== false) {
             $error = 'Short description duplicates class property name.';
             $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
@@ -139,7 +143,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
                 | (?<=[A-Z])      # Or g2of2; Position is after uppercase,
                   (?=[A-Z][a-z])  # and before upper-then-lower case.
                 /x';
-        $varTagParts = preg_split($re, $tokens[$string]['content']);
+        $varTagParts = preg_split($regularExpression, $tokens[$string]['content']);
 
             if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode(' ', $varTagParts)) === false) {
                 return;
