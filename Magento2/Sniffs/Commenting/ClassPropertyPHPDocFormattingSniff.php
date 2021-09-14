@@ -132,7 +132,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
             return;
         }
-        $re = '/
+        $regularExpression = '/
                 # Split camelCase "words". Two global alternatives. Either g1of2:
                   (?<=[a-z])      # Position is after a lowercase,
                   (?=[A-Z])       # and before an uppercase letter.
