@@ -75,7 +75,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
                         'Avoid using self-closing tag with non-void html element'
                         . ' - "' . $match[0]  . PHP_EOL,
                         null,
-                        'HtmlTemplates.Tag.SelfClosing'
+                        'HtmlSelfClosingNonVoidTag'
                     );
                 }
             }
