@@ -131,11 +131,6 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             return;
         }
 
-        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], $tokens[$string]['content']) !== false) {
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
-            return;
-        }
         $regularExpression = '/
                 # Split camelCase "words". Two global alternatives. Either g1of2:
                   (?<=[a-z])      # Position is after a lowercase,
@@ -145,9 +140,9 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
                 /x';
         $varTagParts = preg_split($regularExpression, $tokens[$string]['content']);
 
-            if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode(' ', $varTagParts)) === false) {
-                return;
-            }
+        if (stripos($tokens[$isShortDescriptionPreviousVar]['content'], implode('', $varTagParts)) === false) {
+            return;
+        }
         $error = 'Short description duplicates class property name.';
         $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
     }
