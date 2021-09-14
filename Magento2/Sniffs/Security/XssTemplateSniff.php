@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Files\File;
 class XssTemplateSniff implements Sniff
 {
     /**
-     * Representation of  warning.
+     * Representation of warning.
      *
      * @var string
      */
@@ -85,8 +85,6 @@ class XssTemplateSniff implements Sniff
     private $statements = [];
 
     /**
-     * PHP_CodeSniffer file.
-     *
      * @var File
      */
     private $file;

@@ -14,14 +14,14 @@ use PHP_CodeSniffer\Files\File;
 class LanguageConstructSniff implements Sniff
 {
     /**
-     * Representation of  error.
+     * Representation of error.
      *
      * @var string
      */
     protected $errorMessage = 'Use of %s language construct is discouraged.';
 
     /**
-     * Representation of  backtick error.
+     * Representation of backtick error.
      *
      * phpcs:disable Generic.Files.LineLength
      *

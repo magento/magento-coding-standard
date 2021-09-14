@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Files\File;
 class ThrowCatchSniff implements Sniff
 {
     /**
-     * Representation of  warning.
+     * Representation of warning.
      *
      * @var string
      */

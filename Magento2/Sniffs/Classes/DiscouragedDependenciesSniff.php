@@ -18,7 +18,7 @@ class DiscouragedDependenciesSniff implements Sniff
     const CONSTRUCT_METHOD_NAME = '__construct';
 
     /**
-     * Representation of  warning.
+     * Representation of warning.
      *
      * @var string
      */
