@@ -143,8 +143,9 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             return;
         };
         $propertyName = trim($tokens[$propertyNamePosition]['content'], '$');
+        $shortDescription = strtolower($tokens[$isShortDescriptionPreviousVar]['content']);
 
-        if (strtolower($tokens[$isShortDescriptionPreviousVar]['content']) === strtolower($propertyName)) {
+        if ($shortDescription === strtolower($propertyName)) {
             $error = 'Short description duplicates class property name.';
             $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
             return;
@@ -152,7 +153,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 
         $propertyNameParts = array_filter(preg_split('/(?=[A-Z])/', $propertyName));
 
-        if (strtolower($tokens[$isShortDescriptionPreviousVar]['content']) === strtolower(implode(' ', $propertyNameParts))) {
+        if ($shortDescription === strtolower(implode(' ', $propertyNameParts))) {
             $error = 'Short description duplicates class property name.';
             $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
         }
