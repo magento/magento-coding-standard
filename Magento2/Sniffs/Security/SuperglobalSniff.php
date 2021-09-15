@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Sniffs\Security;
@@ -42,7 +42,7 @@ class SuperglobalSniff implements Sniff
     protected $errorCode = 'SuperglobalUsageError';
 
     /**
-     * @inheritdoc
+     * @var array
      */
     protected $superGlobalErrors = [
         '$GLOBALS',
@@ -55,7 +55,7 @@ class SuperglobalSniff implements Sniff
     ];
 
     /**
-     * @inheritdoc
+     * @var array
      */
     protected $superGlobalWarning = [
         '$_COOKIE', //sometimes need to get list of all cookies array and there are no methods to do that in M2

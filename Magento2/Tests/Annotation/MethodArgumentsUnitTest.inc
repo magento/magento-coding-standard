@@ -22,3 +22,14 @@ public function setExtensionAs(\Magento\Catalog\Api\Data\CategoryExtensionInterf
 {
     return $this->_setExtensionAttributes($extensionAttributes);
 }
+
+/**
+ * Short description of method
+ *
+ * @param int
+ * @return int
+ */
+public function invalidDocBlockShouldNotCauseFatalErrorInSniff(int $number): int
+{
+    return $number;
+}

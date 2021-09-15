@@ -39,8 +39,7 @@ class IndentationSniff implements Sniff
      */
     public $maxIndentLevel = 3;
 
-    /** Skip codes that can be detected by sniffer incorrectly
-     *
+    /**
      * @var array
      */
     private $styleCodesToSkip = [T_ASPERAND, T_COLON, T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS];

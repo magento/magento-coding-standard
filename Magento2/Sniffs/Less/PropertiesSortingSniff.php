@@ -25,15 +25,11 @@ class PropertiesSortingSniff implements Sniff
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS];
 
     /**
-     * List of properties that belong to class
-     *
      * @var array
      */
     private $properties = [];
 
     /**
-     * Skip symbols that can be detected by sniffer incorrectly
-     *
      * @var array
      */
     private $styleSymbolsToSkip = [

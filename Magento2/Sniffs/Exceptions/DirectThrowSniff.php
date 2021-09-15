@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Sniffs\Exceptions;
@@ -16,6 +16,7 @@ class DirectThrowSniff implements Sniff
     /**
      * String representation of warning.
      * phpcs:disable Generic.Files.LineLength.TooLong
+     * @var string
      */
     protected $warningMessage = 'Direct throw of generic Exception is discouraged. Use context specific instead.';
     //phpcs:enable

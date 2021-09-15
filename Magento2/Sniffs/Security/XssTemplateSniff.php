@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Sniffs\Security;
@@ -50,8 +50,6 @@ class XssTemplateSniff implements Sniff
     ];
 
     /**
-     * Allowed method name - {suffix}Html{postfix}()
-     *
      * @var string
      */
     protected $methodNameContains = 'html';

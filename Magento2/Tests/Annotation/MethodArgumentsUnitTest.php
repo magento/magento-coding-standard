@@ -16,10 +16,11 @@ class MethodArgumentsUnitTest extends AbstractSniffUnitTest
     {
         return [
             12 => 1,
-            21 => 1
+            21 => 1,
+            32 => 1,
         ];
     }
-    
+
     /**
      * @inheritdoc
      */

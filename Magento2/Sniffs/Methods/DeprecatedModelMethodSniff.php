@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Sniffs\Methods;
@@ -39,8 +39,6 @@ class DeprecatedModelMethodSniff implements Sniff
         'load',
         'delete'
     ];
-
-    protected $severity = 0;
 
     /**
      * @inheritdoc
