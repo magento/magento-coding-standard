@@ -1,8 +1,9 @@
 <?php
 /**
- * Copyright © Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -114,6 +115,8 @@ class ClassesConfigurationSniff implements Sniff
     }
 
     /**
+     * Parse an XML for references to PHP class names in selected tags or attributes
+     *
      * @param SimpleXMLElement $xml
      * @return array
      */
@@ -137,7 +140,7 @@ class ClassesConfigurationSniff implements Sniff
         );
 
         $classes = array_map(
-            function(ExtendedNode $extendedNode) {
+            function (ExtendedNode $extendedNode) {
                 $extendedNode->value = explode('::', trim($extendedNode->value))[0];
                 return $extendedNode;
             },
