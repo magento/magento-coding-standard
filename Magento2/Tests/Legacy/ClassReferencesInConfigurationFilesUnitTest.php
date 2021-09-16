@@ -7,31 +7,31 @@ namespace Magento2\Tests\Legacy;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ClassesConfigurationUnitTest extends AbstractSniffUnitTest
+class ClassReferencesInConfigurationFilesUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
      */
     public function getErrorList($testFile = '')
     {
-        if ($testFile === 'ClassesConfigurationUnitTest.1.xml') {
+        if ($testFile === 'ClassReferencesInConfigurationFilesUnitTest.1.xml') {
             return [
                 22 => 1,
                 40 => 1,
             ];
         }
-        if ($testFile === 'ClassesConfigurationUnitTest.2.xml') {
+        if ($testFile === 'ClassReferencesInConfigurationFilesUnitTest.2.xml') {
             return [
                 22 => 1,
                 42 => 1,
             ];
         }
-        if ($testFile === 'ClassesConfigurationUnitTest.3.xml') {
+        if ($testFile === 'ClassReferencesInConfigurationFilesUnitTest.3.xml') {
             return [
                 10 => 1,
             ];
         }
-        if ($testFile === 'ClassesConfigurationUnitTest.4.xml') {
+        if ($testFile === 'ClassReferencesInConfigurationFilesUnitTest.4.xml') {
             return [
                 10 => 1,
             ];

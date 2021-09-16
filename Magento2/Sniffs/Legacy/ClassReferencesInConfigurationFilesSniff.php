@@ -11,7 +11,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 use SimpleXMLElement;
 
-class ClassesConfigurationSniff implements Sniff
+class ClassReferencesInConfigurationFilesSniff implements Sniff
 {
     private const ERROR_MESSAGE_CONFIG = 'Attribute does not follow expected format';
     private const ERROR_CODE_CONFIG = 'WrongXML';
