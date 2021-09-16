@@ -21,9 +21,18 @@ class Good
     /**
      * @return Model
      */
-    public function otherMethodThatCallsGetInstance(): void
+    public function otherMethodThatCallsGetInstanceBad(): void
     {
         $model = ObjectManager::getInstance()->get(Model::class);
+        $model->something();
+    }
+
+    /**
+     * @return Model
+     */
+    public function otherMethodThatCallsGetInstanceGood(): void
+    {
+        $model = $this->model ?? ObjectManager::getInstance()->get(Model::class);
         $model->something();
     }
 }
