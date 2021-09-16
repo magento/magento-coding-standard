@@ -26,6 +26,12 @@ class ClassesConfigurationUnitTest extends AbstractSniffUnitTest
                 42 => 1,
             ];
         }
+        if ($testFile === 'ClassesConfigurationUnitTest.3.xml') {
+            return [
+                10 => 1,
+            ];
+        }
+        return [];
     }
 
     /**
