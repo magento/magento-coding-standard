@@ -52,20 +52,19 @@ class ClassesConfigurationSniff implements Sniff
         }
 
         $classes = $this->collectClassesInConfig($xml);
-        $this->assertNonFactoryName($phpcsFile, $stackPtr, $classes);
+        $this->assertNonFactoryName($phpcsFile, $classes);
 
         $modules = $this->getXmlAttributeValues($xml, '//@module', 'module');
-        $this->assertNonFactoryNameModule($phpcsFile, $stackPtr, $modules);
+        $this->assertNonFactoryNameModule($phpcsFile, $modules);
     }
 
     /**
      * Check whether specified classes or module names correspond to a file according PSR-1 Standard.
      *
      * @param File $phpcsFile
-     * @param int $stackPtr
      * @param ExtendedNode[] $elements
      */
-    private function assertNonFactoryName(File $phpcsFile, int $stackPtr, array $elements)
+    private function assertNonFactoryName(File $phpcsFile, array $elements)
     {
         foreach ($elements as $element) {
             if (stripos($element->value, 'Magento') === false) {
@@ -85,10 +84,9 @@ class ClassesConfigurationSniff implements Sniff
      * Check whether specified classes or module names correspond to a file according PSR-1 Standard.
      *
      * @param File $phpcsFile
-     * @param int $stackPtr
      * @param ExtendedNode[] $classes
      */
-    private function assertNonFactoryNameModule(File $phpcsFile, int $stackPtr, array $classes)
+    private function assertNonFactoryNameModule(File $phpcsFile, array $classes)
     {
         foreach ($classes as $element) {
             if (preg_match('/^([A-Z][A-Za-z\d_]+)+$/', $element->value) !== 1) {
