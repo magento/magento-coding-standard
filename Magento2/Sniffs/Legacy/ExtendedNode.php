@@ -6,7 +6,6 @@
 
 namespace Magento2\Sniffs\Legacy;
 
-use DOMElement;
 use SimpleXMLElement;
 
 class ExtendedNode
@@ -17,9 +16,9 @@ class ExtendedNode
     public $value;
 
     /**
-     * @var DOMElement
+     * @var int
      */
-    public $element;
+    public $lineNumber;
 
     /**
      * @param string $value
@@ -28,6 +27,6 @@ class ExtendedNode
     public function __construct(string $value, SimpleXMLElement $element)
     {
         $this->value = $value;
-        $this->element = dom_import_simplexml($element);
+        $this->lineNumber = dom_import_simplexml($element)->getLineNo();
     }
 }

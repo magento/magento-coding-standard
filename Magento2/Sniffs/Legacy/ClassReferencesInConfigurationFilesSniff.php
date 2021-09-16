@@ -74,7 +74,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (preg_match('/^([A-Z][a-z\d\\\\]+)+$/', $element->value) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_CONFIG,
-                    $element->element->getLineNo() - 1,
+                    $element->lineNumber - 1,
                     self::ERROR_CODE_CONFIG,
                 );
             }
@@ -93,7 +93,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (preg_match('/^([A-Z][A-Za-z\d_]+)+$/', $element->value) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_MODULE,
-                    $element->element->getLineNo() - 1,
+                    $element->lineNumber - 1,
                     self::ERROR_CODE_MODULE,
                 );
             }
