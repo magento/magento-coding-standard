@@ -17,6 +17,10 @@ class ExtendedNode
      */
     public $element;
 
+    /**
+     * @param string $value
+     * @param SimpleXMLElement $element
+     */
     public function __construct(string $value, SimpleXMLElement $element)
     {
         $this->value = $value;
