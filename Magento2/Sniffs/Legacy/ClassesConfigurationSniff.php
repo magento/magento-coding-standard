@@ -128,14 +128,15 @@ class ClassesConfigurationSniff implements Sniff
             /config//resource_adapter | /config/*[not(name()="sections")]//class[not(ancestor::observers)]
                 | //model[not(parent::connection)] | //backend_model | //source_model | //price_model
                 | //model_token | //writer_model | //clone_model | //frontend_model | //working_model
-                | //admin_renderer | //renderer | /config/*/di/preferences/*'
+                | //admin_renderer | //renderer'
         );
         $classes = array_merge($classes, $this->getXmlAttributeValues($xml, '//@backend_model', 'backend_model'));
+        $classes = array_merge($classes, $this->getXmlAttributeValues($xml, '/config//preference', 'type'));
         $classes = array_merge(
             $classes,
             $this->getXmlNodeNames(
                 $xml,
-                '/logging/*/expected_models/* | /logging/*/actions/*/expected_models/* | /config/*/di/preferences/*'
+                '/logging/*/expected_models/* | /logging/*/actions/*/expected_models/*'
             )
         );
 
