@@ -64,7 +64,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     }
 
     /**
-     * Check whether specified classes or module names correspond to a file according PSR-1 Standard.
+     * Check whether specified class names are right according PSR-1 Standard.
      *
      * @param File $phpcsFile
      * @param ExtendedNode[] $elements
@@ -86,7 +86,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     }
 
     /**
-     * Check whether specified classes or module names correspond to a file according PSR-1 Standard.
+     * Check whether specified class names in modules are right according PSR-1 Standard.
      *
      * @param File $phpcsFile
      * @param ExtendedNode[] $classes
