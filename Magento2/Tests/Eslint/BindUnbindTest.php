@@ -14,7 +14,7 @@ namespace Magento2\Tests\Eslint;
  */
 class BindUnbindTest extends AbstractEslintTestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $this->assertFileContainsError(
             'BindUnbindTest.js',

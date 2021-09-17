@@ -20,7 +20,7 @@ abstract class AbstractEslintTestCase extends TestCase
      * @param string $testFile
      * @param array $expectedMessages
      */
-    protected function assertFileContainsError(string $testFile, array $expectedMessages)
+    protected function assertFileContainsError(string $testFile, array $expectedMessages): void
     {
         exec(
             'npm run eslint -- Magento2/Tests/Eslint/' . $testFile,

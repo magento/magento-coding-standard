@@ -107,9 +107,9 @@ You need to run the following command to install all the necessary packages desc
 npm install
 ```
 
-After that, you can just execute the ESLint tests simply running:
+After that, you can just execute ESLint as follows:
 ```bash
-npm run eslint -- eslint/rules
+npm run eslint -- path/to/analyze
 ```
 ## License
 

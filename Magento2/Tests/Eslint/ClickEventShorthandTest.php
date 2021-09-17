@@ -14,7 +14,7 @@ namespace Magento2\Tests\Eslint;
  */
 class ClickEventShorthandTest extends AbstractEslintTestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $this->assertFileContainsError(
             'ClickEventShorthand.js',
