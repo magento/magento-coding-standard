@@ -25,6 +25,9 @@ jobs:
     name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:
+    - name: Setup node
+      uses: actions/setup-node@v2
+
     - uses: actions/checkout@v2
 
     - name: Setup PHP
@@ -33,6 +36,11 @@ jobs:
         php-version: ${{ matrix.php-version }}
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install dependencies
+      run: npm install
+    - name: Run ESLint
+      run: npm run eslint -- eslint/rules
 
     - name: Validate composer
       run: composer validate
