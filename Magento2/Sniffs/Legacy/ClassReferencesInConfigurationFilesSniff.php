@@ -175,17 +175,17 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
 
     /**
      * Extract value from the specified $extractFrom which exist in the XML path
-     * 
+     *
      * @param SimpleXMLElement $xml
      * @param string $xPath
      * @param int $extractFrom
-     * @param string $attribute
+     * @param string $attr
      * @return array
      */
-    private function getValuesFromXml(SimpleXMLElement $xml, string $xPath, int $extractFrom, string $attribute = ''): array
+    private function getValuesFromXml(SimpleXMLElement $xml, string $xPath, int $extractFrom, string $attr = ''): array
     {
         $nodes = $xml->xpath($xPath) ?: [];
-        return array_map(function($item) use ($extractFrom, $attribute) {
+        return array_map(function ($item) use ($extractFrom, $attr) {
             switch ($extractFrom) {
                 case self::FROM_CONTENT:
                     return new ExtendedNode((string)$item, $item);
@@ -193,8 +193,8 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
                     return new ExtendedNode($item->getName(), $item);
                 case self::FROM_ATTRIBUTE:
                     $nodeArray = (array)$item;
-                    if (isset($nodeArray['@attributes'][$attribute])) {
-                        return new ExtendedNode($nodeArray['@attributes'][$attribute], $item);
+                    if (isset($nodeArray['@attributes'][$attr])) {
+                        return new ExtendedNode($nodeArray['@attributes'][$attr], $item);
                     }
             }
         }, $nodes);
