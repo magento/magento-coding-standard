@@ -18,6 +18,10 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     private const ERROR_MESSAGE_MODULE = 'Attribute does not follow expected format in module';
     private const ERROR_CODE_MODULE = 'WrongXMLModule';
 
+    private const FROM_CONTENT = 1;
+    private const FROM_NAME = 2;
+    private const FROM_ATTRIBUTE = 3;
+
     /**
      * @inheritdoc
      */
@@ -55,7 +59,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         $classes = $this->collectClassesInConfig($xml);
         $this->assertNonFactoryName($phpcsFile, $classes);
 
-        $modules = $this->getXmlAttributeValues($xml, '//@module', 'module');
+        $modules = $this->getValuesFromXml($xml, '//@module', self::FROM_ATTRIBUTE, 'module');
         $this->assertNonFactoryNameModule($phpcsFile, $modules);
     }
 
@@ -122,21 +126,39 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      */
     private function collectClassesInConfig(SimpleXMLElement $xml): array
     {
-        $classes = $this->getXmlNode(
+        $classes = $this->getValuesFromXml(
             $xml,
             '
             /config//resource_adapter | /config/*[not(name()="sections")]//class[not(ancestor::observers)]
                 | //model[not(parent::connection)] | //backend_model | //source_model | //price_model
                 | //model_token | //writer_model | //clone_model | //frontend_model | //working_model
-                | //admin_renderer | //renderer'
+                | //admin_renderer | //renderer',
+            self::FROM_CONTENT
         );
-        $classes = array_merge($classes, $this->getXmlAttributeValues($xml, '//@backend_model', 'backend_model'));
-        $classes = array_merge($classes, $this->getXmlAttributeValues($xml, '/config//preference', 'type'));
         $classes = array_merge(
             $classes,
-            $this->getXmlNodeNames(
+            $this->getValuesFromXml(
                 $xml,
-                '/logging/*/expected_models/* | /logging/*/actions/*/expected_models/*'
+                '//@backend_model',
+                self::FROM_ATTRIBUTE,
+                'backend_model'
+            )
+        );
+        $classes = array_merge(
+            $classes,
+            $this->getValuesFromXml(
+                $xml,
+                '/config//preference',
+                self::FROM_ATTRIBUTE,
+                'type'
+            )
+        );
+        $classes = array_merge(
+            $classes,
+            $this->getValuesFromXml(
+                $xml,
+                '/logging/*/expected_models/* | /logging/*/actions/*/expected_models/*',
+                self::FROM_NAME
             )
         );
 
@@ -147,70 +169,34 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             },
             $classes
         );
-        $classes = array_filter(
-            $classes,
-            function ($value) {
-                return !empty($value);
-            }
-        );
 
         return $classes;
     }
 
     /**
-     * Get XML node text values using specified xPath
-     *
-     * The node must contain specified attribute
-     *
+     * Extract value from the specified $extractFrom which exist in the XML path
+     * 
      * @param SimpleXMLElement $xml
      * @param string $xPath
+     * @param int $extractFrom
+     * @param string $attribute
      * @return array
      */
-    private function getXmlNode(SimpleXMLElement $xml, string $xPath): array
+    private function getValuesFromXml(SimpleXMLElement $xml, string $xPath, int $extractFrom, string $attribute = ''): array
     {
-        $result = [];
         $nodes = $xml->xpath($xPath) ?: [];
-        foreach ($nodes as $node) {
-            $result[] = new ExtendedNode((string)$node, $node);
-        }
-        return $result;
-    }
-
-    /**
-     * Get XML node names using specified xPath
-     *
-     * @param SimpleXMLElement $xml
-     * @param string $xpath
-     * @return array
-     */
-    private function getXmlNodeNames(SimpleXMLElement $xml, string $xpath): array
-    {
-        $result = [];
-        $nodes = $xml->xpath($xpath) ?: [];
-        foreach ($nodes as $node) {
-            $result[] = new ExtendedNode($node->getName(), $node);
-        }
-        return $result;
-    }
-
-    /**
-     * Get XML node attribute values using specified xPath
-     *
-     * @param SimpleXMLElement $xml
-     * @param string $xPath
-     * @param string $attributeName
-     * @return array
-     */
-    private function getXmlAttributeValues(SimpleXMLElement $xml, string $xPath, string $attributeName): array
-    {
-        $result = [];
-        $nodes = $xml->xpath($xPath) ?: [];
-        foreach ($nodes as $node) {
-            $nodeArray = (array)$node;
-            if (isset($nodeArray['@attributes'][$attributeName])) {
-                $result[] = new ExtendedNode($nodeArray['@attributes'][$attributeName], $node);
+        return array_map(function($item) use ($extractFrom, $attribute) {
+            switch ($extractFrom) {
+                case self::FROM_CONTENT:
+                    return new ExtendedNode((string)$item, $item);
+                case self::FROM_NAME:
+                    return new ExtendedNode($item->getName(), $item);
+                case self::FROM_ATTRIBUTE:
+                    $nodeArray = (array)$item;
+                    if (isset($nodeArray['@attributes'][$attribute])) {
+                        return new ExtendedNode($nodeArray['@attributes'][$attribute], $item);
+                    }
             }
-        }
-        return $result;
+        }, $nodes);
     }
 }
