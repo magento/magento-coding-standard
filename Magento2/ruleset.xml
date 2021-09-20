@@ -121,7 +121,7 @@
         <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
         <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
         <severity>10</severity>
-        <type>warning</type>
+        <type>error</type>
     </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
