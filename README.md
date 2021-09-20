@@ -99,6 +99,18 @@ Also, verify that the sniffer code itself is written according to the Magento Co
 vendor/bin/phpcs --standard=Magento2 Magento2/ --extensions=php
 ```
 
+### ESLint testing
+Prerequisites: [Node.js](https://nodejs.org/) (`^12.22.0`, `^14.17.0`, or `>=16.0.0`).
+
+You need to run the following command to install all the necessary packages described in the `package.json` file:
+```bash
+npm install
+```
+
+After that, you can just execute ESLint as follows:
+```bash
+npm run eslint -- path/to/analyze
+```
 ## License
 
 Each Magento source file included in this distribution is licensed under the OSL-3.0 license.
