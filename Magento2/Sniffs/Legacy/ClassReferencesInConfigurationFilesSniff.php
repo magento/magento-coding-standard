@@ -16,11 +16,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     private const ERROR_MESSAGE_CONFIG = 'Incorrect format of PHP class reference';
     private const ERROR_CODE_CONFIG = 'IncorrectClassReference';
     private const ERROR_MESSAGE_MODULE = 'Incorrect format of module reference';
-    private const ERROR_CODE_MODULE = 'InforrectModuleReference';
-
-    private const FROM_CONTENT = 1;
-    private const FROM_NAME = 2;
-    private const FROM_ATTRIBUTE = 3;
+    private const ERROR_CODE_MODULE = 'IncorrectModuleReference';
 
     /**
      * @inheritdoc
@@ -59,7 +55,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         $classes = $this->collectClassesInConfig($xml);
         $this->assertNonFactoryName($phpcsFile, $classes);
 
-        $modules = $this->getValuesFromXml($xml, '//@module', self::FROM_ATTRIBUTE, 'module');
+        $modules = $this->getValuesFromXmlTagAttribute($xml, '//@module', 'module');
         $this->assertNonFactoryNameModule($phpcsFile, $modules);
     }
 
@@ -67,18 +63,18 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * Check whether specified class names are right according PSR-1 Standard.
      *
      * @param File $phpcsFile
-     * @param ExtendedNode[] $elements
+     * @param array $elements
      */
     private function assertNonFactoryName(File $phpcsFile, array $elements)
     {
         foreach ($elements as $element) {
-            if (stripos($element->value, 'Magento') === false) {
+            if (stripos($element['value'], 'Magento') === false) {
                 continue;
             }
-            if (preg_match('/^([A-Z][a-z\d\\\\]+)+$/', $element->value) !== 1) {
+            if (preg_match('/^([A-Z][a-z\d\\\\]+)+$/', $element['value']) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_CONFIG,
-                    $element->lineNumber - 1,
+                    $element['lineNumber'],
                     self::ERROR_CODE_CONFIG,
                 );
             }
@@ -89,15 +85,15 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * Check whether specified class names in modules are right according PSR-1 Standard.
      *
      * @param File $phpcsFile
-     * @param ExtendedNode[] $classes
+     * @param array $classes
      */
     private function assertNonFactoryNameModule(File $phpcsFile, array $classes)
     {
         foreach ($classes as $element) {
-            if (preg_match('/^([A-Z][A-Za-z\d_]+)+$/', $element->value) !== 1) {
+            if (preg_match('/^([A-Z][A-Za-z\d_]+)+$/', $element['value']) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_MODULE,
-                    $element->lineNumber - 1,
+                    $element['lineNumber'],
                     self::ERROR_CODE_MODULE,
                 );
             }
@@ -126,45 +122,41 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      */
     private function collectClassesInConfig(SimpleXMLElement $xml): array
     {
-        $classes = $this->getValuesFromXml(
+        $classes = $this->getValuesFromXmlTagContent(
             $xml,
             '
             /config//resource_adapter | /config/*[not(name()="sections")]//class[not(ancestor::observers)]
                 | //model[not(parent::connection)] | //backend_model | //source_model | //price_model
                 | //model_token | //writer_model | //clone_model | //frontend_model | //working_model
                 | //admin_renderer | //renderer',
-            self::FROM_CONTENT
         );
         $classes = array_merge(
             $classes,
-            $this->getValuesFromXml(
+            $this->getValuesFromXmlTagAttribute(
                 $xml,
                 '//@backend_model',
-                self::FROM_ATTRIBUTE,
                 'backend_model'
             )
         );
         $classes = array_merge(
             $classes,
-            $this->getValuesFromXml(
+            $this->getValuesFromXmlTagAttribute(
                 $xml,
                 '/config//preference',
-                self::FROM_ATTRIBUTE,
                 'type'
             )
         );
         $classes = array_merge(
             $classes,
-            $this->getValuesFromXml(
+            $this->getValuesFromXmlTagName(
                 $xml,
                 '/logging/*/expected_models/* | /logging/*/actions/*/expected_models/*',
-                self::FROM_NAME
             )
         );
 
         $classes = array_map(
-            function (ExtendedNode $extendedNode) {
-                $extendedNode->value = explode('::', trim($extendedNode->value))[0];
+            function (array $extendedNode) {
+                $extendedNode['value'] = explode('::', trim($extendedNode['value']))[0];
                 return $extendedNode;
             },
             $classes
@@ -174,28 +166,59 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     }
 
     /**
-     * Extract value from the specified $extractFrom which exist in the XML path
+     * Extract value from tag contents which exist in the XML path
      *
      * @param SimpleXMLElement $xml
      * @param string $xPath
-     * @param int $extractFrom
+     * @return array
+     */
+    private function getValuesFromXmlTagContent(SimpleXMLElement $xml, string $xPath): array
+    {
+        $nodes = $xml->xpath($xPath) ?: [];
+        return array_map(function ($item) {
+            return [
+                'value' => (string)$item,
+                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+            ];
+        }, $nodes);
+    }
+
+    /**
+     * Extract value from tag names which exist in the XML path
+     *
+     * @param SimpleXMLElement $xml
+     * @param string $xPath
+     * @return array
+     */
+    private function getValuesFromXmlTagName(SimpleXMLElement $xml, string $xPath): array
+    {
+        $nodes = $xml->xpath($xPath) ?: [];
+        return array_map(function ($item) {
+            return [
+                'value' => $item->getName(),
+                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+            ];
+        }, $nodes);
+    }
+
+    /**
+     * Extract value from tag attributes which exist in the XML path
+     *
+     * @param SimpleXMLElement $xml
+     * @param string $xPath
      * @param string $attr
      * @return array
      */
-    private function getValuesFromXml(SimpleXMLElement $xml, string $xPath, int $extractFrom, string $attr = ''): array
+    private function getValuesFromXmlTagAttribute(SimpleXMLElement $xml, string $xPath, string $attr): array
     {
         $nodes = $xml->xpath($xPath) ?: [];
-        return array_map(function ($item) use ($extractFrom, $attr) {
-            switch ($extractFrom) {
-                case self::FROM_CONTENT:
-                    return new ExtendedNode((string)$item, $item);
-                case self::FROM_NAME:
-                    return new ExtendedNode($item->getName(), $item);
-                case self::FROM_ATTRIBUTE:
-                    $nodeArray = (array)$item;
-                    if (isset($nodeArray['@attributes'][$attr])) {
-                        return new ExtendedNode($nodeArray['@attributes'][$attr], $item);
-                    }
+        return array_map(function ($item) use ($attr) {
+            $nodeArray = (array)$item;
+            if (isset($nodeArray['@attributes'][$attr])) {
+                return [
+                    'value' => $nodeArray['@attributes'][$attr],
+                    'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                ];
             }
         }, $nodes);
     }
