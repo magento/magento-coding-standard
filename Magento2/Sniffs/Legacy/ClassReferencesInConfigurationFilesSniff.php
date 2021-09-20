@@ -16,7 +16,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     private const ERROR_MESSAGE_CONFIG = 'Incorrect format of PHP class reference';
     private const ERROR_CODE_CONFIG = 'IncorrectClassReference';
     private const ERROR_MESSAGE_MODULE = 'Incorrect format of module reference';
-    private const ERROR_CODE_MODULE = 'WrongXMLModule';
+    private const ERROR_CODE_MODULE = 'InforrectModuleReference';
 
     private const FROM_CONTENT = 1;
     private const FROM_NAME = 2;
