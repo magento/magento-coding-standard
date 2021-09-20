@@ -14,7 +14,7 @@ use SimpleXMLElement;
 class ClassReferencesInConfigurationFilesSniff implements Sniff
 {
     private const ERROR_MESSAGE_CONFIG = 'Incorrect format of PHP class reference';
-    private const ERROR_CODE_CONFIG = 'WrongXML';
+    private const ERROR_CODE_CONFIG = 'IncorrectClassReference';
     private const ERROR_MESSAGE_MODULE = 'Attribute does not follow expected format in module';
     private const ERROR_CODE_MODULE = 'WrongXMLModule';
 
