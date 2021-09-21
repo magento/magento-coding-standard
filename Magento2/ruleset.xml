@@ -115,6 +115,13 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Legacy.ObsoleteConfigNodes">
+        <include-pattern>etc/config.xml</include-pattern>
+        <include-pattern>etc/config.*.xml</include-pattern>
+        <include-pattern>etc/*/config.xml</include-pattern>
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
 
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
@@ -249,6 +256,7 @@
     </rule>
     <rule ref="Magento2.Legacy.WidgetXML.FoundObsoleteNode">
         <include-pattern>*\/widget.xml$</include-pattern>
+        <exclude-pattern>*\/*.js$</exclude-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
