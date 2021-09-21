@@ -84,7 +84,7 @@ class ObsoleteConfigNodesSniff implements Sniff
     }
 
     /**
-     * Get a list of obsolete nodes
+     * Get a list of obsolete nodes in the format <class_name> => <replacement>
      *
      * @return array
      */
