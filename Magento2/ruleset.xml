@@ -116,6 +116,11 @@
         <type>error</type>
     </rule>
 
+    <rule ref="Magento2.Html.HtmlSelfClosingTags">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
         <severity>9</severity>
@@ -153,6 +158,7 @@
     <rule ref="Magento2.Html.HtmlBinding">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
@@ -246,6 +252,7 @@
     <rule ref="Magento2.Html.HtmlDirective">
         <severity>8</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.WidgetXML.FoundObsoleteNode">
         <include-pattern>*\/widget.xml$</include-pattern>
