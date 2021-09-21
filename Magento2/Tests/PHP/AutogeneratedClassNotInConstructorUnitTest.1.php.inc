@@ -7,7 +7,7 @@ declare(strict_types = 1);
 
 namespace Magento2\Tests\PHP;
 
-use Magento2\Model;
+use Magento2\OneModel as Model;
 
 class Good
 {
