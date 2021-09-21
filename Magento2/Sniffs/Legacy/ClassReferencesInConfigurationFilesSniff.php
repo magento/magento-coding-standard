@@ -57,6 +57,12 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
 
         $modules = $this->getValuesFromXmlTagAttribute($xml, '//@module', 'module');
         $this->assertNonFactoryNameModule($phpcsFile, $modules);
+
+        $layouts = $this->collectClassesInLayout($xml);
+        $this->assertNonFactoryName($phpcsFile, $layouts);
+
+        $layoutTabs = $this->collectClassesInLayoutTabs($xml);
+        $this->assertNonFactoryNameTab($phpcsFile, $layoutTabs);
     }
 
     /**
@@ -95,6 +101,25 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
                     self::ERROR_MESSAGE_MODULE,
                     $element['lineNumber'],
                     self::ERROR_CODE_MODULE,
+                );
+            }
+        }
+    }
+
+    /**
+     * Check whether specified class names in layout tabs are right according PSR-1 Standard.
+     *
+     * @param File $phpcsFile
+     * @param array $elements
+     */
+    private function assertNonFactoryNameTab(File $phpcsFile, array $elements)
+    {
+        foreach ($elements as $element) {
+            if (preg_match('/\//', $element['value']) !== false) {
+                $phpcsFile->addError(
+                    self::ERROR_MESSAGE_CONFIG,
+                    $element['lineNumber'],
+                    self::ERROR_CODE_CONFIG,
                 );
             }
         }
@@ -164,6 +189,41 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
 
         return $classes;
     }
+
+    private function collectClassesInLayout(SimpleXMLElement $xml): array
+    {
+        $classes = $this->getValuesFromXmlTagAttribute(
+            $xml,
+            '/layout//@helper',
+            'helper'
+        );
+        $classes = array_map(
+            function (array $extendedNode) {
+                $extendedNode['value'] = explode('::', trim($extendedNode['value']))[0];
+                return $extendedNode;
+            },
+            $classes
+        );
+        $classes = array_merge(
+            $classes,
+                $this->getValuesFromXmlTagAttribute(
+                $xml,
+                '/layout//@module',
+                'module'
+            )
+        );
+
+        return $classes;
+    }
+
+    private function collectClassesInLayoutTabs(SimpleXMLElement $xml): array
+    {
+        return $this->getValuesFromXmlTagContent(
+            $xml,
+            '/layout//action[@method="addTab"]/block',
+        );
+    }
+
 
     /**
      * Extract value from tag contents which exist in the XML path
