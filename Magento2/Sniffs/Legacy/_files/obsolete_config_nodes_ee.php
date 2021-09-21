@@ -1,13 +1,15 @@
 <?php
+
 /**
- * Obsolete configuration nodes, specific for EE
- *
- * Format: <class_name> => <replacement>
- *
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
+/**
+ * Obsolete configuration nodes
+ *
+ * Format: <class_name> => <replacement>
+ */
 return [
     '/config/global/full_page_cache' => '/config/global/cache_advanced/full_page',
     '/config/adminhtml/enterprise/admingws' => 'This configuration moved to admingws.xml file',

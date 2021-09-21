@@ -1,15 +1,17 @@
 <?php
+
 /**
- * Obsolete configuration nodes
- *
- * Format: <class_name> => <replacement>
- *
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
 // @codingStandardsIgnoreStart
 
+/**
+ * Obsolete configuration nodes
+ *
+ * Format: <class_name> => <replacement>
+ */
 return [
     '/config/global/fieldsets' => '',
     '/config/global/cache/betatypes' => '',
