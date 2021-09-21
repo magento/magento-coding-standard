@@ -49,12 +49,8 @@ class ObsoleteConfigNodesSniff implements Sniff
                 self::ERROR_CODE_CONFIG
             );
         }
-        $obsoleteNodes = [];
-        $obsoleteNodesFiles = glob(__DIR__ . '/_files/obsolete_config_nodes*.php');
-        foreach ($obsoleteNodesFiles as $obsoleteNodesFile) {
-            $obsoleteNodes = array_merge($obsoleteNodes, include $obsoleteNodesFile);
-        }
-        foreach ($obsoleteNodes as $xpath => $suggestion) {
+
+        foreach ($this->getObsoleteNodes() as $xpath => $suggestion) {
             $matches = $xml->xpath($xpath);
             if (empty($matches)) {
                 continue;
@@ -85,6 +81,21 @@ class ObsoleteConfigNodesSniff implements Sniff
         $doc->formatOutput = true;
         $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
         return $doc->saveXML();
+    }
+
+    /**
+     * Get a list of obsolete nodes
+     *
+     * @return array
+     */
+    private function getObsoleteNodes(): array
+    {
+        $obsoleteNodes = [];
+        $obsoleteNodesFiles = glob(__DIR__ . '/_files/obsolete_config_nodes*.php');
+        foreach ($obsoleteNodesFiles as $obsoleteNodesFile) {
+            $obsoleteNodes = array_merge($obsoleteNodes, include $obsoleteNodesFile);
+        }
+        return $obsoleteNodes;
     }
 
 }
