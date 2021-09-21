@@ -97,5 +97,4 @@ class ObsoleteConfigNodesSniff implements Sniff
         }
         return $obsoleteNodes;
     }
-
 }
