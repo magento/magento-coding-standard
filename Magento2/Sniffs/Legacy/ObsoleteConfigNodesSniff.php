@@ -90,11 +90,7 @@ class ObsoleteConfigNodesSniff implements Sniff
      */
     private function getObsoleteNodes(): array
     {
-        $obsoleteNodes = [];
-        $obsoleteNodesFiles = glob(__DIR__ . '/_files/obsolete_config_nodes*.php');
-        foreach ($obsoleteNodesFiles as $obsoleteNodesFile) {
-            $obsoleteNodes = array_merge($obsoleteNodes, include $obsoleteNodesFile);
-        }
-        return $obsoleteNodes;
+        $obsoleteNodes = include __DIR__ . '/_files/obsolete_config_nodes.php';
+        return  array_merge($obsoleteNodes, include __DIR__ . '/_files/obsolete_config_nodes_ee.php');
     }
 }
