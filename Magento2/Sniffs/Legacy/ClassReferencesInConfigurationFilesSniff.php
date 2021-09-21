@@ -190,6 +190,12 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return $classes;
     }
 
+    /**
+     * Parse an XML for references to PHP class names in selected tags or attributes
+     *
+     * @param SimpleXMLElement $xml
+     * @return array
+     */
     private function collectClassesInLayout(SimpleXMLElement $xml): array
     {
         $classes = $this->getValuesFromXmlTagAttribute(
@@ -206,7 +212,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         );
         $classes = array_merge(
             $classes,
-                $this->getValuesFromXmlTagAttribute(
+            $this->getValuesFromXmlTagAttribute(
                 $xml,
                 '/layout//@module',
                 'module'
@@ -216,6 +222,12 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return $classes;
     }
 
+    /**
+     * Extract class references from layout tabs
+     *
+     * @param SimpleXMLElement $xml
+     * @return array
+     */
     private function collectClassesInLayoutTabs(SimpleXMLElement $xml): array
     {
         return $this->getValuesFromXmlTagContent(
@@ -223,7 +235,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             '/layout//action[@method="addTab"]/block',
         );
     }
-
 
     /**
      * Extract value from tag contents which exist in the XML path
