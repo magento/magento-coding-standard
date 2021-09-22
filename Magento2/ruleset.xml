@@ -14,19 +14,23 @@
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*\.phtml$</exclude-pattern>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.DeprecatedFunctions">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.NoSilencedErrors">
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*/lib/*</exclude-pattern>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Classes.DiscouragedDependencies">
         <severity>10</severity>
@@ -48,14 +52,17 @@
     <rule ref="Magento2.PHP.FinalImplementation">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.Goto">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.ReturnValueCheck">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Security.IncludeFile">
         <severity>10</severity>
@@ -104,6 +111,7 @@
     <rule ref="Squiz.PHP.Eval">
         <severity>10</severity>
         <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.AbstractBlock">
         <severity>10</severity>
@@ -161,6 +169,7 @@
     <rule ref="Squiz.PHP.NonExecutableCode">
         <severity>9</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Html.HtmlBinding">
         <severity>9</severity>
@@ -232,6 +241,7 @@
     <rule ref="Magento2.PHP.ShortEchoSyntax">
         <severity>8</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Templates.ThisInTemplate">
         <include-pattern>*\.phtml$</include-pattern>
@@ -325,10 +335,12 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.Var">
         <severity>7</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Performance.ForeachArrayMerge">
         <severity>7</severity>
@@ -368,6 +380,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Squiz.Scope.MemberVarScope">
         <severity>7</severity>
@@ -406,10 +419,12 @@
     <rule ref="Generic.PHP.LowerCaseConstant">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.LowerCaseKeyword">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.WhiteSpace.DisallowTabIndent">
         <severity>6</severity>
@@ -640,6 +655,7 @@
         </properties>
         <severity>5</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Annotation">
         <severity>5</severity>
@@ -651,10 +667,14 @@
     <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
         <severity>5</severity>
         <type>warning</type>
+        <exclude-pattern>*\.php$</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.Copyright">
         <severity>5</severity>
         <type>warning</type>
+        <include-pattern>*\.php$</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
