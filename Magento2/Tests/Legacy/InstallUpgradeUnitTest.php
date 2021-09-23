@@ -36,7 +36,13 @@ class InstallUpgradeUnitTest extends AbstractSniffUnitTest
         $dir = __DIR__.'/_files/InstallUpgradeUnitTest';
         $di  = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
 
+        /**
+         * @var DirectoryIterator $file
+         */
         foreach ($di as $file) {
+            if ($file->isDir()) {
+                continue;
+            }
             $path = $file->getPathname();
             if ($path !== $testFileBase.'php' && substr($path, -5) !== 'fixed' && substr($path, -4) !== '.bak') {
                 $testFiles[] = $path;

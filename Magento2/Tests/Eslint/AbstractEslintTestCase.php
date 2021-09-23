@@ -24,8 +24,7 @@ abstract class AbstractEslintTestCase extends TestCase
     {
         exec(
             'npm run eslint -- Magento2/Tests/Eslint/' . $testFile,
-            $output,
-            $exitCode
+            $output
         );
 
         foreach ($expectedMessages as $message) {
