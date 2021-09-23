@@ -9,6 +9,7 @@ namespace Magento2\Sniffs\Legacy;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use SplFileInfo;
 
 class InstallUpgradeSniff implements Sniff
 {
@@ -32,8 +33,10 @@ class InstallUpgradeSniff implements Sniff
         if ($stackPtr > 0) {
             return;
         }
+        
+        $fileInfo = new SplFileInfo($phpcsFile->getFilename());
 
-        if (strpos(basename($phpcsFile->getFilename()), 'install-') === 0) {
+        if (strpos($fileInfo->getFilename(), 'install-') === 0) {
             $phpcsFile->addError(
                 'Install scripts are obsolete. '
                 . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
@@ -42,7 +45,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'InstallSchema') === 0) {
+        if (strpos($fileInfo->getFilename(), 'InstallSchema') === 0) {
             $phpcsFile->addError(
                 'InstallSchema scripts are obsolete. '
                 . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
@@ -51,7 +54,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'InstallData') === 0) {
+        if (strpos($fileInfo->getFilename(), 'InstallData') === 0) {
             $phpcsFile->addError(
                 'InstallData scripts are obsolete. '
                 . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
@@ -60,7 +63,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'data-install-') === 0) {
+        if (strpos($fileInfo->getFilename(), 'data-install-') === 0) {
             $phpcsFile->addError(
                 'Install scripts are obsolete. Please create class InstallData in module\'s Setup folder',
                 0,
@@ -68,7 +71,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'upgrade-') === 0) {
+        if (strpos($fileInfo->getFilename(), 'upgrade-') === 0) {
             $phpcsFile->addError(
                 'Upgrade scripts are obsolete. '
                 . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
@@ -77,7 +80,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'UpgradeSchema') === 0) {
+        if (strpos($fileInfo->getFilename(), 'UpgradeSchema') === 0) {
             $phpcsFile->addError(
                 'UpgradeSchema scripts are obsolete. '
                 . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
@@ -86,7 +89,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'UpgradeData') === 0) {
+        if (strpos($fileInfo->getFilename(), 'UpgradeData') === 0) {
             $phpcsFile->addError(
                 'UpgradeSchema scripts are obsolete. '
                 . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
@@ -95,7 +98,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'data-upgrade-') === 0) {
+        if (strpos($fileInfo->getFilename(), 'data-upgrade-') === 0) {
             $phpcsFile->addError(
                 'Upgrade scripts are obsolete. '
                 . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
@@ -104,7 +107,7 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (strpos(basename($phpcsFile->getFilename()), 'recurring') === 0) {
+        if (strpos($fileInfo->getFilename(), 'recurring') === 0) {
             $phpcsFile->addError(
                 'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder',
                 0,
@@ -112,9 +115,9 @@ class InstallUpgradeSniff implements Sniff
             );
         }
 
-        if (preg_match('/(sql|data)/', dirname($phpcsFile->getFilename())) === 1) {
+        if (preg_match('/(sql|data)/', $fileInfo->getPath()) === 1) {
             $phpcsFile->addError(
-                $phpcsFile->getFilename()." is in an invalid directory ".dirname($phpcsFile->getFilename()).":\n"
+                $fileInfo->getFilename()." is in an invalid directory ".$fileInfo->getPath().":\n"
                 . "- Create a data patch within module's Setup/Patch/Data folder for data upgrades.\n"
                 . "- Use declarative schema approach in module's etc/db_schema.xml file for schema changes.",
                 0,
