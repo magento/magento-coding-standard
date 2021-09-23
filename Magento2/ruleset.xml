@@ -127,6 +127,8 @@
         <include-pattern>etc/config.xml</include-pattern>
         <include-pattern>etc/config.*.xml</include-pattern>
         <include-pattern>etc/*/config.xml</include-pattern>
+        <severity>10</severity>
+        <type>error</type>
     </rule>
     <rule ref="Magento2.Legacy.InstallUpgrade">
         <severity>10</severity>
