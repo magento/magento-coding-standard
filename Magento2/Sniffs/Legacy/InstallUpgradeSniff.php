@@ -15,6 +15,9 @@ class InstallUpgradeSniff implements Sniff
 {
     private const ERROR_CODE = 'obsoleteScript';
 
+    /**
+     * @var string[]
+     */
     private $wrongPrefixes = [
         'install-' => 'Install scripts are obsolete. '
             . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
