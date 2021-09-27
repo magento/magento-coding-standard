@@ -15,6 +15,25 @@ class InstallUpgradeSniff implements Sniff
 {
     private const ERROR_CODE = 'obsoleteScript';
 
+    private $wrongPrefixes = [
+        'install-' => 'Install scripts are obsolete. '
+            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        'InstallSchema' => 'InstallSchema scripts are obsolete. '
+            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        'InstallData' => 'InstallData scripts are obsolete. '
+            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        'data-install-' => 'Install scripts are obsolete. Please create class InstallData in module\'s Setup folder',
+        'upgrade-' => 'Upgrade scripts are obsolete. '
+            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        'UpgradeSchema' => 'UpgradeSchema scripts are obsolete. '
+            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        'UpgradeData' => 'UpgradeSchema scripts are obsolete. '
+            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        'data-upgrade-' => 'Upgrade scripts are obsolete. '
+            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        'recurring' => 'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -36,83 +55,10 @@ class InstallUpgradeSniff implements Sniff
         
         $fileInfo = new SplFileInfo($phpcsFile->getFilename());
 
-        if (strpos($fileInfo->getFilename(), 'install-') === 0) {
-            $phpcsFile->addError(
-                'Install scripts are obsolete. '
-                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'InstallSchema') === 0) {
-            $phpcsFile->addError(
-                'InstallSchema scripts are obsolete. '
-                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'InstallData') === 0) {
-            $phpcsFile->addError(
-                'InstallData scripts are obsolete. '
-                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'data-install-') === 0) {
-            $phpcsFile->addError(
-                'Install scripts are obsolete. Please create class InstallData in module\'s Setup folder',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'upgrade-') === 0) {
-            $phpcsFile->addError(
-                'Upgrade scripts are obsolete. '
-                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'UpgradeSchema') === 0) {
-            $phpcsFile->addError(
-                'UpgradeSchema scripts are obsolete. '
-                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'UpgradeData') === 0) {
-            $phpcsFile->addError(
-                'UpgradeSchema scripts are obsolete. '
-                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'data-upgrade-') === 0) {
-            $phpcsFile->addError(
-                'Upgrade scripts are obsolete. '
-                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-                0,
-                self::ERROR_CODE
-            );
-        }
-
-        if (strpos($fileInfo->getFilename(), 'recurring') === 0) {
-            $phpcsFile->addError(
-                'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder',
-                0,
-                self::ERROR_CODE
-            );
+        foreach ($this->wrongPrefixes as $prefix => $errorMessage) {
+            if (strpos($fileInfo->getFilename(), $prefix) === 0) {
+                $phpcsFile->addError($errorMessage, 0, self::ERROR_CODE);
+            }
         }
 
         if (preg_match('/(sql|data)/', $fileInfo->getPath()) === 1) {
