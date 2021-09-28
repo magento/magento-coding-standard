@@ -18,6 +18,11 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
     private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
     private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
 
+    /**
+     * Defines the tokenizers that this sniff is using.
+     *
+     * @var array
+     */
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS, 'PHP'];
     
     /**
