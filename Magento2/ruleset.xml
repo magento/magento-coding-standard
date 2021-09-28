@@ -678,12 +678,14 @@
         <type>warning</type>
         <exclude-pattern>*\.php$</exclude-pattern>
         <exclude-pattern>*\.phtml$</exclude-pattern>
+        <exclude name="Magento2.Legacy.CopyrightAnotherExtensionsFiles"/>
     </rule>
     <rule ref="Magento2.Legacy.Copyright">
         <severity>5</severity>
         <type>warning</type>
         <include-pattern>*\.php$</include-pattern>
         <include-pattern>*\.phtml$</include-pattern>
+        <exclude name="Magento2.Legacy.Copyright"/>
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
