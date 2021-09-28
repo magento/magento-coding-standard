@@ -1,0 +1,14 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "eslint/.eslintrc",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint -c eslint/.eslintrc --rulesdir eslint/rules"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
