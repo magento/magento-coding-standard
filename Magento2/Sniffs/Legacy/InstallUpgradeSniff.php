@@ -64,7 +64,8 @@ class InstallUpgradeSniff implements Sniff
             }
         }
 
-        $folderName = basename($fileInfo->getPath());
+        $folders = array_filter(explode('/', $fileInfo->getPath()));
+        $folderName = array_pop($folders);
 
         if ($folderName === 'data' || $folderName === 'sql') {
             $phpcsFile->addError(
