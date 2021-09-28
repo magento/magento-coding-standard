@@ -60,7 +60,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 
         if ($commentEnd !== false && $tokens[$commentEnd]['code'] === T_STRING) {
             $commentEnd = $phpcsFile->findPrevious($this->ignoreTokens, ($commentEnd - 1), null, true);
-        } else if ($commentEnd === false
+        } elseif ($commentEnd === false
             || ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
                 && $tokens[$commentEnd]['code'] !== T_COMMENT)
         ) {
