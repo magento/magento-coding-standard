@@ -57,13 +57,20 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         $tokens = $phpcsFile->getTokens();
 
         $commentEnd = $phpcsFile->findPrevious($this->ignoreTokens, ($stackPtr - 1), null, true);
+
+        if ($commentEnd !== false && $tokens[$commentEnd]['code'] === T_STRING) {
+            $commentEnd = $phpcsFile->findPrevious($this->ignoreTokens, ($commentEnd - 1), null, true);
+        }
+
         if ($commentEnd === false
             || ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
-                && $tokens[$commentEnd]['code'] !== T_COMMENT)
+                && $tokens[$commentEnd]['code'] !== T_COMMENT
+                && $tokens[$commentEnd]['code'] !== T_STRING)
         ) {
             $phpcsFile->addWarning('Missing PHP DocBlock for class property.', $stackPtr, 'Missing');
             return;
         }
+
         $commentStart = $tokens[$commentEnd]['comment_opener'];
         $foundVar = null;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
