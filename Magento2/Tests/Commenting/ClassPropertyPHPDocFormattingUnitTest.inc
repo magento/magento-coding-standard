@@ -125,5 +125,4 @@ class correctlyFormattedClassMemberDocBlock
      * @var string
      */
     protected string $test;
-
 }
