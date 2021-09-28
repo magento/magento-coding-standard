@@ -686,4 +686,9 @@
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
+    <!-- TODO: AC-1314 -->
+    <rule ref="Magento2.Legacy">
+        <exclude name="Magento2.Legacy.Copyright"/>
+        <exclude name="Magento2.Legacy.CopyrightAnotherExtensionsFiles"/>
+    </rule>
 </ruleset>

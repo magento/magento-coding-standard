@@ -64,7 +64,10 @@ class InstallUpgradeSniff implements Sniff
             }
         }
 
-        if (preg_match('/(sql|data)/', $fileInfo->getPath()) === 1) {
+        $folders = array_filter(explode('/', $fileInfo->getPath()));
+        $folderName = array_pop($folders);
+
+        if ($folderName === 'data' || $folderName === 'sql') {
             $phpcsFile->addError(
                 $fileInfo->getFilename()." is in an invalid directory ".$fileInfo->getPath().":\n"
                 . "- Create a data patch within module's Setup/Patch/Data folder for data upgrades.\n"
