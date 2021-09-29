@@ -15,7 +15,10 @@ class ObsoleteSystemConfigurationSniff implements Sniff
 {
     private const ERROR_CODE_XML = 'WrongXML';
     private const WARNING_CODE_OBSOLETE = 'FoundObsoleteSystemConfiguration';
-    
+
+    /**
+     * @inheritdoc
+     */
     public function register()
     {
         return [
