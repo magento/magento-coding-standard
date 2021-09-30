@@ -21,7 +21,7 @@ class LayoutSniff implements Sniff
     private const ERROR_CODE_OBSOLETE = 'Obsolete';
     private const ERROR_CODE_OBSOLETE_CLASS = 'ObsoleteClass';
     private const ERROR_CODE_ATTRIBUTE_NOT_VALID = 'AttributeNotValid';
-    private const ERROR_CODE_METHOD_NOT_ALLOWED = 'MethodNot';
+    private const ERROR_CODE_METHOD_NOT_ALLOWED = 'MethodNotAllowed';
     private const ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_NOT_ALLOWED = 'CharacterNotAllowedInAttribute';
     private const ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_EXPECTED = 'CharacterExpectedInAttribute';
 
@@ -230,14 +230,13 @@ class LayoutSniff implements Sniff
         $this->testHelperAttribute($layout, $phpcsFile);
         $this->testListText($layout, $phpcsFile);
         $this->testActionNodeMethods($layout, $phpcsFile);
-        //$this->testWithComponentRegistrar($layout, $phpcsFile);
     }
 
     /**
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
-    private function testObsoleteReferences(SimpleXMLElement $layout, File $phpcsFile)
+    private function testObsoleteReferences(SimpleXMLElement $layout, File $phpcsFile): void
     {
         foreach ($layout as $handle) {
             if (!isset($this->_obsoleteReferences[$handle->getName()])) {
@@ -273,7 +272,7 @@ class LayoutSniff implements Sniff
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
-    private function testHeadBlocks(SimpleXMLElement $layout, File $phpcsFile)
+    private function testHeadBlocks(SimpleXMLElement $layout, File $phpcsFile): void
     {
         $selectorHeadBlock = '(name()="block" or name()="referenceBlock") and ' .
             '(@name="head" or @name="convert_root_head" or @name="vde_head")';
@@ -315,10 +314,11 @@ class LayoutSniff implements Sniff
      * Tests the attributes of the top-level Layout Node.
      * Verifies there are no longer attributes of "parent" or "owner"
      *
+     * @todo missing test
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
-    private function testObsoleteAttributes(SimpleXMLElement $layout, File $phpcsFile)
+    private function testObsoleteAttributes(SimpleXMLElement $layout, File $phpcsFile): void
     {
         $type = $layout['type'];
         $parent = $layout['parent'];
@@ -362,7 +362,7 @@ class LayoutSniff implements Sniff
      */
     private function testHelperAttribute(SimpleXMLElement $layout, File $phpcsFile): void
     {
-        foreach ($layout->xpath('@helper') as $action) {
+        foreach ($layout->xpath('//*[@helper]') as $action) {
             if (strpos($this->getAttribute($action, 'helper'), '/') !== false) {
                 $phpcsFile->addError(
                     "'helper' attribute contains '/'",
@@ -401,7 +401,7 @@ class LayoutSniff implements Sniff
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
-    private function testActionNodeMethods(SimpleXMLElement $layout, File $phpcsFile)
+    private function testActionNodeMethods(SimpleXMLElement $layout, File $phpcsFile): void
     {
         $methodFilter = '@method!="' . implode('" and @method!="', $this->allowedActionNodeMethods) . '"';
         foreach ($layout->xpath('//action[' . $methodFilter . ']') as $node) {
@@ -415,32 +415,5 @@ class LayoutSniff implements Sniff
                 self::ERROR_CODE_METHOD_NOT_ALLOWED
             );
         }
-    }
-
-    private function testWithComponentRegistrar(SimpleXMLElement $layout, File $phpcsFile)
-    {
-        /*
-         * $componentRegistrar = new ComponentRegistrar();
-        if (false !== strpos(
-        $layoutFile,
-        $componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_Sales')
-        . '/view/adminhtml/layout/sales_order'
-        ) || false !== strpos(
-        $layoutFile,
-        $componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_Shipping')
-        . '/view/adminhtml/layout/adminhtml_order'
-        )
-        || false !== strpos(
-        $layoutFile,
-        $componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_Catalog')
-        . '/view/adminhtml/layout/catalog_product_grid.xml'
-        )
-        ) {
-        $this->markTestIncomplete(
-        "The file {$layoutFile} has to use \\Magento\\Core\\Block\\Text\\List, \n" .
-        'there is no solution to get rid of it right now.'
-        );
-        }
-         */
     }
 }
