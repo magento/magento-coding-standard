@@ -283,6 +283,13 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Legacy.ObsoleteAcl">
+        <include-pattern>etc/config.xml</include-pattern>
+        <include-pattern>etc/config.*.xml</include-pattern>
+        <include-pattern>etc/*/config.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
     <rule ref="Magento2.Legacy.ObsoleteSystemConfiguration">
         <include-pattern>etc/system.xml</include-pattern>
         <severity>8</severity>

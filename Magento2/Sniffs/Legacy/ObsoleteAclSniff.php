@@ -1,20 +1,20 @@
 <?php
-
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class ObsoleteSystemConfigurationSniff implements Sniff
+/**
+ * Test to find obsolete acl declaration
+ */
+class ObsoleteAclSniff implements Sniff
 {
-    private const ERROR_CODE_XML = 'WrongXML';
-    private const WARNING_CODE_OBSOLETE = 'FoundObsoleteSystemConfiguration';
+    private const WARNING_OBSOLETE_ACL_STRUCTURE = 'ObsoleteAclStructure';
 
     /**
      * @inheritdoc
@@ -27,7 +27,7 @@ class ObsoleteSystemConfigurationSniff implements Sniff
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function process(File $phpcsFile, $stackPtr)
     {
@@ -36,43 +36,14 @@ class ObsoleteSystemConfigurationSniff implements Sniff
         }
 
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
-
-        if ($xml === false) {
-            $this->invalidXML($phpcsFile, $stackPtr);
-            return;
-        }
-        
-        $foundElements = $xml->xpath('/config/tabs|/config/sections');
-        
-        if ($foundElements === false) {
-            return;
-        }
-        
+        $foundElements = $xml->xpath('/config/acl/*[boolean(./children) or boolean(./title)]');
         foreach ($foundElements as $element) {
             $phpcsFile->addWarning(
-                "Obsolete system configuration structure detected in file.",
+                'Obsolete acl structure detected in line ' . dom_import_simplexml($element)->getLineNo(),
                 dom_import_simplexml($element)->getLineNo() - 1,
-                self::WARNING_CODE_OBSOLETE
+                self::WARNING_OBSOLETE_ACL_STRUCTURE
             );
         }
-    }
-
-    /**
-     * Adds an invalid XML error
-     *
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     */
-    private function invalidXML(File $phpcsFile, int $stackPtr): void
-    {
-        $phpcsFile->addError(
-            sprintf(
-                "Couldn't parse contents of '%s', check that they are in valid XML format.",
-                $phpcsFile->getFilename(),
-            ),
-            $stackPtr,
-            self::ERROR_CODE_XML
-        );
     }
 
     /**
