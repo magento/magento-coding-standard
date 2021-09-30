@@ -292,7 +292,8 @@ class LayoutSniff implements Sniff
             'or @class="Magento\Theme\Block\Html\Head\Script"]' .
             '/parent::*[not(' .
             $selectorHeadBlock .
-            ')]');
+            ')]'
+        );
         if (!empty($elements)) {
             $phpcsFile->addError(
                 'Blocks \Magento\Theme\Block\Html\Head\{Css,Link,Script} ' .
@@ -323,8 +324,7 @@ class LayoutSniff implements Sniff
     }
 
     /**
-     * Tests the attributes of the top-level Layout Node.
-     * Verifies there are no longer attributes of "parent" or "owner"
+     * Tests the attributes of the top-level Layout Node. Verifies there are no longer attributes of "parent" or "owner"
      *
      * @todo missing test
      * @param SimpleXMLElement $layout
