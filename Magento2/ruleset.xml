@@ -144,7 +144,7 @@
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Legacy.LayoutSniff">
+    <rule ref="Magento2.Legacy.Layout">
         <severity>10</severity>
         <type>error</type>
         <include-pattern>*/view/(adminhtml|frontend|base)/*\/.xml</include-pattern>
