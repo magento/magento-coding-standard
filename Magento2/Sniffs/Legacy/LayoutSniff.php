@@ -247,7 +247,7 @@ class LayoutSniff implements Sniff
     private function testObsoleteReferences(SimpleXMLElement $layout, File $phpcsFile): void
     {
         foreach ($layout as $handle) {
-            if (!isset($this->_obsoleteReferences[$handle->getName()])) {
+            if (!isset($this->obsoleteReferences[$handle->getName()])) {
                 continue;
             }
             foreach ($handle->xpath('reference') as $reference) {
