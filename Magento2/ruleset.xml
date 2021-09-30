@@ -297,6 +297,11 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
+    <rule ref="Magento2.Legacy.ObsoleteSystemConfiguration">
+        <include-pattern>etc/system.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
