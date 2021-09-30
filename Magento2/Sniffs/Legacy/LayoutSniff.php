@@ -71,6 +71,11 @@ class LayoutSniff implements Sniff
         ],
     ];
 
+    /**
+     * List of allowed method names
+     *
+     * @var string[]
+     */
     private $allowedActionNodeMethods = [
         'addBodyClass',
         'addButtons',
@@ -233,6 +238,9 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check for obsolete block references
+     *
+     * @todo missing test
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
@@ -269,6 +277,8 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check that CSS, Link and Script blocks are inside a head block
+     *
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
@@ -295,6 +305,8 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check that the output attribute has the right value
+     *
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
@@ -347,6 +359,7 @@ class LayoutSniff implements Sniff
     /**
      * Returns attribute value by attribute name
      *
+     * @param SimpleXMLElement $element
      * @param string $name
      * @return string|null
      */
@@ -357,6 +370,8 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check values in helper attributes
+     *
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
@@ -381,6 +396,8 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check that ListText is not used
+     *
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
@@ -398,6 +415,8 @@ class LayoutSniff implements Sniff
     }
 
     /**
+     * Check that action is calling an allowed method
+     *
      * @param SimpleXMLElement $layout
      * @param File $phpcsFile
      */
