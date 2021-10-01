@@ -56,6 +56,7 @@ class RestrictedCodeSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
+        // phpcs:ignore
         if (array_key_exists(basename($phpcsFile->getFilename()), $this->fixtureFiles)) {
             return;
         }
@@ -107,6 +108,7 @@ class RestrictedCodeSniff implements Sniff
      */
     private function loadData(string $filePattern)
     {
+        // phpcs:ignore
         foreach (glob(__DIR__ . '/_files/' . $filePattern) as $file) {
             $relativePath = str_replace(
                 '\\',
@@ -126,6 +128,7 @@ class RestrictedCodeSniff implements Sniff
      */
     private function readList($file)
     {
+        // phpcs:ignore
         return include $file;
     }
 }
