@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function () {
     'use strict';
-    $("div").size();
+
+    $('div').size();
 });
