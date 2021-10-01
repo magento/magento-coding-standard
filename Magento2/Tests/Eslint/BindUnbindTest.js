@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function () {
     'use strict';
-    $(".btn1").bind("click");
+
+    $('.btn1').bind('click');
 });
