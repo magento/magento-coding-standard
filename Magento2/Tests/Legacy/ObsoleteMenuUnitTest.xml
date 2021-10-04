@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <children>
+        <title value="foo" />
+    </children>
+    <title value="bar" />
+    <children default_policy="deny" />
+    <action method="random" />
+    <menu>
+        <children default_policy="deny" />
+        <children>
+            <title value="foo" />
+        </children>
+        <children>
+            <action method="random" />
+        </children>
+        <children>
+            <title value="foo" />
+            <action method="random" />
+        </children>
+        <title value="bar" />
+        <title>
+            <children default_policy="deny" />
+        </title>
+        <title>
+            <action method="random" />
+        </title>
+        <title>
+            <children default_policy="deny" />
+            <action method="random" />
+        </title>
+        <action method="random" />
+        <action>
+            <title value="bar" />
+        </action>
+        <action>
+            <children default_policy="deny" />
+        </action>
+        <action>
+            <children default_policy="deny" />
+            <title value="foo" />
+        </action>
+        <action
+        >
+            <children
+                    default_policy="deny"/>
+
+            <title
+                    value="foo"
+            />
+        </action>
+    </menu>
+</config>
