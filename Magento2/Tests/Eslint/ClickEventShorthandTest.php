@@ -17,7 +17,7 @@ class ClickEventShorthandTest extends AbstractEslintTestCase
     public function testExecute(): void
     {
         $this->assertFileContainsError(
-            'ClickEventShorthand.js',
+            'ClickEventShorthandTest.js',
             ['Instead of .blur(fn) use .on("blur", fn). Instead of .blur() use .trigger("blur")']
         );
     }
