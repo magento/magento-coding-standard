@@ -10,11 +10,11 @@ class PhtmlTemplateSniff implements Sniff
     private const WARNING_CODE = 'PhtmlTemplateObsolete';
 
     private const OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
-        '/(["\'])jquery\/ui\1/' => 'Please do not use "jquery/ui" library in templates. Use needed jquery ' . 
+        '/(["\'])jquery\/ui\1/' => 'Please do not use "jquery/ui" library in templates. Use needed jquery ' .
             'ui widget instead.',
-        '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'Please do not initialize JS component in php. Do ' . 
+        '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'Please do not initialize JS component in php. Do ' .
             'it in template.',
-        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'Please do not initialize JS component ' . 
+        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'Please do not initialize JS component ' .
             'in php. Do it in template.',
     ];
     
@@ -54,6 +54,8 @@ class PhtmlTemplateSniff implements Sniff
     }
     
     /**
+     * Check access to protected and private members of Block
+     * 
      * @param File $phpcsFile
      * @param int $stackPtr
      * @param array $tokens
@@ -76,6 +78,8 @@ class PhtmlTemplateSniff implements Sniff
     }
 
     /**
+     * Check access to members and methods of Block class through $this
+     * 
      * @param File $phpcsFile
      * @param int $stackPtr
      * @param array $tokens
@@ -98,6 +102,8 @@ class PhtmlTemplateSniff implements Sniff
     }
 
     /**
+     * Check use of "text/javascript" type
+     * 
      * @param File $phpcsFile
      * @param int $stackPtr
      */
@@ -115,6 +121,8 @@ class PhtmlTemplateSniff implements Sniff
     }
 
     /**
+     * Check of some obsoletes uses in specific files
+     * 
      * @param File $phpcsFile
      * @param int $stackPtr
      */
@@ -132,5 +140,4 @@ class PhtmlTemplateSniff implements Sniff
             }
         }
     }
-    
 }
