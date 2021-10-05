@@ -55,7 +55,7 @@ class PhtmlTemplateSniff implements Sniff
     
     /**
      * Check access to protected and private members of Block
-     * 
+     *
      * @param File $phpcsFile
      * @param int $stackPtr
      * @param array $tokens
@@ -79,7 +79,7 @@ class PhtmlTemplateSniff implements Sniff
 
     /**
      * Check access to members and methods of Block class through $this
-     * 
+     *
      * @param File $phpcsFile
      * @param int $stackPtr
      * @param array $tokens
@@ -103,7 +103,7 @@ class PhtmlTemplateSniff implements Sniff
 
     /**
      * Check use of "text/javascript" type
-     * 
+     *
      * @param File $phpcsFile
      * @param int $stackPtr
      */
@@ -122,7 +122,7 @@ class PhtmlTemplateSniff implements Sniff
 
     /**
      * Check of some obsoletes uses in specific files
-     * 
+     *
      * @param File $phpcsFile
      * @param int $stackPtr
      */
