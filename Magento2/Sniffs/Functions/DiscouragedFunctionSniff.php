@@ -229,5 +229,14 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^strval$' => '(string) construction',
         '^htmlspecialchars$' => '\Magento\Framework\Escaper->escapeHtml',
         '^getimagesize$' => 'getimagesizefromstring',
+        '^file_exists$' => 'Magento\Framework\Filesystem\DriverInterface::isExists()',
+        '^file_get_contents$' => 'Magento\Framework\Filesystem\DriverInterface::fileGetContents()',
+        '^file_put_contents$' => 'Magento\Framework\Filesystem\DriverInterface::filePutContents()',
+        '^fgetcsv$' => 'Magento\Framework\Filesystem\DriverInterface::fileGetCsv()',
+        '^fputcsv$' => 'Magento\Framework\Filesystem\DriverInterface::filePutCsv()',
+        '^ftell$' => 'Magento\Framework\Filesystem\DriverInterface::fileTell()',
+        '^fseek$' => 'Magento\Framework\Filesystem\DriverInterface::fileSeek()',
+        '^feof$' => 'Magento\Framework\Filesystem\DriverInterface::endOfFile()',
+        '^flock$' => 'Magento\Framework\Filesystem\DriverInterface::fileLock()',
     ];
 }
