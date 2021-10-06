@@ -15,10 +15,11 @@ class TableNameUnitTest extends AbstractSniffUnitTest
     public function getErrorList($testFile = '')
     {
         return [
-            /*3 => 1,
+            3 => 1,
             7 => 1,
             14 => 1,
-            28 => 1,*/
+            20 => 1,
+            28 => 1,
         ];
     }
 
