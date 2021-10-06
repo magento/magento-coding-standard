@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script type="text/x-magento-init">
+</script>
+<script type="text/javascript">
+</script>
+<div id="block-testing"
+     class="block shipping"
+     data-mage-init='{}'
+>
+<?php
+function _testing()
+{
+    return true;
+}
+$_productCollection = $block->_getTestFunction();
+$block->getTestFunction();
+$_something = $this->something();
+$block->_getTest();
+$block = _testing();
+?>
+<?php
+$block->_getTestAnotherFunction();
+?>
+
+<?php $scriptString = <<<script
+    require([
+        "jquery",
+        "jquery/ui",
+    ], function ($, Confirm) {
+    });
+script;
+$this->helper();
+?>
+<script type="jquery/ui">
+</script>
