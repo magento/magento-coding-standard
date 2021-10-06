@@ -114,7 +114,7 @@ class TableNameSniff implements Sniff
                 $paramPos = $phpcsFile->findNext(
                     [T_CONSTANT_ENCAPSED_STRING, T_VARIABLE],
                     $paramPos + 1,
-                   $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $paramPos + 1)
+                    $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $paramPos + 1)
                 );
             }
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
