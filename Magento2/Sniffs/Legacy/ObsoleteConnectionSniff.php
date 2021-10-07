@@ -15,7 +15,7 @@ class ObsoleteConnectionSniff implements Sniff
     private const ERROR_CODE_METHOD = 'FoundObsoleteMethod';
 
     /**
-     * @var string[] 
+     * @var string[]
      */
     private $obsoleteMethods = [
         '_getReadConnection',
@@ -49,11 +49,11 @@ class ObsoleteConnectionSniff implements Sniff
 
     /**
      * Check if obsolete methods are used
-     * 
-     * @param $phpcsFile
-     * @param $stackPtr
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
      */
-    private function validateObsoleteMethod($phpcsFile, $stackPtr)
+    private function validateObsoleteMethod(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $stringPos = $phpcsFile->findNext(T_STRING, $stackPtr + 1);
