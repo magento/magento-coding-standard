@@ -23,14 +23,14 @@ class ObsoleteConnectionUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [
-            3 => 1,
-            6 => 1,
+            7 => 1,
             10 => 1,
             14 => 1,
             18 => 1,
-            21 => 1,
+            22 => 1,
             25 => 1,
-            32 => 1
+            29 => 1,
+            36 => 1
         ];
     }
 }
