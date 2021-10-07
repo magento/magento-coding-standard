@@ -246,7 +246,16 @@ class DiscouragedFunctionUnitTest extends AbstractSniffUnitTest
             458 => 1,
             460 => 1,
             462 => 1,
-            466 => 1
+            466 => 1,
+            468 => 1,
+            470 => 1,
+            472 => 1,
+            474 => 1,
+            476 => 1,
+            478 => 1,
+            480 => 1,
+            482 => 1,
+            484 => 1
         ];
     }
 }
