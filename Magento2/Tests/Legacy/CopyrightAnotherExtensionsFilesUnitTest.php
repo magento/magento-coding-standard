@@ -36,6 +36,11 @@ class CopyrightAnotherExtensionsFilesUnitTest extends AbstractJsSniffUnitTestCas
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.4.js') {
             return [];
         }
+        if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.5.less') {
+            return [
+                null => 1,
+            ];
+        }
         return [];
     }
 }
