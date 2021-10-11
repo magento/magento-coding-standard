@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function () {
     'use strict';
-    $("div").find("p").andSelf().addClass("border");
+
+    $('div').find('p').andSelf().addClass('border');
 });

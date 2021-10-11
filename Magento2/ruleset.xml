@@ -117,9 +117,7 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
-    <rule ref="Magento2.Legacy.EmailTemplate.FoundObsoleteEmailDirective">
-        <include-pattern>view/email/*.html</include-pattern>
-        <include-pattern>view/*/email/*.html</include-pattern>
+    <rule ref="Magento2.Legacy.EmailTemplate">
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -143,6 +141,12 @@
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Legacy.RestrictedCode">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*\.js$</exclude-pattern>
     </rule>
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
@@ -282,6 +286,30 @@
     </rule>
     <rule ref="Magento2.Legacy.WidgetXML">
         <include-pattern>*\/widget.xml$</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.ObsoleteAcl">
+        <include-pattern>etc/config.xml</include-pattern>
+        <include-pattern>etc/config.*.xml</include-pattern>
+        <include-pattern>etc/*/config.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.ObsoleteMenu">
+        <include-pattern>etc/config.xml</include-pattern>
+        <include-pattern>etc/config.*.xml</include-pattern>
+        <include-pattern>etc/*/config.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.ObsoleteSystemConfiguration">
+        <include-pattern>etc/adminhtml/system.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.PhtmlTemplate">
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -687,5 +715,10 @@
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
+    </rule>
+    <!-- TODO: AC-1314 -->
+    <rule ref="Magento2.Legacy">
+        <exclude name="Magento2.Legacy.Copyright"/>
+        <exclude name="Magento2.Legacy.CopyrightAnotherExtensionsFiles"/>
     </rule>
 </ruleset>
