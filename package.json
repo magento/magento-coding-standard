@@ -1,0 +1,16 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "eslint/.eslintrc",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint -c eslint/.eslintrc --rulesdir eslint/rules",
+    "jscs": "./node_modules/.bin/jscs -c jscs/.jscsrc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "jscs": "^2.1.1"
+  }
+}

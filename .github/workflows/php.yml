@@ -25,6 +25,11 @@ jobs:
     name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
     - uses: actions/checkout@v2
 
     - name: Setup PHP
@@ -33,6 +38,13 @@ jobs:
         php-version: ${{ matrix.php-version }}
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install dependencies
+      run: npm install
+    - name: Run ESLint
+      run: npm run eslint -- eslint/rules Magento2 --ignore-pattern 'Magento2/Tests/Eslint/*Test.js'
+    - name: Run JSCS
+      run: npm run jscs eslint/rules Magento2
 
     - name: Validate composer
       run: composer validate
