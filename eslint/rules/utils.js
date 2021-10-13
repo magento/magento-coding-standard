@@ -11,11 +11,11 @@ function traverse(node) {
         switch (node.type) {
             case 'CallExpression':
                 node = node.callee;
-            break;
+                break;
 
             case 'MemberExpression':
                 node = node.object;
-            break;
+                break;
 
             case 'Identifier':
                 return node;

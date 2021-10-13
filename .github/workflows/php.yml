@@ -42,7 +42,9 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Run ESLint
-      run: npm run eslint -- eslint/rules Magento2/ --ignore-pattern 'Magento2/Tests/Eslint/*Test.js'
+      run: npm run eslint -- eslint/rules Magento2 --ignore-pattern 'Magento2/Tests/Eslint/*Test.js'
+    - name: Run JSCS
+      run: npm run jscs eslint/rules Magento2
 
     - name: Validate composer
       run: composer validate

@@ -464,3 +464,21 @@ $str = chop($text, 'ttt');
 md5($text);
 
 htmlspecialchars('text');
+
+file_exists('./');
+
+file_get_contents('file.txt');
+
+file_put_contents($file, 'test');
+
+fgetcsv($fp,'r');
+
+fputcsv($fp, $fields);
+
+ftell($file);
+
+fseek($file, 0);
+
+feof($fp);
+
+flock($fp, LOCK_EX);

@@ -309,7 +309,12 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Legacy.ObsoleteSystemConfiguration">
-        <include-pattern>etc/system.xml</include-pattern>
+        <include-pattern>etc/adminhtml/system.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.PhtmlTemplate">
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
