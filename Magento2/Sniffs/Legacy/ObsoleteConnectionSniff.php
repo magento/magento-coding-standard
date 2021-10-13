@@ -61,7 +61,7 @@ class ObsoleteConnectionSniff implements Sniff
         foreach ($this->obsoleteMethods as $method) {
             if ($tokens[$stringPos]['content'] === $method) {
                 $phpcsFile->addWarning(
-                    sprintf("Contains obsolete method: %s.", $method),
+                    sprintf("Contains obsolete method: %s. Please use getConnection method instead.", $method),
                     $stackPtr,
                     self::ERROR_CODE_METHOD
                 );
