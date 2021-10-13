@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="2columns-left" />
+
+    <container name="columns.top.wrapper" htmlTag="div" htmlClass="page-main" output="toHtml"/>
+    <move element="columns.top" destination="columns.top.wrapper"/>
+    <move element="columns.top.wrapper" destination="page.wrapper" after="page.top"/>
+    <move element="category.view.container" destination="page.wrapper" after="columns.top.wrapper"/>
+
+    <container name="category.image.wrapper" htmlTag="div" htmlClass="page-main"/>
+    <move element="category.image" destination="category.image.wrapper"/>
+    <move element="category.image.wrapper" destination="category.view.container"/>
+
+    <container name="category.description.wrapper" htmlTag="div"/>
+    <move element="category.description" destination="category.description.wrapper"/>
+    <move element="category.description.wrapper" destination="category.view.container" after="category.image.wrapper"/>
+
+    <container name="category.cms.wrapper" htmlTag="div" htmlClass="page-main"/>
+    <move element="category.cms" destination="category.cms.wrapper"/>
+    <move element="category.cms.wrapper" destination="category.view.container" after="category.description.wrapper"/>
+
+    <block name="list" class="Magento\Framework\View\Element\Text\ListText" />
+</layout>
