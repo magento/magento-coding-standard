@@ -271,7 +271,7 @@ class LayoutSniff implements Sniff
     {
         $doc = new DomDocument('1.0');
         $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
+        $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
         return $doc->saveXML();
     }
 
