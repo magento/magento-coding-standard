@@ -16,21 +16,23 @@ class LayoutUnitTest extends AbstractSniffUnitTest
     {
         if ($testFile === 'LayoutUnitTest.1.xml') {
             return [
+                13 => 1,
+                22 => 1,
                 23 => 1,
-                146 => 1,
-                149 => 1,
+                145 => 1,
+                148 => 1,
             ];
         }
         if ($testFile === 'LayoutUnitTest.2.xml') {
             return [
-                12 => 1,
-                29 => 1,
+                11 => 1,
+                28 => 1,
             ];
         }
         if ($testFile === 'LayoutUnitTest.3.xml') {
             return [
-                16 => 1,
-                19 => 1,
+                15 => 1,
+                18 => 1,
             ];
         }
         return [];
