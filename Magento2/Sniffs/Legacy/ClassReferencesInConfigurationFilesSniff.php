@@ -3,6 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+declare(strict_types = 1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -60,9 +61,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
 
         $layouts = $this->collectClassesInLayout($xml);
         $this->assertNonFactoryName($phpcsFile, $layouts);
-
-        $layoutTabs = $this->collectClassesInLayoutTabs($xml);
-        $this->assertNonFactoryNameTab($phpcsFile, $layoutTabs);
     }
 
     /**
@@ -101,25 +99,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
                     self::ERROR_MESSAGE_MODULE,
                     $element['lineNumber'],
                     self::ERROR_CODE_MODULE,
-                );
-            }
-        }
-    }
-
-    /**
-     * Check whether specified class names in layout tabs are right according PSR-1 Standard.
-     *
-     * @param File $phpcsFile
-     * @param array $elements
-     */
-    private function assertNonFactoryNameTab(File $phpcsFile, array $elements)
-    {
-        foreach ($elements as $element) {
-            if (preg_match('/\//', $element['value']) !== false) {
-                $phpcsFile->addError(
-                    self::ERROR_MESSAGE_CONFIG,
-                    $element['lineNumber'],
-                    self::ERROR_CODE_CONFIG,
                 );
             }
         }
@@ -198,41 +177,10 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      */
     private function collectClassesInLayout(SimpleXMLElement $xml): array
     {
-        $classes = $this->getValuesFromXmlTagAttribute(
+        return $this->getValuesFromXmlTagAttribute(
             $xml,
-            '/layout//@helper',
-            'helper'
-        );
-        $classes = array_map(
-            function (array $extendedNode) {
-                $extendedNode['value'] = explode('::', trim($extendedNode['value']))[0];
-                return $extendedNode;
-            },
-            $classes
-        );
-        $classes = array_merge(
-            $classes,
-            $this->getValuesFromXmlTagAttribute(
-                $xml,
-                '/layout//@module',
-                'module'
-            )
-        );
-
-        return $classes;
-    }
-
-    /**
-     * Extract class references from layout tabs
-     *
-     * @param SimpleXMLElement $xml
-     * @return array
-     */
-    private function collectClassesInLayoutTabs(SimpleXMLElement $xml): array
-    {
-        return $this->getValuesFromXmlTagContent(
-            $xml,
-            '/layout//action[@method="addTab"]/block',
+            '/layout//@module',
+            'module'
         );
     }
 
