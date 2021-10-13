@@ -245,12 +245,12 @@ class LayoutSniff implements Sniff
     private function testObsoleteReferences(SimpleXMLElement $layout, File $phpcsFile): void
     {
         foreach ($layout as $handle) {
-            $attributes = $handle->attributes();
-            if (!isset($this->obsoleteReferences[(string)$attributes->handle])) {
+            $handleAttribute = (string)$handle->attributes()->handle;
+            if (!isset($this->obsoleteReferences[$handleAttribute])) {
                 continue;
             }
             foreach ($handle->xpath('//reference | //referenceContainer | //referenceBlock') as $reference) {
-                if (in_array((string)$reference['name'], $this->obsoleteReferences[(string)$attributes->handle]) !== false) {
+                if (in_array((string)$reference['name'], $this->obsoleteReferences[$handleAttribute]) !== false) {
                     $phpcsFile->addError(
                         'The block being referenced is removed.',
                         dom_import_simplexml($reference)->getLineNo()-1,
