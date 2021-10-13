@@ -18,16 +18,16 @@ class ObsoleteResponseSniff implements Sniff
      * @var string[]
      */
     private $obsoleteResponseMethods = [
-        'loadLayout',
-        'renderLayout',
-        '_redirect',
-        '_forward',
-        '_setActiveMenu',
-        '_addBreadcrumb',
-        '_addContent',
-        '_addLeft',
-        '_addJs',
-        '_moveBlockToContainer',
+        'loadLayout' => 'Please use \Magento\Framework\View\Layout\Builder::build instead.',
+        'renderLayout' => 'Please use \Magento\Framework\Controller\ResultInterface::renderResult instead.',
+        '_redirect' => 'Please use \Magento\Backend\Model\View\Result\Redirect::render instead.',
+        '_forward' => 'Please use \Magento\Backend\Model\View\Result\Forward::forward instead.',
+        '_setActiveMenu' => 'Please use \Magento\Backend\Model\View\Result\Page::setActiveMenu instead.',
+        '_addBreadcrumb' => 'Please use \Magento\Backend\Model\View\Result\Page::addBreadcrumb instead.',
+        '_addContent' => 'Please use \Magento\Backend\Model\View\Result\Page::addContent instead.',
+        '_addLeft' => 'Please use \Magento\Backend\Model\View\Result\Page::addLeft instead.',
+        '_addJs' => 'Please use \Magento\Backend\Model\View\Result\Page::addJs instead.',
+        '_moveBlockToContainer' => 'Please use \Magento\Backend\Model\View\Result\Page::moveBlockToContainer instead.',
     ];
     
     /**
@@ -49,10 +49,10 @@ class ObsoleteResponseSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $stringPos = $phpcsFile->findNext(T_STRING, $stackPtr + 1);
 
-        foreach ($this->obsoleteResponseMethods as $method) {
+        foreach ($this->obsoleteResponseMethods as $method => $errorMessage) {
             if ($tokens[$stringPos]['content'] === $method) {
                 $phpcsFile->addWarning(
-                    sprintf('Contains obsolete response method: %s.', $method),
+                    sprintf('%s method is deprecated. %s', $method, $errorMessage),
                     $stackPtr,
                     self::WARNING_CODE_METHOD
                 );
