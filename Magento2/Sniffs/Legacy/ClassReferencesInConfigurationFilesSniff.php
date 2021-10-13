@@ -58,9 +58,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
 
         $modules = $this->getValuesFromXmlTagAttribute($xml, '//@module', 'module');
         $this->assertNonFactoryNameModule($phpcsFile, $modules);
-
-        $layouts = $this->collectClassesInLayout($xml);
-        $this->assertNonFactoryName($phpcsFile, $layouts);
     }
 
     /**
@@ -167,21 +164,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         );
 
         return $classes;
-    }
-
-    /**
-     * Parse an XML for references to PHP class names in selected tags or attributes
-     *
-     * @param SimpleXMLElement $xml
-     * @return array
-     */
-    private function collectClassesInLayout(SimpleXMLElement $xml): array
-    {
-        return $this->getValuesFromXmlTagAttribute(
-            $xml,
-            '/layout//@module',
-            'module'
-        );
     }
 
     /**
