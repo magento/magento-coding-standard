@@ -22,6 +22,8 @@ class LicenseSniff implements Sniff
 
     private const WARNING_CODE = 'FoundLegacyTextInCopyright';
     
+    private const LEGACY_TEXTS = ['Irubin Consulting Inc', 'DBA Varien', 'Magento Inc'];
+    
     /**
      * @inheritdoc
      */
@@ -65,7 +67,7 @@ class LicenseSniff implements Sniff
         if (stripos($commentContent, 'copyright') === false) {
             return;
         }
-        foreach (['Irubin Consulting Inc', 'DBA Varien', 'Magento Inc'] as $legacyText) {
+        foreach (self::LEGACY_TEXTS as $legacyText) {
             if (stripos($commentContent, $legacyText) !== false) {
                 $phpcsFile->addWarning(
                     sprintf("The copyright license contains legacy text: %s.", $legacyText),
