@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Magento2">
-    <description>Magento Coding Standard</description>
+<ruleset name="customizations">
+    <description>Magento Coding Standard for customizations</description>
 
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml,js/PHP"/>
