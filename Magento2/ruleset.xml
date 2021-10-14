@@ -202,10 +202,6 @@
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Legacy.License">
-        <severity>9</severity>
-        <type>warning</type>
-    </rule>
 
     <!-- Severity 8 warnings: Magento specific code issues and design violations. -->
     <rule ref="Magento2.Classes.AbstractApi">
@@ -335,6 +331,10 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Legacy.ObsoleteResponse">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.License">
         <severity>8</severity>
         <type>warning</type>
     </rule>
