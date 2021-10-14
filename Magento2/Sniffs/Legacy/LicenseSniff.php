@@ -54,7 +54,7 @@ class LicenseSniff implements Sniff
 
     /**
      * Check that the copyright license does not contain legacy text
-     * 
+     *
      * @param string $content
      * @param int $stackPtr
      * @param File $phpcsFile
