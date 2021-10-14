@@ -13,9 +13,14 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class LicenseSniff implements Sniff
 {
-    private const WARNING_CODE = 'FoundLegacyTextInCopyright';
-    
+    /**
+     * A list of tokenizers this sniff supports.
+     *
+     * @var array
+     */
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS, 'PHP'];
+
+    private const WARNING_CODE = 'FoundLegacyTextInCopyright';
     
     /**
      * @inheritdoc
@@ -42,12 +47,14 @@ class LicenseSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_INLINE_HTML) {
             $content = $phpcsFile->getTokensAsString($stackPtr, 1);
         }
-        if ($content != null){
-            $this->checkLicense($content, $stackPtr, $phpcsFile); 
+        if ($content != null) {
+            $this->checkLicense($content, $stackPtr, $phpcsFile);
         }
     }
 
     /**
+     * Check that the copyright license does not contain legacy text
+     * 
      * @param string $content
      * @param int $stackPtr
      * @param File $phpcsFile
