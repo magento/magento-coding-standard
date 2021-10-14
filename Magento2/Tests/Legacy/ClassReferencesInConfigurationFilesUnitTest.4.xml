@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="DateTimeInterface" type="DateTime" />
+    <preference for="Psr\Log\LoggerInterface" type="Magento\FRAMEWORK\Logger\LoggerProxy" />
+    <preference for="Magento\Framework\EntityManager\EntityMetadataInterface" type="Magento\Framework\EntityManager\EntityMetadata" />
+    <preference for="Magento\Framework\EntityManager\HydratorInterface" type="Magento\Framework\EntityManager\Hydrator" />
+    <preference for="Magento\Framework\View\Template\Html\MinifierInterface" type="Magento\Framework\View\Template\Html\Minifier" />
+    <preference for="Magento\Framework\Model\Entity\ScopeInterface" type="Magento\Framework\Model\Entity\Scope" />
+    <type name="Magento\Store\Model\Store">
+        <arguments>
+            <argument name="currencyInstalled" xsi:type="string">system/currency/installed</argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Framework\Communication\Config\Reader\XmlReader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Magento\Framework\Communication\Config\Reader\XmlReader\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">Magento\Framework\Communication\Config\Reader\XmlReader\SchemaLocator</argument>
+            <argument name="fileName" xsi:type="string">communication.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/topic" xsi:type="string">name</item>
+                <item name="/config/topic/handler" xsi:type="string">name</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Logger\Handler\Syslog">
+        <arguments>
+            <argument name="ident" xsi:type="string">Magento</argument>
+        </arguments>
+    </type>
+</config>
