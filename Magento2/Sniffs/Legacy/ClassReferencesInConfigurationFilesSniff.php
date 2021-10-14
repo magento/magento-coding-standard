@@ -131,14 +131,15 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
                 | //model_token | //writer_model | //clone_model | //frontend_model | //working_model
                 | //admin_renderer | //renderer',
         );
-$classes = array_merge(
+
+        $classes = array_merge(
             $classes,
             $this->getValuesFromXmlTagAttribute(
                 $xml,
                 '//@backend_model',
                 'backend_model'
             ),
-$this->getValuesFromXmlTagAttribute(
+            $this->getValuesFromXmlTagAttribute(
                 $xml,
                 '/config//preference',
                 'type'
