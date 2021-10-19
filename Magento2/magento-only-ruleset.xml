@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="Magento2 Only">
+    <description>Magento Coding Standard sniffs applicable for Magento Open Source development only</description>
+    <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
+        <severity>5</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.php$</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Legacy.Copyright">
+        <severity>5</severity>
+        <type>warning</type>
+        <include-pattern>*\.php$</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
+    </rule>
+</ruleset>

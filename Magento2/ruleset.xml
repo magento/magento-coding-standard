@@ -726,24 +726,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
-        <severity>5</severity>
-        <type>warning</type>
-        <exclude-pattern>*\.php$</exclude-pattern>
-        <exclude-pattern>*\.phtml$</exclude-pattern>
-    </rule>
-    <rule ref="Magento2.Legacy.Copyright">
-        <severity>5</severity>
-        <type>warning</type>
-        <include-pattern>*\.php$</include-pattern>
-        <include-pattern>*\.phtml$</include-pattern>
-    </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
-    </rule>
-    <!-- TODO: AC-1314 -->
-    <rule ref="Magento2.Legacy">
-        <exclude name="Magento2.Legacy.Copyright"/>
-        <exclude name="Magento2.Legacy.CopyrightAnotherExtensionsFiles"/>
     </rule>
 </ruleset>
