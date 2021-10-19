@@ -5,7 +5,7 @@
  */
 declare(strict_types = 1);
 
-namespace Magento2\Sniffs\Legacy;
+namespace Magento2Framework\Sniffs\Header;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -13,10 +13,10 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class CopyrightSniff implements Sniff
 {
     private const WARNING_CODE = 'FoundCopyrightMissingOrWrongFormat';
-    
+
     private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
     private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
-    
+
     /**
      * @inheritdoc
      */
@@ -24,7 +24,7 @@ class CopyrightSniff implements Sniff
     {
         return [T_OPEN_TAG];
     }
-    
+
     /**
      * @inheritDoc
      */

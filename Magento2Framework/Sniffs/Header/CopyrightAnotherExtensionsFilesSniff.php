@@ -5,7 +5,7 @@
  */
 declare(strict_types = 1);
 
-namespace Magento2\Sniffs\Legacy;
+namespace Magento2Framework\Sniffs\Header;
 
 use Magento2\Sniffs\Less\TokenizerSymbolsInterface;
 use PHP_CodeSniffer\Files\File;
@@ -24,7 +24,7 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
      * @var array
      */
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS, 'PHP'];
-    
+
     /**
      * @inheritDoc
      */
@@ -44,7 +44,7 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
         if ($stackPtr > 0) {
             return;
         }
-        
+
         $fileText = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
         $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $fileText);
 

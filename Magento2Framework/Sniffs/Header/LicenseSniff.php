@@ -5,7 +5,7 @@
  */
 declare(strict_types = 1);
 
-namespace Magento2\Sniffs\Legacy;
+namespace Magento2Framework\Sniffs\Header;
 
 use Magento2\Sniffs\Less\TokenizerSymbolsInterface;
 use PHP_CodeSniffer\Files\File;
@@ -21,9 +21,9 @@ class LicenseSniff implements Sniff
     public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS, 'PHP'];
 
     private const WARNING_CODE = 'FoundLegacyTextInCopyright';
-    
+
     private const LEGACY_TEXTS = ['Irubin Consulting Inc', 'DBA Varien', 'Magento Inc'];
-    
+
     /**
      * @inheritdoc
      */
@@ -34,7 +34,7 @@ class LicenseSniff implements Sniff
             T_INLINE_HTML
         ];
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -42,7 +42,7 @@ class LicenseSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         $content = null;
-        
+
         if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_STRING) {
             $content = $tokens[$stackPtr]['content'];
         }
