@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Legacy;
+namespace Magento2Framework\Tests\Header;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
@@ -25,7 +25,7 @@ class LicenseUnitTest extends AbstractSniffUnitTest
         if ($testFile === 'LicenseUnitTest.1.inc' || $testFile === 'LicenseUnitTest.3.xml') {
             return [];
         }
-        
+
         if ($testFile === 'LicenseUnitTest.2.inc') {
             return [
                 3 => 1,

@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Legacy;
+namespace Magento2Framework\Tests\Header;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
@@ -25,7 +25,7 @@ class CopyrightUnitTest extends AbstractSniffUnitTest
         if ($testFile === 'CopyrightUnitTest.4.inc' || $testFile === 'CopyrightUnitTest.5.inc') {
             return [];
         }
-        
+
         if ($testFile === 'CopyrightUnitTest.1.inc') {
             return [
                 1 => 1,

@@ -27,7 +27,8 @@
             "PHP_CodeSniffer/Tokenizers/"
         ],
         "psr-4": {
-            "Magento2\\": "Magento2/"
+            "Magento2\\": "Magento2/",
+            "Magento2Framework\\": "Magento2Framework/"
         }
     },
     "scripts": {

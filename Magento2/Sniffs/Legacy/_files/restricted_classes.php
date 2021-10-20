@@ -17,7 +17,8 @@ return [
         'exclude' => [
             'Magento/Framework/DB/Select.php',
             'Magento/Framework/DB/Adapter/Pdo/Mysql.php',
-            'Magento/Framework/Model/ResourceModel/Iterator.php'
+            'Magento/Framework/Model/ResourceModel/Iterator.php',
+            'Magento/ResourceConnections/DB/Adapter/Pdo/MysqlProxy.php'
         ]
     ],
     'Zend_Db_Adapter_Pdo_Mysql' => [
@@ -48,7 +49,10 @@ return [
             'Magento/Framework/Flag.php',
             'Magento/Widget/Setup/LayoutUpdateConverter.php',
             'Magento/Cms/Setup/ContentConverter.php',
-            'Magento/Framework/Unserialize/Test/Unit/UnserializeTest.php'
+            'Magento/Framework/Unserialize/Test/Unit/UnserializeTest.php',
+            'Magento/Framework/Test/Unit/FlagTest.php',
+            'Magento/Staging/Test/Unit/Model/Update/FlagTest.php',
+            'Magento/Logging/Test/Unit/Setup/ObjectConverterTest.php'
         ]
     ],
     'ArrayObject' => [
@@ -67,7 +71,10 @@ return [
                 'Magento/Framework/Indexer/Test/Unit/BatchTest.php',
                 'Magento/Framework/View/Element/UiComponent/ArrayObjectFactory.php',
                 'Magento/Framework/View/Element/UiComponent/Config/Provider/Component/Definition.php',
-                'Magento/Framework/Indexer/Action/Base.php'
+                'Magento/Framework/Indexer/Action/Base.php',
+                'Magento/MultipleWishlist/Test/Unit/Model/Search/Strategy/EmailTest.php',
+                'Magento/Rma/Test/Unit/Model/RmaRepositoryTest.php',
+                'Magento/Rma/Test/Unit/Model/Status/HistoryRepositoryTest.php'
             ]
     ],
     'Magento\Framework\View\Element\UiComponent\ArrayObjectFactory' => [

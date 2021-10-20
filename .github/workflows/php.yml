@@ -42,7 +42,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Run ESLint
-      run: npm run eslint -- eslint/rules Magento2 --ignore-pattern 'Magento2/Tests/Eslint/*Test.js'
+      run: npm run eslint -- eslint/rules
     - name: Run JSCS
       run: npm run jscs eslint/rules Magento2
 
@@ -59,4 +59,7 @@ jobs:
       run: vendor/bin/phpunit
 
     - name: Run code style suite
-      run: vendor/bin/phpcs --standard=Magento2 Magento2/Helpers/ Magento2/Sniffs
+      run: vendor/bin/phpcs --standard=Magento2 Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
+
+    - name: Run framework suite
+      run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
