@@ -32,16 +32,16 @@ class ObsoleteResponseSniff implements Sniff
      * @var string[]
      */
     private $obsoleteResponseWarningCodes = [
-        'loadLayout' => 'loadLayoutResponseMethodFound',
-        'renderLayout' => 'renderLayoutResponseMethodFound',
-        '_redirect' => 'redirectResponseMethodFound',
-        '_forward' => 'forwardResponseMethodFound',
-        '_setActiveMenu' => 'setActiveMenuResponseMethodFound',
-        '_addBreadcrumb' => 'addBreadcrumbResponseMethodFound',
-        '_addContent' => 'addContentResponseMethodFound',
-        '_addLeft' => 'addLeftResponseMethodFound',
-        '_addJs' => 'addJsResponseMethodFound',
-        '_moveBlockToContainer' => 'moveBlockToContainerResponseMethodFound',
+        'loadLayout' => 'LoadLayoutResponseMethodFound',
+        'renderLayout' => 'RenderLayoutResponseMethodFound',
+        '_redirect' => 'RedirectResponseMethodFound',
+        '_forward' => 'ForwardResponseMethodFound',
+        '_setActiveMenu' => 'SetActiveMenuResponseMethodFound',
+        '_addBreadcrumb' => 'AddBreadcrumbResponseMethodFound',
+        '_addContent' => 'AddContentResponseMethodFound',
+        '_addLeft' => 'AddLeftResponseMethodFound',
+        '_addJs' => 'AddJsResponseMethodFound',
+        '_moveBlockToContainer' => 'MoveBlockToContainerResponseMethodFound',
     ];
     
     /**

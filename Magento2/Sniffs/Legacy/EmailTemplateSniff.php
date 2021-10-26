@@ -15,16 +15,14 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class EmailTemplateSniff implements Sniff
 {
     private const OBSOLETE_EMAIL_DIRECTIVES = [
-        '/\{\{htmlescape.*?\}\}/i' => 'Directive {{htmlescape}} is obsolete. Use {{var}} instead.',
-        '/\{\{escapehtml.*?\}\}/i' => 'Directive {{escapehtml}} is obsolete. Use {{var}} instead.',
-    ];
-
-    /**
-     * @var string[]
-     */
-    private $errorCodes = [
-        '/\{\{htmlescape.*?\}\}/i' => 'FoundObsoleteHtmlescapeDirective',
-        '/\{\{escapehtml.*?\}\}/i' => 'FoundObsoleteEscapehtmlDirective'
+        'FoundObsoleteHtmlescapeDirective' => [
+            'pattern' => '/\{\{htmlescape.*?\}\}/i',
+            'message' => 'Directive {{htmlescape}} is obsolete. Use {{var}} instead.',
+        ],
+        'FoundObsoleteEscapehtmlDirective' => [
+            'pattern' => '/\{\{escapehtml.*?\}\}/i',
+            'message' => 'Directive {{escapehtml}} is obsolete. Use {{var}} instead.',
+        ],
     ];
 
     /**
@@ -43,12 +41,12 @@ class EmailTemplateSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $content = $phpcsFile->getTokens()[$stackPtr]['content'];
-        foreach (self::OBSOLETE_EMAIL_DIRECTIVES as $directiveRegex => $errorMessage) {
-            if (preg_match($directiveRegex, $content)) {
+        foreach (self::OBSOLETE_EMAIL_DIRECTIVES as $code => $data) {
+            if (preg_match($data['pattern'], $content)) {
                 $phpcsFile->addError(
-                    $errorMessage,
+                    $data['message'],
                     $stackPtr,
-                    $this->errorCodes[$directiveRegex]
+                    $code
                 );
             }
         }
