@@ -18,14 +18,14 @@ class ObsoleteConnectionSniff implements Sniff
      * @var string[]
      */
     private $obsoleteMethods = [
-        '_getReadConnection',
-        '_getWriteConnection',
-        '_getReadAdapter',
-        '_getWriteAdapter',
-        'getReadConnection',
-        'getWriteConnection',
-        'getReadAdapter',
-        'getWriteAdapter',
+        '_getReadConnection' => 'FoundObsoleteMethod_getReadConnection',
+        '_getWriteConnection' => 'FoundObsoleteMethod_getWriteConnection',
+        '_getReadAdapter' => 'FoundObsoleteMethod_getReadAdapter',
+        '_getWriteAdapter' => 'FoundObsoleteMethod_getWriteAdapter',
+        'getReadConnection' => 'FoundObsoleteMethodGetReadConnection',
+        'getWriteConnection' => 'FoundObsoleteMethodGetWriteConnection',
+        'getReadAdapter' => 'FoundObsoleteMethodGetReadAdapter',
+        'getWriteAdapter' => 'FoundObsoleteMethodGetWriteAdapter',
     ];
 
     /**
@@ -58,12 +58,12 @@ class ObsoleteConnectionSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $stringPos = $phpcsFile->findNext(T_STRING, $stackPtr + 1);
         
-        foreach ($this->obsoleteMethods as $method) {
+        foreach ($this->obsoleteMethods as $method => $errorCode) {
             if ($tokens[$stringPos]['content'] === $method) {
                 $phpcsFile->addWarning(
                     sprintf("Contains obsolete method: %s. Please use getConnection method instead.", $method),
                     $stackPtr,
-                    self::ERROR_CODE_METHOD
+                    $errorCode
                 );
             }
         }

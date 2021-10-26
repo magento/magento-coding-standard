@@ -12,8 +12,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteResponseSniff implements Sniff
 {
-    private const WARNING_CODE_METHOD = 'FoundObsoleteResponseMethod';
-    
     /**
      * @var string[]
      */
@@ -28,6 +26,22 @@ class ObsoleteResponseSniff implements Sniff
         '_addLeft' => 'Please use \Magento\Backend\Model\View\Result\Page::addLeft instead.',
         '_addJs' => 'Please use \Magento\Backend\Model\View\Result\Page::addJs instead.',
         '_moveBlockToContainer' => 'Please use \Magento\Backend\Model\View\Result\Page::moveBlockToContainer instead.',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private $obsoleteResponseWarningCodes = [
+        'loadLayout' => 'loadLayoutResponseMethodFound',
+        'renderLayout' => 'renderLayoutResponseMethodFound',
+        '_redirect' => 'redirectResponseMethodFound',
+        '_forward' => 'forwardResponseMethodFound',
+        '_setActiveMenu' => 'setActiveMenuResponseMethodFound',
+        '_addBreadcrumb' => 'addBreadcrumbResponseMethodFound',
+        '_addContent' => 'addContentResponseMethodFound',
+        '_addLeft' => 'addLeftResponseMethodFound',
+        '_addJs' => 'addJsResponseMethodFound',
+        '_moveBlockToContainer' => 'moveBlockToContainerResponseMethodFound',
     ];
     
     /**
@@ -54,7 +68,7 @@ class ObsoleteResponseSniff implements Sniff
                 $phpcsFile->addWarning(
                     sprintf('%s method is deprecated. %s', $method, $errorMessage),
                     $stackPtr,
-                    self::WARNING_CODE_METHOD
+                    $this->obsoleteResponseWarningCodes[$method]
                 );
             }
         }

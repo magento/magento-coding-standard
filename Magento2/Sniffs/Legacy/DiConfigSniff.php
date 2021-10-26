@@ -11,7 +11,13 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DiConfigSniff implements Sniff
 {
-    private const WARNING_CODE = 'FoundObsoleteAttribute';
+    private $obsoleteDiNodesWarningCodes = [
+        '<param' => 'FoundObsoleteParamNode',
+        '<instance' => 'FoundObsoleteInstanceNode',
+        '<array' => 'FoundObsoleteArrayNode',
+        '<item key=' => 'FoundObsoleteItemNode',
+        '<value' => 'FoundObsoleteValueNode',
+    ];
 
     /**
      * @var string[] Associative array containing the obsolete nodes and the message to display when they are found.
@@ -46,7 +52,7 @@ class DiConfigSniff implements Sniff
                 $phpcsFile->addWarning(
                     $message,
                     $stackPtr,
-                    self::WARNING_CODE
+                    $this->obsoleteDiNodesWarningCodes[$element]
                 );
             }
         }

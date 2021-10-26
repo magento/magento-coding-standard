@@ -13,6 +13,7 @@
  */
 return [
     'Zend_Db_Select' => [
+        'warning_code' => 'ZendDbSelectIsRestricted',
         'replacement' => '\Magento\Framework\DB\Select',
         'exclude' => [
             'Magento/Framework/DB/Select.php',
@@ -22,12 +23,14 @@ return [
         ]
     ],
     'Zend_Db_Adapter_Pdo_Mysql' => [
+        'warning_code' => 'ZendDbAdapterPdoMysqlIsRestricted',
         'replacement' => '\Magento\Framework\DB\Adapter\Pdo\Mysql',
         'exclude' => [
             'Magento/Framework/DB/Adapter/Pdo/Mysql.php'
         ]
     ],
     'Magento\Framework\Serialize\Serializer\Serialize' => [
+        'warning_code' => 'SerializerSerializeIsRestricted',
         'replacement' => 'Magento\Framework\Serialize\SerializerInterface',
         'exclude' => [
             'Magento/Framework/App/ObjectManager/ConfigLoader/Compiled.php',
@@ -56,6 +59,7 @@ return [
         ]
     ],
     'ArrayObject' => [
+        'warning_code' => 'ArrayObjectIsRestricted',
         'replacement' => 'Custom class, extended from ArrayObject with overwritten serialize/unserialize methods',
         'exclude' => [
                 'Magento/Theme/Model/Indexer/Design/Config.php',
@@ -78,6 +82,7 @@ return [
             ]
     ],
     'Magento\Framework\View\Element\UiComponent\ArrayObjectFactory' => [
+        'warning_code' => 'ArrayObjectFactoryIsRestricted',
         'replacement' => 'Factory that creates custom class, extended from ArrayObject with overwritten '
             . 'serialize/unserialize methods',
         'exclude' => [

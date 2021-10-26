@@ -13,7 +13,7 @@ use SplFileInfo;
 
 class InstallUpgradeSniff implements Sniff
 {
-    private const ERROR_CODE = 'obsoleteScript';
+    private const ERROR_CODE = 'invalidDirectory';
 
     /**
      * @var string[]
@@ -30,11 +30,26 @@ class InstallUpgradeSniff implements Sniff
             . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
         'UpgradeSchema' => 'UpgradeSchema scripts are obsolete. '
             . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-        'UpgradeData' => 'UpgradeSchema scripts are obsolete. '
+        'UpgradeData' => 'UpgradeData scripts are obsolete. '
             . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
         'data-upgrade-' => 'Upgrade scripts are obsolete. '
             . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
         'recurring' => 'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private $wrongPrefixesErrorCodes = [
+        'install-' => 'obsoleteInstallScript',
+        'InstallSchema' => 'obsoleteInstallSchemaScript',
+        'InstallData' => 'obsoleteInstallDataScript',
+        'data-install-' => 'obsoleteDataInstallScript',
+        'upgrade-' => 'obsoleteUpgradeScript',
+        'UpgradeSchema' => 'obsoleteUpgradeSchemaScript',
+        'UpgradeData' => 'obsoleteUpgradeDataScript',
+        'data-upgrade-' => 'obsoleteDataUpgradeScript',
+        'recurring' => 'obsoleteRecurringScript',
     ];
 
     /**
@@ -60,7 +75,7 @@ class InstallUpgradeSniff implements Sniff
 
         foreach ($this->wrongPrefixes as $prefix => $errorMessage) {
             if (strpos($fileInfo->getFilename(), $prefix) === 0) {
-                $phpcsFile->addError($errorMessage, 0, self::ERROR_CODE);
+                $phpcsFile->addError($errorMessage, 0, $this->wrongPrefixesErrorCodes[$prefix]);
             }
         }
 

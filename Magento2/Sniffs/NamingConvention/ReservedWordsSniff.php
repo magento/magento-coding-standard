@@ -37,6 +37,44 @@ class ReservedWordsSniff implements Sniff
     ];
 
     /**
+     * @var string[]
+     */
+    private $classErrorCodes = [
+        'int' => 'IntForbiddenAsClassName',
+        'float' => 'FloatForbiddenAsClassName',
+        'bool' => 'boolForbiddenAsClassName',
+        'string' => 'stringForbiddenAsClassName',
+        'true' => 'trueForbiddenAsClassName',
+        'false' => 'falseForbiddenAsClassName',
+        'null' => 'nullForbiddenAsClassName',
+        'void' => 'voidForbiddenAsClassName',
+        'iterable' => 'iterableForbiddenAsClassName',
+        'resource' => 'resourceForbiddenAsClassName',
+        'object' => 'objectForbiddenAsClassName',
+        'mixed' => 'mixedForbiddenAsClassName',
+        'numeric' => 'numericForbiddenAsClassName',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private $namespaceErrorCodes = [
+        'int' => 'IntForbiddenAsNameSpace',
+        'float' => 'FloatForbiddenAsNameSpace',
+        'bool' => 'boolForbiddenAsNameSpace',
+        'string' => 'stringForbiddenAsNameSpace',
+        'true' => 'trueForbiddenAsNameSpace',
+        'false' => 'falseForbiddenAsNameSpace',
+        'null' => 'nullForbiddenAsNameSpace',
+        'void' => 'voidForbiddenAsNameSpace',
+        'iterable' => 'iterableForbiddenAsNameSpace',
+        'resource' => 'resourceForbiddenAsNameSpace',
+        'object' => 'objectForbiddenAsNameSpace',
+        'mixed' => 'mixedForbiddenAsNameSpace',
+        'numeric' => 'numericForbiddenAsNameSpace',
+    ];
+
+    /**
      * @inheritdoc
      */
     public function register()
@@ -65,7 +103,7 @@ class ReservedWordsSniff implements Sniff
                 $sourceFile->addError(
                     'Cannot use "%s" in namespace as it is reserved since PHP %s',
                     $stackPtr,
-                    'Namespace',
+                    $this->namespaceErrorCodes[strtolower($namespacePart)],
                     [$namespacePart, $this->reservedWords[strtolower($namespacePart)]]
                 );
             }
@@ -89,7 +127,7 @@ class ReservedWordsSniff implements Sniff
             $sourceFile->addError(
                 'Cannot use "%s" as class name as it is reserved since PHP %s',
                 $stackPtr,
-                'Class',
+                $this->classErrorCodes[strtolower($className)],
                 [$className, $this->reservedWords[$className]]
             );
         }

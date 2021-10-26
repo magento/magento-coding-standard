@@ -13,6 +13,15 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class PhtmlTemplateSniff implements Sniff
 {
     private const WARNING_CODE = 'PhtmlTemplateObsolete';
+    private const WARNING_CODE_TEXT_JAVASCRIPT = 'TextJavascriptTypeFound';
+    private const WARNING_CODE_THIS_USAGE = 'ThisUsageObsolete';
+    private const WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS = 'ProtectedPrivateBlockAccess';
+
+    private const WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
+        '/(["\'])jquery\/ui\1/' => 'JQueryUILibraryFound',
+        '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'JSComponentInitInPHPFound',
+        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'JSComponentInitInPHPFound',
+    ];
 
     private const OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
         '/(["\'])jquery\/ui\1/' => 'Please do not use "jquery/ui" library in templates. Use needed jquery ' .
@@ -77,7 +86,7 @@ class PhtmlTemplateSniff implements Sniff
                 'Access to protected and private members of Block class is ' .
                 'obsolete in phtml templates. Use only public members.',
                 $stringPos,
-                self::WARNING_CODE
+                self::WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS
             );
         }
     }
@@ -101,7 +110,7 @@ class PhtmlTemplateSniff implements Sniff
                 'Access to members and methods of Block class through $this is ' .
                 'obsolete in phtml templates. Use only $block instead of $this.',
                 $stringPos,
-                self::WARNING_CODE
+                self::WARNING_CODE_THIS_USAGE
             );
         }
     }
@@ -120,7 +129,7 @@ class PhtmlTemplateSniff implements Sniff
             $phpcsFile->addWarning(
                 'Please do not use "text/javascript" type attribute.',
                 $stackPtr,
-                self::WARNING_CODE
+                self::WARNING_CODE_TEXT_JAVASCRIPT
             );
         }
     }
@@ -140,7 +149,7 @@ class PhtmlTemplateSniff implements Sniff
                 $phpcsFile->addWarning(
                     $errorMessage,
                     $stackPtr,
-                    self::WARNING_CODE
+                    self::WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES[$obsoleteRegex]
                 );
             }
         }
