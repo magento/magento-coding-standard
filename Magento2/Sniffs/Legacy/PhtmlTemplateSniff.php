@@ -16,19 +16,19 @@ class PhtmlTemplateSniff implements Sniff
     private const WARNING_CODE_THIS_USAGE = 'ThisUsageObsolete';
     private const WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS = 'ProtectedPrivateBlockAccess';
 
-    private const WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
-        '/(["\'])jquery\/ui\1/' => 'FoundJQueryUI',
-        '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'FoundDataMageInit',
-        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'FoundXMagentoInit',
-    ];
-
-    private const OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
-        '/(["\'])jquery\/ui\1/' => 'Please do not use "jquery/ui" library in templates. Use needed jquery ' .
-            'ui widget instead.',
-        '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'Please do not initialize JS component in php. Do ' .
-            'it in template.',
-        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'Please do not initialize JS component ' .
-            'in php. Do it in template.',
+    private const OBSOLETE_REGEX = [
+        'FoundJQueryUI' => [
+            'pattern' => '/(["\'])jquery\/ui\1/',
+            'message' => 'Please do not use "jquery/ui" library in templates. Use needed jquery ui widget instead'
+        ],
+        'FoundDataMageInit' => [
+            'pattern' => '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/',
+            'message' => 'Please do not initialize JS component in php. Do it in template'
+        ],
+        'FoundXMagentoInit' => [
+            'pattern' => '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i',
+            'message' => 'Please do not initialize JS component in php. Do it in template'
+        ],
     ];
     
     /**
@@ -143,12 +143,12 @@ class PhtmlTemplateSniff implements Sniff
     {
         $content = $phpcsFile->getTokensAsString($stackPtr, 1);
         
-        foreach (self::OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES as $obsoleteRegex => $errorMessage) {
-            if (preg_match($obsoleteRegex, $content)) {
+        foreach (self::OBSOLETE_REGEX as $code => $data) {
+            if (preg_match($data['pattern'], $content)) {
                 $phpcsFile->addWarning(
-                    $errorMessage,
+                    $data['message'],
                     $stackPtr,
-                    self::WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES[$obsoleteRegex]
+                    $code
                 );
             }
         }
