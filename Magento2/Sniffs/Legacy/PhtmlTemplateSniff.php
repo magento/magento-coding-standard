@@ -17,7 +17,7 @@ class PhtmlTemplateSniff implements Sniff
     private const WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS = 'ProtectedPrivateBlockAccess';
 
     private const WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
-        '/(["\'])jquery\/ui\1/' => 'JQueryUILibraryFound',
+        '/(["\'])jquery\/ui\1/' => 'FoundJQueryUI',
         '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'FoundDataMageInit',
         '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'FoundXMagentoInit',
     ];
