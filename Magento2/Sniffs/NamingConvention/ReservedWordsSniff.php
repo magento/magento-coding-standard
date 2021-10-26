@@ -36,6 +36,9 @@ class ReservedWordsSniff implements Sniff
         'numeric' => '7',
     ];
 
+    private const CLASS_ERROR_CODE = 'ForbiddenAsClassName';
+    private const NAMESPACE_ERROR_CODE = 'ForbiddenAsNameSpace';
+
     /**
      * @inheritdoc
      */
@@ -51,7 +54,7 @@ class ReservedWordsSniff implements Sniff
      * @param int $stackPtr
      * @return void
      */
-    protected function validateNamespace(File $sourceFile, $stackPtr)
+    protected function validateNamespace(File $sourceFile, int $stackPtr)
     {
         $stackPtr += 2;
         $tokens = $sourceFile->getTokens();
@@ -65,7 +68,7 @@ class ReservedWordsSniff implements Sniff
                 $sourceFile->addError(
                     'Cannot use "%s" in namespace as it is reserved since PHP %s',
                     $stackPtr,
-                    'Namespace',
+                    self::NAMESPACE_ERROR_CODE,
                     [$namespacePart, $this->reservedWords[strtolower($namespacePart)]]
                 );
             }
@@ -80,7 +83,7 @@ class ReservedWordsSniff implements Sniff
      * @param int $stackPtr
      * @return void
      */
-    protected function validateClass(File $sourceFile, $stackPtr)
+    protected function validateClass(File $sourceFile, int $stackPtr)
     {
         $tokens = $sourceFile->getTokens();
         $stackPtr += 2; //skip "class" and whitespace
@@ -89,7 +92,7 @@ class ReservedWordsSniff implements Sniff
             $sourceFile->addError(
                 'Cannot use "%s" as class name as it is reserved since PHP %s',
                 $stackPtr,
-                'Class',
+                self::CLASS_ERROR_CODE,
                 [$className, $this->reservedWords[$className]]
             );
         }
@@ -98,17 +101,17 @@ class ReservedWordsSniff implements Sniff
     /**
      * @inheritdoc
      */
-    public function process(File $sourceFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $sourceFile->getTokens();
+        $tokens = $phpcsFile->getTokens();
         switch ($tokens[$stackPtr]['code']) {
             case T_CLASS:
             case T_INTERFACE:
             case T_TRAIT:
-                $this->validateClass($sourceFile, $stackPtr);
+                $this->validateClass($phpcsFile, $stackPtr);
                 break;
             case T_NAMESPACE:
-                $this->validateNamespace($sourceFile, $stackPtr);
+                $this->validateNamespace($phpcsFile, $stackPtr);
                 break;
         }
     }
