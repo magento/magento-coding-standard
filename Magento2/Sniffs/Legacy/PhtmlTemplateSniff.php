@@ -19,7 +19,7 @@ class PhtmlTemplateSniff implements Sniff
     private const WARNING_CODES_OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
         '/(["\'])jquery\/ui\1/' => 'JQueryUILibraryFound',
         '/data-mage-init=(?:\'|")(?!\s*{\s*"[^"]+")/' => 'FoundDataMageInit',
-        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'JSComponentInitInPHPFound',
+        '@x-magento-init.>(?!\s*+{\s*"[^"]+"\s*:\s*{\s*"[\w/-]+")@i' => 'FoundXMagentoInit',
     ];
 
     private const OBSOLETE_REGEX_IN_SPECIFIC_PHTML_TEMPLATES = [
