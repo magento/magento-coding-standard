@@ -12,8 +12,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConnectionSniff implements Sniff
 {
-    private const ERROR_CODE_METHOD = 'FoundObsoleteMethod';
-
     /**
      * @var string[]
      */

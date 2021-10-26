@@ -13,8 +13,6 @@ use SplFileInfo;
 
 class InstallUpgradeSniff implements Sniff
 {
-    private const ERROR_CODE = 'invalidDirectory';
-
     /**
      * @var string[]
      */
@@ -53,6 +51,14 @@ class InstallUpgradeSniff implements Sniff
     ];
 
     /**
+     * @var string[]
+     */
+    private $invalidDirectoriesErrorCodes = [
+        'data' => 'dataInvalidDirectory',
+        'sql' => 'sqlInvalidDirectory'
+    ];
+
+    /**
      * @inheritdoc
      */
     public function register(): array
@@ -88,7 +94,7 @@ class InstallUpgradeSniff implements Sniff
                 . "- Create a data patch within module's Setup/Patch/Data folder for data upgrades.\n"
                 . "- Use declarative schema approach in module's etc/db_schema.xml file for schema changes.",
                 0,
-                self::ERROR_CODE
+                $this->invalidDirectoriesErrorCodes[$folderName]
             );
         }
     }

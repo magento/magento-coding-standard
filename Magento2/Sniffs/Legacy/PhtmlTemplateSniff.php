@@ -12,7 +12,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class PhtmlTemplateSniff implements Sniff
 {
-    private const WARNING_CODE = 'PhtmlTemplateObsolete';
     private const WARNING_CODE_TEXT_JAVASCRIPT = 'TextJavascriptTypeFound';
     private const WARNING_CODE_THIS_USAGE = 'ThisUsageObsolete';
     private const WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS = 'ProtectedPrivateBlockAccess';
