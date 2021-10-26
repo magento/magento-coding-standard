@@ -13,7 +13,7 @@
  */
 return [
     'Zend_Db_Select' => [
-        'warning_code' => 'ZendDbSelectIsRestricted',
+        'warning_code' => 'ZendDbSelect',
         'replacement' => '\Magento\Framework\DB\Select',
         'exclude' => [
             'Magento/Framework/DB/Select.php',
