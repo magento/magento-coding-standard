@@ -19,6 +19,9 @@ class EmailTemplateSniff implements Sniff
         '/\{\{escapehtml.*?\}\}/i' => 'Directive {{escapehtml}} is obsolete. Use {{var}} instead.',
     ];
 
+    /**
+     * @var string[]
+     */
     private $errorCodes = [
         '/\{\{htmlescape.*?\}\}/i' => 'FoundObsoleteHtmlescapeDirective',
         '/\{\{escapehtml.*?\}\}/i' => 'FoundObsoleteEscapehtmlDirective'

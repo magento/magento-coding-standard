@@ -11,6 +11,9 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DiConfigSniff implements Sniff
 {
+    /**
+     * @var string[]
+     */
     private $obsoleteDiNodesWarningCodes = [
         '<param' => 'FoundObsoleteParamNode',
         '<instance' => 'FoundObsoleteInstanceNode',

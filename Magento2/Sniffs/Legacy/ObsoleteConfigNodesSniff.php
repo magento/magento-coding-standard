@@ -15,6 +15,10 @@ class ObsoleteConfigNodesSniff implements Sniff
 {
     private const ERROR_MESSAGE_CONFIG = "Nodes identified by XPath '%s' are obsolete. %s";
     private const ERROR_CODE_CONFIG = 'WrongXML';
+
+    /**
+     * @var string[]
+     */
     private $obsoleteNodesErrorCodes = [
         '/config/global/fieldsets' => 'obsoleteNodeGlobalFieldsets',
         '/config/global/cache/betatypes' => 'obsoleteNodeBetatypes',
@@ -331,6 +335,4 @@ class ObsoleteConfigNodesSniff implements Sniff
             '/config/system/cms/content/versioning' => 'Functionality is eliminated',
         ];
     }
-
-
 }
