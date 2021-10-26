@@ -39,7 +39,7 @@ class InstallUpgradeSniff implements Sniff
      * @var string[]
      */
     private $wrongPrefixesErrorCodes = [
-        'install-' => 'obsoleteInstallScript',
+        'install-' => 'ObsoleteInstallScript',
         'InstallSchema' => 'obsoleteInstallSchemaScript',
         'InstallData' => 'obsoleteInstallDataScript',
         'data-install-' => 'obsoleteDataInstallScript',
