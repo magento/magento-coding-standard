@@ -3,11 +3,12 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
-use PHP_CodeSniffer\Util\Tokens;
 use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
 
 /**
@@ -15,17 +16,19 @@ use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
  */
 class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
 {
-
     /**
      * @var array
      */
-    private $ignoreTokens = [
+    private const TOKENS_ALLOWED_BETWEEN_PHPDOC_AND_PROPERTY_NAME = [
         T_PUBLIC,
         T_PRIVATE,
         T_PROTECTED,
         T_VAR,
         T_STATIC,
         T_WHITESPACE,
+        T_NS_SEPARATOR,
+        T_STRING,
+        T_COMMENT
     ];
 
     /**
@@ -38,15 +41,9 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
      */
     public function __construct()
     {
-        $scopes = Tokens::$ooScopeTokens;
         $this->PHPDocFormattingValidator = new PHPDocFormattingValidator();
-        $listen = [
-            T_VARIABLE,
-            T_DOUBLE_QUOTED_STRING,
-            T_HEREDOC,
-        ];
 
-        parent::__construct($scopes, $listen, true);
+        parent::__construct();
     }
 
     /**
@@ -56,111 +53,147 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $commentEnd = $phpcsFile->findPrevious($this->ignoreTokens, ($stackPtr - 1), null, true);
+        $commentEnd = $phpcsFile->findPrevious(
+            self::TOKENS_ALLOWED_BETWEEN_PHPDOC_AND_PROPERTY_NAME,
+            $stackPtr - 1,
+            null,
+            true
+        );
 
-        if ($commentEnd !== false && $tokens[$commentEnd]['code'] === T_STRING) {
-            $commentEnd = $phpcsFile->findPrevious($this->ignoreTokens, ($commentEnd - 1), null, true);
-        } elseif ($commentEnd === false
-            || ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
-                && $tokens[$commentEnd]['code'] !== T_COMMENT)
-        ) {
+        if ($commentEnd === false || $tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
             $phpcsFile->addWarning('Missing PHP DocBlock for class property.', $stackPtr, 'Missing');
             return;
         }
 
         $commentStart = $tokens[$commentEnd]['comment_opener'];
-        $foundVar = null;
+        $varAnnotationPosition = null;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             if ($tokens[$tag]['content'] === '@var') {
-                if ($foundVar !== null) {
-                    $error = 'Only one @var tag is allowed for class property declaration.';
-                    $phpcsFile->addWarning($error, $tag, 'DuplicateVar');
+                if ($varAnnotationPosition !== null) {
+                    $phpcsFile->addWarning(
+                        'Only one @var tag is allowed for class property declaration.',
+                        $tag,
+                        'DuplicateVar'
+                    );
                 } else {
-                    $foundVar = $tag;
+                    $varAnnotationPosition = $tag;
                 }
             }
         }
 
-        if ($foundVar === null) {
-            $error = 'Class properties must have type declaration using @var tag.';
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingVar');
+        if ($varAnnotationPosition === null) {
+            $phpcsFile->addWarning(
+                'Class properties must have type declaration using @var tag.',
+                $stackPtr,
+                'MissingVar'
+            );
             return;
         }
 
-        $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $foundVar, $commentEnd);
-        if ($string === false || $tokens[$string]['line'] !== $tokens[$foundVar]['line']) {
-            $error = 'Content missing for @var tag in class property declaration.';
-            $phpcsFile->addWarning($error, $foundVar, 'EmptyVar');
+        $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $varAnnotationPosition, $commentEnd);
+        if ($string === false || $tokens[$string]['line'] !== $tokens[$varAnnotationPosition]['line']) {
+            $phpcsFile->addWarning(
+                'Content missing for @var tag in class property declaration.',
+                $varAnnotationPosition,
+                'EmptyVar'
+            );
             return;
         }
 
         // Check if class has already have meaningful description after @var tag
-        $isShortDescriptionAfterVar = $phpcsFile->findNext(
+        $shortDescriptionAfterVarPosition = $phpcsFile->findNext(
             T_DOC_COMMENT_STRING,
-            $foundVar + 4,
+            $varAnnotationPosition + 4,
             $commentEnd,
             false,
             null,
             false
         );
+
         if ($this->PHPDocFormattingValidator->providesMeaning(
-            $isShortDescriptionAfterVar,
+            $shortDescriptionAfterVarPosition,
             $commentStart,
             $tokens
         ) !== true) {
             preg_match(
                 '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
-                $tokens[($foundVar + 2)]['content'],
+                $tokens[($varAnnotationPosition + 2)]['content'],
                 $varParts
             );
             if ($varParts[1]) {
                 return;
             }
-            $error = 'Short description must be before @var tag.';
-            $phpcsFile->addWarning($error, $isShortDescriptionAfterVar, 'ShortDescriptionAfterVar');
-            return;
+            $phpcsFile->addWarning(
+                'Short description must be before @var tag.',
+                $shortDescriptionAfterVarPosition,
+                'ShortDescriptionAfterVar'
+            );
         }
 
-        // Check if class has already have meaningful description before @var tag
-        $isShortDescriptionPreviousVar = $phpcsFile->findPrevious(
+        $this->processPropertyShortDescription($phpcsFile, $stackPtr, $varAnnotationPosition, $commentStart);
+    }
+
+    /**
+     * Check if class has already have meaningful description before var tag
+     *
+     * @param File $phpcsFile
+     * @param int $propertyNamePosition
+     * @param int $varAnnotationPosition
+     * @param int $commentStart
+     */
+    private function processPropertyShortDescription(
+        File $phpcsFile,
+        int $propertyNamePosition,
+        int $varAnnotationPosition,
+        int $commentStart
+    ): void {
+        $propertyShortDescriptionPosition = $phpcsFile->findPrevious(
             T_DOC_COMMENT_STRING,
-            $foundVar,
+            $varAnnotationPosition,
             $commentStart,
             false,
             null,
             false
         );
 
-        if ($isShortDescriptionPreviousVar === false) {
+        if ($propertyShortDescriptionPosition === false) {
             return;
         }
 
-        $propertyNamePosition = $phpcsFile->findNext(
-            T_VARIABLE,
-            $foundVar,
-            null,
-            false,
-            null,
-            false
-        );
-        if ($propertyNamePosition === false) {
-            return;
-        };
+        $tokens = $phpcsFile->getTokens();
         $propertyName = trim($tokens[$propertyNamePosition]['content'], '$');
-        $shortDescription = strtolower($tokens[$isShortDescriptionPreviousVar]['content']);
+        $shortDescription = strtolower($tokens[$propertyShortDescriptionPosition]['content']);
 
-        if ($shortDescription === strtolower($propertyName)) {
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
-            return;
+        if ($this->isDuplicate($propertyName, $shortDescription)) {
+            $phpcsFile->addWarning(
+                'Short description duplicates class property name.',
+                $propertyShortDescriptionPosition,
+                'AlreadyHaveMeaningfulNameVar'
+            );
         }
+    }
 
-        $propertyNameParts = array_filter(preg_split('/(?=[A-Z])/', $propertyName));
+    /**
+     * Does short description duplicate the property name
+     *
+     * @param string $propertyName
+     * @param string $shortDescription
+     * @return bool
+     */
+    private function isDuplicate(string $propertyName, string $shortDescription): bool
+    {
+        return $this->clean($propertyName) === $this->clean($shortDescription);
+    }
 
-        if ($shortDescription === strtolower(implode(' ', $propertyNameParts))) {
-            $error = 'Short description duplicates class property name.';
-            $phpcsFile->addWarning($error, $isShortDescriptionPreviousVar, 'AlreadyHaveMeaningfulNameVar');
-        }
+    /**
+     * Return only A-Za-z characters converted to lowercase from the string
+     *
+     * @param string $string
+     * @return string
+     */
+    private function clean(string $string): string
+    {
+        return strtolower(preg_replace('/[^A-Za-z]/', '', $string));
     }
 
     /**

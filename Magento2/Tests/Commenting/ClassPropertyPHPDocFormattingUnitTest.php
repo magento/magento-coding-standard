@@ -34,6 +34,7 @@ class ClassPropertyPHPDocFormattingUnitTest extends AbstractSniffUnitTest
             63 => 1,
             68 => 1,
             75 => 1,
+            125 => 1
         ];
     }
 }

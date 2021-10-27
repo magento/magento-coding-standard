@@ -115,6 +115,16 @@ class correctlyFormattedClassMemberDocBlock
     protected $rulePool;
 
     /**
+     * @var \Magento\Store\Model\StoreManager
+     */
+    private \Magento\Store\Model\StoreManager $decoratedStoreManager;
+
+    /*
+     * @var \Magento\Eav\Model\Entity\Attribute\SetFactory
+     */
+    private $attributeSetFactory;
+
+    /**
      * A description that includes test which is the same name as the variable is allowed
      *
      * @var test
