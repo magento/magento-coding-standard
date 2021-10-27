@@ -7,8 +7,7 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  build:
-
+  php:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -41,10 +40,6 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-    - name: Run ESLint
-      run: npm run eslint -- eslint/rules
-    - name: Run JSCS
-      run: npm run jscs eslint/rules Magento2
 
     - name: Validate composer
       run: composer validate
@@ -63,3 +58,23 @@ jobs:
 
     - name: Run framework suite
       run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
+  js:
+    runs-on: ubuntu-latest
+    name: Javascript tests
+
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run eslint -- eslint/rules
+
+      - name: Run JSCS
+        run: npm run jscs eslint/rules Magento2
