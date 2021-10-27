@@ -15,7 +15,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class WidgetXMLSniff implements Sniff
 {
-    private const ERROR_CODE_OBSOLETE = 'FoundObsoleteNode';
+    private const ERROR_CODE_OBSOLETE_SUPPORTED_BLOCKS = 'FoundObsoleteNodeSupportedBlocks';
+    private const ERROR_CODE_OBSOLETE_BLOCK_NAME = 'FoundObsoleteNodeBlockName';
     private const ERROR_CODE_FACTORY = 'FoundFactory';
     private const ERROR_CODE_XML = 'WrongXML';
 
@@ -66,7 +67,7 @@ class WidgetXMLSniff implements Sniff
             $phpcsFile->addError(
                 "Obsolete node: <supported_blocks>. To be replaced with <supported_containers>",
                 dom_import_simplexml($element)->getLineNo() - 1,
-                self::ERROR_CODE_OBSOLETE
+                self::ERROR_CODE_OBSOLETE_SUPPORTED_BLOCKS
             );
         }
 
@@ -75,7 +76,7 @@ class WidgetXMLSniff implements Sniff
             $phpcsFile->addError(
                 "Obsolete node: <block_name>. To be replaced with <container_name>",
                 dom_import_simplexml($element)->getLineNo() - 1,
-                self::ERROR_CODE_OBSOLETE
+                self::ERROR_CODE_OBSOLETE_BLOCK_NAME
             );
         }
     }

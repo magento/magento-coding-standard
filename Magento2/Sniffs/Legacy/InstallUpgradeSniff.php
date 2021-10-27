@@ -13,28 +13,58 @@ use SplFileInfo;
 
 class InstallUpgradeSniff implements Sniff
 {
-    private const ERROR_CODE = 'obsoleteScript';
+    private const WRONG_PREFIXES = [
+        'ObsoleteInstallScript' => [
+            'pattern' => 'install-',
+            'message' => 'Install scripts are obsolete. '
+                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        ],
+        'ObsoleteInstallSchemaScript' => [
+            'pattern' => 'InstallSchema',
+            'message' => 'InstallSchema scripts are obsolete. '
+                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        ],
+        'ObsoleteInstallDataScript' => [
+            'pattern' => 'InstallData',
+            'message' => 'InstallData scripts are obsolete. '
+                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        ],
+        'ObsoleteDataInstallScript' => [
+            'pattern' => 'data-install-',
+            'message' => 'Install scripts are obsolete. Please create class InstallData in module\'s Setup folder',
+        ],
+        'ObsoleteUpgradeScript' => [
+            'pattern' => 'upgrade-',
+            'message' => 'Upgrade scripts are obsolete. '
+                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        ],
+        'ObsoleteUpgradeSchemaScript' => [
+            'pattern' => 'UpgradeSchema',
+            'message' => 'UpgradeSchema scripts are obsolete. '
+                . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
+        ],
+        'ObsoleteUpgradeDataScript' => [
+            'pattern' => 'UpgradeData',
+            'message' => 'UpgradeData scripts are obsolete. '
+                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        ],
+        'ObsoleteDataUpgradeScript' => [
+            'pattern' => 'data-upgrade',
+            'message' => 'Upgrade scripts are obsolete. '
+                . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
+        ],
+        'ObsoleteRecurringScript' => [
+            'pattern' => 'recurring',
+            'message' => 'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder'
+        ]
+    ];
 
     /**
      * @var string[]
      */
-    private $wrongPrefixes = [
-        'install-' => 'Install scripts are obsolete. '
-            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-        'InstallSchema' => 'InstallSchema scripts are obsolete. '
-            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-        'InstallData' => 'InstallData scripts are obsolete. '
-            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-        'data-install-' => 'Install scripts are obsolete. Please create class InstallData in module\'s Setup folder',
-        'upgrade-' => 'Upgrade scripts are obsolete. '
-            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-        'UpgradeSchema' => 'UpgradeSchema scripts are obsolete. '
-            . 'Please use declarative schema approach in module\'s etc/db_schema.xml file',
-        'UpgradeData' => 'UpgradeSchema scripts are obsolete. '
-            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-        'data-upgrade-' => 'Upgrade scripts are obsolete. '
-            . 'Please use data patches approach in module\'s Setup/Patch/Data dir',
-        'recurring' => 'Recurring scripts are obsolete. Please create class Recurring in module\'s Setup folder',
+    private const INVALID_DIRECTORIES_ERROR_CODES = [
+        'data' => 'DataInvalidDirectory',
+        'sql' => 'SqlInvalidDirectory'
     ];
 
     /**
@@ -58,9 +88,9 @@ class InstallUpgradeSniff implements Sniff
         
         $fileInfo = new SplFileInfo($phpcsFile->getFilename());
 
-        foreach ($this->wrongPrefixes as $prefix => $errorMessage) {
-            if (strpos($fileInfo->getFilename(), $prefix) === 0) {
-                $phpcsFile->addError($errorMessage, 0, self::ERROR_CODE);
+        foreach (self::WRONG_PREFIXES as $code => $data) {
+            if (strpos($fileInfo->getFilename(), $data['pattern']) === 0) {
+                $phpcsFile->addError($data['message'], 0, $code);
             }
         }
 
@@ -73,7 +103,7 @@ class InstallUpgradeSniff implements Sniff
                 . "- Create a data patch within module's Setup/Patch/Data folder for data upgrades.\n"
                 . "- Use declarative schema approach in module's etc/db_schema.xml file for schema changes.",
                 0,
-                self::ERROR_CODE
+                self::INVALID_DIRECTORIES_ERROR_CODES[$folderName]
             );
         }
     }
