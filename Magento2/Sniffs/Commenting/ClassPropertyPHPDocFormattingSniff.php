@@ -146,7 +146,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         int $propertyNamePosition,
         int $varAnnotationPosition,
         int $commentStart
-    ) {
+    ): void {
         $propertyShortDescriptionPosition = $phpcsFile->findPrevious(
             T_DOC_COMMENT_STRING,
             $varAnnotationPosition,

@@ -28,8 +28,6 @@ class InterfaceNameSniff implements Sniff
     protected $warningCode = 'WrongInterfaceName';
 
     /**
-     * Interface suffix.
-     *
      * @var string
      */
     private $interfaceSuffix = 'Interface';
