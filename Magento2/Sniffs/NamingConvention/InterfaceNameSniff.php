@@ -43,16 +43,16 @@ class InterfaceNameSniff implements Sniff
     /**
      * @inheritdoc
      */
-    public function process(File $sourceFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $sourceFile->getTokens();
+        $tokens = $phpcsFile->getTokens();
         $declarationLine = $tokens[$stackPtr]['line'];
         $suffixLength = strlen($this->interfaceSuffix);
         // Find first T_STRING after 'interface' keyword in the line and verify it
         while ($tokens[$stackPtr]['line'] === $declarationLine) {
             if ($tokens[$stackPtr]['type'] === 'T_STRING') {
                 if (substr($tokens[$stackPtr]['content'], 0 - $suffixLength) !== $this->interfaceSuffix) {
-                    $sourceFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
+                    $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
                 }
                 break;
             }

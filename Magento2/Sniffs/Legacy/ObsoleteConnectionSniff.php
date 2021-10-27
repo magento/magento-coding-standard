@@ -12,8 +12,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConnectionSniff implements Sniff
 {
-    private const ERROR_CODE_METHOD = 'FoundObsoleteMethod';
-
     /**
      * @var string[]
      */
@@ -27,6 +25,8 @@ class ObsoleteConnectionSniff implements Sniff
         'getReadAdapter',
         'getWriteAdapter',
     ];
+
+    private const OBSOLETE_METHOD_ERROR_CODE = 'ObsoleteMethodFound';
 
     /**
      * @inheritdoc
@@ -63,7 +63,7 @@ class ObsoleteConnectionSniff implements Sniff
                 $phpcsFile->addWarning(
                     sprintf("Contains obsolete method: %s. Please use getConnection method instead.", $method),
                     $stackPtr,
-                    self::ERROR_CODE_METHOD
+                    self::OBSOLETE_METHOD_ERROR_CODE
                 );
             }
         }

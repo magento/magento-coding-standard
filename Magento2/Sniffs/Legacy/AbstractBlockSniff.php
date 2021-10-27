@@ -15,12 +15,8 @@ class AbstractBlockSniff implements Sniff
     private const CHILD_HTML_METHOD = 'getChildHtml';
     private const CHILD_CHILD_HTML_METHOD = 'getChildChildHtml';
 
-    /**
-     * Error violation code.
-     *
-     * @var string
-     */
-    protected $errorCode = 'FoundCountOfParametersIncorrect';
+    private const ERROR_CODE_THIRD_PARAMETER = 'ThirdParameterNotNeeded';
+    private const ERROR_CODE_FOURTH_PARAMETER = 'FourthParameterNotNeeded';
 
     /**
      * @inheritdoc
@@ -52,14 +48,14 @@ class AbstractBlockSniff implements Sniff
             $phpcsFile->addError(
                 '3rd parameter is not needed anymore for getChildHtml()',
                 $stackPtr,
-                $this->errorCode
+                self::ERROR_CODE_THIRD_PARAMETER
             );
         }
         if ($content === self::CHILD_CHILD_HTML_METHOD && $paramsCount >= 4) {
             $phpcsFile->addError(
                 '4th parameter is not needed anymore for getChildChildHtml()',
                 $stackPtr,
-                $this->errorCode
+                self::ERROR_CODE_FOURTH_PARAMETER
             );
         }
     }

@@ -16,7 +16,6 @@ use PHP_CodeSniffer\Files\File;
 class RestrictedCodeSniff implements Sniff
 {
     private const ERROR_MESSAGE = "Class '%s' is restricted in %s. Suggested replacement: %s";
-    private const ERROR_CODE = "restrictedClass";
 
     /**
      * List of fixtures that contain restricted classes and should not be tested
@@ -76,7 +75,7 @@ class RestrictedCodeSniff implements Sniff
                     $this->classes[$token]['replacement']
                 ),
                 $stackPtr,
-                self::ERROR_CODE,
+                $this->classes[$token]['warning_code'],
             );
         }
     }

@@ -19,8 +19,9 @@ class LayoutSniff implements Sniff
 {
     private const ERROR_CODE_XML = 'WrongXML';
     private const ERROR_CODE_NOT_ALLOWED = 'NotAllowed';
-    private const ERROR_CODE_OBSOLETE = 'Obsolete';
+    private const ERROR_CODE_OBSOLETE_BLOCK = 'ObsoleteBlock';
     private const ERROR_CODE_OBSOLETE_CLASS = 'ObsoleteClass';
+    private const ERROR_CODE_OBSOLETE_TOHTML_ATTRIBUTE = 'ObsoleteToHtmlAttribute';
     private const ERROR_CODE_METHOD_NOT_ALLOWED = 'MethodNotAllowed';
     private const ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_NOT_ALLOWED = 'CharacterNotAllowedInAttribute';
     private const ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_EXPECTED = 'CharacterExpectedInAttribute';
@@ -254,7 +255,7 @@ class LayoutSniff implements Sniff
                     $phpcsFile->addError(
                         'The block being referenced is removed.',
                         dom_import_simplexml($reference)->getLineNo()-1,
-                        self::ERROR_CODE_OBSOLETE
+                        self::ERROR_CODE_OBSOLETE_BLOCK
                     );
                 }
             }
@@ -317,7 +318,7 @@ class LayoutSniff implements Sniff
             $phpcsFile->addError(
                 'output="toHtml" is obsolete. Use output="1"',
                 dom_import_simplexml($elements[0])->getLineNo()-1,
-                self::ERROR_CODE_OBSOLETE
+                self::ERROR_CODE_OBSOLETE_TOHTML_ATTRIBUTE
             );
         };
     }
