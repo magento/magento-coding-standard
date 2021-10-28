@@ -32,6 +32,9 @@ class Bad
         $this->eavSetup = $objectManager
             ->get(EavSetupFactory::class)
             ->create(['setup' => $this->setup]);
+
+        ObjectManager::getInstance()
+            ->get(\Full\Class\NameFactory::class);
     }
 }
 
