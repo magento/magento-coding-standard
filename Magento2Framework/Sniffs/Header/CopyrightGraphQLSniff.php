@@ -10,29 +10,26 @@ namespace Magento2Framework\Sniffs\Header;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class CopyrightAnotherExtensionsFilesSniff implements Sniff
+class CopyrightGraphQLSniff implements Sniff
 {
     private const WARNING_CODE = 'FoundCopyrightMissingOrWrongFormat';
 
     private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
     private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
 
-    /**
-     * Defines the tokenizers that this sniff is using.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = ['CSS', 'PHP', 'JS'];
+    private const FILE_EXTENSION = 'graphqls';
 
     /**
-     * @inheritDoc
+     * @var string[]
      */
-    public function register(): array
+    public $supportedTokenizers = ['GRAPHQL'];
+
+    /**
+     * @inheritdoc
+     */
+    public function register()
     {
-        return [
-            T_INLINE_HTML,
-            T_OPEN_TAG
-        ];
+        return [T_OPEN_TAG];
     }
 
     /**
@@ -40,15 +37,14 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        if ($stackPtr > 0) {
+        if ($phpcsFile->findPrevious(T_OPEN_TAG, $stackPtr - 1) !== false) {
             return;
         }
 
-        $fileText = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
+        // @phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
+        $content = file_get_contents($phpcsFile->getFilename());
 
-        if (strpos($fileText, self::COPYRIGHT_MAGENTO_TEXT) !== false
-            || preg_match(self::COPYRIGHT_ADOBE, $fileText)
-        ) {
+        if (strpos($content, self::COPYRIGHT_MAGENTO_TEXT) !== false || preg_match(self::COPYRIGHT_ADOBE, $content)) {
             return;
         }
 
