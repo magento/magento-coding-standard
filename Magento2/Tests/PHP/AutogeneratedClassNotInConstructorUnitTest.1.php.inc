@@ -12,10 +12,10 @@ use Magento2\OneModel as Model;
 class Good
 {
     public function __construct(
-        Model $model = null
+        ModelFactory $model = null
     )
     {
-        $this->model = $model ?? ObjectManager::getInstance()->get(Model::class);
+        $this->model = $model ?? ObjectManager::getInstance()->get(ModelFactory::class);
     }
 
     /**
@@ -23,8 +23,8 @@ class Good
      */
     public function otherMethodThatCallsGetInstanceBad(): void
     {
-        $model = ObjectManager::getInstance()->get(Model::class);
-        $model->something();
+        $modelFactory = ObjectManager::getInstance()->get(OtherFactory::class);
+        $modelFactory->create();
     }
 
     /**
@@ -35,4 +35,18 @@ class Good
         $model = $this->model ?? ObjectManager::getInstance()->get(Model::class);
         $model->something();
     }
+
+    public function variablePositive(): void
+    {
+        $objectManager = ObjectManager::getInstance();
+        $this->_entityFactory = $objectManager->get(EntityFactoryInterface::class);
+    }
+
+    public function variableNegative(): void
+    {
+        $objectManager = ObjectManager::getInstance();
+        $this->_entityFactory = $objectManager->get(EntityFactory::class);
+    }
 }
+
+
