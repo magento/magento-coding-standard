@@ -48,12 +48,15 @@ class ArrayAutovivificationSniff implements Sniff
 
         if ($positionSquareBracket) {
             $tokens = $phpcsFile->getTokens();
-            $propertyTokenKey = array_keys(array_column($tokens, 'content'), $tokens[$stackPtr]['content']);
+            $positionFunction = $phpcsFile->findPrevious(T_FUNCTION, $positionSquareBracket) ?: 0;
+            $sliceLength = $stackPtr - $positionFunction;
+            $sliceToken = array_slice(array_column($tokens, 'content'), $positionFunction, $sliceLength, true);
+            $propertyTokenKey = array_keys($sliceToken, $tokens[$stackPtr]['content']);
 
             arsort($propertyTokenKey);
 
             foreach ($propertyTokenKey as $tokenKey) {
-                if ($tokenKey < $stackPtr && $tokens[$tokenKey + 2]['content'] === '=') {
+                if ($tokens[$tokenKey + 2]['content'] === '=') {
                     if ($tokens[$tokenKey + 4]['content'] != 'false') {
                         return;
                     }
