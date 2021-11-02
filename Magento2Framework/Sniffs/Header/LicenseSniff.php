@@ -7,7 +7,6 @@ declare(strict_types = 1);
 
 namespace Magento2Framework\Sniffs\Header;
 
-use Magento2\Sniffs\Less\TokenizerSymbolsInterface;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
@@ -18,7 +17,7 @@ class LicenseSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = [TokenizerSymbolsInterface::TOKENIZER_CSS, 'PHP'];
+    public $supportedTokenizers = ['CSS', 'PHP'];
 
     private const WARNING_CODE = 'FoundLegacyTextInCopyright';
 
@@ -49,7 +48,7 @@ class LicenseSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_INLINE_HTML) {
             $content = $phpcsFile->getTokensAsString($stackPtr, 1);
         }
-        if ($content != null) {
+        if ($content !== null) {
             $this->checkLicense($content, $stackPtr, $phpcsFile);
         }
     }
