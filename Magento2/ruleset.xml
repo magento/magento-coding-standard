@@ -142,11 +142,24 @@
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Legacy.Layout">
+        <severity>10</severity>
+        <type>error</type>
+        <include-pattern>*/view/(adminhtml|frontend|base)/*\/.xml</include-pattern>
+    </rule>
     <rule ref="Magento2.Legacy.RestrictedCode">
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
         <exclude-pattern>*\.js$</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Legacy.ClassReferencesInConfigurationFiles">
+        <include-pattern>*\/etc/*.xml$</include-pattern>
+        <exclude-pattern>*\/etc/wsdl.xml$</exclude-pattern>
+        <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
+        <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
+        <severity>10</severity>
+        <type>error</type>
     </rule>
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
@@ -305,6 +318,19 @@
     </rule>
     <rule ref="Magento2.Legacy.ObsoleteSystemConfiguration">
         <include-pattern>etc/adminhtml/system.xml</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.PhtmlTemplate">
+        <include-pattern>*\.phtml$</include-pattern>
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.ObsoleteConnection">
+        <severity>8</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2.Legacy.ObsoleteResponse">
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -696,24 +722,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Legacy.CopyrightAnotherExtensionsFiles">
-        <severity>5</severity>
-        <type>warning</type>
-        <exclude-pattern>*\.php$</exclude-pattern>
-        <exclude-pattern>*\.phtml$</exclude-pattern>
-    </rule>
-    <rule ref="Magento2.Legacy.Copyright">
-        <severity>5</severity>
-        <type>warning</type>
-        <include-pattern>*\.php$</include-pattern>
-        <include-pattern>*\.phtml$</include-pattern>
-    </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
-    </rule>
-    <!-- TODO: AC-1314 -->
-    <rule ref="Magento2.Legacy">
-        <exclude name="Magento2.Legacy.Copyright"/>
-        <exclude name="Magento2.Legacy.CopyrightAnotherExtensionsFiles"/>
     </rule>
 </ruleset>

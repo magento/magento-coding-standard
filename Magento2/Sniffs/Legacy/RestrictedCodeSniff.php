@@ -16,7 +16,6 @@ use PHP_CodeSniffer\Files\File;
 class RestrictedCodeSniff implements Sniff
 {
     private const ERROR_MESSAGE = "Class '%s' is restricted in %s. Suggested replacement: %s";
-    private const ERROR_CODE = "restrictedClass";
 
     /**
      * List of fixtures that contain restricted classes and should not be tested
@@ -37,7 +36,8 @@ class RestrictedCodeSniff implements Sniff
      */
     public function __construct()
     {
-        $this->loadData('restricted_classes*.php');
+        // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
+        $this->classes = include __DIR__ . '/_files/restricted_classes.php';
     }
 
     /**
@@ -56,7 +56,7 @@ class RestrictedCodeSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        // phpcs:ignore
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
         if (array_key_exists(basename($phpcsFile->getFilename()), $this->fixtureFiles)) {
             return;
         }
@@ -75,7 +75,7 @@ class RestrictedCodeSniff implements Sniff
                     $this->classes[$token]['replacement']
                 ),
                 $stackPtr,
-                self::ERROR_CODE,
+                $this->classes[$token]['warning_code'],
             );
         }
     }
@@ -98,37 +98,5 @@ class RestrictedCodeSniff implements Sniff
             }
         }
         return false;
-    }
-
-    /**
-     * Loads and merges data from fixtures
-     *
-     * @param string $filePattern
-     * @return void
-     */
-    private function loadData(string $filePattern)
-    {
-        // phpcs:ignore
-        foreach (glob(__DIR__ . '/_files/' . $filePattern) as $file) {
-            $relativePath = str_replace(
-                '\\',
-                '/',
-                str_replace(__DIR__ . DIRECTORY_SEPARATOR, '', $file)
-            );
-            array_push($this->fixtureFiles, $relativePath);
-            $this->classes = array_merge_recursive($this->classes, $this->readList($file));
-        }
-    }
-
-    /**
-     * Isolate including a file into a method to reduce scope
-     *
-     * @param string $file
-     * @return array
-     */
-    private function readList($file)
-    {
-        // phpcs:ignore
-        return include $file;
     }
 }

@@ -13,20 +13,24 @@
  */
 return [
     'Zend_Db_Select' => [
+        'warning_code' => 'ZendDbSelect',
         'replacement' => '\Magento\Framework\DB\Select',
         'exclude' => [
             'Magento/Framework/DB/Select.php',
             'Magento/Framework/DB/Adapter/Pdo/Mysql.php',
-            'Magento/Framework/Model/ResourceModel/Iterator.php'
+            'Magento/Framework/Model/ResourceModel/Iterator.php',
+            'Magento/ResourceConnections/DB/Adapter/Pdo/MysqlProxy.php'
         ]
     ],
     'Zend_Db_Adapter_Pdo_Mysql' => [
+        'warning_code' => 'ZendDbAdapterPdoMysqlIsRestricted',
         'replacement' => '\Magento\Framework\DB\Adapter\Pdo\Mysql',
         'exclude' => [
             'Magento/Framework/DB/Adapter/Pdo/Mysql.php'
         ]
     ],
     'Magento\Framework\Serialize\Serializer\Serialize' => [
+        'warning_code' => 'SerializerSerializeIsRestricted',
         'replacement' => 'Magento\Framework\Serialize\SerializerInterface',
         'exclude' => [
             'Magento/Framework/App/ObjectManager/ConfigLoader/Compiled.php',
@@ -48,10 +52,14 @@ return [
             'Magento/Framework/Flag.php',
             'Magento/Widget/Setup/LayoutUpdateConverter.php',
             'Magento/Cms/Setup/ContentConverter.php',
-            'Magento/Framework/Unserialize/Test/Unit/UnserializeTest.php'
+            'Magento/Framework/Unserialize/Test/Unit/UnserializeTest.php',
+            'Magento/Framework/Test/Unit/FlagTest.php',
+            'Magento/Staging/Test/Unit/Model/Update/FlagTest.php',
+            'Magento/Logging/Test/Unit/Setup/ObjectConverterTest.php'
         ]
     ],
     'ArrayObject' => [
+        'warning_code' => 'ArrayObjectIsRestricted',
         'replacement' => 'Custom class, extended from ArrayObject with overwritten serialize/unserialize methods',
         'exclude' => [
                 'Magento/Theme/Model/Indexer/Design/Config.php',
@@ -67,10 +75,14 @@ return [
                 'Magento/Framework/Indexer/Test/Unit/BatchTest.php',
                 'Magento/Framework/View/Element/UiComponent/ArrayObjectFactory.php',
                 'Magento/Framework/View/Element/UiComponent/Config/Provider/Component/Definition.php',
-                'Magento/Framework/Indexer/Action/Base.php'
+                'Magento/Framework/Indexer/Action/Base.php',
+                'Magento/MultipleWishlist/Test/Unit/Model/Search/Strategy/EmailTest.php',
+                'Magento/Rma/Test/Unit/Model/RmaRepositoryTest.php',
+                'Magento/Rma/Test/Unit/Model/Status/HistoryRepositoryTest.php'
             ]
     ],
     'Magento\Framework\View\Element\UiComponent\ArrayObjectFactory' => [
+        'warning_code' => 'ArrayObjectFactoryIsRestricted',
         'replacement' => 'Factory that creates custom class, extended from ArrayObject with overwritten '
             . 'serialize/unserialize methods',
         'exclude' => [

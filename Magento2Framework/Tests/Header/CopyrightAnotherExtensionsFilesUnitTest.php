@@ -3,10 +3,31 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Legacy;
+namespace Magento2Framework\Tests\Header;
 
-class CopyrightAnotherExtensionsFilesUnitTest extends AbstractJsSniffUnitTestCase
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+
+class CopyrightAnotherExtensionsFilesUnitTest extends AbstractSniffUnitTest
 {
+    /**
+     * @inheritDoc
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $config = new Config();
+        $config->extensions = array_merge(
+            $config->extensions,
+            [
+                'js' => 'PHP'
+            ]
+        );
+
+        $GLOBALS['PHP_CODESNIFFER_CONFIG'] = $config;
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,6 +56,11 @@ class CopyrightAnotherExtensionsFilesUnitTest extends AbstractJsSniffUnitTestCas
         }
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.4.js') {
             return [];
+        }
+        if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.5.less') {
+            return [
+                null => 1,
+            ];
         }
         return [];
     }

@@ -62,7 +62,7 @@ class XssTemplateSniff implements Sniff
     protected $allowedFunctions = ['count'];
 
     /**
-     * Allowed annotations.
+     * Annotations preventing from static analysis (skipping this sniff)
      *
      * @var array
      */

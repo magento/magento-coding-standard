@@ -6,7 +6,7 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "13",
+    "version": "14",
     "require": {
         "php": ">=7.3",
         "squizlabs/php_codesniffer": "^3.6",
@@ -27,7 +27,8 @@
             "PHP_CodeSniffer/Tokenizers/"
         ],
         "psr-4": {
-            "Magento2\\": "Magento2/"
+            "Magento2\\": "Magento2/",
+            "Magento2Framework\\": "Magento2Framework/"
         }
     },
     "scripts": {

@@ -37,11 +37,11 @@ class LiteralNamespacesSniff implements Sniff
     /**
      * @inheritdoc
      */
-    public function process(File $sourceFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $sourceFile->getTokens();
-        if ($sourceFile->findPrevious(T_STRING_CONCAT, $stackPtr, $stackPtr - 3) ||
-            $sourceFile->findNext(T_STRING_CONCAT, $stackPtr, $stackPtr + 3)
+        $tokens = $phpcsFile->getTokens();
+        if ($phpcsFile->findPrevious(T_STRING_CONCAT, $stackPtr, $stackPtr - 3) ||
+            $phpcsFile->findNext(T_STRING_CONCAT, $stackPtr, $stackPtr + 3)
         ) {
             return;
         }
@@ -53,7 +53,7 @@ class LiteralNamespacesSniff implements Sniff
         }
 
         if (preg_match($this->literalNamespacePattern, $content) === 1) {
-            $sourceFile->addWarning(
+            $phpcsFile->addWarning(
                 "Use ::class notation instead.",
                 $stackPtr,
                 'LiteralClassUsage'

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="Magento2Framework">
+    <description>Magento Coding Standard sniffs applicable for the framework testing only</description>
+
+    <arg name="extensions" value="php,phtml,graphqls/GRAPHQL,less/CSS,html/CSS,css/CSS,xml,js/JS"/>
+
+    <rule ref="Magento2Framework.Header.License">
+        <severity>5</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Magento2Framework.Header.CopyrightAnotherExtensionsFiles">
+        <severity>5</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.php$</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
+    </rule>
+    <rule ref="Magento2Framework.Header.Copyright">
+        <severity>5</severity>
+        <type>warning</type>
+        <include-pattern>*\.php$</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
+    </rule>
+    <rule ref="Magento2Framework.Header.CopyrightGraphQL">
+        <severity>5</severity>
+        <type>warning</type>
+        <include-pattern>*\.graphqls$</include-pattern>
+    </rule>
+
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+</ruleset>
