@@ -400,6 +400,11 @@
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.PHP.ArrayAutovivification">
+        <severity>7</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Performance.ForeachArrayMerge">
         <severity>7</severity>
         <type>warning</type>
