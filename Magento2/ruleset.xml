@@ -251,6 +251,11 @@
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Functions.DeprecatedFunction">
+        <severity>7</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Namespaces.ImportsFromTestNamespace">
         <severity>8</severity>
         <type>warning</type>
