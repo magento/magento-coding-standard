@@ -238,5 +238,12 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^fseek$' => 'Magento\Framework\Filesystem\DriverInterface::fileSeek()',
         '^feof$' => 'Magento\Framework\Filesystem\DriverInterface::endOfFile()',
         '^flock$' => 'Magento\Framework\Filesystem\DriverInterface::fileLock()',
+        '^date_sunrise$' => 'date_sun_info',
+        '^date_sunset$' => 'date_sun_info',
+        '^strptime$' => 'date_parse_from_format',
+        '^strftime$' => null,
+        '^gmstrftime$' => null,
+        '^(mhash|mhash_.*)$' => null,
+        '^odbc_result_all$' => null
     ];
 }
