@@ -10,9 +10,9 @@ namespace Magento2\Tests\Functions;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Sniff to validate PHP deprecated function.
+ * Test to validate PHP functions usage of which without passing arguments.
  */
-class DeprecatedFunctionUnitTest extends AbstractSniffUnitTest
+class FunctionsDeprecatedWithoutArgumentUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -25,14 +25,13 @@ class DeprecatedFunctionUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList($testFile = ''): array
+    public function getWarningList(): array
     {
-        if ($testFile === 'DeprecatedFunctionUnitTest.inc') {
-            return [
-                23 => 1
-            ];
-        }
-
-        return [];
+        return [
+            23 => 1,
+            25 => 1,
+            27 => 1,
+            29 => 1
+        ];
     }
 }

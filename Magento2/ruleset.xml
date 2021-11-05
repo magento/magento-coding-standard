@@ -251,7 +251,7 @@
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
-    <rule ref="Magento2.Functions.DeprecatedFunction">
+    <rule ref="Magento2.Functions.FunctionsDeprecatedWithoutArgument">
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
