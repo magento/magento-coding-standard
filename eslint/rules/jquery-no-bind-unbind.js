@@ -31,11 +31,9 @@ module.exports = {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                // jscs:disable requireCurlyBraces
-                if (node.callee.type !== 'MemberExpression') return;
+                if (node.callee.type !== 'MemberExpression') {return;}
 
-                if (!['bind', 'unbind'].includes(node.callee.property.name)) return;
-                // jscs:enable requireCurlyBraces
+                if (!['bind', 'unbind'].includes(node.callee.property.name)) {return;}
 
                 if (utils.isjQuery(node)) {
                     context.report({

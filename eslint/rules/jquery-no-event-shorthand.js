@@ -31,11 +31,9 @@ module.exports = {
                 var names = ['load', 'unload', 'error'],
                     name;
 
-                // jscs:disable requireCurlyBraces
-                if (node.callee.type !== 'MemberExpression') return;
+                if (node.callee.type !== 'MemberExpression') {return;}
 
-                if (!names.includes(node.callee.property.name)) return;
-                // jscs:enable requireCurlyBraces
+                if (!names.includes(node.callee.property.name)) {return;}
 
                 if (utils.isjQuery(node)) {
                     name = node.callee.property.name;
