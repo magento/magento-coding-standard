@@ -241,9 +241,9 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^date_sunrise$' => 'date_sun_info',
         '^date_sunset$' => 'date_sun_info',
         '^strptime$' => 'date_parse_from_format',
-        '^strftime$' => null,
-        '^gmstrftime$' => null,
-        '^(mhash|mhash_.*)$' => null,
+        '^strftime$' => 'IntlDateFormatter::format',
+        '^gmstrftime$' => 'IntlDateFormatter::format',
+        '^(mhash|mhash_.*)$' => 'hash_*',
         '^odbc_result_all$' => null
     ];
 }
