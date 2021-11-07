@@ -20,7 +20,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
      *
      * @var string
      */
-    private $warningMessage = 'Calling function %s() without argument is deprecated in PHP 8.1. '
+    private const WARNING_MESSAGE = 'Calling function %s() without argument is deprecated in PHP 8.1. '
         . 'Please pass the input to validate as the first argument of the function.';
 
     /**
@@ -28,14 +28,14 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
      *
      * @var string
      */
-    private $warningCode = 'FunctionsDeprecatedWithoutArgument';
+    private const WARNING_CODE = 'FunctionsDeprecatedWithoutArgument';
 
     /**
      * Deprecated functions without argument.
      *
      * @var array
      */
-    private $deprecatedFunctions = [
+    private const FUNCTIONS_LIST = [
         'mb_check_encoding',
         'get_class',
         'get_parent_class',
@@ -66,8 +66,8 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
 
         $functionName = $phpcsFile->getTokensAsString($phpcsFile->findPrevious(T_STRING, $stackPtr), 1);
 
-        if (in_array($functionName, $this->deprecatedFunctions)) {
-            $phpcsFile->addWarning(sprintf($this->warningMessage, $functionName), $stackPtr, $this->warningCode);
+        if (in_array($functionName, self::FUNCTIONS_LIST)) {
+            $phpcsFile->addWarning(sprintf(self::WARNING_MESSAGE, $functionName), $stackPtr, self::WARNING_CODE);
         }
     }
 }
