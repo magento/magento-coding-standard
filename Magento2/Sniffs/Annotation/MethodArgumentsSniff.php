@@ -228,7 +228,7 @@ class MethodArgumentsSniff implements Sniff
                 $phpcsFile->addError(
                     '{@inheritdoc} does not import parameter annotation',
                     $stackPtr,
-                    'MethodArguments'
+                    'InheritDoc'
                 );
             } elseif ($this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)
                 && !$inheritdocAnnotationWithoutBracesExists
@@ -236,7 +236,7 @@ class MethodArgumentsSniff implements Sniff
                 $phpcsFile->addError(
                     'Missing @param for argument in method annotation',
                     $stackPtr,
-                    'MethodArguments'
+                    'ParamMissing'
                 );
             }
         }
@@ -260,13 +260,13 @@ class MethodArgumentsSniff implements Sniff
             $phpcsFile->addError(
                 'Extra @param found in method annotation',
                 $stackPtr,
-                'MethodArguments'
+                'ExtraParam'
             );
         } elseif ($argumentsCount > 0 && $argumentsCount != $parametersCount && $parametersCount != 0) {
             $phpcsFile->addError(
                 '@param is not found for one or more params in method annotation',
                 $stackPtr,
-                'MethodArguments'
+                'ParamMissing'
             );
         }
     }
@@ -290,7 +290,7 @@ class MethodArgumentsSniff implements Sniff
         $parameterNames = $this->getMethodParameters($paramDefinitions);
         if (!in_array($methodArguments[$ptr], $parameterNames)) {
             $error = $methodArguments[$ptr] . ' parameter is missing in method annotation';
-            $phpcsFile->addError($error, $stackPtr, 'MethodArguments');
+            $phpcsFile->addError($error, $stackPtr, 'ArgumentMissing');
         }
     }
 
@@ -314,7 +314,7 @@ class MethodArgumentsSniff implements Sniff
             $phpcsFile->addError(
                 $paramDefinitionsArguments . ' parameter is missing in method arguments signature',
                 $paramPointers[$ptr],
-                'MethodArguments'
+                'ArgumentMissing'
             );
         }
     }
@@ -343,7 +343,7 @@ class MethodArgumentsSniff implements Sniff
                     $phpcsFile->addError(
                         $methodArguments[$ptr] . ' parameter is not in order',
                         $paramPointers[$ptr],
-                        'MethodArguments'
+                        'ParamOrder'
                     );
                 }
             }
@@ -386,7 +386,7 @@ class MethodArgumentsSniff implements Sniff
                 $phpcsFile->addError(
                     $value . ' duplicate found in method annotation',
                     $stackPtr,
-                    'MethodArguments'
+                    'DuplicateParam'
                 );
             }
         }
@@ -413,7 +413,7 @@ class MethodArgumentsSniff implements Sniff
                 $phpcsFile->addError(
                     'Missing both type and parameter',
                     $paramPointers[$ptr],
-                    'MethodArguments'
+                    'Malformed'
                 );
                 break;
             case 1:
@@ -421,7 +421,7 @@ class MethodArgumentsSniff implements Sniff
                     $phpcsFile->addError(
                         'Type is not specified',
                         $paramPointers[$ptr],
-                        'MethodArguments'
+                        'NoTypeSpecified'
                     );
                 }
                 break;
@@ -430,7 +430,7 @@ class MethodArgumentsSniff implements Sniff
                     $phpcsFile->addError(
                         $paramDefinitions[0] . ' is not a valid PHP type',
                         $paramPointers[$ptr],
-                        'MethodArguments'
+                        'NotValidType'
                     );
                 }
                 $this->validateParameterPresentInMethodSignature(
@@ -446,13 +446,13 @@ class MethodArgumentsSniff implements Sniff
                     $phpcsFile->addError(
                         'Type is not specified',
                         $paramPointers[$ptr],
-                        'MethodArguments'
+                        'NoTypeSpecified'
                     );
                     if ($this->isInvalidType($paramDefinitions[0])) {
                         $phpcsFile->addError(
                             $paramDefinitions[0] . ' is not a valid PHP type',
                             $paramPointers[$ptr],
-                            'MethodArguments'
+                            'NotValidType'
                         );
                     }
                 }
@@ -552,7 +552,7 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
             if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
-                $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
+                $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
             }
         } else {
@@ -636,7 +636,7 @@ class MethodArgumentsSniff implements Sniff
             $phpcsFile->addError(
                 'Method arguments visual alignment must be consistent',
                 $paramPointers[0],
-                'MethodArguments'
+                'VisualAlignment'
             );
         }
     }
