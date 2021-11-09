@@ -735,8 +735,5 @@
     <rule ref="PSR12.Properties.ConstantVisibility">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/_files/*</exclude-pattern>
-        <exclude-pattern>*/Test/*</exclude-pattern>
-        <exclude-pattern>*Test.php</exclude-pattern>
     </rule>
 </ruleset>
