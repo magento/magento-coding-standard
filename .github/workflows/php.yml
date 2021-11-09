@@ -75,6 +75,3 @@ jobs:
 
       - name: Run ESLint
         run: npm run eslint -- eslint/rules
-
-      - name: Run JSCS
-        run: npm run jscs eslint/rules Magento2

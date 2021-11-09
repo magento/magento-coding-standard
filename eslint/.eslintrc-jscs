@@ -1,0 +1,64 @@
+{
+  "rules": {
+    "no-with": 2,
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "curly": [
+      2,
+      "all"
+    ],
+    "keyword-spacing": [
+      2,
+      {}
+    ],
+    "no-empty": [
+      2,
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-mixed-spaces-and-tabs": 2,
+    "no-multiple-empty-lines": 2,
+    "no-multi-str": 2,
+    "space-unary-ops": [
+      2,
+      {
+        "words": false,
+        "nonwords": false
+      }
+    ],
+    "space-in-parens": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "no-trailing-spaces": 2,
+    "comma-style": [
+      2,
+      "last"
+    ],
+    "eol-last": 2,
+    "one-var": [
+      2,
+      "always"
+    ],
+    "space-infix-ops": 2,
+    "space-before-blocks": [
+      2,
+      "always"
+    ],
+    "quotes": [
+      2,
+      "single"
+    ]
+  }
+}

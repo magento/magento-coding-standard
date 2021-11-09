@@ -400,6 +400,11 @@
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.PHP.ArrayAutovivification">
+        <severity>7</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Performance.ForeachArrayMerge">
         <severity>7</severity>
         <type>warning</type>
@@ -497,6 +502,7 @@
         </properties>
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*\.js$</exclude-pattern>
     </rule>
     <rule ref="Magento2.GraphQL.ValidArgumentName">
         <severity>6</severity>
@@ -572,6 +578,7 @@
     <rule ref="PSR2.Methods.FunctionCallSignature">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*\.js$</exclude-pattern>
     </rule>
     <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterCloseBracket">
         <severity>0</severity>
