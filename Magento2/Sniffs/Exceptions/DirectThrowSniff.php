@@ -44,7 +44,19 @@ class DirectThrowSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $endOfStatement = $phpcsFile->findEndOfStatement($stackPtr);
         $posOfException = $phpcsFile->findNext(T_STRING, $stackPtr, $endOfStatement);
-        if ($tokens[$posOfException]['content'] === 'Exception') {
+        $content = $tokens[$posOfException]['content'];
+        $exceptionClassInUseStatement = false;
+        foreach ($tokens as $key => $token) {
+            if ($token['code'] === T_USE) {
+                $endOfUse = $phpcsFile->findEndOfStatement($key);
+                $posOfException = $phpcsFile->findNext(T_STRING, $key, $key + 3, false, 'Exception');
+                if ($posOfException && $phpcsFile->findNext(T_SEMICOLON, $posOfException+1, $endOfUse + 1)) {
+                    $exceptionClassInUseStatement = true;
+                    break;
+                }
+            }
+        }
+        if ($content === '\Exception' || ($content === 'Exception' && $exceptionClassInUseStatement)) {
             $phpcsFile->addWarning(
                 $this->warningMessage,
                 $stackPtr,
