@@ -696,6 +696,10 @@
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
         <severity>0</severity>
     </rule>
+    <rule ref="PSR12.Properties.ConstantVisibility">
+        <severity>6</severity>
+        <type>warning</type>
+    </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
     <rule ref="Magento2.Commenting.ClassAndInterfacePHPDocFormatting">
@@ -731,9 +735,5 @@
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
-    </rule>
-    <rule ref="PSR12.Properties.ConstantVisibility">
-        <severity>5</severity>
-        <type>warning</type>
     </rule>
 </ruleset>
