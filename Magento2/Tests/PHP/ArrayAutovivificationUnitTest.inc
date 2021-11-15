@@ -57,4 +57,44 @@ class Avtovivification
 
         return $productIds;
     }
+
+    /**
+     * @return array
+     */
+    public function testAvtovivification($testData)
+    {
+        $productIds = false !== $testData ? $testData : null;
+
+        $productIds[] = 'test_array_value';
+
+        return $productIds;
+    }
+
+    /**
+     * @param array $productIds
+     *
+     * @return array
+     */
+    public function testWithParameterArray($productIds)
+    {
+        if (!empty($productIds['test_array_key'])) {
+            $productIds['test_array_key'] = 'test_array_value';
+        }
+
+        return $productIds;
+    }
+
+    /**
+     * @param false|array $productIds
+     *
+     * @return false|array
+     */
+    public function testWithParameterFalse($productIds = false)
+    {
+        if ($productIds !== false) {
+            $productIds[] = 'test_array_value';
+        }
+
+        return $productIds;
+    }
 }

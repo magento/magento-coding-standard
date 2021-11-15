@@ -20,14 +20,14 @@ class ArrayAutovivificationSniff implements Sniff
      *
      * @var string
      */
-    private $warningMessage = 'Deprecated: Automatic conversion of false to array is deprecated.';
+    private const WARNING_MESSAGE = 'Deprecated: Automatic conversion of false to array is deprecated.';
 
     /**
-     * Warning violation code.
+     * Error violation code.
      *
      * @var string
      */
-    private $warningCode = 'Autovivification';
+    private const WARNING_CODE = 'Autovivification';
 
     /**
      * @inheritdoc
@@ -44,25 +44,37 @@ class ArrayAutovivificationSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr): void
     {
-        $positionSquareBracket = $phpcsFile->findNext(T_OPEN_SQUARE_BRACKET, $stackPtr, $stackPtr + 2);
+        $openSquareBracketKey = $phpcsFile->findNext(T_OPEN_SQUARE_BRACKET, $stackPtr, $stackPtr + 2);
 
-        if ($positionSquareBracket) {
-            $tokens = $phpcsFile->getTokens();
-            $positionFunction = $phpcsFile->findPrevious(T_FUNCTION, $positionSquareBracket) ?: 0;
-            $sliceLength = $stackPtr - $positionFunction;
-            $sliceToken = array_slice(array_column($tokens, 'content'), $positionFunction, $sliceLength, true);
-            $propertyTokenKey = array_keys($sliceToken, $tokens[$stackPtr]['content']);
+        if (!$openSquareBracketKey) {
+            return;
+        }
 
-            arsort($propertyTokenKey);
+        $closeSquareBracketKey = $phpcsFile->findNext(T_CLOSE_SQUARE_BRACKET, $openSquareBracketKey);
+        $hasEqualKey = $phpcsFile->findNext(T_EQUAL, $closeSquareBracketKey, $closeSquareBracketKey + 3);
 
-            foreach ($propertyTokenKey as $tokenKey) {
-                if ($tokens[$tokenKey + 2]['content'] === '=') {
-                    if ($tokens[$tokenKey + 4]['content'] != 'false') {
-                        return;
-                    }
+        if (!$hasEqualKey) {
+            return;
+        }
 
-                    $phpcsFile->addWarning($this->warningMessage, $positionSquareBracket, $this->warningCode);
+        $tokens = $phpcsFile->getTokens();
+        $functionKey = $phpcsFile->findPrevious(T_FUNCTION, $openSquareBracketKey) ?: 0;
+        $sliceToken = array_slice(array_column($tokens, 'content'), $functionKey, $stackPtr - $functionKey, true);
+        $propertyTokenKey = array_keys($sliceToken, $tokens[$stackPtr]['content']);
+
+        arsort($propertyTokenKey);
+
+        foreach ($propertyTokenKey as $propertyKey) {
+            $positionEqualKey = $phpcsFile->findNext(T_EQUAL, $propertyKey, $propertyKey + 3);
+
+            if ($positionEqualKey) {
+                $falseKey = $phpcsFile->findNext(T_FALSE, $positionEqualKey, $positionEqualKey + 3);
+
+                if (!($falseKey && $phpcsFile->findNext(T_SEMICOLON, $falseKey, $falseKey + 2))) {
+                    return;
                 }
+
+                $phpcsFile->addWarning(self::WARNING_MESSAGE, $openSquareBracketKey, self::WARNING_CODE);
             }
         }
     }
