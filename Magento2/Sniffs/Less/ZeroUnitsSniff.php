@@ -19,9 +19,9 @@ use PHP_CodeSniffer\Files\File;
  */
 class ZeroUnitsSniff implements Sniff
 {
-    const CSS_PROPERTY_UNIT_PX = 'px';
-    const CSS_PROPERTY_UNIT_EM = 'em';
-    const CSS_PROPERTY_UNIT_REM = 'rem';
+    private const CSS_PROPERTY_UNIT_PX = 'px';
+    private const CSS_PROPERTY_UNIT_EM = 'em';
+    private const CSS_PROPERTY_UNIT_REM = 'rem';
 
     /**
      * @var array

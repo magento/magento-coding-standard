@@ -19,11 +19,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class CommentLevelsSniff implements Sniff
 {
-    const COMMENT_STRING = '//';
+    private const COMMENT_STRING = '//';
 
-    const FIRST_LEVEL_COMMENT = '_____________________________________________';
+    private const FIRST_LEVEL_COMMENT = '_____________________________________________';
 
-    const SECOND_LEVEL_COMMENT = '--';
+    private const SECOND_LEVEL_COMMENT = '--';
 
     /**
      * @var array

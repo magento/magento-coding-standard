@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Files\File;
  */
 class DeprecatedModelMethodSniff implements Sniff
 {
-    const RESOURCE_METHOD = "getResource";
+    private const RESOURCE_METHOD = "getResource";
 
     /**
      * String representation of warning.
