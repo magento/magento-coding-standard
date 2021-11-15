@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<ruleset name="PHPCompatibilityMagento">
+    <description>Magento 2 specific ruleset which checks for PHP cross version compatibility.</description>
+    <rule ref="../vendor/phpcompatibility/php-compatibility/PHPCompatibility">
+        <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
+        <exclude name="PHPCompatibility.FunctionUse.RequiredToOptionalFunctionParameters" />
+        <exclude name="PHPCompatibility.ParameterValues.RemovedPCREModifiers" />
+        <exclude name="PHPCompatibility.InitialValue.NewConstantScalarExpressions" />
+    </rule>
+</ruleset>
