@@ -58,7 +58,6 @@ jobs:
 
     - name: Run framework suite
       run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
-
   js:
     runs-on: ubuntu-latest
     name: Javascript tests
@@ -76,7 +75,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run eslint -- eslint/rules
-
   rector:
     runs-on: ubuntu-latest
     name: Rector tests
