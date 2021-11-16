@@ -737,17 +737,7 @@
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
-    <rule ref="../vendor/phpcompatibility/php-compatibility/PHPCompatibility">
+    <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
-        <exclude name="PHPCompatibility.FunctionUse.RequiredToOptionalFunctionParameters" />
-        <exclude name="PHPCompatibility.ParameterValues.RemovedPCREModifiers" />
-        <exclude name="PHPCompatibility.InitialValue.NewConstantScalarExpressions" />
     </rule>
-    <!--
-    These sniffs are copied from latest development version of PHPCompatibility, and are included here due to  bug
-    in version 9.3 of PHPCompatibility. Once version 10 is released, this hack must me removed.
-
-    See https://github.com/PHPCompatibility/PHPCompatibility/issues/793 form more information
-    -->
-    <rule ref="../PHPCompatibilityMagento/Sniffs/FunctionUse" />
 </ruleset>
