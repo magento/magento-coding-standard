@@ -91,4 +91,4 @@ jobs:
         run: composer install  
             
       - name: Run rector
-        run: vendor/bin/rector process . --dry-run
+        run: vendor/bin/rector process --dry-run
