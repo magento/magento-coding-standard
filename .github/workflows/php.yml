@@ -60,7 +60,7 @@ jobs:
       run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
     
     - name: Run rector
-      run: vendor/bin/rector process --dry-run
+      run: vendor/bin/rector process . --dry-run
 
   js:
     runs-on: ubuntu-latest
