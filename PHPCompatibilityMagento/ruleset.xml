@@ -13,4 +13,11 @@
         <exclude name="PHPCompatibility.ParameterValues.RemovedPCREModifiers" />
         <exclude name="PHPCompatibility.InitialValue.NewConstantScalarExpressions" />
     </rule>
+    <!--
+    These sniffs are copied from latest development version of PHPCompatibility, and are included here due to  bug
+    in version 9.3 of PHPCompatibility. Once version 10 is released, this hack must me removed.
+
+    See https://github.com/PHPCompatibility/PHPCompatibility/issues/793 form more information
+    -->
+    <rule ref="./Sniffs/FunctionUse" />
 </ruleset>
