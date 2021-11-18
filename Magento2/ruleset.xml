@@ -739,5 +739,7 @@
     </rule>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
+        <!-- Check for cross-version support for stated PHP version and higher. -->
+        <config name="testVersion" value="7.4-"/>
     </rule>
 </ruleset>
