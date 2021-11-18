@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class DiscouragedDependenciesSniff implements Sniff
 {
-    const CONSTRUCT_METHOD_NAME = '__construct';
+    private const CONSTRUCT_METHOD_NAME = '__construct';
 
     /**
      * String representation of warning.
