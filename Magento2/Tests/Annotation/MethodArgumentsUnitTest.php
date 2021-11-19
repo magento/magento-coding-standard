@@ -18,6 +18,7 @@ class MethodArgumentsUnitTest extends AbstractSniffUnitTest
             12 => 1,
             21 => 1,
             32 => 1,
+            50 => 1
         ];
     }
 

@@ -70,7 +70,23 @@ class MethodArgumentsSniff implements Sniff
     private function validateCommentBlockExists(File $phpcsFile, int $previousCommentClosePtr, int $stackPtr): bool
     {
         $tokens = $phpcsFile->getTokens();
+        $attributeFlag = false;
         for ($tempPtr = $previousCommentClosePtr + 1; $tempPtr < $stackPtr; $tempPtr++) {
+            $tokenCode = $tokens[$tempPtr]['code'];
+
+            // Ignore attributes e.g. #[\ReturnTypeWillChange]
+            if ($tokenCode === T_ATTRIBUTE_END) {
+                $attributeFlag = false;
+                continue;
+            }
+            if ($attributeFlag) {
+                continue;
+            }
+            if ($tokenCode === T_ATTRIBUTE) {
+                $attributeFlag = true;
+                continue;
+            }
+
             if (!$this->isTokenBeforeClosingCommentTagValid($tokens[$tempPtr]['type'])) {
                 return false;
             }
