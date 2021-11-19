@@ -36,5 +36,10 @@ class Bad
         ObjectManager::getInstance()
             ->get(\Full\Class\NameFactory::class);
     }
+
+    private function foo(): void
+    {
+        ObjectManager::getInstance() ;
+    }
 }
 
