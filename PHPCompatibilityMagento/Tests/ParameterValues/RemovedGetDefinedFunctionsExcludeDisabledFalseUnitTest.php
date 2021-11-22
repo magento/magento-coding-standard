@@ -10,7 +10,7 @@
 
 namespace PHPCompatibility\Tests\ParameterValues;
 
-use PHPCompatibility\Tests\BaseSniffTest;
+use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
 /**
  * Test the RemovedGetDefinedFunctionsExcludeDisabledFalse sniff.

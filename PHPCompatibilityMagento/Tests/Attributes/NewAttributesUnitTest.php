@@ -10,7 +10,7 @@
 
 namespace PHPCompatibility\Tests\Attributes;
 
-use PHPCompatibility\Tests\BaseSniffTest;
+use PHPCompatibilityMagento\Tests\BaseSniffTest;
 use PHPCSUtils\BackCompat\Helper;
 
 /**

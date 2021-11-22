@@ -10,7 +10,7 @@
 
 namespace PHPCompatibility\Tests\Constants;
 
-use PHPCompatibility\Tests\BaseSniffTest;
+use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
 /**
  * Test the NewMagicClassConstant sniff.

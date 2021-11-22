@@ -10,7 +10,7 @@
 
 namespace PHPCompatibility\Tests\ControlStructures;
 
-use PHPCompatibility\Tests\BaseSniffTest;
+use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
 /**
  * Test the NewNonCapturingCatch sniff.

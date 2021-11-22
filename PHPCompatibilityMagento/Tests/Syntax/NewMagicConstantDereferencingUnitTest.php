@@ -10,7 +10,7 @@
 
 namespace PHPCompatibility\Tests\Syntax;
 
-use PHPCompatibility\Tests\BaseSniffTest;
+use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
 /**
  * Test the NewMagicConstantDereferencing sniff.
