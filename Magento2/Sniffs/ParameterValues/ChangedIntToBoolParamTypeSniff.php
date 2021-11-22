@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
