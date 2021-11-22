@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\ControlStructures;
+namespace PHPCompatibilityMagento\Tests\ControlStructures;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -19,7 +19,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group controlStructures
  * @group exceptions
  *
- * @covers \PHPCompatibility\Sniffs\ControlStructures\NewNonCapturingCatchSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\ControlStructures\NewNonCapturingCatchSniff
  *
  * @since 10.0.0
  */

@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\ParameterValues;
+namespace PHPCompatibilityMagento\Tests\ParameterValues;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group removedSplAutoloadRegisterThrowFalse
  * @group parameterValues
  *
- * @covers \PHPCompatibility\Sniffs\ParameterValues\RemovedSplAutoloadRegisterThrowFalseSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\ParameterValues\RemovedSplAutoloadRegisterThrowFalseSniff
  *
  * @since 10.0.0
  */

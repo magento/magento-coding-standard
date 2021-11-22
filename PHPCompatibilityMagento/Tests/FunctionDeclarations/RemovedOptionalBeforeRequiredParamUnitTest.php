@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\FunctionDeclarations;
+namespace PHPCompatibilityMagento\Tests\FunctionDeclarations;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group removedOptionalBeforeRequiredParam
  * @group functiondeclarations
  *
- * @covers \PHPCompatibility\Sniffs\FunctionDeclarations\RemovedOptionalBeforeRequiredParamSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\FunctionDeclarations\RemovedOptionalBeforeRequiredParamSniff
  *
  * @since 10.0.0
  */

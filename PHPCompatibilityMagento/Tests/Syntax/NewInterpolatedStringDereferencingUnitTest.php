@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\Syntax;
+namespace PHPCompatibilityMagento\Tests\Syntax;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group newInterpolatedStringDereferencing
  * @group syntax
  *
- * @covers \PHPCompatibility\Sniffs\Syntax\NewInterpolatedStringDereferencingSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\Syntax\NewInterpolatedStringDereferencingSniff
  *
  * @since 10.0.0
  */

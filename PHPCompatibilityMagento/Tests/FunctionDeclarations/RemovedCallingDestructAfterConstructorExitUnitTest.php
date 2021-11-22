@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\FunctionDeclarations;
+namespace PHPCompatibilityMagento\Tests\FunctionDeclarations;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group removedCallingDestructAfterConstructorExit
  * @group functiondeclarations
  *
- * @covers \PHPCompatibility\Sniffs\FunctionDeclarations\RemovedCallingDestructAfterConstructorExitSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\FunctionDeclarations\RemovedCallingDestructAfterConstructorExitSniff
  *
  * @since 10.0.0
  */

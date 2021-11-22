@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\FunctionDeclarations;
+namespace PHPCompatibilityMagento\Tests\FunctionDeclarations;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group newTrailingComma
  * @group syntax
  *
- * @covers \PHPCompatibility\Sniffs\FunctionDeclarations\NewTrailingCommaSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\FunctionDeclarations\NewTrailingCommaSniff
  *
  * @since 10.0.0
  */

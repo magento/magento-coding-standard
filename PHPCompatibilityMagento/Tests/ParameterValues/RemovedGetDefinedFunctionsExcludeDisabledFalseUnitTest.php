@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\ParameterValues;
+namespace PHPCompatibilityMagento\Tests\ParameterValues;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group removedGetDefinedFunctionsExcludeDisabledFalse
  * @group parameterValues
  *
- * @covers \PHPCompatibility\Sniffs\ParameterValues\RemovedGetDefinedFunctionsExcludeDisabledFalseSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\ParameterValues\RemovedGetDefinedFunctionsExcludeDisabledFalseSniff
  *
  * @since 10.0.0
  */

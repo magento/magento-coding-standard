@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\FunctionDeclarations;
+namespace PHPCompatibilityMagento\Tests\FunctionDeclarations;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group forbiddenFinalPrivateMethods
  * @group functiondeclarations
  *
- * @covers \PHPCompatibility\Sniffs\FunctionDeclarations\ForbiddenFinalPrivateMethodsSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\FunctionDeclarations\ForbiddenFinalPrivateMethodsSniff
  *
  * @since 10.0.0
  */

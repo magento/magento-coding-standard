@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\Attributes;
+namespace PHPCompatibilityMagento\Tests\Attributes;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 use PHPCSUtils\BackCompat\Helper;
@@ -19,7 +19,7 @@ use PHPCSUtils\BackCompat\Helper;
  * @group newAttributes
  * @group attributes
  *
- * @covers \PHPCompatibility\Sniffs\Attributes\NewAttributesSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\Attributes\NewAttributesSniff
  *
  * @since 10.0.0
  */

@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\Constants;
+namespace PHPCompatibilityMagento\Tests\Constants;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group newMagicClassConstant
  * @group constants
  *
- * @covers \PHPCompatibility\Sniffs\Constants\NewMagicClassConstantSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\Constants\NewMagicClassConstantSniff
  *
  * @since 7.1.4
  */

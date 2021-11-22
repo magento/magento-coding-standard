@@ -39,7 +39,7 @@ class BaseSniffTest extends TestCase
      *
      * @var string
      */
-    const STANDARD_NAME = 'PHPCompatibility';
+    const STANDARD_NAME = 'PHPCompatibilityMagento';
 
     /**
      * The PHP_CodeSniffer object used for testing.

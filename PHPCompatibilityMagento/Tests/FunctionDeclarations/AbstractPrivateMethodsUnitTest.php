@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\FunctionDeclarations;
+namespace PHPCompatibilityMagento\Tests\FunctionDeclarations;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group abstractPrivateMethods
  * @group functiondeclarations
  *
- * @covers \PHPCompatibility\Sniffs\FunctionDeclarations\AbstractPrivateMethodsSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\FunctionDeclarations\AbstractPrivateMethodsSniff
  *
  * @since 9.2.0
  * @since 10.0.0 Moved from `Classes` to `FunctionDeclarations`.

@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\Syntax;
+namespace PHPCompatibilityMagento\Tests\Syntax;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group newNestedStaticAccess
  * @group syntax
  *
- * @covers \PHPCompatibility\Sniffs\Syntax\NewNestedStaticAccessSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\Syntax\NewNestedStaticAccessSniff
  *
  * @since 10.0.0
  */

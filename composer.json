@@ -30,7 +30,8 @@
         ],
         "psr-4": {
             "Magento2\\": "Magento2/",
-            "Magento2Framework\\": "Magento2Framework/"
+            "Magento2Framework\\": "Magento2Framework/",
+            "PHPCompatibilityMagento\\": "PHPCompatibilityMagento/"
         }
     },
     "scripts": {

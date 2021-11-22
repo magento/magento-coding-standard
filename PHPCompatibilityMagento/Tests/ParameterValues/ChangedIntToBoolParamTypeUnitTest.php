@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests\ParameterValues;
+namespace PHPCompatibilityMagento\Tests\ParameterValues;
 
 use PHPCompatibilityMagento\Tests\BaseSniffTest;
 
@@ -18,7 +18,7 @@ use PHPCompatibilityMagento\Tests\BaseSniffTest;
  * @group changedIntToBoolParamType
  * @group parameterValues
  *
- * @covers \PHPCompatibility\Sniffs\ParameterValues\ChangedIntToBoolParamTypeSniff
+ * @covers \PHPCompatibilityMagento\Sniffs\ParameterValues\ChangedIntToBoolParamTypeSniff
  *
  * @since 10.0.0
  */
