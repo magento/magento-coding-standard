@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
@@ -89,8 +90,7 @@ class RemovedOptionalBeforeRequiredParamSniff extends Sniff
             return;
         }
 
-        $error = 'Declaring a required parameter after an optional one is deprecated since '.
-        'PHP 8.0. Parameter %s is optional, while parameter %s is required.';
+        $error = 'Declaring a required parameter after an optional one is deprecated since PHP 8.0. Parameter %s is optional, while parameter %s is required.';
 
         $paramCount    = \count($parameters);
         $lastKey       = ($paramCount - 1);

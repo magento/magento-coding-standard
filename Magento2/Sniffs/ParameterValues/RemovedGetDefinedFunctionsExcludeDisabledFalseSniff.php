@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
@@ -75,8 +76,7 @@ class RemovedGetDefinedFunctionsExcludeDisabledFalseSniff extends AbstractFuncti
         }
 
         $phpcsFile->addWarning(
-            'Explicitly passing "false" as the value for $exclude_disabled to'.
-            'get_defined_functions() is deprecated since PHP 8.0.',
+            'Explicitly passing "false" as the value for $exclude_disabled to get_defined_functions() is deprecated since PHP 8.0.',
             $parameters[1]['start'],
             'Deprecated'
         );

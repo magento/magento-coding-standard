@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
@@ -76,8 +77,7 @@ class RemovedSplAutoloadRegisterThrowFalseSniff extends AbstractFunctionCallPara
         }
 
         $phpcsFile->addWarning(
-            'Explicitly passing "false" as the value for $throw to spl_autoload_register() '.
-            'is deprecated since PHP 8.0.',
+            'Explicitly passing "false" as the value for $throw to spl_autoload_register() is deprecated since PHP 8.0.',
             $parameters[2]['start'],
             'Deprecated'
         );

@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 /**
  * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
@@ -108,12 +109,7 @@ class RemovedAssertStringAssertionSniff extends AbstractFunctionCallParameterSni
         }
 
         $targetParam = $parameters[1];
-        $hasOther    = $phpcsFile->findNext(
-            $this->targetTokens,
-            $targetParam['start'],
-            ($targetParam['end'] + 1),
-            true
-        );
+        $hasOther    = $phpcsFile->findNext($this->targetTokens, $targetParam['start'], ($targetParam['end'] + 1), true);
         if ($hasOther !== false) {
             // Some other token was found, unclear whether this is really a text string. Bow out.
             return;
