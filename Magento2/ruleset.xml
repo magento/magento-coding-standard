@@ -471,7 +471,7 @@
         </properties>
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
+        <exclude-pattern>*/PHPCompatibilityMagento/*</exclude-pattern>
     </rule>
     <rule ref="Generic.Formatting.DisallowMultipleStatements">
         <severity>6</severity>
@@ -742,31 +742,5 @@
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
-    <rule ref="PHPCompatibility">
-        <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
-        <!-- Following sniffs has been updated or renamed in PHPCompatibility 10 -->
-        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant" />
-        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods" />
-        <!-- Check for cross-version support for stated PHP version and higher. -->
-        <config name="testVersion" value="7.4-"/>
-    </rule>
-    <!--
-     All these rules belong to the unreleased PhpCompatibility 10. Remove them once PHPCompatibility is
-     updated to version 10
-     -->
-    <rule ref="Magento2.PHPCompatibility.Attributes.NewAttributes" />
-    <rule ref="Magento2.PHPCompatibility.Constants.NewMagicClassConstant" />
-    <rule ref="Magento2.PHPCompatibility.ControlStructures.NewNonCapturingCatch" />
-    <rule ref="Magento2.PHPCompatibility.FunctionDeclarations.AbstractPrivateMethods" />
-    <rule ref="Magento2.PHPCompatibility.FunctionDeclarations.ForbiddenFinalPrivateMethods" />
-    <rule ref="Magento2.PHPCompatibility.FunctionDeclarations.NewTrailingComma" />
-    <rule ref="Magento2.PHPCompatibility.FunctionDeclarations.RemovedCallingDestructAfterConstructorExit" />
-    <rule ref="Magento2.PHPCompatibility.FunctionDeclarations.RemovedOptionalBeforeRequiredParam" />
-    <rule ref="Magento2.PHPCompatibility.ParameterValues.ChangedIntToBoolParamType" />
-    <rule ref="Magento2.PHPCompatibility.ParameterValues.RemovedAssertStringAssertion" />
-    <rule ref="Magento2.PHPCompatibility.ParameterValues.RemovedGetDefinedFunctionsExcludeDisabledFalse" />
-    <rule ref="Magento2.PHPCompatibility.ParameterValues.RemovedSplAutoloadRegisterThrowFalse" />
-    <rule ref="Magento2.PHPCompatibility.Syntax.NewInterpolatedStringDereferencing" />
-    <rule ref="Magento2.PHPCompatibility.Syntax.NewMagicConstantDereferencing" />
-    <rule ref="Magento2.PHPCompatibility.Syntax.NewNestedStaticAccess" />
+    <rule ref="PHPCompatibilityMagento" />
 </ruleset>
