@@ -142,7 +142,8 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
         $nextFunc    = $classOpen;
 
         while (($nextFunc = $phpcsFile->findNext(
-            [\T_FUNCTION, \T_DOC_COMMENT_OPEN_TAG, \T_USE], ($nextFunc + 1), $classClose)
+            [\T_FUNCTION, \T_DOC_COMMENT_OPEN_TAG, \T_USE], ($nextFunc + 1), $classClose
+        )
             ) !== false) {
             // Skip over docblocks.
             if ($tokens[$nextFunc]['code'] === \T_DOC_COMMENT_OPEN_TAG) {
@@ -195,10 +196,12 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
          * Ok, either a destruct method has been found and we can throw an error, or either a class extends
          * or trait use has been found and no destruct method, in which case, we throw a warning.
          */
-        $error     = 'When %s() is called within an object constructor, the object destructor will no longer be called since PHP 8.0';
+        $error     = 'When %s() is called within an object constructor, the object '.
+        'destructor will no longer be called since PHP 8.0';
         $errorCode = 'Found';
         if ($isError === false) {
-            $error    .= ' While no __destruct() method was found in this class, one may be declared in the parent class or in a trait being used.';
+            $error    .= ' While no __destruct() method was found in this class, one may be declared in the parent '.
+            'class or in a trait being used.';
             $errorCode = 'NeedsInspection';
         }
 
