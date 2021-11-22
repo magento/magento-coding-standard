@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace PHPCompatibility\Tests;
+namespace PHPCompatibilityMagento\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHP_CodeSniffer\Files\File;
