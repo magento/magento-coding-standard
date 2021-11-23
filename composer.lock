@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61cf9451f97627aeb7908e83b51a1d82",
+    "content-hash": "20e40c8c33e9c2fc21cae5999414b4c0",
     "packages": [
         {
             "name": "phpcompatibility/php-compatibility",
@@ -250,16 +250,16 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v14.11.1",
+            "version": "v14.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "8f3e584335696c2eb8d307019f0afdff64fc0e35"
+                "reference": "a7192e7a2b0487dc5e185feb4f4df1fc24d35d86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/8f3e584335696c2eb8d307019f0afdff64fc0e35",
-                "reference": "8f3e584335696c2eb8d307019f0afdff64fc0e35",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/a7192e7a2b0487dc5e185feb4f4df1fc24d35d86",
+                "reference": "a7192e7a2b0487dc5e185feb4f4df1fc24d35d86",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webonyx/graphql-php/issues",
-                "source": "https://github.com/webonyx/graphql-php/tree/v14.11.1"
+                "source": "https://github.com/webonyx/graphql-php/tree/v14.11.3"
             },
             "funding": [
                 {
@@ -312,7 +312,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-11-15T10:25:57+00:00"
+            "time": "2021-11-19T09:42:02+00:00"
         }
     ],
     "packages-dev": [
@@ -839,16 +839,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.8",
+            "version": "9.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e"
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
                 "shasum": ""
             },
             "require": {
@@ -904,7 +904,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.9"
             },
             "funding": [
                 {
@@ -912,7 +912,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-30T08:01:38+00:00"
+            "time": "2021-11-19T15:21:02+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2111,6 +2111,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
