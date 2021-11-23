@@ -113,7 +113,7 @@ npm run eslint -- path/to/analyze
 ```
 
 ### RECTOR PHP
-Inside `magento-condign-standard` project. You can execute rector php as follows:
+From `magento-condign-standard` project, you can execute rector php as follows:
 ```bash
 vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php
 ```
