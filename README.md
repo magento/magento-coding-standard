@@ -119,7 +119,7 @@ vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run -
 ```
 The rules from rector that are applied are set inside the config file: `rector.php`
 
-The option `--dry-run` allows that the errors are displayed, but the code is not automatically refactored.
+The option `--dry-run` displays errors found, but code is not automatically fixed.
 
 To run rector for `magento` projects you need to:
 - Specify the magento path and the autoload file for the magento project: 
