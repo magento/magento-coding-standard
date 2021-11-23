@@ -112,6 +112,25 @@ You can execute ESLint as follows:
 npm run eslint -- path/to/analyze
 ```
 
+### RECTOR PHP
+From `magento-condign-standard` project, you can execute rector php as follows:
+```bash
+vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php
+```
+The rules from rector that are applied are set inside the config file: `rector.php`
+
+The option `--dry-run` displays errors found, but code is not automatically fixed.
+
+To run rector for `magento` projects you need to:
+- Specify the magento path and the autoload file for the magento project: 
+```bash
+vendor/bin/rector process MAGENTO_PATH --dry-run --autoload-file MAGENTO_AUTOLOAD_FILE
+```
+Example:
+```bash
+vendor/bin/rector process magento2ce/app/code/Magento/Cms/Model --dry-run --autoload-file magento2ce/vendor/autoload.php
+```
+
 ## License
 
 Each Magento source file included in this distribution is licensed under the OSL-3.0 license.

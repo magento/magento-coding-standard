@@ -482,3 +482,25 @@ fseek($file, 0);
 feof($fp);
 
 flock($fp, LOCK_EX);
+
+$test = date_sunrise(0);
+
+$test = date_sunset(0);
+
+$test = strptime('12.12.12 00:00:00', 'D, d M Y H:i:s');
+
+strftime('D, d M Y H:i:s');
+
+gmstrftime('D, d M Y H:i:s');
+
+$test = mhash(1000, 'test_value');
+
+$test = mhash_count();
+
+$test = mhash_get_block_size(1000);
+
+$test = mhash_get_hash_name(1000);
+
+$test = mhash_keygen_s2k(1000, 'password', 'abccdf' , 10);
+
+$test = odbc_result_all('test_value', 'test_value');

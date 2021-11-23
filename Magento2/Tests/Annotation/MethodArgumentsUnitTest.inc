@@ -33,3 +33,21 @@ public function invalidDocBlockShouldNotCauseFatalErrorInSniff(int $number): int
 {
     return $number;
 }
+
+/**
+ * Short description.
+ *
+ * @param string $text
+ * @return string
+ */
+#[\ReturnTypeWillChange]
+public function methodWithAttributeAndValidDocblock(string $text): string
+{
+    return $text;
+}
+
+#[\ReturnTypeWillChange]
+public function methodWithAttributeAndWithoutDocblock(string $text): string
+{
+    return $text;
+}

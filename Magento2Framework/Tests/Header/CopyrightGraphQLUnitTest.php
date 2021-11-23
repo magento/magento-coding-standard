@@ -22,13 +22,15 @@ class CopyrightGraphQLUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile = ''): array
     {
-        if ($testFile === 'CopyrightGraphQLUnitTest.1.inc' || $testFile === 'CopyrightGraphQLUnitTest.2.inc') {
+        if ($testFile === 'CopyrightGraphQLUnitTest.1.graphqls' || 
+            $testFile === 'CopyrightGraphQLUnitTest.2.graphqls') {
             return [];
         }
 
-        if ($testFile === 'CopyrightGraphQLUnitTest.3.inc' || $testFile === 'CopyrightGraphQLUnitTest.4.inc') {
+        if ($testFile === 'CopyrightGraphQLUnitTest.3.graphqls' || 
+            $testFile === 'CopyrightGraphQLUnitTest.4.graphqls') {
             return [
-                1 => 1
+                null => 1
             ];
         }
 

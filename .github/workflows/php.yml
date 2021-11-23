@@ -75,3 +75,20 @@ jobs:
 
       - name: Run ESLint
         run: npm run eslint -- eslint/rules
+  rector:
+    runs-on: ubuntu-latest
+    name: Rector tests
+    
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: composer install  
+            
+      - name: Run rector
+        run: vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php
