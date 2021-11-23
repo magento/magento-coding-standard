@@ -119,7 +119,7 @@ class RemovedAssertStringAssertionSniff extends AbstractFunctionCallParameterSni
         $isError = false;
         $data    = [
             '',
-            $targetParam['clean'],
+            $targetParam['raw'],
         ];
 
         if ($this->supportsAbove('8.0') === true) {

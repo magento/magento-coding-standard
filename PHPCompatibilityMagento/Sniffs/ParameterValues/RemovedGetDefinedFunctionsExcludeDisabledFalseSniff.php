@@ -70,7 +70,7 @@ class RemovedGetDefinedFunctionsExcludeDisabledFalseSniff extends AbstractFuncti
             return;
         }
 
-        if ($parameters[1]['clean'] !== 'false') {
+        if ($parameters[1]['raw'] !== 'false') {
             return;
         }
 

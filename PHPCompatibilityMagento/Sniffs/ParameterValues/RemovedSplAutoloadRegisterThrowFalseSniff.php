@@ -71,7 +71,7 @@ class RemovedSplAutoloadRegisterThrowFalseSniff extends AbstractFunctionCallPara
             return;
         }
 
-        if ($parameters[2]['clean'] !== 'false') {
+        if ($parameters[2]['raw'] !== 'false') {
             return;
         }
 

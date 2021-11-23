@@ -114,7 +114,7 @@ class ChangedIntToBoolParamTypeSniff extends AbstractFunctionCallParameterSniff
                 $paramInfo['name'],
                 $functionLC,
                 $paramInfo['since'],
-                $target['clean'],
+                $target['raw'],
             ];
 
             $phpcsFile->addError($error, $target['start'], $code, $data);

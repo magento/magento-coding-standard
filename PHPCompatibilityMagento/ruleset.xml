@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="PHPCompatibilityMagento">
     <description>PHP 8 Compatibility</description>
+    <autoload>./../PHPCSAliases.php</autoload>
 
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml,html/PHP,js/PHP"/>
