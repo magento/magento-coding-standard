@@ -81,6 +81,6 @@ if (class_exists('PHPUnit\Runner\Version')
     class_alias('PHPUnit\Framework\TestCase', 'PHPUnit_Framework_TestCase');
 }
 
-//require_once __DIR__ . $ds . 'PHPCompatibilityMagento' . $ds . 'Tests' . $ds . 'BaseSniffTest.php';
-require_once __DIR__ . $ds . 'PHPCompatibilityMagento' . $ds . 'Util' . $ds . 'Tests' . $ds . 'CoreMethodTestFrame.php';
+//require_once __DIR__ . $ds . 'Magento2/Tests/PHPCompatibility' . $ds . 'BaseSniffTest.php';
+//require_once __DIR__ . $ds . 'Magento2/Tests/PHPCompatibility' . $ds . 'Util' . $ds . 'CoreMethodTestFrame.php';
 unset($ds, $phpcsDir, $vendorDir);
