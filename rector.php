@@ -17,6 +17,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_80);
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_81);
+    $parameters->set(Option::BOOTSTRAP_FILES, [
+        'vendor/phpcompatibility/php-compatibility/PHPCSAliases.php']);
 
     // get services (needed for register a single rule)
     $services = $containerConfigurator->services();
