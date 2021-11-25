@@ -471,6 +471,7 @@
         </properties>
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
     </rule>
     <rule ref="Generic.Formatting.DisallowMultipleStatements">
         <severity>6</severity>
@@ -743,7 +744,29 @@
     </rule>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
+        <!-- Following sniffs has been updated or renamed in PHPCompatibility 10 -->
+        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant" />
+        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods" />
         <!-- Check for cross-version support for stated PHP version and higher. -->
         <config name="testVersion" value="7.4-"/>
     </rule>
+    <!--
+     All these rules belong to the unreleased PhpCompatibility 10. Remove them once PHPCompatibility is
+     updated to version 10
+     -->
+    <rule ref="Magento2.PHPCompatibility.NewAttributes" />
+    <rule ref="Magento2.PHPCompatibility.NewMagicClassConstant" />
+    <rule ref="Magento2.PHPCompatibility.NewNonCapturingCatch" />
+    <rule ref="Magento2.PHPCompatibility.AbstractPrivateMethods" />
+    <rule ref="Magento2.PHPCompatibility.ForbiddenFinalPrivateMethods" />
+    <rule ref="Magento2.PHPCompatibility.NewTrailingComma" />
+    <rule ref="Magento2.PHPCompatibility.RemovedCallingDestructAfterConstructorExit" />
+    <rule ref="Magento2.PHPCompatibility.RemovedOptionalBeforeRequiredParam" />
+    <rule ref="Magento2.PHPCompatibility.ChangedIntToBoolParamType" />
+    <rule ref="Magento2.PHPCompatibility.RemovedAssertStringAssertion" />
+    <rule ref="Magento2.PHPCompatibility.RemovedGetDefinedFunctionsExcludeDisabledFalse" />
+    <rule ref="Magento2.PHPCompatibility.RemovedSplAutoloadRegisterThrowFalse" />
+    <rule ref="Magento2.PHPCompatibility.NewInterpolatedStringDereferencing" />
+    <rule ref="Magento2.PHPCompatibility.NewMagicConstantDereferencing" />
+    <rule ref="Magento2.PHPCompatibility.NewNestedStaticAccess" />
 </ruleset>
