@@ -31,9 +31,7 @@ class DirectThrowUnitTest extends AbstractSniffUnitTest
             return [
                 20 => 1
             ];
-
         }
         return [];
-
     }
 }
