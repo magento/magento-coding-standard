@@ -272,16 +272,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.12.4",
+            "version": "0.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d7d4659acae85a9ba5b8b75d4dadb998ffed2a48"
+                "reference": "e50e40e0fe73b88a46f27e086441e1998ceeca3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d7d4659acae85a9ba5b8b75d4dadb998ffed2a48",
-                "reference": "d7d4659acae85a9ba5b8b75d4dadb998ffed2a48",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/e50e40e0fe73b88a46f27e086441e1998ceeca3c",
+                "reference": "e50e40e0fe73b88a46f27e086441e1998ceeca3c",
                 "shasum": ""
             },
             "require": {
@@ -320,7 +320,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.12.4"
+                "source": "https://github.com/rectorphp/rector/tree/0.12.5"
             },
             "funding": [
                 {
@@ -328,7 +328,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-15T14:06:50+00:00"
+            "time": "2021-11-23T17:38:29+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -2249,7 +2249,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
