@@ -91,4 +91,4 @@ jobs:
         run: composer install
 
       - name: Run rector
-        run: vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php --autoload-file vendor/phpcompatibility/php-compatibility/PHPCSAliases.php
+        run: vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php --autoload-file vendor/phpcompatibility/php-compatibility/PHPCSAliases.php --autoload-file Magento2/PHPCSUtils/TestUtils/UtilityMethodTestCase.php
