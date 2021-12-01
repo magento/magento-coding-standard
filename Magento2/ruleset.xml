@@ -716,9 +716,6 @@
         <type>warning</type>
         <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
-    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
-        <severity>0</severity>
-    </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
     <rule ref="Magento2.Commenting.ClassAndInterfacePHPDocFormatting">
