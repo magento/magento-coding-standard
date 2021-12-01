@@ -259,6 +259,7 @@
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Namespaces.ImportsFromTestNamespace">
         <severity>8</severity>
@@ -376,6 +377,7 @@
     <rule ref="Generic.Metrics.NestingLevel">
         <severity>7</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.DisallowShortOpenTag">
         <exclude-pattern>*\.xml$</exclude-pattern>
@@ -541,6 +543,7 @@
     <rule ref="Magento2.Whitespace.MultipleEmptyLines">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="PEAR.ControlStructures.ControlSignature">
         <severity>6</severity>
@@ -712,27 +715,29 @@
         <type>warning</type>
         <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement">
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
+    </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
     <rule ref="Magento2.Commenting.ClassAndInterfacePHPDocFormatting">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Commenting.ClassPropertyPHPDocFormatting">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Commenting.ConstantsPHPDocFormatting">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.Commenting.DocCommentAlignment">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
@@ -748,6 +753,7 @@
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
