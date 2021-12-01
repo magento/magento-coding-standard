@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Files\File;
 
@@ -95,47 +95,6 @@ class Conditions
         }
 
         return false;
-    }
-
-    /**
-     * Determine if the passed token has a condition of one of the passed types.
-     *
-     * This method is not significantly different from the PHPCS native version.
-     *
-     * @see \PHP_CodeSniffer\Files\File::hasCondition()   Original source.
-     * @see \PHPCSUtils\BackCompat\BCFile::hasCondition() Cross-version compatible version of the original.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the token we are checking.
-     * @param int|string|array            $types     The type(s) of tokens to search for.
-     *
-     * @return bool
-     */
-    public static function hasCondition(File $phpcsFile, $stackPtr, $types)
-    {
-        return (self::getCondition($phpcsFile, $stackPtr, $types) !== false);
-    }
-
-    /**
-     * Return the position of the first (outermost) condition of a certain type for the passed token.
-     *
-     * If no types are specified, the first condition for the token, independently of type,
-     * will be returned.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
-     * @param int                         $stackPtr  The position of the token we are checking.
-     * @param int|string|array            $types     Optional. The type(s) of tokens to search for.
-     *
-     * @return int|false Integer stack pointer to the condition; or `FALSE` if the token
-     *                   does not have the condition or has no conditions at all.
-     */
-    public static function getFirstCondition(File $phpcsFile, $stackPtr, $types = [])
-    {
-        return self::getCondition($phpcsFile, $stackPtr, $types, true);
     }
 
     /**

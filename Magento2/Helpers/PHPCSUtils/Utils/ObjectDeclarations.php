@@ -8,13 +8,12 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use PHPCSUtils\Tokens\Collections;
-use PHPCSUtils\Utils\GetTokensAsString;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
 
 /**
  * Utility functions for use when examining object declaration statements.

@@ -8,11 +8,11 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\TestUtils;
+namespace Magento2\Helpers\PHPCSUtils\TestUtils;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Exceptions\TokenizerException;
-use PHPCSUtils\BackCompat\Helper;
+use Magento2\Helpers\PHPCSUtils\BackCompat\Helper;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RuntimeException as PHPRuntimeException;
@@ -42,7 +42,7 @@ use RuntimeException as PHPRuntimeException;
  * ```php
  * <?php
  *
- * use PHPCSUtils\TestUtils\UtilityMethodTestCase;
+ * use Magento2\Helpers\PHPCSUtils\TestUtils\UtilityMethodTestCase;
  * use YourStandard\ClassUnderTest;
  *
  * class ClassUnderTestUnitTest extends UtilityMethodTestCase {

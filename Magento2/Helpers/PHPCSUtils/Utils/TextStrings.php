@@ -8,11 +8,11 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
 
 /**
  * Utility functions for working with text string tokens.

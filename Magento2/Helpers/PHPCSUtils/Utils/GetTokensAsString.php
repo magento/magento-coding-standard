@@ -8,7 +8,7 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
@@ -28,7 +28,6 @@ use PHP_CodeSniffer\Util\Tokens;
  */
 class GetTokensAsString
 {
-
     /**
      * Retrieve the tab-replaced content of the tokens from the specified start position in
      * the token stack to the specified end position (inclusive).
@@ -56,103 +55,6 @@ class GetTokensAsString
     public static function normal(File $phpcsFile, $start, $end)
     {
         return self::getString($phpcsFile, $start, $end);
-    }
-
-    /**
-     * Retrieve the tab-replaced content of the tokens from the specified start position in
-     * the token stack to the specified end position (inclusive).
-     *
-     * Alias for the {@see \PHPCSUtils\Utils\GetTokensAsString::normal()} method.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $start     The position to start from in the token stack.
-     * @param int                         $end       The position to end at in the token stack (inclusive).
-     *
-     * @return string The token contents.
-     *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified start position does not exist.
-     */
-    public static function tabReplaced(File $phpcsFile, $start, $end)
-    {
-        return self::normal($phpcsFile, $start, $end);
-    }
-
-    /**
-     * Retrieve the original content of the tokens from the specified start position in
-     * the token stack to the specified end position (inclusive).
-     *
-     * In contrast to the {@see GetTokensAsString::normal()} method, this method will return
-     * the original token content for the specified tokens.
-     * That means that if the original content contained tabs, the return value of this function
-     * will also contain tabs.
-     *
-     * The same can be achieved in PHPCS since version 3.3.0, by calling the
-     * {@see \PHP_CodeSniffer\Files\File::getTokensAsString()} method and passing `true` as the
-     * value for the `$origContent` parameter.
-     *
-     * @see \PHP_CodeSniffer\Files\File::getTokensAsString()   Similar length-based function.
-     * @see \PHPCSUtils\BackCompat\BCFile::getTokensAsString() Cross-version compatible version of the original.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $start     The position to start from in the token stack.
-     * @param int                         $end       The position to end at in the token stack (inclusive).
-     *
-     * @return string The token contents.
-     *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified start position does not exist.
-     */
-    public static function origContent(File $phpcsFile, $start, $end)
-    {
-        return self::getString($phpcsFile, $start, $end, true);
-    }
-
-    /**
-     * Retrieve the content of the tokens from the specified start position in the token
-     * stack to the specified end position (inclusive) without comments.
-     *
-     * @see \PHP_CodeSniffer\Files\File::getTokensAsString() Loosely related function.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $start     The position to start from in the token stack.
-     * @param int                         $end       The position to end at in the token stack (inclusive).
-     *
-     * @return string The token contents stripped off comments.
-     *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified start position does not exist.
-     */
-    public static function noComments(File $phpcsFile, $start, $end)
-    {
-        return self::getString($phpcsFile, $start, $end, false, true);
-    }
-
-    /**
-     * Retrieve the code-tokens only content of the tokens from the specified start position
-     * in the token stack to the specified end position (inclusive) without whitespace or comments.
-     *
-     * This is, for instance, useful to retrieve a namespace name without stray whitespace or comments.
-     * Use this function selectively and with care!
-     *
-     * @see \PHP_CodeSniffer\Files\File::getTokensAsString() Loosely related function.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $start     The position to start from in the token stack.
-     * @param int                         $end       The position to end at in the token stack (inclusive).
-     *
-     * @return string The token contents stripped off comments and whitespace.
-     *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified start position does not exist.
-     */
-    public static function noEmpties(File $phpcsFile, $start, $end)
-    {
-        return self::getString($phpcsFile, $start, $end, false, true, true);
     }
 
     /**
@@ -258,5 +160,29 @@ class GetTokensAsString
         }
 
         return $str;
+    }
+
+    /**
+     * Retrieve the code-tokens only content of the tokens from the specified start position
+     * in the token stack to the specified end position (inclusive) without whitespace or comments.
+     *
+     * This is, for instance, useful to retrieve a namespace name without stray whitespace or comments.
+     * Use this function selectively and with care!
+     *
+     * @see \PHP_CodeSniffer\Files\File::getTokensAsString() Loosely related function.
+     *
+     * @since 1.0.0
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $start     The position to start from in the token stack.
+     * @param int                         $end       The position to end at in the token stack (inclusive).
+     *
+     * @return string The token contents stripped off comments and whitespace.
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified start position does not exist.
+     */
+    public static function noEmpties(File $phpcsFile, $start, $end)
+    {
+        return self::getString($phpcsFile, $start, $end, false, true, true);
     }
 }

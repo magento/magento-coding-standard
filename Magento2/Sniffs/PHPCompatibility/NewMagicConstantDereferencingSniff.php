@@ -13,8 +13,8 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCompatibility\Sniff;
-use PHPCSUtils\BackCompat\BCTokens;
-use PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\BackCompat\BCTokens;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
 
 /**
  * Detect dereferencing of magic constants as allowed per PHP 8.0.

@@ -11,7 +11,7 @@
 namespace Magento2\Sniffs\PHPCompatibility;
 
 use PHPCompatibility\Sniff;
-use PHPCSUtils\Utils\TextStrings;
+use Magento2\Helpers\PHPCSUtils\Utils\TextStrings;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 

@@ -8,13 +8,10 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
+use Magento2\Helpers\PHPCSUtils\BackCompat\BCTokens;
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\BackCompat\BCTokens;
-use PHPCSUtils\Tokens\Collections;
-use PHPCSUtils\Utils\Conditions;
-use PHPCSUtils\Utils\Parentheses;
 
 /**
  * Utility functions for use when examining token scopes.
@@ -49,66 +46,6 @@ class Scopes
 
             if (\in_array($tokens[$ptr]['code'], $validScopes, true) === true) {
                 return $ptr;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Check whether a T_CONST token is a class/interface constant declaration.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
-     * @param int                         $stackPtr  The position in the stack of the
-     *                                               `T_CONST` token to verify.
-     *
-     * @return bool
-     */
-    public static function isOOConstant(File $phpcsFile, $stackPtr)
-    {
-        $tokens = $phpcsFile->getTokens();
-
-        if (isset($tokens[$stackPtr]) === false || $tokens[$stackPtr]['code'] !== \T_CONST) {
-            return false;
-        }
-
-        if (self::validDirectScope($phpcsFile, $stackPtr, Collections::$OOConstantScopes) !== false) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check whether a T_VARIABLE token is a class/trait property declaration.
-     *
-     * @since 1.0.0
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
-     * @param int                         $stackPtr  The position in the stack of the
-     *                                               `T_VARIABLE` token to verify.
-     *
-     * @return bool
-     */
-    public static function isOOProperty(File $phpcsFile, $stackPtr)
-    {
-        $tokens = $phpcsFile->getTokens();
-
-        if (isset($tokens[$stackPtr]) === false || $tokens[$stackPtr]['code'] !== \T_VARIABLE) {
-            return false;
-        }
-
-        $scopePtr = self::validDirectScope($phpcsFile, $stackPtr, Collections::$OOPropertyScopes);
-        if ($scopePtr !== false) {
-            // Make sure it's not a method parameter.
-            $deepestOpen = Parentheses::getLastOpener($phpcsFile, $stackPtr);
-            if ($deepestOpen === false
-                || $deepestOpen < $scopePtr
-                || Parentheses::isOwnerIn($phpcsFile, $deepestOpen, \T_FUNCTION) === false
-            ) {
-                return true;
             }
         }
 

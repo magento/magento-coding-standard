@@ -8,14 +8,14 @@
  * @link      https://github.com/PHPCSStandards/PHPCSUtils
  */
 
-namespace PHPCSUtils\Utils;
+namespace Magento2\Helpers\PHPCSUtils\Utils;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use PHPCSUtils\BackCompat\BCTokens;
-use PHPCSUtils\Utils\Conditions;
-use PHPCSUtils\Utils\Parentheses;
+use Magento2\Helpers\PHPCSUtils\BackCompat\BCTokens;
+
+use Magento2\Helpers\PHPCSUtils\Utils\Parentheses;
 
 /**
  * Utility functions for examining use statements.
