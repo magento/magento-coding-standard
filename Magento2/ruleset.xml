@@ -395,6 +395,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.LiteralNamespaces">
         <severity>7</severity>
@@ -717,9 +718,6 @@
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
         <severity>0</severity>
-    </rule>
-    <rule ref="Generic.CodeAnalysis.EmptyStatement">
-        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
