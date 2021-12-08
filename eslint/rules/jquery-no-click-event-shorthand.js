@@ -42,8 +42,7 @@ module.exports = {
                     name = node.callee.property.name;
                     context.report({
                         node: node,
-                        message:
-                            'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
+                        message: 'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
                             '() use .trigger("' + name + '")'
                     });
                 }

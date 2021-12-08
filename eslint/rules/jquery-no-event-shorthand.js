@@ -32,12 +32,14 @@ module.exports = {
                         'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
                         'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
                     },
-                    name;
+                    name,
+                    message;
 
                 if (node.callee.type !== 'MemberExpression') {return;}
 
                 name = node.callee.property.name;
-                if (!(name in namesToMsg)) {return;}
+                if (!namesToMsg.hasOwnProperty(name)) {return;}
+                message = namesToMsg[name];
 
                 if (utils.isjQuery(node)) {
                     context.report({

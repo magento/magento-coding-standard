@@ -40,7 +40,7 @@ function isjQuery(node) {
 
     var id = traverse(node);
 
-    return id && id.name.startsWith('$') || id.name.toLowerCase() === 'jquery';
+    return id && (id.name.startsWith('$') || id.name.toLowerCase() === 'jquery');
 }
 
 module.exports = {

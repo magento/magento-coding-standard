@@ -38,17 +38,19 @@ module.exports = {
                         'parseJSON' : 'jQuery.parseJSON() is deprecated. ' +
                             'To parse JSON strings, use the native JSON.parse method instead'
                     },
-                    name;
+                    name,
+                    message;
 
                 if (node.callee.type !== 'MemberExpression') {return;}
 
                 name = node.callee.property.name;
-                if (!(name in namesToMsg)) {return;}
+                if (!namesToMsg.hasOwnProperty(name)) {return;}
+                message = namesToMsg[name];
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: namesToMsg[name]
+                        message: message
                     });
                 }
             }
