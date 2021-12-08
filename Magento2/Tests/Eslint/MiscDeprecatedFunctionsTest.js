@@ -4,5 +4,5 @@ $(function () {
     $.parseJSON('');
     jQuery.type({});
     $.isArray({});
-    $.isFunction({})
+    $.isFunction({});
 });
