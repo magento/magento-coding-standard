@@ -23,26 +23,23 @@ module.exports = {
 
         return {
             /**
-             * Checks if deprecated functions are used and reports it.
+             * Checks if shorthand methods are used and reports it.
              *
              * @param {Object} node - The node to check.
              */
-            CallExpression: function (node) {
-                var namesToMsg = {
-                        'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
-                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
-                    },
-                    name;
-
-                if (node.callee.type !== 'MemberExpression') {return;}
-
-                name = node.callee.property.name;
-                if (!(name in namesToMsg)) {return;}
-
+            'MemberExpression[property.value=":"] MemberExpression[property.name="expr"]': function (node) {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: namesToMsg[name]
+                        message: 'jQuery.expr[":"] is deprecated; Use jQuery.expr.pseudos instead'
+                    });
+                }
+            },
+            'MemberExpression[property.name="filters"] MemberExpression[property.name="expr"]': function (node) {
+                if (utils.isjQuery(node)) {
+                    context.report({
+                        node: node,
+                        message: 'jQuery.expr.filters is deprecated; Use jQuery.expr.pseudos instead'
                     });
                 }
             }

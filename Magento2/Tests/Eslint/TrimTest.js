@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     'use strict';
 
     $.trim('    hello, how are you?    ');

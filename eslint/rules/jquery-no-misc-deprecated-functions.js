@@ -23,14 +23,20 @@ module.exports = {
 
         return {
             /**
-             * Checks if deprecated functions are used and reports it.
+             * Checks if shorthand methods are used and reports it.
              *
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
                 var namesToMsg = {
-                        'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
-                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
+                        'isFunction': 'jQuery.isFunction() is deprecated. '
+                            + 'In most cases, it can be replaced by [typeof x === "function"]',
+                        'type': 'jQuery.type() is deprecated. ' +
+                            'Replace with an appropriate type check like [typeof x === "function"]',
+                        'isArray': 'jQuery.isArray() is deprecated. ' +
+                            'Use the native Array.isArray method instead',
+                        'parseJSON' : 'jQuery.parseJSON() is deprecated. ' +
+                            'To parse JSON strings, use the native JSON.parse method instead'
                     },
                     name;
 

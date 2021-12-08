@@ -12,15 +12,15 @@ namespace Magento2\Tests\Eslint;
  *
  * Test Eslint Rule: jquery-no-event-shorthand.js
  */
-class EventShorthandTest extends AbstractEslintTestCase
+class MiscDeprecatedExprTest extends AbstractEslintTestCase
 {
     public function testExecute(): void
     {
         $this->assertFileContainsError(
-            'EventShorthandTest.js',
+            'MiscDeprecatedExprTest.js',
             [
-                'jQuery.unload() was removed, use .on("unload", fn) instead',
-                'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
+                'jQuery.expr[":"] is deprecated; Use jQuery.expr.pseudos instead',
+                'jQuery.expr.filters is deprecated; Use jQuery.expr.pseudos instead'
             ]
         );
     }

@@ -1,5 +1,6 @@
-$(document).ready(function () {
+$(function () {
     'use strict';
 
-    $('input').blur();
+    $('#result').blur();
+    $.fn.focus(function () {});
 });

@@ -6,6 +6,8 @@
         "jquery-no-delegate-undelegate": 2,
         "jquery-no-event-shorthand": 2,
         "jquery-no-size": 2,
-        "jquery-no-trim": 2
+        "jquery-no-trim": 2,
+        "jquery-no-misc-deprecated-functions": 2,
+        "jquery-no-deprecated-expr": 2
     }
 }
