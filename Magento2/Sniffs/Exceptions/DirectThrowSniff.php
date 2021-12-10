@@ -49,34 +49,19 @@ class DirectThrowSniff implements Sniff
         $exceptionString = 'Exception';
         $customExceptionFound = false;
         foreach ($tokens as $key => $token) {
-           if ($token['code'] !== T_USE) {
+            if ($token['code'] !== T_USE) {
                 continue;
-           }
-           $endOfUse = $phpcsFile->findEndOfStatement($key);
-           $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
-           // we safely consider use statement has alias will not be a direct exception class
-           if (!empty($useStatementValue['alias'])) {
-                continue;
-           }
-           if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
-                && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
-                && $useStatementValue['name'] !== $exceptionString
+            }
+            $endOfUse = $phpcsFile->findEndOfStatement($key);
+            $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
+            //we safely consider use statement has alias will not be a direct exception class
+            if (empty($useStatementValue['alias'])) {
+                if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
+                    && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
+                    && $useStatementValue['name'] !== $exceptionString
                 ) {
-                        $customExceptionFound = true;
-                        break;
-                }
-           }
-                $endOfUse = $phpcsFile->findEndOfStatement($key);
-                $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
-                //we safely consider use statement has alias will not be a direct exception class
-                if (empty($useStatementValue['alias'])) {
-                    if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
-                        && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
-                        && $useStatementValue['name'] !== $exceptionString
-                    ) {
-                        $customExceptionFound = true;
-                        break;
-                    }
+                    $customExceptionFound = true;
+                    break;
                 }
             }
         }
