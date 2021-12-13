@@ -4,7 +4,7 @@
   "description": "",
   "main": "eslint/.eslintrc",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint -c eslint/.eslintrc-jquery --rulesdir eslint/rules"
+    "eslint": "./node_modules/.bin/eslint -c eslint/.eslintrc --rulesdir eslint/rules"
   },
   "author": "",
   "license": "ISC",

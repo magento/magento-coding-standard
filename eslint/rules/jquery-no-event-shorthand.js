@@ -11,7 +11,7 @@ module.exports = {
     },
 
     /**
-     * Executes the function to check if shorthand methods are used.
+     * Executes the function to check if shorthand event methods are used.
      *
      * @param {Object} context
      * @returns {Object}
@@ -23,7 +23,7 @@ module.exports = {
 
         return {
             /**
-             * Checks if deprecated functions are used and reports it.
+             * Checks if shorthand event methods are used.
              *
              * @param {Object} node - The node to check.
              */
