@@ -2,7 +2,7 @@ module.exports = {
     meta: {
         type: 'suggestion',
         docs: {
-            description: 'Disallow the use of shortcuts to trigger events',
+            description: 'Disallow the use of shortcuts to input events via keyboard/mouse trigger events',
             category: 'jQuery deprecated functions',
             recommended: true,
             url: 'https://api.jquery.com/bind/'

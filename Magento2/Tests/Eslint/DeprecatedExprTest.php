@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Magento2\Tests\Eslint;
 
 /**
- * Class EventShorthandTest
+ * Class DeprecatedExprTest
  *
- * Test Eslint Rule: jquery-no-event-shorthand.js
+ * Test Eslint Rule: jquery-no-deprecated-expr.js
  */
-class MiscDeprecatedExprTest extends AbstractEslintTestCase
+class DeprecatedExprTest extends AbstractEslintTestCase
 {
     public function testExecute(): void
     {
         $this->assertFileContainsError(
-            'MiscDeprecatedExprTest.js',
+            'DeprecatedExprTest.js',
             [
                 'jQuery.expr[":"] is deprecated; Use jQuery.expr.pseudos instead',
                 'jQuery.expr.filters is deprecated; Use jQuery.expr.pseudos instead'

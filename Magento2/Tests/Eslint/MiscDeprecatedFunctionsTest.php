@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Magento2\Tests\Eslint;
 
 /**
- * Class EventShorthandTest
+ * Class MiscDeprecatedFunctionsTest
  *
- * Test Eslint Rule: jquery-no-event-shorthand.js
+ * Test Eslint Rule: jquery-no-misc-deprecated-functions.js
  */
 class MiscDeprecatedFunctionsTest extends AbstractEslintTestCase
 {

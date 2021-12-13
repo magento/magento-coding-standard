@@ -2,7 +2,7 @@ module.exports = {
     meta: {
         type: 'suggestion',
         docs: {
-            description: 'Disallow the use of shorthand event methods',
+            description: 'Disallow the use of various deprecated methods methods',
             category: 'jQuery deprecated functions',
             recommended: true,
             url: 'https://api.jquery.com/load/'
@@ -11,7 +11,7 @@ module.exports = {
     },
 
     /**
-     * Executes the function to check if shorthand methods are used.
+     * Executes the function to check if deprecated methods methods are used
      *
      * @param {Object} context
      * @returns {Object}
@@ -23,7 +23,7 @@ module.exports = {
 
         return {
             /**
-             * Checks if shorthand methods are used and reports it.
+             * Checks if deprecated methods are used and reports it.
              *
              * @param {Object} node - The node to check.
              */

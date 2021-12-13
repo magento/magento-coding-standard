@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Magento2\Tests\Eslint;
 
 /**
- * Class ClickEventShorthandTest
+ * Class InputEventShorthandTest
  *
- * Test Eslint Rule: jquery-no-click-event-shorthand.js
+ * Test Eslint Rule: jquery-no-input-event-shorthand.js
  */
-class ClickEventShorthandTest extends AbstractEslintTestCase
+class InputEventShorthandTest extends AbstractEslintTestCase
 {
     public function testExecute(): void
     {
         $this->assertFileContainsError(
-            'ClickEventShorthandTest.js',
+            'InputEventShorthandTest.js',
             [
                 'Instead of .blur(fn) use .on("blur", fn). Instead of .blur() use .trigger("blur")',
                 'Instead of .focus(fn) use .on("focus", fn). Instead of .focus() use .trigger("focus")',

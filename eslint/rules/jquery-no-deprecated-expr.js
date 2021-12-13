@@ -2,7 +2,7 @@ module.exports = {
     meta: {
         type: 'suggestion',
         docs: {
-            description: 'Disallow the use of shorthand event methods',
+            description: 'Disallow the use of deprecated way to add to custom selectors',
             category: 'jQuery deprecated functions',
             recommended: true,
             url: 'https://api.jquery.com/load/'
@@ -23,7 +23,7 @@ module.exports = {
 
         return {
             /**
-             * Checks if shorthand methods are used and reports it.
+             * Checks for jQuery.expr[':']
              *
              * @param {Object} node - The node to check.
              */
@@ -35,6 +35,12 @@ module.exports = {
                     });
                 }
             },
+
+            /**
+             * Checks for jQuery.expr.filters
+             *
+             * @param {Object} node - The node to check.
+             */
             'MemberExpression[property.name="filters"] MemberExpression[property.name="expr"]': function (node) {
                 if (utils.isjQuery(node)) {
                     context.report({
