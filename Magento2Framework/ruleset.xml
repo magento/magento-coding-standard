@@ -21,6 +21,7 @@
         <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
         <include-pattern>*\.php$</include-pattern>
         <include-pattern>*\.phtml$</include-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2Framework.Header.CopyrightGraphQL">
         <severity>5</severity>

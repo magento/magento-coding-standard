@@ -10,7 +10,7 @@
 
 namespace Magento2\Tests\PHPCompatibility;
 
-use PHPCSUtils\BackCompat\Helper;
+use Magento2\Helpers\PHPCSUtils\BackCompat\Helper;
 
 /**
  * Test the NewAttributes sniff.

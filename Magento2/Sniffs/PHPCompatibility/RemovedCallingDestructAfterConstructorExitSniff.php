@@ -13,11 +13,11 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use PHPCSUtils\Tokens\Collections;
-use PHPCSUtils\Utils\FunctionDeclarations;
-use PHPCSUtils\Utils\ObjectDeclarations;
-use PHPCSUtils\Utils\Scopes;
-use PHPCSUtils\Utils\UseStatements;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
+use Magento2\Helpers\PHPCSUtils\Utils\ObjectDeclarations;
+use Magento2\Helpers\PHPCSUtils\Utils\Scopes;
+use Magento2\Helpers\PHPCSUtils\Utils\UseStatements;
 
 /**
  * As of PHP 8.0, when an object constructor exit()s, the destructor will no longer be called.

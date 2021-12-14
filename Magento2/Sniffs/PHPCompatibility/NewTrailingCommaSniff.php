@@ -13,8 +13,8 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use PHPCSUtils\Tokens\Collections;
-use PHPCSUtils\Utils\FunctionDeclarations;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
 
 /**
  * Detect trailing comma's in function declarations and closure use lists as allowed since PHP 8.

@@ -12,7 +12,7 @@ namespace Magento2\Sniffs\PHPCompatibility;
 
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\Utils\GetTokensAsString;
+use Magento2\Helpers\PHPCSUtils\Utils\GetTokensAsString;
 
 /**
  * Attributes as a form of structured, syntactic metadata to declarations of classes, properties,

@@ -14,8 +14,8 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCompatibility\Sniff;
-use PHPCSUtils\Tokens\Collections;
-use PHPCSUtils\Utils\FunctionDeclarations;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
 
 /**
  * Declaring a required function parameter after an optional parameter is deprecated since PHP 8.0.
