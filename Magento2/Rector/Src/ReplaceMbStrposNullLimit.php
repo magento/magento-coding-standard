@@ -10,7 +10,7 @@ use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ReplacePregSplitNullLimit extends AbstractRector
+final class ReplaceMbStrposNullLimit extends AbstractRector
 {
     /**
      * @return array<class-string<Node>>
@@ -25,12 +25,12 @@ final class ReplacePregSplitNullLimit extends AbstractRector
      */
     public function refactor(Node $node): ?Node
     {
-        if (!$this->isName($node->name, 'preg_split')) {
+        if (!$this->isName($node->name, 'mb_strpos')) {
             return null;
         }
 
         if ($node->args[2] !== LNumber::class) {
-            $node->args[2] = $this->nodeFactory->createArg(-1);
+            $node->args[2] = $this->nodeFactory->createArg(0);
             return $node;
         }
 
@@ -40,10 +40,10 @@ final class ReplacePregSplitNullLimit extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change preg_split limit from null to -1', [
+            'Change mb_strpos limit from null to 0', [
                 new CodeSample(
-                    'preg_split("pattern", "subject", null, 0);',
-                    'preg_split("pattern", "subject", -1, 0);'
+                    'mb_strpos("pattern", "subject", null, "encoding");',
+                    'mb_strpos("pattern", "subject", 0, "encoding");'
                 ),
             ]
         );

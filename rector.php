@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Magento2\Rector\Src\ReplaceMbStrposNullLimit;
+use Magento2\Rector\Src\ReplaceNewDateTimeNull;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
@@ -29,4 +31,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(StringableForToStringRector::class);
     $services->set(Php81ResourceReturnToObjectRector::class);
     $services->set(ReplacePregSplitNullLimit::class);
+    $services->set(ReplaceMbStrposNullLimit::class);
+    $services->set(ReplaceNewDateTimeNull::class);
 };

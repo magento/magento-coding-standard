@@ -4,33 +4,33 @@ declare(strict_types=1);
 namespace Magento2\Rector\Src;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Scalar\LNumber;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Scalar\String_;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ReplacePregSplitNullLimit extends AbstractRector
+final class ReplaceNewDateTimeNull extends AbstractRector
 {
     /**
      * @return array<class-string<Node>>
      */
     public function getNodeTypes(): array
     {
-        return [FuncCall::class];
+        return [New_::class];
     }
 
     /**
-     * @param FuncCall $node
+     * @param New_ $node
      */
     public function refactor(Node $node): ?Node
     {
-        if (!$this->isName($node->name, 'preg_split')) {
+        if (!$this->isName($node->class, 'DateTime')) {
             return null;
         }
 
-        if ($node->args[2] !== LNumber::class) {
-            $node->args[2] = $this->nodeFactory->createArg(-1);
+        if ($node->args[0] !== String_::class) {
+            $node->args[0] = $this->nodeFactory->createArg('now');
             return $node;
         }
 
@@ -40,10 +40,10 @@ final class ReplacePregSplitNullLimit extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change preg_split limit from null to -1', [
+            'Change mb_strpos limit from null to 0', [
                 new CodeSample(
-                    'preg_split("pattern", "subject", null, 0);',
-                    'preg_split("pattern", "subject", -1, 0);'
+                    'mb_strpos("pattern", "subject", null, "encoding");',
+                    'mb_strpos("pattern", "subject", 0, "encoding");'
                 ),
             ]
         );
