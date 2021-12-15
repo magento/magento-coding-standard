@@ -20,15 +20,18 @@ class IteratorDummyFile extends AbstractSniffUnitTest
         return true;
     }
 
-    protected function getErrorList() {
+    protected function getErrorList()
+    {
         return [];
     }
 
-    protected function getWarningList() {
+    protected function getWarningList()
+    {
         return [];
     }
 
-    private function withProtectedClass() {
+    private function withProtectedClass()
+    {
         return new \Zend_Db_Expr();
     }
 }

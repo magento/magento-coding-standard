@@ -28,7 +28,7 @@ abstract class AbstractEslintTestCase extends TestCase
         );
 
         foreach ($expectedMessages as $message) {
-            $this->assertStringContainsString($message, implode(' ',$output));
+            $this->assertStringContainsString($message, implode(' ', $output));
         }
     }
 }
