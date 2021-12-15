@@ -4,78 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60d3c6d032137be43c4740222c2bc6d1",
+    "content-hash": "20e40c8c33e9c2fc21cae5999414b4c0",
     "packages": [
-        {
-            "name": "dealerdirect/phpcodesniffer-composer-installer",
-            "version": "v0.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Dealerdirect/phpcodesniffer-composer-installer.git",
-                "reference": "fe390591e0241955f22eb9ba327d137e501c771c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Dealerdirect/phpcodesniffer-composer-installer/zipball/fe390591e0241955f22eb9ba327d137e501c771c",
-                "reference": "fe390591e0241955f22eb9ba327d137e501c771c",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0 || ^2.0",
-                "php": ">=5.3",
-                "squizlabs/php_codesniffer": "^2.0 || ^3.0 || ^4.0"
-            },
-            "require-dev": {
-                "composer/composer": "*",
-                "phpcompatibility/php-compatibility": "^9.0",
-                "sensiolabs/security-checker": "^4.1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Franck Nijhof",
-                    "email": "franck.nijhof@dealerdirect.com",
-                    "homepage": "http://www.frenck.nl",
-                    "role": "Developer / IT Manager"
-                }
-            ],
-            "description": "PHP_CodeSniffer Standards Composer Installer Plugin",
-            "homepage": "http://www.dealerdirect.com",
-            "keywords": [
-                "PHPCodeSniffer",
-                "PHP_CodeSniffer",
-                "code quality",
-                "codesniffer",
-                "composer",
-                "installer",
-                "phpcs",
-                "plugin",
-                "qa",
-                "quality",
-                "standard",
-                "standards",
-                "style guide",
-                "stylecheck",
-                "tests"
-            ],
-            "support": {
-                "issues": "https://github.com/dealerdirect/phpcodesniffer-composer-installer/issues",
-                "source": "https://github.com/dealerdirect/phpcodesniffer-composer-installer"
-            },
-            "time": "2020-12-07T18:04:37+00:00"
-        },
         {
             "name": "phpcompatibility/php-compatibility",
             "version": "9.3.5",
@@ -137,74 +67,6 @@
                 "source": "https://github.com/PHPCompatibility/PHPCompatibility"
             },
             "time": "2019-12-27T09:44:58+00:00"
-        },
-        {
-            "name": "phpcsstandards/phpcsutils",
-            "version": "1.0.0-alpha3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "a16c989b8421e29c336ece5c4099b48585994673"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/a16c989b8421e29c336ece5c4099b48585994673",
-                "reference": "a16c989b8421e29c336ece5c4099b48585994673",
-                "shasum": ""
-            },
-            "require": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7",
-                "php": ">=5.4",
-                "squizlabs/php_codesniffer": "^2.6.0 || ^3.1.0 || 4.0.x-dev@dev"
-            },
-            "conflict": {
-                "squizlabs/php_codesniffer": "3.5.3"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-console-highlighter": "^0.5",
-                "php-parallel-lint/php-parallel-lint": "^1.2.0",
-                "phpunit/phpunit": "^4.5 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "type": "phpcodesniffer-standard",
-            "autoload": {
-                "classmap": [
-                    "PHPCSUtils/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Juliette Reinders Folmer",
-                    "homepage": "https://github.com/jrfnl",
-                    "role": "lead"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/PHPCSStandards/PHPCSUtils/graphs/contributors"
-                }
-            ],
-            "description": "A suite of utility functions for use with PHP_CodeSniffer",
-            "homepage": "https://phpcsutils.com/",
-            "keywords": [
-                "PHP_CodeSniffer",
-                "phpcbf",
-                "phpcodesniffer-standard",
-                "phpcs",
-                "phpcs2",
-                "phpcs3",
-                "standards",
-                "tokens",
-                "utility"
-            ],
-            "support": {
-                "docs": "https://phpcsutils.com/",
-                "issues": "https://github.com/PHPCSStandards/PHPCSUtils/issues",
-                "source": "https://github.com/PHPCSStandards/PHPCSUtils"
-            },
-            "time": "2020-06-28T21:57:33+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2549,11 +2411,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "alpha",
-    "stability-flags": {
-        "phpcsstandards/phpcsutils": 15
-    },
-    "prefer-stable": true,
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.3",

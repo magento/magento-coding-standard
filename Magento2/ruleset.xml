@@ -26,6 +26,7 @@
         <type>error</type>
         <exclude-pattern>*/lib/*</exclude-pattern>
         <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.Syntax">
         <severity>10</severity>
@@ -220,6 +221,7 @@
     <rule ref="Magento2.Exceptions.ThrowCatch">
         <severity>8</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Exceptions.TryProcessSystemResources">
         <severity>8</severity>
@@ -239,6 +241,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Functions.StaticFunction">
         <severity>8</severity>
@@ -250,11 +253,13 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Functions.FunctionsDeprecatedWithoutArgument">
         <severity>7</severity>
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.Namespaces.ImportsFromTestNamespace">
         <severity>8</severity>
@@ -372,6 +377,7 @@
     <rule ref="Generic.Metrics.NestingLevel">
         <severity>7</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.DisallowShortOpenTag">
         <exclude-pattern>*\.xml$</exclude-pattern>
@@ -389,6 +395,7 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Magento2.PHP.LiteralNamespaces">
         <severity>7</severity>
@@ -537,6 +544,7 @@
     <rule ref="Magento2.Whitespace.MultipleEmptyLines">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="PEAR.ControlStructures.ControlSignature">
         <severity>6</severity>
@@ -580,6 +588,7 @@
     <rule ref="PSR2.Files.EndFileNewline">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="PSR2.Methods.FunctionCallSignature">
         <severity>6</severity>
@@ -705,6 +714,7 @@
     <rule ref="PSR12.Properties.ConstantVisibility">
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
 
     <!-- Severity 5 warnings: PHPDoc formatting and commenting issues. -->
@@ -738,6 +748,7 @@
         <exclude-pattern>*/_files/*</exclude-pattern>
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
+        <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>

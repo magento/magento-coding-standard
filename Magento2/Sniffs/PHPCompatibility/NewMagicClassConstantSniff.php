@@ -13,7 +13,7 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use PHPCSUtils\Tokens\Collections;
+use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
 
 /**
  * Detect usage of the magic `::class` constant introduced in PHP 5.5.

@@ -12,7 +12,7 @@ namespace Magento2\Tests\PHPCompatibility;
 
 use PHPUnit\Framework\TestCase;
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\BackCompat\Helper;
+use Magento2\Helpers\PHPCSUtils\BackCompat\Helper;
 
 /**
  * Base sniff test class file.

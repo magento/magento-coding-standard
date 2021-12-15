@@ -12,9 +12,9 @@ namespace Magento2\Sniffs\PHPCompatibility;
 
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
-use PHPCSUtils\BackCompat\BCTokens;
-use PHPCSUtils\Utils\FunctionDeclarations;
-use PHPCSUtils\Utils\Scopes;
+use Magento2\Helpers\PHPCSUtils\BackCompat\BCTokens;
+use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
+use Magento2\Helpers\PHPCSUtils\Utils\Scopes;
 
 /**
  * Abstract private methods are not allowed since PHP 5.1, though they are allowed in traits since PHP 8.0.

@@ -10,7 +10,7 @@
 
 namespace Magento2\Tests\PHPCompatibility\Util;
 
-use PHPCSUtils\TestUtils\UtilityMethodTestCase;
+use Magento2\Helpers\PHPCSUtils\TestUtils\UtilityMethodTestCase;
 
 /**
  * Base class to use when testing utility methods.
