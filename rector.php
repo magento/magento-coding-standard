@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Magento2\Rector\Src\ReplaceMbStrposNullLimit;
+use Magento2\Rector\Src\AddArrayAccessInterfaceReturnTypes;
 use Magento2\Rector\Src\ReplaceNewDateTimeNull;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
@@ -33,4 +34,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ReplacePregSplitNullLimit::class);
     $services->set(ReplaceMbStrposNullLimit::class);
     $services->set(ReplaceNewDateTimeNull::class);
+    $services->set(AddArrayAccessInterfaceReturnTypes::class);
 };
