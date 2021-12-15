@@ -1,6 +1,10 @@
-$(function () {
-    'use strict';
+define([
+    'jquery',
+], function (jQuery) {
+    $(function () {
+        'use strict';
 
-    $.extend($.expr[':'], {});
-    jQuery.extend($.expr.filters, {});
+        jQuery.extend(jQuery.expr[':'], {});
+        jQuery.extend(jQuery.expr.filters, {});
+    });
 });

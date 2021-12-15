@@ -1,6 +1,11 @@
-$(function () {
-    'use strict';
+define([
+    'jquery',
+], function ($) {
+    $(function () {
+        'use strict';
 
-    $('#result').blur();
-    $.fn.focus(function () {});
+        $('#result').blur();
+        $.fn.focus(function () {
+        });
+    });
 });

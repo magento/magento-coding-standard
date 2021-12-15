@@ -1,8 +1,12 @@
-$(function () {
-    'use strict';
+define([
+    'jquery',
+], function ($) {
+    $(function () {
+        'use strict';
 
-    $.parseJSON('');
-    jQuery.type({});
-    $.isArray({});
-    $.isFunction({});
+        $.parseJSON('');
+        $.type({});
+        $.isArray({});
+        $.isFunction({});
+    });
 });

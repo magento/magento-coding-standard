@@ -1,5 +1,9 @@
-$(function () {
-    'use strict';
+define([
+    'jquery',
+], function ($) {
+    $(function () {
+        'use strict';
 
-    $('div').size();
+        $('div').size();
+    });
 });
