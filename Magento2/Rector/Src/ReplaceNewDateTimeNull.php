@@ -40,10 +40,10 @@ final class ReplaceNewDateTimeNull extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change mb_strpos limit from null to 0', [
+            'Change DateTime datetime input from null to "now"', [
                 new CodeSample(
-                    'mb_strpos("pattern", "subject", null, "encoding");',
-                    'mb_strpos("pattern", "subject", 0, "encoding");'
+                    'new DateTime(null, new DateTimeZone("GMT"));',
+                    'new DateTime("now", new DateTimeZone("GMT"));'
                 ),
             ]
         );
