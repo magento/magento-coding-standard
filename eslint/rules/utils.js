@@ -6,6 +6,7 @@
 function define(node) {
     'use strict';
     var defineStmt, args;
+
     defineStmt = node.body.find(function (stmt) {
         return (
             stmt.type === 'ExpressionStatement' &&
@@ -35,7 +36,10 @@ function define(node) {
  * @returns {null|*}
  */
 function getJqueryName(defineObject) {
+    'use strict';
+
     var jQueryPathIndex;
+
     if (!defineObject.modulePaths || !defineObject.moduleNames) {
         return null;
     }
@@ -59,8 +63,6 @@ function getProgramNode(node) {
     }
     return getProgramNode(node.parent);
 }
-
-
 
 /**
  * Traverses the node to identify its id
@@ -101,16 +103,17 @@ function getExpressionId(node) {
 
 function isjQuery(node) {
     'use strict';
-    var parentNode = getProgramNode(node);
-    var defineNode = define(parentNode);
+    var parentNode, defineNode, jQueryId, id;
+
+    parentNode = getProgramNode(node);
+    defineNode = define(parentNode);
     if (!defineNode) {
         return false;
     }
-    var jQueryID = getJqueryName(defineNode);
+    jQueryId = getJqueryName(defineNode);
+    id = getExpressionId(node);
 
-    var id = getExpressionId(node);
-
-    return id && jQueryID && id.name === jQueryID.name;
+    return id && jQueryId && id.name === jQueryId.name;
 }
 
 module.exports = {
