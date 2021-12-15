@@ -22,6 +22,8 @@ module.exports = {
     create: function (context) {
         'use strict';
 
+        var utils = require('./utils.js');
+
         return {
             /**
              * Checks if trim method is used and reports it.
@@ -31,14 +33,14 @@ module.exports = {
             CallExpression: function (node) {
                 if (node.callee.type !== 'MemberExpression') {return;}
 
-                if (node.callee.object.name !== '$') {return;}
-
                 if (node.callee.property.name !== 'trim') {return;}
 
-                context.report({
-                    node: node,
-                    messageId: 'trim'
-                });
+                if (utils.isjQuery(node)) {
+                    context.report({
+                        node: node,
+                        messageId: 'trim'
+                    });
+                }
             }
         };
     }
