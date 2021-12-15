@@ -4,6 +4,9 @@
         <testsuite name="PHP_CodeSniffer Test Suite">
             <file>vendor/squizlabs/php_codesniffer/tests/Standards/AllSniffs.php</file>
         </testsuite>
+        <testsuite name="Rector">
+            <directory>Magento2/Rector/Tests</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="PHPCS_IGNORE_TESTS" value="Generic,MySource,PEAR,PSR1,PSR2,Squiz,Zend"/>
