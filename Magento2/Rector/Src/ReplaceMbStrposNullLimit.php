@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright 2021 Adobe
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace Magento2\Rector\Src;
@@ -7,6 +11,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Scalar\LNumber;
 use Rector\Core\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -37,6 +42,10 @@ final class ReplaceMbStrposNullLimit extends AbstractRector
         return null;
     }
 
+    /**
+     * @return RuleDefinition
+     * @throws PoorDocumentationException
+     */
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
