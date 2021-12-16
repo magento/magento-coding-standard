@@ -11,7 +11,7 @@ use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class AddArrayAccessInterfaceReturnTypesTest extends AbstractRectorTestCase
+class AddArrayAccessInterfaceReturnTypesTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()

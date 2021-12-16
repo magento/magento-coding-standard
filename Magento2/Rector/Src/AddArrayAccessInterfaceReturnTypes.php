@@ -10,14 +10,13 @@ namespace Magento2\Rector\Src;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use Rector\Core\Rector\AbstractRector;
-use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class AddArrayAccessInterfaceReturnTypes extends AbstractRector
+class AddArrayAccessInterfaceReturnTypes extends AbstractRector
 {
     /**
-     * @return array<class-string<Node>>
+     * @inheritDoc
      */
     public function getNodeTypes(): array
     {
@@ -25,7 +24,7 @@ final class AddArrayAccessInterfaceReturnTypes extends AbstractRector
     }
 
     /**
-     * @param Class_ $node
+     * @inheritDoc
      */
     public function refactor(Node $node): ?Node
     {
@@ -52,13 +51,13 @@ final class AddArrayAccessInterfaceReturnTypes extends AbstractRector
     }
 
     /**
-     * @return RuleDefinition
-     * @throws PoorDocumentationException
+     * @inheritDoc
      */
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Add return types specified by ArrayAccess interface', [
+            'Add return types specified by ArrayAccess interface',
+            [
                 new CodeSample(
                     'public function offsetSet($offset, $value)',
                     'public function offsetSet($offset, $value): void'
