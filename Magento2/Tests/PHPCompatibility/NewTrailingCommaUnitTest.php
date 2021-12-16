@@ -58,7 +58,6 @@ class NewTrailingCommaUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Test correctly identifying trailing comma's in closure use lists.
      *
@@ -89,7 +88,6 @@ class NewTrailingCommaUnitTest extends BaseSniffTest
             [91],
         ];
     }
-
 
     /**
      * Verify the sniff does not throw false positives for valid code.
@@ -126,7 +124,6 @@ class NewTrailingCommaUnitTest extends BaseSniffTest
 
         return $data;
     }
-
 
     /**
      * Verify no notices are thrown at all.

@@ -63,7 +63,6 @@ class ChangedIntToBoolParamTypeUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify no false positives are thrown for valid code.
      *
@@ -97,7 +96,6 @@ class ChangedIntToBoolParamTypeUnitTest extends BaseSniffTest
 
         return $data;
     }
-
 
     /**
      * Verify no notices are thrown at all.

@@ -56,7 +56,6 @@ class AbstractPrivateMethodsUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify that the sniff throws an error for abstract private methods in traits for PHP 7.4
      * and doesn't for PHP 8.0.
@@ -90,7 +89,6 @@ class AbstractPrivateMethodsUnitTest extends BaseSniffTest
             [43],
         ];
     }
-
 
     /**
      * Verify the sniff does not throw false positives for valid code.
@@ -127,7 +125,6 @@ class AbstractPrivateMethodsUnitTest extends BaseSniffTest
 
         return $cases;
     }
-
 
     /**
      * Verify no notices are thrown at all.

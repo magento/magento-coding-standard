@@ -52,7 +52,6 @@ class RemovedGetDefinedFunctionsExcludeDisabledFalseUnitTest extends BaseSniffTe
         ];
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code.
      *
@@ -67,7 +66,6 @@ class RemovedGetDefinedFunctionsExcludeDisabledFalseUnitTest extends BaseSniffTe
             $this->assertNoViolation($file, $line);
         }
     }
-
 
     /**
      * Verify no notices are thrown at all.

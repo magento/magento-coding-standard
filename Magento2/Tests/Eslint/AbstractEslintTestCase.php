@@ -17,6 +17,8 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractEslintTestCase extends TestCase
 {
     /**
+     * Assert that file contains a specific error.
+     *
      * @param string $testFile
      * @param array $expectedMessages
      */

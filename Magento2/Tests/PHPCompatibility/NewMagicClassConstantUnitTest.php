@@ -62,7 +62,6 @@ class NewMagicClassConstantUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify that no false positives are thrown for valid code.
      *
@@ -94,7 +93,6 @@ class NewMagicClassConstantUnitTest extends BaseSniffTest
             [19],
         ];
     }
-
 
     /**
      * Test correctly identifying the magic class constant when used on instantiated objects.
@@ -134,7 +132,6 @@ class NewMagicClassConstantUnitTest extends BaseSniffTest
             [52],
         ];
     }
-
 
     /**
      * Verify no notices are thrown at all.

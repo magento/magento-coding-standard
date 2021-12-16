@@ -65,7 +65,6 @@ class RemovedCallingDestructAfterConstructorExitUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code.
      *
@@ -105,7 +104,6 @@ class RemovedCallingDestructAfterConstructorExitUnitTest extends BaseSniffTest
 
         return $cases;
     }
-
 
     /**
      * Verify no notices are thrown at all.
