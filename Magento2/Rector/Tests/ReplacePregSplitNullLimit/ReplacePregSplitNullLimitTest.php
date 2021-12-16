@@ -1,8 +1,11 @@
 <?php
-
+/**
+ * Copyright 2021 Adobe
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
-namespace Rector\Tests\ReplacePregSplitNullLimit;
+namespace Magento2\Rector\Tests\ReplacePregSplitNullLimit;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

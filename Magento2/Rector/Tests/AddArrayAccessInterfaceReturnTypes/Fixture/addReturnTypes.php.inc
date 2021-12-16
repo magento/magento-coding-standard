@@ -1,11 +1,39 @@
 <?php
 
-mb_strpos('haystack with needle', 'needle', null, 'utf-8')
+class MyExampleClass implements \ArrayAccess
+{
+    public function offsetExists($offset)
+    {
+    }
+    public function offsetGet($offset)
+    {
+    }
+    public function offsetSet($offset, $value)
+    {
+    }
+    public function offsetUnset($offset)
+    {
+    }
+}
 
 ?>
 -----
 <?php
 
-mb_strpos('haystack with needle', 'needle', 0, 'utf-8')
+class MyExampleClass implements \ArrayAccess
+{
+    public function offsetExists($offset): bool
+    {
+    }
+    public function offsetGet($offset)
+    {
+    }
+    public function offsetSet($offset, $value): void
+    {
+    }
+    public function offsetUnset($offset): void
+    {
+    }
+}
 
 ?>

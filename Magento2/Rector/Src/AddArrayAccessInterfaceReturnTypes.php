@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright 2021 Adobe
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace Magento2\Rector\Src;
@@ -6,6 +10,7 @@ namespace Magento2\Rector\Src;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use Rector\Core\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -24,25 +29,39 @@ final class AddArrayAccessInterfaceReturnTypes extends AbstractRector
      */
     public function refactor(Node $node): ?Node
     {
-        if (!$this->isName($node->implements, 'ArrayAccess')) {
+        foreach ($node->implements as $implement) {
+            if ($this->isName($implement, 'ArrayAccess')) {
+                break;
+            }
             return null;
         }
 
-        if ($node->args[0] !== String_::class) {
-            $node->args[0] = $this->nodeFactory->createArg('now');
-            return $node;
+        foreach ($node->getMethods() as $method) {
+            if ($this->isName($method, 'offsetExists') && empty($method->getReturnType())) {
+                $method->returnType = new \PhpParser\Node\Name('bool');
+            }
+            if ($this->isName($method, 'offsetSet') && empty($method->getReturnType())) {
+                $method->returnType = new \PhpParser\Node\Name('void');
+            }
+            if ($this->isName($method, 'offsetUnset') && empty($method->getReturnType())) {
+                $method->returnType = new \PhpParser\Node\Name('void');
+            }
         }
 
         return null;
     }
 
+    /**
+     * @return RuleDefinition
+     * @throws PoorDocumentationException
+     */
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change DateTime datetime input from null to "now"', [
+            'Add return types specified by ArrayAccess interface', [
                 new CodeSample(
-                    'new DateTime(null, new DateTimeZone("GMT"));',
-                    'new DateTime("now", new DateTimeZone("GMT"));'
+                    'public function offsetSet($offset, $value)',
+                    'public function offsetSet($offset, $value): void'
                 ),
             ]
         );

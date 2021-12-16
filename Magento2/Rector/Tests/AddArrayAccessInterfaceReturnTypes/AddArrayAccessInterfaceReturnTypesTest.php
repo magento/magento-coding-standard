@@ -1,8 +1,11 @@
 <?php
-
+/**
+ * Copyright 2021 Adobe
+ * See COPYING.txt for license details.
+ */
 declare(strict_types=1);
 
-namespace Magento2\Rector\Tests\ReplaceMbStrposNullLimit;
+namespace Magento2\Rector\Tests\AddArrayAccessInterfaceReturnTypes;
 
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
