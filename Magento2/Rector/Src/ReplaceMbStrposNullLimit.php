@@ -49,7 +49,8 @@ final class ReplaceMbStrposNullLimit extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change mb_strpos offset from null to 0', [
+            'Change mb_strpos offset from null to 0',
+            [
                 new CodeSample(
                     'mb_strpos("pattern", "subject", null, "encoding");',
                     'mb_strpos("pattern", "subject", 0, "encoding");'

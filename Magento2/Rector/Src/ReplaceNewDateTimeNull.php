@@ -49,7 +49,8 @@ final class ReplaceNewDateTimeNull extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change DateTime datetime input from null to "now"', [
+            'Change DateTime datetime input from null to "now"',
+            [
                 new CodeSample(
                     'new DateTime(null, new DateTimeZone("GMT"));',
                     'new DateTime("now", new DateTimeZone("GMT"));'

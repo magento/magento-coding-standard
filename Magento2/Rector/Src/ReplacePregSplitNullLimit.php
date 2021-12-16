@@ -49,7 +49,8 @@ final class ReplacePregSplitNullLimit extends AbstractRector
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change preg_split limit from null to -1', [
+            'Change preg_split limit from null to -1',
+            [
                 new CodeSample(
                     'preg_split("pattern", "subject", null, 0);',
                     'preg_split("pattern", "subject", -1, 0);'
