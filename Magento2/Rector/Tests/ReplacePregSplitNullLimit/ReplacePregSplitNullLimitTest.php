@@ -11,7 +11,7 @@ use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ReplacePregSplitNullLimitTest extends AbstractRectorTestCase
+class ReplacePregSplitNullLimitTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()

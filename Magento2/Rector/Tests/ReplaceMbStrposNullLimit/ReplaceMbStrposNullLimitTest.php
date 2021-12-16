@@ -11,7 +11,7 @@ use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ReplaceMbStrposNullLimitTest extends AbstractRectorTestCase
+class ReplaceMbStrposNullLimitTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()
@@ -29,6 +29,9 @@ final class ReplaceMbStrposNullLimitTest extends AbstractRectorTestCase
         return $this->yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
+    /**
+     * @return string
+     */
     public function provideConfigFilePath(): string
     {
         return __DIR__ . '/config/configured_rule.php';

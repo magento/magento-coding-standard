@@ -11,14 +11,13 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Scalar\LNumber;
 use Rector\Core\Rector\AbstractRector;
-use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ReplacePregSplitNullLimit extends AbstractRector
+class ReplacePregSplitNullLimit extends AbstractRector
 {
     /**
-     * @return array<class-string<Node>>
+     * @inheritDoc
      */
     public function getNodeTypes(): array
     {
@@ -26,7 +25,7 @@ final class ReplacePregSplitNullLimit extends AbstractRector
     }
 
     /**
-     * @param FuncCall $node
+     * @inheritDoc
      */
     public function refactor(Node $node): ?Node
     {
@@ -43,8 +42,7 @@ final class ReplacePregSplitNullLimit extends AbstractRector
     }
 
     /**
-     * @return RuleDefinition
-     * @throws PoorDocumentationException
+     * @inheritDoc
      */
     public function getRuleDefinition(): RuleDefinition
     {

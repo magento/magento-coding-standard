@@ -11,7 +11,7 @@ use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class ReplaceNewDateTimeNullTest extends AbstractRectorTestCase
+class ReplaceNewDateTimeNullTest extends AbstractRectorTestCase
 {
     /**
      * @dataProvider provideData()
