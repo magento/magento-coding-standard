@@ -12,6 +12,9 @@ use RecursiveIteratorIterator;
 
 class InstallUpgradeUnitTest extends AbstractSniffUnitTest
 {
+    /**
+     * @var string[]
+     */
     private $wrongFileNames = [
         'data-install-.inc',
         'data-upgrade-.inc',
