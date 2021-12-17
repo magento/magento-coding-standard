@@ -18,7 +18,10 @@ class EventShorthandTest extends AbstractEslintTestCase
     {
         $this->assertFileContainsError(
             'EventShorthandTest.js',
-            ['jQuery.load() was removed, use .on("load", fn) instead']
+            [
+                'jQuery.unload() was removed, use .on("unload", fn) instead',
+                'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
+            ]
         );
     }
 }

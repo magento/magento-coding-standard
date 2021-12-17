@@ -1,5 +1,10 @@
-$(document).ready(function () {
-    'use strict';
-
-    $('#result').load('ajax/test.html');
+define([
+    'jquery',
+], function (jQuery) {
+    jQuery(document).ready(function () {
+        'use strict';
+        jQuery('#result').unload(function () {
+        });
+    });
 });
+

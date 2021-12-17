@@ -1,7 +1,11 @@
-$(document).ready(function () {
-    'use strict';
+define([
+    'jquery',
+], function ($) {
+    $(function () {
+        'use strict';
 
-    $('table').delegate('td', 'click', function () {
-        $(this).toggleClass('chosen');
+        $('table').delegate('td', 'click', function () {
+            $(this).toggleClass('chosen');
+        });
     });
 });
