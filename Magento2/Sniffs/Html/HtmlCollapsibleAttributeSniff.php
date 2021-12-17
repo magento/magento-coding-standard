@@ -24,6 +24,7 @@ class HtmlCollapsibleAttributeSniff implements Sniff
 
     /**
      * Detect use of data attributes used by older version of bootstrap collapse
+     *
      * Use new attributes in https://getbootstrap.com/docs/5.0/components/collapse/
      *
      * @param File $phpcsFile
@@ -41,7 +42,8 @@ class HtmlCollapsibleAttributeSniff implements Sniff
             return;
         }
 
-        if (preg_match_all('$<\w+.*?\s*(?=.*?\s*data-toggle="collapse")[^>]*?>.*?$', $html, $matches, PREG_SET_ORDER)) {
+        $pattern = '$<\w+.*?\s*(?=.*?\s*data-toggle="collapse")[^>]*?>.*?$';
+        if (preg_match_all($pattern , $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 $phpcsFile->addError(
                     'Collapsible attributes data-toggle and data-target need to be updated to ' .
