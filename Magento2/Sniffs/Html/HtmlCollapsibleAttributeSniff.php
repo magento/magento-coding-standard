@@ -43,7 +43,7 @@ class HtmlCollapsibleAttributeSniff implements Sniff
         }
 
         $pattern = '$<\w+.*?\s*(?=.*?\s*data-toggle="collapse")[^>]*?>.*?$';
-        if (preg_match_all($pattern , $html, $matches, PREG_SET_ORDER)) {
+        if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 $phpcsFile->addError(
                     'Collapsible attributes data-toggle and data-target need to be updated to ' .
