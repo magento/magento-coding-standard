@@ -2,7 +2,7 @@ module.exports = {
     meta: {
         type: 'suggestion',
         docs: {
-            description: 'Disallow the use of shortcuts to trigger events',
+            description: 'Disallow the use of shortcuts to input events via keyboard/mouse trigger events',
             category: 'jQuery deprecated functions',
             recommended: true,
             url: 'https://api.jquery.com/bind/'
@@ -42,8 +42,7 @@ module.exports = {
                     name = node.callee.property.name;
                     context.report({
                         node: node,
-                        message:
-                            'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
+                        message: 'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
                             '() use .trigger("' + name + '")'
                     });
                 }

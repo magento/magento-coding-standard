@@ -4,6 +4,9 @@ define([
     $(function () {
         'use strict';
 
-        $.trim('    hello, how are you?    ');
+        $.parseJSON('');
+        $.type({});
+        $.isArray({});
+        $.isFunction({});
     });
 });

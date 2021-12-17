@@ -4,6 +4,8 @@ define([
     $(function () {
         'use strict';
 
-        $.trim('    hello, how are you?    ');
+        $('#result').blur();
+        $.fn.focus(function () {
+        });
     });
 });
