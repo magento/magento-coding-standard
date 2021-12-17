@@ -67,8 +67,7 @@ class PhtmlTemplateUnitTest extends AbstractSniffUnitTest
                 39 => 1
             ];
         }
-        if ($testFile === 'PhtmlTemplateUnitTest.3.phtml')
-        {
+        if ($testFile === 'PhtmlTemplateUnitTest.3.phtml') {
             return [
                 9 => 1,
                 20 => 1,

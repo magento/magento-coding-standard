@@ -52,7 +52,6 @@ class RemovedSplAutoloadRegisterThrowFalseUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code.
      *
@@ -67,7 +66,6 @@ class RemovedSplAutoloadRegisterThrowFalseUnitTest extends BaseSniffTest
             $this->assertNoViolation($file, $line);
         }
     }
-
 
     /**
      * Verify no notices are thrown at all.

@@ -60,7 +60,6 @@ class RemovedAssertStringAssertionUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify there are no false positives on code this sniff should ignore.
      *

@@ -56,7 +56,6 @@ class NewNonCapturingCatchUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify no false positives are thrown for valid code.
      *
@@ -88,7 +87,6 @@ class NewNonCapturingCatchUnitTest extends BaseSniffTest
             [34], // Live coding.
         ];
     }
-
 
     /**
      * Verify no notices are thrown at all.

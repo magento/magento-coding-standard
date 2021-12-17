@@ -11,14 +11,13 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Scalar\LNumber;
 use Rector\Core\Rector\AbstractRector;
-use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ReplaceMbStrposNullLimit extends AbstractRector
+class ReplaceMbStrposNullLimit extends AbstractRector
 {
     /**
-     * @return array<class-string<Node>>
+     * @inheritDoc
      */
     public function getNodeTypes(): array
     {
@@ -26,7 +25,7 @@ final class ReplaceMbStrposNullLimit extends AbstractRector
     }
 
     /**
-     * @param FuncCall $node
+     * @inheritDoc
      */
     public function refactor(Node $node): ?Node
     {
@@ -43,13 +42,13 @@ final class ReplaceMbStrposNullLimit extends AbstractRector
     }
 
     /**
-     * @return RuleDefinition
-     * @throws PoorDocumentationException
+     * @inheritDoc
      */
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change mb_strpos offset from null to 0', [
+            'Change mb_strpos offset from null to 0',
+            [
                 new CodeSample(
                     'mb_strpos("pattern", "subject", null, "encoding");',
                     'mb_strpos("pattern", "subject", 0, "encoding");'

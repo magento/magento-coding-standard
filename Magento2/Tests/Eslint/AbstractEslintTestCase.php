@@ -17,18 +17,21 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractEslintTestCase extends TestCase
 {
     /**
+     * Assert that file contains a specific error.
+     *
      * @param string $testFile
      * @param array $expectedMessages
      */
     protected function assertFileContainsError(string $testFile, array $expectedMessages): void
     {
+        // phpcs:disable
         exec(
             'npm run eslint -- Magento2/Tests/Eslint/' . $testFile,
             $output
         );
 
         foreach ($expectedMessages as $message) {
-            $this->assertStringContainsString($message, implode(' ',$output));
+            $this->assertStringContainsString($message, implode(' ', $output));
         }
     }
 }

@@ -107,7 +107,6 @@ class NewAttributesUnitTest extends BaseSniffTest
         return $data;
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code.
      *
@@ -141,7 +140,6 @@ class NewAttributesUnitTest extends BaseSniffTest
 
         return $data;
     }
-
 
     /**
      * Verify no notices are thrown at all.

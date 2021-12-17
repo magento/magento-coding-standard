@@ -69,7 +69,6 @@ class NewNestedStaticAccessUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify that class constant dereferencing emits an error in PHP 7.4.
      *
@@ -99,7 +98,6 @@ class NewNestedStaticAccessUnitTest extends BaseSniffTest
             [35],
         ];
     }
-
 
     /**
      * Verify the sniff doesn't throw false positives.
@@ -132,7 +130,6 @@ class NewNestedStaticAccessUnitTest extends BaseSniffTest
             [31],
         ];
     }
-
 
     /**
      * Verify no notices are thrown at all.

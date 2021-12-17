@@ -47,6 +47,7 @@ class TestHelperPHPCompatibility extends Sniff
     {
     }
 
+    /* phpcs:disable */
     /**
      * Wrapper to make the protected parent::isNumber() method testable.
      *
@@ -87,4 +88,5 @@ class TestHelperPHPCompatibility extends Sniff
     {
         return parent::isNumericCalculation($phpcsFile, $start, $end);
     }
+    /* phpcs:enable */
 }

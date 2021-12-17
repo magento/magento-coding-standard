@@ -10,7 +10,6 @@
 
 namespace Magento2\Tests\PHPCompatibility;
 
-
 /**
  * Test the NewInterpolatedStringDereferencing sniff.
  *

@@ -57,7 +57,6 @@ class ForbiddenFinalPrivateMethodsUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code.
      *
@@ -90,7 +89,6 @@ class ForbiddenFinalPrivateMethodsUnitTest extends BaseSniffTest
 
         return $cases;
     }
-
 
     /**
      * Verify no notices are thrown at all.

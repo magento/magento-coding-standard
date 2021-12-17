@@ -10,7 +10,6 @@
 
 namespace Magento2\Tests\PHPCompatibility;
 
-
 /**
  * Test the NewMagicConstantDereferencing sniff.
  *
@@ -60,7 +59,6 @@ class NewMagicConstantDereferencingUnitTest extends BaseSniffTest
         ];
     }
 
-
     /**
      * Verify the sniff does not throw false positives for valid code, nor for code which is still invalid.
      *
@@ -98,7 +96,6 @@ class NewMagicConstantDereferencingUnitTest extends BaseSniffTest
             [40],
         ];
     }
-
 
     /**
      * Verify no notices are thrown at all.
