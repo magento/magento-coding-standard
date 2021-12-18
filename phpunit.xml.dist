@@ -9,6 +9,6 @@
         </testsuite>
     </testsuites>
     <php>
-        <env name="PHPCS_IGNORE_TESTS" value="Generic,MySource,PEAR,PSR1,PSR2,Squiz,Zend"/>
+        <env name="PHPCS_IGNORE_TESTS" value="Generic,MySource,PEAR,PSR1,PSR2,PSR12,Squiz,Zend"/>
     </php>
 </phpunit>
