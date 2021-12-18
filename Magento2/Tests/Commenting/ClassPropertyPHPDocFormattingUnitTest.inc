@@ -134,5 +134,5 @@ class correctlyFormattedClassMemberDocBlock
     /**
      * @var string
      */
-    protected string $test;
+    protected string $test1;
 }
