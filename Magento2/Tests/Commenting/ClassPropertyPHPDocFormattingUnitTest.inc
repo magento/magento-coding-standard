@@ -135,4 +135,11 @@ class correctlyFormattedClassMemberDocBlock
      * @var string
      */
     protected string $test1;
+
+    /**
+     * Ensure that nullable sign in the property type hint declaration is interpreted correctly
+     *
+     * @var string|null
+     */
+    protected ?string $test2;
 }
