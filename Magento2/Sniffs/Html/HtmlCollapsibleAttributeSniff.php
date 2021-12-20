@@ -47,7 +47,7 @@ class HtmlCollapsibleAttributeSniff implements Sniff
             foreach ($matches as $match) {
                 $phpcsFile->addError(
                     'Collapsible attributes data-toggle and data-target need to be updated to ' .
-                    'data-bs-toogle and data-bs-target'
+                    'data-bs-toggle and data-bs-target'
                     . ' - "' . $match[0]  . PHP_EOL,
                     null,
                     'HtmlCollapsibleAttribute'
