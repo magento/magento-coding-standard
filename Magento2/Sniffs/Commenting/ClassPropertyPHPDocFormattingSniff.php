@@ -28,7 +28,8 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         T_WHITESPACE,
         T_NS_SEPARATOR,
         T_STRING,
-        T_COMMENT
+        T_COMMENT,
+        T_NULLABLE
     ];
 
     /**
