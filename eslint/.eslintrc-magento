@@ -76,6 +76,7 @@
         "strict": ["error", "function"],
         "use-isnan": 2,
         "valid-typeof": 2,
-        "vars-on-top": 2
+        "vars-on-top": 2,
+        "yoda": [2, "never"]
     }
 }
