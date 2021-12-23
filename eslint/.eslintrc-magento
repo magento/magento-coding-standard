@@ -2,6 +2,7 @@
     "env": {
         "amd": true,
         "browser": true,
+        "es6": true,
         "jasmine": true,
         "jquery": true,
         "prototypejs": true,
