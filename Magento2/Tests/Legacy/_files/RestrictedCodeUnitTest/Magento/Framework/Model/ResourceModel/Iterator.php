@@ -1,11 +1,11 @@
 <?php
-
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+namespace Magento2\Tests\Legacy\_files\RestrictedCodeUnitTest\Magento\Framework\Model\ResourceModel;
+
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
  * This is NOT actually a test, but a file that must be ignored by RestrictedCodeSniff
@@ -15,20 +15,23 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  */
 class IteratorDummyFile extends AbstractSniffUnitTest
 {
-    protected function shouldSkipTest()
+    protected function shouldSkipTest(): bool
     {
         return true;
     }
 
-    protected function getErrorList() {
+    protected function getErrorList(): array
+    {
         return [];
     }
 
-    protected function getWarningList() {
+    protected function getWarningList(): array
+    {
         return [];
     }
 
-    private function withProtectedClass() {
+    private function withProtectedClass(): Zend_Db_Expr
+    {
         return new \Zend_Db_Expr();
     }
 }

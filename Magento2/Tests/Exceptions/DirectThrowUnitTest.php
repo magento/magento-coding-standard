@@ -12,7 +12,7 @@ class DirectThrowUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getErrorList()
+    protected function getErrorList()
     {
         return [];
     }
@@ -20,11 +20,18 @@ class DirectThrowUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    protected function getWarningList($testFile = '')
     {
-        return [
-            10 => 1,
-            17 => 1,
-        ];
+        if ($testFile === 'DirectThrowUnitTest.1.inc') {
+            return [
+                10 => 1,
+                17 => 1,
+            ];
+        } elseif ($testFile === 'DirectThrowUnitTest.2.inc') {
+            return [
+                20 => 1
+            ];
+        }
+        return [];
     }
 }

@@ -2,7 +2,7 @@ module.exports = {
     meta: {
         type: 'suggestion',
         docs: {
-            description: 'Disallow the use of shorthand methods',
+            description: 'Disallow the use of shorthand event methods',
             category: 'jQuery deprecated functions',
             recommended: true,
             url: 'https://api.jquery.com/load/'
@@ -11,7 +11,7 @@ module.exports = {
     },
 
     /**
-     * Executes the function to check if shorthand methods are used.
+     * Executes the function to check if shorthand event methods are used.
      *
      * @param {Object} context
      * @returns {Object}
@@ -23,23 +23,28 @@ module.exports = {
 
         return {
             /**
-             * Checks if shorthand methods are used and reports it.
+             * Checks if shorthand event methods are used.
              *
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                var names = ['load', 'unload', 'error'],
-                    name;
+                var namesToMsg = {
+                        'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
+                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
+                    },
+                    name,
+                    message;
 
                 if (node.callee.type !== 'MemberExpression') {return;}
 
-                if (!names.includes(node.callee.property.name)) {return;}
+                name = node.callee.property.name;
+                if (!namesToMsg.hasOwnProperty(name)) {return;}
+                message = namesToMsg[name];
 
                 if (utils.isjQuery(node)) {
-                    name = node.callee.property.name;
                     context.report({
                         node: node,
-                        message: 'jQuery.' + name + '() was removed, use .on("' + name + '", fn) instead.'
+                        message: message
                     });
                 }
             }

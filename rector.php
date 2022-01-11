@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Magento2\Rector\Src\ReplaceMbStrposNullLimit;
+use Magento2\Rector\Src\ReplaceNewDateTimeNull;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
@@ -9,6 +11,7 @@ use Rector\Php80\Rector\ClassMethod\FinalPrivateToPrivateVisibilityRector;
 use Rector\Php80\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
 use Rector\Php80\Rector\ClassMethod\SetStateToStaticRector;
 use Rector\Php81\Rector\FuncCall\Php81ResourceReturnToObjectRector;
+use Magento2\Rector\Src\ReplacePregSplitNullLimit;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -27,4 +30,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SetStateToStaticRector::class);
     $services->set(StringableForToStringRector::class);
     $services->set(Php81ResourceReturnToObjectRector::class);
+    $services->set(ReplacePregSplitNullLimit::class);
+    $services->set(ReplaceMbStrposNullLimit::class);
+    $services->set(ReplaceNewDateTimeNull::class);
 };

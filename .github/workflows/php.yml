@@ -16,6 +16,7 @@ jobs:
           - "7.3"
           - "7.4"
           - "8.0"
+          - "8.1"
         dependencies:
           - "lowest"
           - "highest"
@@ -54,10 +55,10 @@ jobs:
       run: vendor/bin/phpunit
 
     - name: Run code style suite
-      run: vendor/bin/phpcs --standard=Magento2 Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
+      run: vendor/bin/phpcs --standard=Magento2 Magento2/Helpers Magento2/Sniffs Magento2/Rector Magento2Framework/Sniffs
 
     - name: Run framework suite
-      run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2Framework/Sniffs
+      run: vendor/bin/phpcs --standard=Magento2Framework Magento2/Helpers Magento2/Sniffs Magento2/Rector Magento2Framework/Sniffs
   js:
     runs-on: ubuntu-latest
     name: Javascript tests
@@ -78,7 +79,7 @@ jobs:
   rector:
     runs-on: ubuntu-latest
     name: Rector tests
-    
+
     steps:
       - name: Setup node
         uses: actions/setup-node@v2
@@ -88,7 +89,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: composer install  
-            
+        run: composer install
+
       - name: Run rector
-        run: vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php
+        run: vendor/bin/rector process Magento2 Magento2Framework PHP_CodeSniffer --dry-run --autoload-file vendor/squizlabs/php_codesniffer/autoload.php --autoload-file vendor/phpcompatibility/php-compatibility/PHPCSAliases.php
