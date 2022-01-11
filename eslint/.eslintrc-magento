@@ -50,6 +50,7 @@
         "no-fallthrough": 2,
         "no-floating-decimal": 2,
         "no-func-assign": 2,
+        "no-global-assign": 2,
         "no-implied-eval": 2,
         "no-inner-declarations": 2,
         "no-invalid-regexp": 2,
