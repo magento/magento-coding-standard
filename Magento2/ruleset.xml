@@ -164,6 +164,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="PHPCompatibility.FunctionUse.RemovedFunctions">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <!-- Severity 9 warnings: Possible security and issues that may cause bugs. -->
     <rule ref="Generic.Files.ByteOrderMark">
         <severity>9</severity>
@@ -761,8 +765,7 @@
         <exclude name="PHPCompatibility.Constants.NewMagicClassConstant.Found" />
         <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods.Found" />
         <!-- Following sniffs have an equivalent in PHPCS -->
-        <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference.Deprecated" />
-        <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference.NotAllowed" />
+        <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
         <!-- Check for cross-version support for stated PHP version and higher. -->
         <config name="testVersion" value="7.4-"/>
     </rule>
