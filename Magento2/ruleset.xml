@@ -16,11 +16,6 @@
         <exclude-pattern>*\.phtml$</exclude-pattern>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
-    <rule ref="Generic.PHP.DeprecatedFunctions">
-        <severity>10</severity>
-        <type>error</type>
-        <exclude-pattern>*\.xml$</exclude-pattern>
-    </rule>
     <rule ref="Generic.PHP.NoSilencedErrors">
         <severity>10</severity>
         <type>error</type>
@@ -166,6 +161,10 @@
         <exclude-pattern>*\/etc/wsdl.xml$</exclude-pattern>
         <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
         <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
+    <rule ref="PHPCompatibility.FunctionUse.RemovedFunctions">
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -762,9 +761,11 @@
     </rule>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
-        <!-- Following sniffs has been updated or renamed in PHPCompatibility 10 -->
-        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant" />
-        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods" />
+        <!-- Following sniffs have been updated or renamed in PHPCompatibility 10 -->
+        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant.Found" />
+        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods.Found" />
+        <!-- Following sniffs have an equivalent in PHPCS -->
+        <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
         <!-- Check for cross-version support for stated PHP version and higher. -->
         <config name="testVersion" value="7.4-"/>
     </rule>
