@@ -766,6 +766,7 @@
         <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods.Found" />
         <!-- Following sniffs have an equivalent in PHPCS -->
         <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
+        <exclude name="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared" />
         <!-- Check for cross-version support for stated PHP version and higher. -->
         <config name="testVersion" value="7.4-"/>
     </rule>
