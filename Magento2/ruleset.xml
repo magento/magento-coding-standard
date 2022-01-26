@@ -138,6 +138,11 @@
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Html.HtmlClosingVoidTags">
+        <severity>10</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Html.HtmlCollapsibleAttribute">
         <include-pattern>*\.html$</include-pattern>
         <include-pattern>*\.phtml$</include-pattern>
