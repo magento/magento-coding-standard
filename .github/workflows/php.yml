@@ -36,6 +36,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
+        ini-file: development
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
