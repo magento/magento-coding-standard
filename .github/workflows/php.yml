@@ -20,8 +20,9 @@ jobs:
         dependencies:
           - "lowest"
           - "highest"
-        experimental:
-          - false
+        exclude:
+          - php-version: "8.1"
+            dependencies: "lowest"
     name: Tests with PHP ${{ matrix.php-version }} and ${{ matrix.dependencies }} dependencies
 
     steps:
