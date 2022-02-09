@@ -13,33 +13,8 @@ use PHP_CodeSniffer\Files\File;
  */
 class ThisInTemplateSniff implements Sniff
 {
-    /**
-     * Warning violation code.
-     *
-     * @var string
-     */
-    protected $warningCodeFoundHelper = 'FoundHelper';
-
-    /**
-     * String representation of warning.
-     *
-     * @var string
-     */
-    protected $warningMessageFoundHelper = 'The use of helpers in templates is discouraged. Use ViewModel instead.';
-
-    /**
-     * Warning violation code.
-     *
-     * @var string
-     */
-    protected $warningCodeFoundThis = 'FoundThis';
-
-    /**
-     * String representation of warning.
-     *
-     * @var string
-     */
-    protected $warningMessageFoundThis = 'The use of $this in templates is deprecated. Use $block instead.';
+    private const MESSAGE_THIS = 'The use of $this in templates is deprecated. Use $block instead.';
+    private const MESSAGE_HELPER = 'The use of helpers in templates is discouraged. Use ViewModel instead.';
 
     /**
      * @inheritdoc
@@ -54,14 +29,17 @@ class ThisInTemplateSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-        if ($tokens[$stackPtr]['content'] === '$this') {
-            $position = $phpcsFile->findNext(T_STRING, $stackPtr, null, false, 'helper', true);
-            if ($position !== false) {
-                $phpcsFile->addWarning($this->warningMessageFoundHelper, $position, $this->warningCodeFoundHelper);
-            } else {
-                $phpcsFile->addWarning($this->warningMessageFoundThis, $stackPtr, $this->warningCodeFoundThis);
-            }
+        if ($phpcsFile->getTokensAsString($stackPtr, 1) !== '$this') {
+            return;
+        }
+        $isHelperCall = $phpcsFile->findNext(T_STRING, $stackPtr, null, false, 'helper', true);
+        if ($isHelperCall) {
+            $phpcsFile->addWarning(self::MESSAGE_HELPER, $stackPtr, 'FoundHelper');
+        }
+        if ($phpcsFile->addFixableWarning(self::MESSAGE_THIS, $stackPtr, 'FoundThis') === true) {
+            $phpcsFile->fixer->beginChangeset();
+            $phpcsFile->fixer->replaceToken($stackPtr, '$block');
+            $phpcsFile->fixer->endChangeset();
         }
     }
 }
