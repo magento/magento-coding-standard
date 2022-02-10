@@ -1,0 +1,5 @@
+<?php
+echo $block->escapeHtml($block->getGroupCode());
+echo $block->escapeHtml($block->getGroupCode());
+$block->foo();
+$block->helper();
