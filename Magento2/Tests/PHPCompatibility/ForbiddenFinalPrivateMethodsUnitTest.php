@@ -40,10 +40,10 @@ class ForbiddenFinalPrivateMethodsUnitTest extends AbstractSniffUnitTest
        return [
             6 => 1,
             7 => 1,
-            12 => 1,
-            13 => 1,
-            19 => 1,
-            20 => 1,
+            14 => 1,
+            15 => 1,
+            23 => 1,
+            25 => 1,
         ];
     }
 }
