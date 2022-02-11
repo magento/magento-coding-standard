@@ -83,7 +83,7 @@ class ForbiddenFinalPrivateMethodsSniff extends Sniff
             // Not a private final method.
             return;
         }
-        $phpcsFile->fixer->enabled = true;
+
         if ($phpcsFile->addFixableWarning(self::MESSAGE_FINAL, $stackPtr, 'Found') === true) {
             $phpcsFile->fixer->beginChangeset();
             $prev = $phpcsFile->findPrevious(\T_FINAL, ($stackPtr - 1));
