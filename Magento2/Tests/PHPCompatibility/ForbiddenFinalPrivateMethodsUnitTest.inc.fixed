@@ -1,0 +1,21 @@
+<?php
+
+class CrossVersionInValid
+{
+    private final function __construct() {}
+    private function privateFinal();
+    static private function privateStaticFinal();
+}
+
+$anon = new class() {
+    private final function __construct() {}
+    private function privateFinal();
+    static private function privateStaticFinal();
+};
+
+trait CrossVersionInValidTrait
+{
+    private final function __construct() {}
+    private function privateFinal();
+    static private function privateStaticFinal();
+}

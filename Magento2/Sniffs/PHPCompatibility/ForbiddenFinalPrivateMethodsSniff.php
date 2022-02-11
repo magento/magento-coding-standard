@@ -35,6 +35,7 @@ use Magento2\Helpers\PHPCSUtils\Utils\Scopes;
  */
 class ForbiddenFinalPrivateMethodsSniff extends Sniff
 {
+    private const MESSAGE_FINAL = 'Private methods should not be declared as final since PHP 8.0';
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -61,10 +62,6 @@ class ForbiddenFinalPrivateMethodsSniff extends Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        if ($this->supportsAbove('8.0') === false) {
-            return;
-        }
-
         if (Scopes::isOOMethod($phpcsFile, $stackPtr) === false) {
             // Function, not method.
             return;
@@ -83,14 +80,18 @@ class ForbiddenFinalPrivateMethodsSniff extends Sniff
 
         $properties = FunctionDeclarations::getProperties($phpcsFile, $stackPtr);
         if ($properties['scope'] !== 'private' || $properties['is_final'] === false) {
-            // Not an private final method.
+            // Not a private final method.
             return;
         }
-
-        $phpcsFile->addWarning(
-            'Private methods should not be declared as final since PHP 8.0',
-            $stackPtr,
-            'Found'
-        );
+        $phpcsFile->fixer->enabled = true;
+        if ($phpcsFile->addFixableWarning(self::MESSAGE_FINAL, $stackPtr, 'Found') === true) {
+            $phpcsFile->fixer->beginChangeset();
+            $prev = $phpcsFile->findPrevious(\T_FINAL, ($stackPtr - 1));
+            $phpcsFile->fixer->replaceToken($prev, null);
+            // Remove extra space left out by previous replacement
+            $next = $phpcsFile->findNext(\T_WHITESPACE, $prev);
+            $phpcsFile->fixer->replaceToken($next, null);
+            $phpcsFile->fixer->endChangeset();
+        }
     }
 }

@@ -10,6 +10,8 @@
 
 namespace Magento2\Tests\PHPCompatibility;
 
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+
 /**
  * Test the ForbiddenFinalPrivateMethods sniff.
  *
@@ -20,84 +22,28 @@ namespace Magento2\Tests\PHPCompatibility;
  *
  * @since 10.0.0
  */
-class ForbiddenFinalPrivateMethodsUnitTest extends BaseSniffTest
+class ForbiddenFinalPrivateMethodsUnitTest extends AbstractSniffUnitTest
 {
-
     /**
-     * Verify that the sniff throws a warning for non-construct final private methods for PHP 8.0+.
-     *
-     * @dataProvider dataForbiddenFinalPrivateMethods
-     *
-     * @param int $line The line number where a warning is expected.
-     *
-     * @return void
+     * @inheritdoc
      */
-    public function testForbiddenFinalPrivateMethods($line)
+    public function getErrorList()
     {
-        $file = $this->sniffFile(__FILE__, '8.0');
-        $this->assertWarning($file, $line, 'Private methods should not be declared as final since PHP 8.0');
+        return [];
     }
 
     /**
-     * Data provider.
-     *
-     * @see testForbiddenFinalPrivateMethods()
-     *
-     * @return array
+     * @inheritdoc
      */
-    public function dataForbiddenFinalPrivateMethods()
+    public function getWarningList()
     {
-        return [
-            [34],
-            [35],
-            [39],
-            [40],
-            [45],
-            [46],
+       return [
+            6 => 1,
+            7 => 1,
+            12 => 1,
+            13 => 1,
+            19 => 1,
+            20 => 1,
         ];
-    }
-
-    /**
-     * Verify the sniff does not throw false positives for valid code.
-     *
-     * @dataProvider dataNoFalsePositives
-     *
-     * @param int $line The line number.
-     *
-     * @return void
-     */
-    public function testNoFalsePositives($line)
-    {
-        $file = $this->sniffFile(__FILE__, '8.0');
-        $this->assertNoViolation($file, $line);
-    }
-
-    /**
-     * Data provider.
-     *
-     * @see testNoFalsePositives()
-     *
-     * @return array
-     */
-    public function dataNoFalsePositives()
-    {
-        $cases = [];
-        // No errors expected on the first 28 lines.
-        for ($line = 1; $line <= 28; $line++) {
-            $cases[] = [$line];
-        }
-
-        return $cases;
-    }
-
-    /**
-     * Verify no notices are thrown at all.
-     *
-     * @return void
-     */
-    public function testNoViolationsInFileOnValidVersion()
-    {
-        $file = $this->sniffFile(__FILE__, '7.4');
-        $this->assertNoViolation($file);
     }
 }
