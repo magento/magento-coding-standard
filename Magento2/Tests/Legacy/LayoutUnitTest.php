@@ -18,7 +18,6 @@ class LayoutUnitTest extends AbstractSniffUnitTest
             return [
                 13 => 1,
                 22 => 1,
-                23 => 1,
                 145 => 1,
                 148 => 1,
             ];
