@@ -31,7 +31,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
     private const WARNING_CODE = 'FunctionsDeprecatedWithoutArgument';
 
     /**
-     * Deprecated functions without argument
+     * Deprecated functions without argument https://wiki.php.net/rfc/deprecations_php_8_1
      *
      * @var array
      */
