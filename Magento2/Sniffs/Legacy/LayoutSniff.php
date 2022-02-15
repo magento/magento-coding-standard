@@ -18,7 +18,6 @@ use SimpleXMLElement;
 class LayoutSniff implements Sniff
 {
     private const ERROR_CODE_XML = 'WrongXML';
-    private const ERROR_CODE_NOT_ALLOWED = 'NotAllowed';
     private const ERROR_CODE_OBSOLETE_BLOCK = 'ObsoleteBlock';
     private const ERROR_CODE_OBSOLETE_CLASS = 'ObsoleteClass';
     private const ERROR_CODE_OBSOLETE_TOHTML_ATTRIBUTE = 'ObsoleteToHtmlAttribute';
@@ -230,7 +229,6 @@ class LayoutSniff implements Sniff
         }
 
         $this->testObsoleteReferences($layout, $phpcsFile);
-        $this->testHeadBlocks($layout, $phpcsFile);
         $this->testOutputAttribute($layout, $phpcsFile);
         $this->testHelperAttribute($layout, $phpcsFile);
         $this->testListText($layout, $phpcsFile);
@@ -274,35 +272,6 @@ class LayoutSniff implements Sniff
         $doc->formatOutput = true;
         $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
         return $doc->saveXML();
-    }
-
-    /**
-     * Check that CSS, Link and Script blocks are inside a head block
-     *
-     * @param SimpleXMLElement $layout
-     * @param File $phpcsFile
-     */
-    private function testHeadBlocks(SimpleXMLElement $layout, File $phpcsFile): void
-    {
-        $selectorHeadBlock = '(name()="block" or name()="referenceBlock") and ' .
-            '(@name="head" or @name="convert_root_head" or @name="vde_head")';
-        $elements = $layout->xpath(
-            '//block[@class="Magento\Theme\Block\Html\Head\Css" ' .
-            'or @class="Magento\Theme\Block\Html\Head\Link" ' .
-            'or @class="Magento\Theme\Block\Html\Head\Script"]' .
-            '/parent::*[not(' .
-            $selectorHeadBlock .
-            ')]'
-        );
-        if (!empty($elements)) {
-            $phpcsFile->addError(
-                'Blocks \Magento\Theme\Block\Html\Head\{Css,Link,Script} ' .
-                'are allowed within the "head" block only. ' .
-                'Verify integrity of the nodes nesting.',
-                dom_import_simplexml($elements[0])->getLineNo(),
-                self::ERROR_CODE_NOT_ALLOWED
-            );
-        };
     }
 
     /**
@@ -378,7 +347,7 @@ class LayoutSniff implements Sniff
                 dom_import_simplexml($elements[0])->getLineNo()-1,
                 self::ERROR_CODE_OBSOLETE_CLASS
             );
-        };
+        }
     }
 
     /**

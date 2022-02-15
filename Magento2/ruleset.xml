@@ -5,20 +5,14 @@
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml,js/PHP"/>
 
+    <!-- Exclude minified JS files. -->
+    <exclude-pattern>*\.min\.js$</exclude-pattern>
+
     <!-- Severity 10 errors: Critical code issues. -->
-    <rule ref="Generic.Functions.CallTimePassByReference">
-        <severity>10</severity>
-        <type>error</type>
-    </rule>
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag">
         <severity>10</severity>
         <type>error</type>
         <exclude-pattern>*\.phtml$</exclude-pattern>
-        <exclude-pattern>*\.xml$</exclude-pattern>
-    </rule>
-    <rule ref="Generic.PHP.DeprecatedFunctions">
-        <severity>10</severity>
-        <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.PHP.NoSilencedErrors">
@@ -143,6 +137,11 @@
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Html.HtmlClosingVoidTags">
+        <severity>10</severity>
+        <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Html.HtmlCollapsibleAttribute">
         <include-pattern>*\.html$</include-pattern>
         <include-pattern>*\.phtml$</include-pattern>
@@ -166,6 +165,10 @@
         <exclude-pattern>*\/etc/wsdl.xml$</exclude-pattern>
         <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
         <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
+    <rule ref="PHPCompatibility.FunctionUse.RemovedFunctions">
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -757,34 +760,31 @@
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
     </rule>
+
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
+
+    <!-- PHPCompatibility configuration. -->
+    <config name="testVersion" value="7.4-"/>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
-        <!-- Following sniffs has been updated or renamed in PHPCompatibility 10 -->
-        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant" />
-        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods" />
-        <!-- Check for cross-version support for stated PHP version and higher. -->
-        <config name="testVersion" value="7.4-"/>
+        <!-- Following sniffs have been updated or renamed in PHPCompatibility 10 -->
+        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant.Found" />
+        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods.Found" />
+        <!-- Following sniffs have an equivalent in PHPCS -->
+        <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
+        <exclude name="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared" />
     </rule>
     <!--
      All these rules belong to the unreleased PhpCompatibility 10. Remove them once PHPCompatibility is
      updated to version 10
      -->
-    <rule ref="Magento2.PHPCompatibility.NewAttributes" />
-    <rule ref="Magento2.PHPCompatibility.NewMagicClassConstant" />
-    <rule ref="Magento2.PHPCompatibility.NewNonCapturingCatch" />
-    <rule ref="Magento2.PHPCompatibility.AbstractPrivateMethods" />
     <rule ref="Magento2.PHPCompatibility.ForbiddenFinalPrivateMethods" />
-    <rule ref="Magento2.PHPCompatibility.NewTrailingComma" />
     <rule ref="Magento2.PHPCompatibility.RemovedCallingDestructAfterConstructorExit" />
     <rule ref="Magento2.PHPCompatibility.RemovedOptionalBeforeRequiredParam" />
     <rule ref="Magento2.PHPCompatibility.ChangedIntToBoolParamType" />
     <rule ref="Magento2.PHPCompatibility.RemovedAssertStringAssertion" />
     <rule ref="Magento2.PHPCompatibility.RemovedGetDefinedFunctionsExcludeDisabledFalse" />
     <rule ref="Magento2.PHPCompatibility.RemovedSplAutoloadRegisterThrowFalse" />
-    <rule ref="Magento2.PHPCompatibility.NewInterpolatedStringDereferencing" />
-    <rule ref="Magento2.PHPCompatibility.NewMagicConstantDereferencing" />
-    <rule ref="Magento2.PHPCompatibility.NewNestedStaticAccess" />
 </ruleset>

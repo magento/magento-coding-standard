@@ -1,13 +1,13 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento2\Tests\Templates;
+namespace Magento2\Tests\Html;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ThisInTemplateUnitTest extends AbstractSniffUnitTest
+class HtmlClosingVoidTagsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
@@ -22,10 +22,6 @@ class ThisInTemplateUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [
-            3 => 2,
-            4 => 1,
-            5 => 2,
-        ];
+        return [1 => 15];
     }
 }
