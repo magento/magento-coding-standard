@@ -20,7 +20,7 @@ class FunctionsDeprecatedWithoutArgument
     public function testDeprecatedMethod(): array
     {
         return [
-            mb_check_encoding(null), // Calling without argument is deprecated.
+            mb_check_encoding(''), // Calling without argument is deprecated.
             mb_check_encoding('test-argument', null),
             get_class($this), // Calling without argument is deprecated.
             get_class(new FunctionsDeprecatedWithoutArgument()),
