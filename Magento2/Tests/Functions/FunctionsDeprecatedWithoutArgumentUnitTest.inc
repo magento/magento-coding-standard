@@ -21,11 +21,11 @@ class FunctionsDeprecatedWithoutArgument
     {
         return [
             mb_check_encoding(), // Calling without argument is deprecated.
-            mb_check_encoding('test-argument', null),
+            mb_check_encoding('test-argument'),
             get_class(), // Calling without argument is deprecated.
             get_class(new FunctionsDeprecatedWithoutArgument()),
             get_parent_class(), // Calling without argument is deprecated.
-            get_parent_class('test-argument')
+            get_parent_class(new FunctionsDeprecatedWithoutArgument())
         ];
     }
 }
