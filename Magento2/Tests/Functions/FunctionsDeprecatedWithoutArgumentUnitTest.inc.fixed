@@ -25,9 +25,7 @@ class FunctionsDeprecatedWithoutArgument
             get_class($this), // Calling without argument is deprecated.
             get_class(new FunctionsDeprecatedWithoutArgument()),
             get_parent_class($this), // Calling without argument is deprecated.
-            get_parent_class('test-argument'),
-            get_called_class($this), // Calling without argument is deprecated.
-            get_called_class('test-argument')
+            get_parent_class('test-argument')
         ];
     }
 }

@@ -38,8 +38,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
     private const DEPRECATED_FUNCTIONS_AND_FIXES = [
         'mb_check_encoding' => 'null',
         'get_class' => '$this',
-        'get_parent_class' => '$this',
-        'get_called_class' => '$this'
+        'get_parent_class' => '$this'
     ];
 
     /**
