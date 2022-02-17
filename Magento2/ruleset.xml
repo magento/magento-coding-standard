@@ -5,6 +5,9 @@
     <!-- File extensions to be checked. -->
     <arg name="extensions" value="php,phtml,graphqls/GraphQL,less/CSS,html/PHP,xml,js/PHP"/>
 
+    <!-- Exclude minified JS files. -->
+    <exclude-pattern>*\.min\.js$</exclude-pattern>
+
     <!-- Severity 10 errors: Critical code issues. -->
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag">
         <severity>10</severity>
