@@ -77,12 +77,14 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
             );
             return;
         }
+        
+        $fix = $phpcsFile->addFixableWarning(
+            sprintf(self::WARNING_MESSAGE, $functionName),
+            $stackPtr,
+            self::WARNING_CODE
+        );
 
-        if ($phpcsFile->addFixableWarning(
-                sprintf(self::WARNING_MESSAGE, $functionName),
-                $stackPtr,
-                self::WARNING_CODE
-            ) === true) {
+        if ($fix === true) {
             $content = self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName];
             $phpcsFile->fixer->beginChangeset();
             $phpcsFile->fixer->addContentBefore($phpcsFile->findNext(T_CLOSE_PARENTHESIS, $stackPtr), $content);
