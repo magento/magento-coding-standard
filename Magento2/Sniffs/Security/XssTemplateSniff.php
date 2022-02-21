@@ -1,18 +1,27 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento2\Sniffs\Security;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use function array_key_exists;
+use function is_string;
+use function preg_match;
+use function sprintf;
+use function substr;
 
 /**
  * Detects not escaped output in phtml templates.
  */
 class XssTemplateSniff implements Sniff
 {
+    private const CONTEXT_HTML = 'context_html';
+    private const CONTEXT_HTML_ATTRIBUTE = 'context_html_attribute';
+    private const CONTEXT_JAVASCRIPT = 'context_javascript';
+
     /**
      * String representation of warning.
      *
@@ -97,6 +106,13 @@ class XssTemplateSniff implements Sniff
      * @var array
      */
     private $tokens;
+
+    /**
+     * Tokens that need to be removed
+     *
+     * @var array
+     */
+    private $removeTokens = [];
 
     /**
      * @inheritdoc
@@ -202,6 +218,10 @@ class XssTemplateSniff implements Sniff
         switch ($this->tokens[$posOfFirstElement]['code']) {
             case T_STRING:
                 if (!in_array($this->tokens[$posOfFirstElement]['content'], $this->allowedFunctions)) {
+                    $fixed = $this->fix($posOfFirstElement, $posOfFirstElement);
+                    if ($fixed === true) {
+                        break;
+                    }
                     $this->addWarning($posOfFirstElement);
                 }
                 break;
@@ -212,6 +232,10 @@ class XssTemplateSniff implements Sniff
             case T_VARIABLE:
                 $posOfObjOperator = $this->findLastInScope(T_OBJECT_OPERATOR, $posOfFirstElement, $statement['end']);
                 if ($posOfObjOperator === false) {
+                    $fixed = $this->fix($posOfFirstElement);
+                    if ($fixed === true) {
+                        break;
+                    }
                     $this->addWarning($posOfFirstElement);
                     break;
                 }
@@ -222,6 +246,10 @@ class XssTemplateSniff implements Sniff
                 ) {
                     break;
                 } else {
+                    $fixed = $this->fix($posOfFirstElement, $posOfMethod);
+                    if ($fixed === true) {
+                        break;
+                    }
                     $this->addWarning($posOfMethod);
                 }
                 break;
@@ -332,8 +360,223 @@ class XssTemplateSniff implements Sniff
     {
         if ($this->hasDisallowedAnnotation) {
             $this->file->addWarning($this->warningMessage, $position, $this->warningCodeNotAllowed);
+            $this->hasDisallowedAnnotation = false;
         } else {
             $this->file->addWarning($this->warningMessage, $position, $this->warningCodeUnescaped);
         }
+    }
+
+    private function fix(int $posOfElement, ?int $posOfMethod = null): ?bool
+    {
+        $element = $posOfMethod === null ? $posOfElement : $posOfMethod;
+        if (preg_match('(url|Url)', $this->tokens[$element]['content'])) {
+            $this->fixUnescapedUrl($posOfElement, $posOfMethod);
+            return true;
+        }
+
+        if (preg_match('(json|Json)', $this->tokens[$element]['content'])) {
+            $this->fixUnescapedJson($posOfElement);
+            return true;
+        }
+
+        return $this->fixUnescaped($posOfElement, $posOfMethod);
+    }
+
+    private function fixUnescapedUrl(int $posOfElement, ?int $posOfMethod = null): void
+    {
+        $fix = $this->file->addFixableError(
+            'Can be fixed because it contains "Url"',
+            $posOfElement,
+            $this->warningCodeUnescaped
+        );
+        if (!$fix) {
+            return;
+        }
+        $content = $this->tokens[$posOfElement]['content'];
+        if ($posOfMethod !== null) {
+            $posOfEndFunction = $this->getEndOfFunction($posOfMethod);
+            $content = $this->getFullFunctionName($posOfElement, $posOfEndFunction);
+        }
+
+        $newContent = sprintf('$escaper->escapeUrl(%s)', $content);
+
+        $this->file->fixer->beginChangeset();
+        $this->removeUnusedTokens();
+        $this->file->fixer->replaceToken($posOfElement, $newContent);
+        $this->file->fixer->endChangeset();
+
+    }
+
+    private function fixUnescapedJson(int $posOfElement): void
+    {
+        $fix = $this->file->addFixableError(
+            'Can be fixed because it contains "json"',
+            $posOfElement,
+            $this->warningCodeUnescaped
+        );
+        if (!$fix) {
+            return;
+        }
+
+        $content = $this->tokens[$posOfElement]['content'];
+        $newContent = sprintf('/* @noEscape  */ %s', $content);
+
+        $this->file->fixer->beginChangeset();
+        $this->file->fixer->replaceToken($posOfElement, $newContent);
+        $this->file->fixer->endChangeset();
+    }
+
+    private function fixUnescaped(int $posOfElement, ?int $posOfMethod = null): ?bool
+    {
+        $context = $this->findContextBeforeExpression($posOfElement);
+
+        $newContent = null;
+
+        if ($context !== null && $context === self::CONTEXT_HTML_ATTRIBUTE) {
+            $newContent = $this->getNewContentHtmlAttribute($posOfElement, $posOfMethod);
+        }
+
+        if ($context !== null && $context === self::CONTEXT_HTML) {
+            $newContent = $this->getNewContentHtml($posOfElement, $posOfMethod);
+        }
+
+        if (!is_string($newContent)) {
+            return $newContent;
+        }
+
+        $this->file->fixer->beginChangeset();
+        $this->removeUnusedTokens();
+        $this->file->fixer->replaceToken($posOfElement, $newContent);
+        $this->file->fixer->endChangeset();
+
+        return true;
+    }
+
+    private function findContextBeforeExpression(int $posOfStartElement): ?string
+    {
+        if (!array_key_exists($posOfStartElement -1, $this->tokens)) {
+            return null;
+        }
+        $previousElement = $this->tokens[$posOfStartElement -1];
+        if ($previousElement['type'] !== 'T_OPEN_TAG_WITH_ECHO' && $previousElement['type'] !== 'T_OPEN_TAG') {
+            return $this->findContextBeforeExpression($posOfStartElement -1);
+        }
+
+        $index = 2;
+        $isFixable = true;
+        while ($isFixable) {
+            if (($posOfStartElement - $index) === 0 || $this->hasDisallowedAnnotation) {
+                $isFixable = false;
+                continue;
+            }
+            $element = $this->tokens[$posOfStartElement - $index];
+            if ($element['type'] === 'T_INLINE_HTML') {
+                $isWhiteSpace = false;
+                // remove enter from html tag
+                $content = preg_replace("/\r|\n/", '', $element['content']);
+                switch (substr($content, -1)) {
+                    case '>':
+                        return self::CONTEXT_HTML;
+                    case '"':
+                        return self::CONTEXT_HTML_ATTRIBUTE;
+                    case ':':
+                        return self::CONTEXT_JAVASCRIPT;
+                    default:
+                        $isWhiteSpace = true;
+                        $index++;
+                }
+                continue;
+            }
+
+            $index++;
+        }
+
+        return null;
+    }
+
+    private function getEndOfFunction(int $posOfElement): int
+    {
+        $isEndOfFunction = false;
+        $index = 1;
+        while(!$isEndOfFunction) {
+            $newElement = $this->tokens[$posOfElement + $index];
+            if ($newElement['code'] === T_CLOSE_PARENTHESIS) {
+                $isEndOfFunction = true;
+                continue;
+            }
+
+            $index++;
+        }
+
+        return $posOfElement + $index;
+    }
+
+    private function getFullFunctionName(int $beginPosOfElement, int $endPosOfElement): string
+    {
+        $result = '';
+        for ($index = $beginPosOfElement; $index <= $endPosOfElement; $index++) {
+            $result .= $this->tokens[$index]['content'];
+            $this->removeTokens[] = $index;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param int $posOfElement
+     * @param int|null $posOfMethod
+     * @return false|string
+     */
+    private function getNewContentHtmlAttribute(int $posOfElement, ?int $posOfMethod)
+    {
+        $fix = $this->file->addFixableError(
+            'Can be fixed because its an attribute',
+            $posOfElement,
+            $this->warningCodeUnescaped
+        );
+
+        if (!$fix) {
+            return true;
+        }
+        $content = $this->tokens[$posOfElement]['content'];
+        if ($posOfMethod !== null) {
+            $posOfEndFunction = $this->getEndOfFunction($posOfMethod);
+            $content = $this->getFullFunctionName($posOfElement, $posOfEndFunction);
+        }
+
+        return sprintf('$escaper->escapeHtmlAttr(%s)', $content);
+    }
+
+    /**
+     * @param int $posOfElement
+     * @param int|null $posOfMethod
+     * @return false|string
+     */
+    private function getNewContentHtml(int $posOfElement, ?int $posOfMethod)
+    {
+        $fix = $this->file->addFixableError(
+            'Can be fixed because its a html tag',
+            $posOfElement,
+            $this->warningCodeUnescaped
+        );
+
+        if (!$fix) {
+            return true;
+        }
+        $content = $this->tokens[$posOfElement]['content'];
+        if ($posOfMethod !== null) {
+            $posOfEndFunction = $this->getEndOfFunction($posOfMethod);
+            $content = $this->getFullFunctionName($posOfElement, $posOfEndFunction);
+        }
+
+        return sprintf('$escaper->escapeHtml(%s)', $content);
+    }
+
+    private function removeUnusedTokens(): void
+    {
+        foreach ($this->removeTokens as $removeToken) {
+            $this->file->fixer->replaceToken($removeToken, '');
+        }
+        $this->removeTokens = [];
     }
 }
