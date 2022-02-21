@@ -75,6 +75,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
                 $stackPtr,
                 self::WARNING_CODE
             );
+            return;
         }
 
         if ($phpcsFile->addFixableWarning(
