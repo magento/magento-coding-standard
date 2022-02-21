@@ -366,6 +366,13 @@ class XssTemplateSniff implements Sniff
         }
     }
 
+    /**
+     * Fixer for
+     *
+     * @param int $posOfElement
+     * @param int|null $posOfMethod
+     * @return bool|null
+     */
     private function fix(int $posOfElement, ?int $posOfMethod = null): ?bool
     {
         $element = $posOfMethod === null ? $posOfElement : $posOfMethod;
@@ -382,6 +389,12 @@ class XssTemplateSniff implements Sniff
         return $this->fixUnescaped($posOfElement, $posOfMethod);
     }
 
+    /**
+     * Fix unescaped elements that contains "url"
+     *
+     * @param int $posOfElement
+     * @param int|null $posOfMethod
+     */
     private function fixUnescapedUrl(int $posOfElement, ?int $posOfMethod = null): void
     {
         $fix = $this->file->addFixableError(
@@ -407,6 +420,11 @@ class XssTemplateSniff implements Sniff
 
     }
 
+    /**
+     * Fix unescaped elements that contains "json"
+     *
+     * @param int $posOfElement
+     */
     private function fixUnescapedJson(int $posOfElement): void
     {
         $fix = $this->file->addFixableError(
@@ -426,6 +444,13 @@ class XssTemplateSniff implements Sniff
         $this->file->fixer->endChangeset();
     }
 
+    /**
+     * Fix unescaped elements for inline html
+     *
+     * @param int $posOfElement
+     * @param int|null $posOfMethod
+     * @return bool|null
+     */
     private function fixUnescaped(int $posOfElement, ?int $posOfMethod = null): ?bool
     {
         $context = $this->findContextBeforeExpression($posOfElement);
@@ -452,6 +477,12 @@ class XssTemplateSniff implements Sniff
         return true;
     }
 
+    /**
+     * Find first matching context
+     *
+     * @param int $posOfStartElement
+     * @return string|null
+     */
     private function findContextBeforeExpression(int $posOfStartElement): ?string
     {
         if (!array_key_exists($posOfStartElement -1, $this->tokens)) {
@@ -494,11 +525,17 @@ class XssTemplateSniff implements Sniff
         return null;
     }
 
+    /**
+     * Find the position of the end of the function
+     *
+     * @param int $posOfElement
+     * @return int
+     */
     private function getEndOfFunction(int $posOfElement): int
     {
         $isEndOfFunction = false;
         $index = 1;
-        while(!$isEndOfFunction) {
+        while (!$isEndOfFunction) {
             $newElement = $this->tokens[$posOfElement + $index];
             if ($newElement['code'] === T_CLOSE_PARENTHESIS) {
                 $isEndOfFunction = true;
@@ -511,6 +548,13 @@ class XssTemplateSniff implements Sniff
         return $posOfElement + $index;
     }
 
+    /**
+     * Get full function name
+     *
+     * @param int $beginPosOfElement
+     * @param int $endPosOfElement
+     * @return string
+     */
     private function getFullFunctionName(int $beginPosOfElement, int $endPosOfElement): string
     {
         $result = '';
@@ -523,6 +567,8 @@ class XssTemplateSniff implements Sniff
     }
 
     /**
+     * Get new content html attribute
+     *
      * @param int $posOfElement
      * @param int|null $posOfMethod
      * @return false|string
@@ -548,6 +594,8 @@ class XssTemplateSniff implements Sniff
     }
 
     /**
+     * Get new content inline html
+     *
      * @param int $posOfElement
      * @param int|null $posOfMethod
      * @return false|string
@@ -572,6 +620,9 @@ class XssTemplateSniff implements Sniff
         return sprintf('$escaper->escapeHtml(%s)', $content);
     }
 
+    /**
+     * Remove tokens that are not used anymore after the replacement
+     */
     private function removeUnusedTokens(): void
     {
         foreach ($this->removeTokens as $removeToken) {
