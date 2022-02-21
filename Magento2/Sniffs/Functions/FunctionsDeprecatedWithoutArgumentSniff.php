@@ -36,7 +36,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
      * @var array
      */
     private const DEPRECATED_FUNCTIONS_AND_FIXES = [
-        'mb_check_encoding' => 'STDIN',
+        'mb_check_encoding' => false,
         'get_class' => '$this',
         'get_parent_class' => '$this'
     ];
@@ -65,17 +65,27 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
 
         $functionName = $phpcsFile->getTokensAsString($phpcsFile->findPrevious(T_STRING, $stackPtr), 1);
 
-        if (in_array($functionName, array_keys(self::DEPRECATED_FUNCTIONS_AND_FIXES))) {
-            if ($phpcsFile->addFixableWarning(
+        if (!isset(self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName])) {
+            return;
+        }
+
+        if (self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName] === false) {
+            $phpcsFile->addWarning(
+                sprintf(self::WARNING_MESSAGE, $functionName),
+                $stackPtr,
+                self::WARNING_CODE
+            );
+        }
+
+        if ($phpcsFile->addFixableWarning(
                 sprintf(self::WARNING_MESSAGE, $functionName),
                 $stackPtr,
                 self::WARNING_CODE
             ) === true) {
-                $content = self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName];
-                $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->addContentBefore($phpcsFile->findNext(T_CLOSE_PARENTHESIS, $stackPtr), $content);
-                $phpcsFile->fixer->endChangeset();
-            }
+            $content = self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName];
+            $phpcsFile->fixer->beginChangeset();
+            $phpcsFile->fixer->addContentBefore($phpcsFile->findNext(T_CLOSE_PARENTHESIS, $stackPtr), $content);
+            $phpcsFile->fixer->endChangeset();
         }
     }
 }
