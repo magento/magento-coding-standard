@@ -417,7 +417,6 @@ class XssTemplateSniff implements Sniff
         $this->removeUnusedTokens();
         $this->file->fixer->replaceToken($posOfElement, $newContent);
         $this->file->fixer->endChangeset();
-
     }
 
     /**
