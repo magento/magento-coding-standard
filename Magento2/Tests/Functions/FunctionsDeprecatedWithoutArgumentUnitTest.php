@@ -30,8 +30,7 @@ class FunctionsDeprecatedWithoutArgumentUnitTest extends AbstractSniffUnitTest
         return [
             23 => 1,
             25 => 1,
-            27 => 1,
-            29 => 1
+            27 => 1
         ];
     }
 }

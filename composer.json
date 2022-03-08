@@ -6,7 +6,7 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "18",
+    "version": "19",
     "require": {
         "php": ">=7.3",
         "webonyx/graphql-php": "^14.9",
