@@ -35,6 +35,11 @@ class ModuleXMLUnitTest extends AbstractSniffUnitTest
         if ($testFile === 'ModuleXMLUnitTest.3.xml') {
             return [];
         }
+        if ($testFile === 'ModuleXMLUnitTest.4.xml') {
+            return [
+                9 => 2,
+            ];
+        }
         return [];
     }
 }
