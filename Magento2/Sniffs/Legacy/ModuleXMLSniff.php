@@ -51,6 +51,7 @@ class ModuleXMLSniff implements Sniff
                 $stackPtr,
                 self::ERROR_CODE
             );
+            return;
         }
 
         $foundElements = $xml->xpath('/config/module[@version]');
