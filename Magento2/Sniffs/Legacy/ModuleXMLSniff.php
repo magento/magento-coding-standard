@@ -18,7 +18,7 @@ class ModuleXMLSniff implements Sniff
 {
     private const WARNING_CODE = 'FoundObsoleteAttribute';
     private const ERROR_CODE = 'WrongXML';
-    
+
     /**
      * @inheritdoc
      */
@@ -34,8 +34,7 @@ class ModuleXMLSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $line = $phpcsFile->getTokens()[$stackPtr]['content'];
-        if (strpos(trim($line), '<module') === false) {
+        if ($stackPtr > 0) {
             return;
         }
 
@@ -52,51 +51,31 @@ class ModuleXMLSniff implements Sniff
                 $stackPtr,
                 self::ERROR_CODE
             );
-        }
-
-        $foundElements = $xml->xpath('/config/module');
-        if ($foundElements === false) {
             return;
         }
-        
-        foreach ($foundElements as $element) {
-            if (!$this->elementIsCurrentlySniffedLine($element, $stackPtr)) {
-                continue;
-            }
-            
-            if (property_exists($element->attributes(), 'version')) {
+
+        $foundElements = $xml->xpath('/config/module[@version]');
+        if ($foundElements !== false) {
+            foreach ($foundElements as $element) {
                 $phpcsFile->addWarning(
                     'The "version" attribute is obsolete. Use "setup_version" instead.',
-                    $stackPtr,
+                    dom_import_simplexml($element)->getLineNo()-1,
                     self::WARNING_CODE
                 );
             }
+        }
 
-            if (property_exists($element->attributes(), 'active')) {
+        $foundElements = $xml->xpath('/config/module[@active]');
+        if ($foundElements !== false) {
+            foreach ($foundElements as $element) {
                 $phpcsFile->addWarning(
                     'The "active" attribute is obsolete. The list of active modules '.
                     'is defined in deployment configuration.',
-                    $stackPtr,
+                    dom_import_simplexml($element)->getLineNo()-1,
                     self::WARNING_CODE
                 );
             }
         }
-    }
-
-    /**
-     * Check if the element passed is in the currently sniffed line
-     *
-     * @param SimpleXMLElement $element
-     * @param int $stackPtr
-     * @return bool
-     */
-    private function elementIsCurrentlySniffedLine(SimpleXMLElement $element, int $stackPtr): bool
-    {
-        $node = dom_import_simplexml($element);
-        if ($node->getLineNo() === $stackPtr+1) {
-            return true;
-        }
-        return false;
     }
 
     /**
