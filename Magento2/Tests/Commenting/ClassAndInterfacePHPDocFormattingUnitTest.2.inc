@@ -60,7 +60,7 @@ interface EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author is actually ok
+ * @author is not ment to be used
  * @category is irrelevant
  * @package is not ment to be used
  * @subpackage does not belong here
