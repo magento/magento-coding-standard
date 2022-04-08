@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a99a1a61cd8522f9c564620fb2142113",
+    "content-hash": "f7fc6bebe57a5ad3379a7192ac17047e",
     "packages": [
         {
             "name": "phpcompatibility/php-compatibility",
@@ -129,21 +129,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.12.16",
+            "version": "0.12.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "13412efd0dfda2e2c310dd24397281804441cf7a"
+                "reference": "cfa8d3e236a6e1a41d69712a84d434dfdf70e560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/13412efd0dfda2e2c310dd24397281804441cf7a",
-                "reference": "13412efd0dfda2e2c310dd24397281804441cf7a",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/cfa8d3e236a6e1a41d69712a84d434dfdf70e560",
+                "reference": "cfa8d3e236a6e1a41d69712a84d434dfdf70e560",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1|^8.0",
-                "phpstan/phpstan": "^1.4.2"
+                "php": "^7.2|^8.0",
+                "phpstan/phpstan": "^1.5"
             },
             "conflict": {
                 "phpstan/phpdoc-parser": "<1.2",
@@ -177,7 +177,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.12.16"
+                "source": "https://github.com/rectorphp/rector/tree/0.12.20"
             },
             "funding": [
                 {
@@ -185,7 +185,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-09T14:50:55+00:00"
+            "time": "2022-04-06T12:55:14+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
