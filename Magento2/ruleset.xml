@@ -350,11 +350,7 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
-    <rule ref="Magento2.Legacy.ObsoleteResponse">
-        <severity>8</severity>
-        <type>warning</type>
-    </rule>
-
+   
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <severity>7</severity>
