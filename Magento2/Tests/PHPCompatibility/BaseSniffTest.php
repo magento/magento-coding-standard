@@ -29,7 +29,7 @@ use Magento2\Helpers\PHPCSUtils\BackCompat\Helper;
  * @since 9.0.0  Dropped support for PHP_CodeSniffer 1.x.
  * @since 10.0.0 Updated for preliminary support of PHP_CodeSniffer 4.
  */
-class BaseSniffTest extends TestCase
+abstract class BaseSniffTest extends TestCase
 {
 
     /**

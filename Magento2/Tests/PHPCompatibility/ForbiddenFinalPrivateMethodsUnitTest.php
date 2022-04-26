@@ -37,7 +37,7 @@ class ForbiddenFinalPrivateMethodsUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-       return [
+        return [
             6 => 1,
             7 => 1,
             14 => 1,
