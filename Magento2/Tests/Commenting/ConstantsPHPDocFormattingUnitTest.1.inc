@@ -48,4 +48,9 @@ class Profiler
      * @see
      */
     const SOMETHING = 'else';
+
+    /**
+     * @see
+     */
+    const ANOTHER = 'another';
 }
