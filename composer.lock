@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63d0aa40cf8f2071a5e7e572eae08f45",
+    "content-hash": "f9b079fd78b0e546e1bbad784a248bfe",
     "packages": [
         {
             "name": "phpcompatibility/php-compatibility",
@@ -129,21 +129,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.12.23",
+            "version": "0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "690b31768b322db886b35845f8452025eba2cacb"
+                "reference": "bb3b32dd590cbd0deb67c2ce8ae32801357ff059"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/690b31768b322db886b35845f8452025eba2cacb",
-                "reference": "690b31768b322db886b35845f8452025eba2cacb",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/bb3b32dd590cbd0deb67c2ce8ae32801357ff059",
+                "reference": "bb3b32dd590cbd0deb67c2ce8ae32801357ff059",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.6"
+                "phpstan/phpstan": "^1.6.8"
             },
             "conflict": {
                 "phpstan/phpdoc-parser": "<1.2",
@@ -177,7 +177,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.12.23"
+                "source": "https://github.com/rectorphp/rector/tree/0.13.0"
             },
             "funding": [
                 {
@@ -185,7 +185,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-01T15:50:16+00:00"
+            "time": "2022-05-23T10:26:32+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
