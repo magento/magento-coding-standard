@@ -142,4 +142,56 @@ class correctlyFormattedClassMemberDocBlock
      * @var string|null
      */
     protected ?string $test2;
+
+    /**
+     * @var string
+     * @deprecated
+     */
+    protected string $badlyDeprecated;
+
+    /**
+     * @var string
+     * @deprecated Why not
+     */
+    protected string $incorrectlyDeprecated;
+
+    /**
+     * @var string
+     * @deprecated
+     * @see
+     */
+    protected string $inaccurately;
+
+    /**
+     * @var string
+     * @deprecated No reference specified
+     * @see
+     */
+    protected string $mistakenly;
+
+    /**
+     * @var string
+     * @deprecated No reference specified
+     * @see Some reference
+     */
+    protected string $correctly;
+
+    /**
+     * @var string
+     * @deprecated
+     * @see Some other reference
+     */
+    protected string $alsoCorrect;
+
+    /**
+     * @var string
+     * @see
+     */
+    protected string $shouldBeCorrect;
+
+    /**
+     * @var string
+     * @see Message with some reference
+     */
+    protected string $itIsCorrect;
 }
