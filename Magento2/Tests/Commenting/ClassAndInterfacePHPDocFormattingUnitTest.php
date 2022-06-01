@@ -33,8 +33,9 @@ class ClassAndInterfacePHPDocFormattingUnitTest extends AbstractSniffUnitTest
             65 => 1,
             66 => 1,
             101 => 1,
+            109 => 1,
             118 => 1,
-            127 => 1,
+            127 => 1
         ];
     }
 }

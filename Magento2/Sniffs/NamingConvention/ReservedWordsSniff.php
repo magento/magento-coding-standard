@@ -34,6 +34,7 @@ class ReservedWordsSniff implements Sniff
         'object' => '7',
         'mixed' => '7',
         'numeric' => '7',
+        'match' => '8'
     ];
 
     private const CLASS_ERROR_CODE = 'ForbiddenAsClassName';

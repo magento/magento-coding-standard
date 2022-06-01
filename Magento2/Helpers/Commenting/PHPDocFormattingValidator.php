@@ -121,15 +121,11 @@ class PHPDocFormattingValidator
         if ($deprecatedPtr === -1) {
             return true;
         }
-
-        $seeTagRequired = false;
-        if ($tokens[$deprecatedPtr + 2]['code'] !== T_DOC_COMMENT_STRING) {
-            $seeTagRequired = true;
-        }
         $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
         if ($seePtr === -1) {
-            return !$seeTagRequired;
+            return false;
         }
+
         return $tokens[$seePtr + 2]['code'] === T_DOC_COMMENT_STRING;
     }
 

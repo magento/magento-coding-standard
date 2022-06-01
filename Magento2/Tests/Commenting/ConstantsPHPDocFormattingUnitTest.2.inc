@@ -14,6 +14,11 @@ define('NUMBER_ONE', 1);
 define('A', 65);
 
 /**
+ * @deprecated It is a lie
+ */
+define('THERE IS', 'cake');
+
+/**
  * @deprecated
  * @see
  */
@@ -41,6 +46,11 @@ class Profiler
      * @deprecated
      */
     const a = 97;
+
+    /**
+     * @deprecated Why not
+     */
+    const YES = false;
 
     /**
      * @deprecated

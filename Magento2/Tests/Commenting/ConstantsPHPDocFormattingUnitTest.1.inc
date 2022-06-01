@@ -8,11 +8,6 @@ define('DS', DIRECTORY_SEPARATOR);
 define('BP', dirname(__FILE__));
 
 /**
- * @deprecated It is a lie
- */
-define('THERE IS', 'cake');
-
-/**
  * @deprecated New implementation available
  * @see \Ascii\Asterisk
  */
@@ -26,11 +21,6 @@ class Profiler
      * Unlike first const, this one is not self explanatory.
      */
     const NUMBER_TWO = 2;
-
-    /**
-     * @deprecated Why not
-     */
-    const YES = false;
 
     /**
      * @deprecated Unable to identify the question, replaced

@@ -306,4 +306,67 @@ class MethodAnnotationFixture
     {
         return $start === $length;
     }
+
+    /**
+     * This is a well-formed deprecated function
+     *
+     * @deprecated can be used in this context
+     * @see is ok here
+     */
+    public function deprecated(): bool
+    {
+        return true;
+    }
+
+    /**
+     * This deprecated function is incorrect since it only contains the @deprecated tag
+     *
+     * @deprecated
+     */
+    public function incorrectlyDeprecated()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is incorrect since it only contains the @deprecated tag
+     *
+     * @deprecated Should not be used
+     */
+    public function incorrectAsWell()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is incorrect since the @see tag does not have extra info
+     *
+     * @deprecated
+     * @see
+     */
+    public function anotherOne()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is incorrect since the @see tag does not have extra info
+     *
+     * @deprecated Should not be used
+     * @see
+     */
+    public function yetAnotherOne()
+    {
+        return false;
+    }
+
+    /**
+     * This function is correct since the @see tag can be used without the @deprecated tag
+     *
+     * @see Magento\Framework\NewHandler
+     */
+    public function correctUseOfSee()
+    {
+        return true;
+    }
 }
