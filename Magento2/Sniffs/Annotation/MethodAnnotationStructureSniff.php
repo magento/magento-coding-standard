@@ -52,6 +52,11 @@ class MethodAnnotationStructureSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, ($stackPtr), 0);
+        $commentEndPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, ($stackPtr), 0);
+        if (!$commentStartPtr) {
+            $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
+            return;
+        }
 
         if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
@@ -62,11 +67,7 @@ class MethodAnnotationStructureSniff implements Sniff
                 'InvalidDeprecatedTagUsage'
             );
         }
-        $commentEndPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, ($stackPtr), 0);
-        if (!$commentStartPtr) {
-            $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
-            return;
-        }
+
         $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
         $functionPtrContent = $tokens[$stackPtr + 2]['content'];
         if (preg_match('/(?i)__construct/', $functionPtrContent)) {
