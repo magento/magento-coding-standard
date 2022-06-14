@@ -25,6 +25,13 @@ if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
     define('PHP_CODESNIFFER_VERBOSITY', 0);
 }
 
+/**
+ * Define PHP 8.1 tokens
+ */
+if (!defined('T_READONLY')) {
+    define('T_READONLY', 42401);
+}
+
 $ds = DIRECTORY_SEPARATOR;
 
 // Get the PHPCS dir from an environment variable.
