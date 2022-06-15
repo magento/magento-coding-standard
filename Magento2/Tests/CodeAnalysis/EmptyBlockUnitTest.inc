@@ -76,3 +76,15 @@ function emptyFunction () { /*Empty function block*/ }
 function nonEmptyFunction () { return true; }
 
 function aroundEmptyFunction ($foo, $bar) { }
+
+class Foo {
+    public function __construct(private $bar) {}
+}
+
+class Foo2 {
+    public function __construct() {}
+}
+
+class Foo3 {
+    public function __construct(private $bar, $baz) {}
+}
