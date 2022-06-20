@@ -61,11 +61,9 @@ class ColonSpacingSniff implements Sniff
         }
 
         // Avoid false positives when parsing pseudo-classes
-        if ($tokens[$stackPtr]['code'] === T_COLON) {
-            $next = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr + 1);
-            if ($tokens[$next]['code'] === T_OPEN_CURLY_BRACKET) {
-                return false;
-            }
+        $next = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr + 1);
+        if ($tokens[$next]['code'] === T_OPEN_CURLY_BRACKET) {
+            return false;
         }
 
         $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
