@@ -5,22 +5,46 @@
 
 
 div#foo {
-  blah:'abc';
+    blah:'abc';
 }
 
 .my #foo .blah {
-  some:  'stuff';
+    some:  'stuff';
 }
 
 .blah {
-  foo :'jkl';
+    foo :'jkl';
 }
 
 .foo {
-  bar:
+    bar:
           'xyz';
 }
 
 .right {
-  way: 'good'
+    way: 'good';
+}
+
+a:active {
+    color: #000;
+}
+
+@abs-action-button-as-link: {
+    &:not(:focus) {
+        box-shadow: none;
+    }
+}
+
+.actions-toolbar {
+    &:not(:first-child) {
+        &:extend(.abs-add-clearfix all);
+            > .secondary {
+                .action {
+                    &.add {
+                        margin-top: @indent__l;
+                    }
+                }
+            float: left;
+        }
+    }
 }

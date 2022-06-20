@@ -60,12 +60,15 @@ class ColonSpacingSniff implements Sniff
             return false;
         }
 
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        if ($tokens[$prev]['code'] !== T_STYLE) {
-            // The colon is not part of a style definition.
-            return false;
+        // Avoid false positives when parsing pseudo-classes
+        if ($tokens[$stackPtr]['code'] === T_COLON) {
+            $next = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_CURLY_BRACKET], $stackPtr + 1);
+            if ($tokens[$next]['code'] === T_OPEN_CURLY_BRACKET) {
+                return false;
+            }
         }
 
+        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
         if ($tokens[$prev]['content'] === 'progid') {
             // Special case for IE filters.
             return false;
