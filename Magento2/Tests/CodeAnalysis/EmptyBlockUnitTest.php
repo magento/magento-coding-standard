@@ -29,6 +29,8 @@ class EmptyBlockUnitTest extends AbstractSniffUnitTest
             68 => 1,
             72 => 2,
             74 => 1,
+            85 => 1,
+            89 => 1
         ];
     }
 

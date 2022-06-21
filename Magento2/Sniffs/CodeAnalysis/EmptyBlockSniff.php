@@ -37,6 +37,17 @@ class EmptyBlockSniff extends EmptyStatementSniff
             return;
         }
 
+        // Ignore empty constructor function blocks when using property promotion
+        if ($tokens[$stackPtr]['code'] === T_FUNCTION &&
+            strpos($phpcsFile->getDeclarationName($stackPtr), '__construct') === 0 &&
+            count($phpcsFile->getMethodParameters($stackPtr)) > 0 &&
+            array_reduce($phpcsFile->getMethodParameters($stackPtr), static function ($result, $methodParam) {
+                return $result && isset($methodParam['property_visibility']);
+            }, true)) {
+
+            return;
+        }
+
         parent::process($phpcsFile, $stackPtr);
     }//end process()
 }
