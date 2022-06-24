@@ -38,6 +38,16 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
     private $PHPDocFormattingValidator;
 
     /**
+     * @var array
+     */
+    private $invalidTypes = [
+        'null',
+        'false',
+        'true',
+        'self'
+    ];
+
+    /**
      * Constructs an ClassPropertyPHPDocFormattingSniff.
      */
     public function __construct()
@@ -62,7 +72,12 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         );
 
         if ($commentEnd === false || $tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
-            $phpcsFile->addWarning('Missing PHP DocBlock for class property.', $stackPtr, 'Missing');
+            // if the property has a valid type definition, we don't require a doc block
+            if (!$this->hasValidType($phpcsFile, $stackPtr)) {
+                $phpcsFile->addWarning(
+                    'Missing PHP DocBlock for class property without valid type.', $stackPtr, 'Missing');
+            }
+            // no comment, so nothing further to process
             return;
         }
 
@@ -121,10 +136,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         );
 
         if ($this->PHPDocFormattingValidator->providesMeaning(
-            $shortDescriptionAfterVarPosition,
-            $commentStart,
-            $tokens
-        ) !== true) {
+                $shortDescriptionAfterVarPosition,
+                $commentStart,
+                $tokens
+            ) !== true) {
             preg_match(
                 '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
                 $tokens[($varAnnotationPosition + 2)]['content'],
@@ -141,6 +156,30 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         }
 
         $this->processPropertyShortDescription($phpcsFile, $stackPtr, $varAnnotationPosition, $commentStart);
+    }
+
+    /**
+     * Check if class property has a valid (not specifically invalid) type
+     *
+     * @param File $phpcsFile
+     * @param int $propertyPosition
+     * @return bool
+     */
+    private function hasValidType(File $phpcsFile, int $propertyPosition): bool
+    {
+        // type token should be 2 before property. If not present, visibility token should be in its place
+        $typePosition = $phpcsFile->findPrevious(
+            [T_STRING],
+            $propertyPosition,
+            $propertyPosition - 2
+        );
+
+        if (!$typePosition) {
+            return false;
+        }
+
+        $type = $phpcsFile->getTokensAsString($typePosition, 1);
+        return !in_array(strtolower($type), $this->invalidTypes);
     }
 
     /**

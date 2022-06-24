@@ -194,4 +194,6 @@ class correctlyFormattedClassMemberDocBlock
      * @see Message with some reference
      */
     protected string $itIsCorrect;
+
+    private string $typedPropertyWithoutComment;
 }
