@@ -75,7 +75,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             // if the property has a valid type definition, we don't require a doc block
             if (!$this->hasValidType($phpcsFile, $stackPtr)) {
                 $phpcsFile->addWarning(
-                    'Missing PHP DocBlock for class property without valid type.', $stackPtr, 'Missing');
+                    'Missing PHP DocBlock for class property without valid type.',
+                    $stackPtr,
+                    'Missing'
+                );
             }
             // no comment, so nothing further to process
             return;
