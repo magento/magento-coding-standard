@@ -350,7 +350,7 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
-   
+
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <severity>7</severity>
@@ -579,7 +579,7 @@
         <type>warning</type>
         <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
     </rule>
-    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+    <rule ref="PSR12.ControlStructures.ControlStructureSpacing">
         <severity>6</severity>
         <type>warning</type>
     </rule>
