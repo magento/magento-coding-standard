@@ -195,5 +195,18 @@ class correctlyFormattedClassMemberDocBlock
      */
     protected string $itIsCorrect;
 
+
     private string $typedPropertyWithoutComment;
+
+    private string $typedPropertyWithoutComment2;
+
+    private ?string $typedPropertyWithoutComment3;
+
+    private string|int $typedPropertyWithoutComment4;
+
+    private Test $typedPropertyWithoutComment5;
+
+    private Test|Test2 $typedPropertyWithoutComment6;
+    
+    private ?Test $typedPropertyWithoutComment7;    
 }
