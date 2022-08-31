@@ -13,6 +13,8 @@ use PHP_CodeSniffer\Files\File;
  */
 class PHPDocFormattingValidator
 {
+    private const REMOVED_IN_VERSION = 'removed in version';
+
     /**
      * Finds matching PHPDoc for current pointer
      *
@@ -123,7 +125,10 @@ class PHPDocFormattingValidator
         }
         $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
         if ($seePtr === -1) {
-            return false;
+            if (!stripos($tokens[$deprecatedPtr + 2]['content'], self::REMOVED_IN_VERSION, 0)) {
+                return false;
+            }
+            return true;
         }
 
         return $tokens[$seePtr + 2]['code'] === T_DOC_COMMENT_STRING;

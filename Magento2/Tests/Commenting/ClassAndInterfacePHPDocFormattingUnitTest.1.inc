@@ -162,3 +162,20 @@ class OldHandler
 {
 
 }
+
+/**
+ * @deprecated It will be removed in version 1.0.0
+ */
+class DeprecatedButHandler
+{
+
+}
+
+/**
+ * @deprecated It's also deprecated, but it will be removed in version 1.0.0
+ */
+class AlsoDeprecatedButHandler
+{
+
+}
+
