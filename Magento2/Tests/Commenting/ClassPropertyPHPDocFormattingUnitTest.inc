@@ -197,7 +197,7 @@ class correctlyFormattedClassMemberDocBlock
 
     /**
      * @var string
-     * @deprecated This property will be removed in version 1.0.0
+     * @deprecated This property will be removed in version 1.0.0 without replacement
      */
     protected string $deprecatedWithKeyword;
 }

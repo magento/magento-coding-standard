@@ -155,7 +155,7 @@ interface DoNotCareHandler
 }
 
 /**
- * @deprecated This interface will be removed in version 1.0.0
+ * @deprecated This interface will be removed in version 1.0.0 without replacement
  */
 interface DeprecatedButHandler
 {
@@ -163,7 +163,7 @@ interface DeprecatedButHandler
 }
 
 /**
- * @deprecated Yeah! This interface will be removed in version 1.0.0
+ * @deprecated Yeah! This interface will be removed in version 1.0.0 without replacement
  */
 interface AlsoDeprecatedButHandler
 {

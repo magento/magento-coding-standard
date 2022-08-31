@@ -65,12 +65,12 @@ class Profiler
     const d = 100;
 
     /**
-     * @deprecated This constant will be removed in version 1.0.0
+     * @deprecated This constant will be removed in version 1.0.0 without replacement
      */
     const KEYWORD_PHRASE = false;
 
     /**
-     * @deprecated It's awesome - This constant will be removed in version 1.0.0
+     * @deprecated It's awesome - This constant will be removed in version 1.0.0 without replacement
      */
     const WITH_KEYWORD_PHRASE = false;
 }
