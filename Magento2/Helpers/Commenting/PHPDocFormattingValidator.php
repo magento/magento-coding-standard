@@ -126,8 +126,8 @@ class PHPDocFormattingValidator
         }
         $seePtr = $this->getTagPosition('@see', $commentStartPtr, $tokens);
         if ($seePtr === -1) {
-            if (stripos($tokens[$deprecatedPtr + 2]['content'], self::REMOVED_IN_VERSION, 0) &&
-                stripos($tokens[$deprecatedPtr + 2]['content'], self::WITHOUT_REPLACEMENT, 0)) {
+            if (stripos($tokens[$deprecatedPtr + 2]['content'], self::REMOVED_IN_VERSION, 0) >= 0 &&
+                stripos($tokens[$deprecatedPtr + 2]['content'], self::WITHOUT_REPLACEMENT, 0) >= 0) {
                 return true;
             }
             return false;
