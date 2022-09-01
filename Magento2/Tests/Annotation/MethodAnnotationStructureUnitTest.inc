@@ -373,7 +373,7 @@ class MethodAnnotationFixture
     /**
      * This deprecated function is correct even though it only contains the @deprecated tag.
      *
-     * @deprecated It will be removed in version 1.0.0 without replacement
+     * @deprecated This method will be removed in version 1.0.0 without replacement
      */
     public function correctBecauseOfKeywordPhrase()
     {
@@ -383,7 +383,7 @@ class MethodAnnotationFixture
     /**
      * This deprecated function is correct even though it only contains the @deprecated tag.
      *
-     * @deprecated WOW! It will be removed in version 1.0.0 without replacement
+     * @deprecated WOW! This method will be removed in version 1.0.0 without replacement
      */
     public function alsoCorrectBecauseOfKeywordPhrase()
     {

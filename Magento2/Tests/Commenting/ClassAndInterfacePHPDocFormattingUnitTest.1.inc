@@ -164,7 +164,7 @@ class OldHandler
 }
 
 /**
- * @deprecated It will be removed in version 1.0.0 without replacement
+ * @deprecated This class will be removed in version 1.0.0 without replacement
  */
 class DeprecatedButHandler
 {
@@ -172,7 +172,7 @@ class DeprecatedButHandler
 }
 
 /**
- * @deprecated It's also deprecated, but it will be removed in version 1.0.0 without replacement
+ * @deprecated It's also deprecated - This class will be removed in version 1.0.0 without replacement
  */
 class AlsoDeprecatedButHandler
 {
