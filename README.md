@@ -4,7 +4,7 @@ A set of Magento rules for [PHP_CodeSniffer](https://github.com/squizlabs/PHP_Co
 
 ## Installation within a Magento 2 site
 
-To use within your Magento 2 project you can use:
+To TEST use within your Magento 2 project you can use:
 
 ```bash
 composer require --dev magento/magento-coding-standard
