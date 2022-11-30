@@ -189,8 +189,10 @@ class TableNameSniff implements Sniff
     private function checkOccurrencesInArray(File $phpcsFile, int $stackPtr, array $tokens): void
     {
         $aliasPos = $phpcsFile->findPrevious(
-            T_CONSTANT_ENCAPSED_STRING,
-            $stackPtr -1
+            T_WHITESPACE,
+            $stackPtr - 1,
+            null,
+            true,
         );
 
         $alias = trim($tokens[$aliasPos]['content'], '\'"');
