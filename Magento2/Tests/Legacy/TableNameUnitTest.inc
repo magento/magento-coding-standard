@@ -28,6 +28,8 @@ $select = $connection->select()->from(
     ['main_table' => 'magento_sample_table']
 );
 
+$fooBar=array(0=>array(125,0,875,750),'33' =>array(85,0,194,716), 10 => 100);
+
 class Collection extends \Magento\Sales\Model\ResourceModel\Report\Order\Collection
 {
     /**
