@@ -6,10 +6,10 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "29",
+    "version": "30",
     "require": {
-        "php": ">=7.3",
-        "webonyx/graphql-php": "^14.9",
+        "php": ">=7.4",
+        "webonyx/graphql-php": "^15.0",
         "ext-simplexml": "*",
         "ext-dom": "*",
         "phpcompatibility/php-compatibility": "^9.3",
