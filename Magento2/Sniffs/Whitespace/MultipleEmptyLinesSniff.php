@@ -41,11 +41,13 @@ class MultipleEmptyLinesSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        if ($phpcsFile->hasCondition($stackPtr, T_FUNCTION)
+        if (
+            $phpcsFile->hasCondition($stackPtr, T_FUNCTION)
             || $phpcsFile->hasCondition($stackPtr, T_CLASS)
             || $phpcsFile->hasCondition($stackPtr, T_INTERFACE)
         ) {
-            if ($tokens[$stackPtr - 1]['line'] < $tokens[$stackPtr]['line']
+            if (
+                $tokens[$stackPtr - 1]['line'] < $tokens[$stackPtr]['line']
                 && $tokens[$stackPtr - 2]['line'] === $tokens[$stackPtr - 1]['line']
             ) {
                 // This is an empty line and the line before this one is not

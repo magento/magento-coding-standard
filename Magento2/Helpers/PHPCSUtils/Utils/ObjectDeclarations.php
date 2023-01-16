@@ -68,7 +68,8 @@ class ObjectDeclarations
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || ($tokens[$stackPtr]['code'] === \T_ANON_CLASS || $tokens[$stackPtr]['code'] === \T_CLOSURE)
         ) {
             return null;
@@ -79,7 +80,8 @@ class ObjectDeclarations
         /*
          * BC: Work-around JS ES6 classes not being tokenized as T_CLASS in PHPCS < 3.0.0.
          */
-        if (isset($phpcsFile->tokenizerType)
+        if (
+            isset($phpcsFile->tokenizerType)
             && $phpcsFile->tokenizerType === 'JS'
             && $tokenCode === \T_STRING
             && $tokens[$stackPtr]['content'] === 'class'
@@ -87,7 +89,8 @@ class ObjectDeclarations
             $tokenCode = \T_CLASS;
         }
 
-        if ($tokenCode !== \T_FUNCTION
+        if (
+            $tokenCode !== \T_FUNCTION
             && $tokenCode !== \T_CLASS
             && $tokenCode !== \T_INTERFACE
             && $tokenCode !== \T_TRAIT
@@ -97,7 +100,8 @@ class ObjectDeclarations
             );
         }
 
-        if ($tokenCode === \T_FUNCTION
+        if (
+            $tokenCode === \T_FUNCTION
             && \strtolower($tokens[$stackPtr]['content']) !== 'function'
         ) {
             // This is a function declared without the "function" keyword.
@@ -323,7 +327,8 @@ class ObjectDeclarations
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || isset($allowedFor[$tokens[$stackPtr]['code']]) === false
             || isset($tokens[$stackPtr]['scope_opener']) === false
         ) {

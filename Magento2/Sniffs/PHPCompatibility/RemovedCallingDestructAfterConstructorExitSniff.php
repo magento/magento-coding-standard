@@ -100,7 +100,8 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
 
             // Skip over nested closed scopes as possible for efficiency.
             // Ignore arrow functions as they aren't closed scopes.
-            if (isset(Collections::$closedScopes[$tokens[$current]['code']]) === true
+            if (
+                isset(Collections::$closedScopes[$tokens[$current]['code']]) === true
                 && isset($tokens[$current]['scope_closer']) === true
             ) {
                 $current = $tokens[$current]['scope_closer'];
@@ -108,7 +109,8 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
             }
 
             // Skip over array access and short arrays/lists, but not control structures.
-            if (isset($tokens[$current]['bracket_closer']) === true
+            if (
+                isset($tokens[$current]['bracket_closer']) === true
                 && isset($tokens[$current]['scope_closer']) === false
             ) {
                 $current = $tokens[$current]['bracket_closer'];
@@ -116,7 +118,8 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
             }
 
             // Skip over long array/lists as they can't contain an exit statement, except within a closed scope.
-            if (($tokens[$current]['code'] === \T_ARRAY || $tokens[$current]['code'] === \T_LIST)
+            if (
+                ($tokens[$current]['code'] === \T_ARRAY || $tokens[$current]['code'] === \T_LIST)
                 && isset($tokens[$current]['parenthesis_closer']) === true
             ) {
                 $current = $tokens[$current]['parenthesis_closer'];
@@ -148,7 +151,8 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
                 continue;
             }
 
-            if ($tokens[$nextFunc]['code'] === \T_USE
+            if (
+                $tokens[$nextFunc]['code'] === \T_USE
                 && UseStatements::isTraitUse($phpcsFile, $nextFunc) === true
             ) {
                 $usesTraits = true;

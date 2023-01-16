@@ -216,7 +216,8 @@ class XssTemplateSniff implements Sniff
                     break;
                 }
                 $posOfMethod = $this->file->findNext([T_STRING, T_VARIABLE], $posOfObjOperator + 1, $statement['end']);
-                if ($this->tokens[$posOfMethod]['code'] === T_STRING &&
+                if (
+                    $this->tokens[$posOfMethod]['code'] === T_STRING &&
                     (in_array($this->tokens[$posOfMethod]['content'], $this->allowedMethods) ||
                         stripos($this->tokens[$posOfMethod]['content'], $this->methodNameContains) !== false)
                 ) {

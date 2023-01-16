@@ -62,7 +62,8 @@ class TextStrings
             );
         }
 
-        if ($tokens[$stackPtr]['code'] === \T_CONSTANT_ENCAPSED_STRING
+        if (
+            $tokens[$stackPtr]['code'] === \T_CONSTANT_ENCAPSED_STRING
             || $tokens[$stackPtr]['code'] === \T_DOUBLE_QUOTED_STRING
         ) {
             $prev = $phpcsFile->findPrevious(\T_WHITESPACE, ($stackPtr - 1), null, true);

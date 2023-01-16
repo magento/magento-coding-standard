@@ -46,7 +46,8 @@ class UseStatements
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || $tokens[$stackPtr]['code'] !== \T_USE
         ) {
             throw new RuntimeException('$stackPtr must be of type T_USE');
@@ -59,7 +60,8 @@ class UseStatements
         }
 
         $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        if ($prev !== false && $tokens[$prev]['code'] === \T_CLOSE_PARENTHESIS
+        if (
+            $prev !== false && $tokens[$prev]['code'] === \T_CLOSE_PARENTHESIS
             && Parentheses::isOwnerIn($phpcsFile, $prev, \T_CLOSURE) === true
         ) {
             return 'closure';
@@ -245,7 +247,8 @@ class UseStatements
                     // Only when either at the start of the statement or at the start of a new sub within a group.
                     if ($start === true && $fixedType === false) {
                         $content = \strtolower($tokens[$i]['content']);
-                        if ($content === 'function'
+                        if (
+                            $content === 'function'
                             || $content === 'const'
                         ) {
                             $type  = $content;

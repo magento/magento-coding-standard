@@ -45,7 +45,8 @@ class ClassNamingSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (T_WHITESPACE !== $tokens[$stackPtr - 1]['code']
+        if (
+            T_WHITESPACE !== $tokens[$stackPtr - 1]['code']
             && !in_array(
                 $tokens[$stackPtr - 1]['content'],
                 [

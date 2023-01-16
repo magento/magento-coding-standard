@@ -46,7 +46,8 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
 
         $fileText = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
 
-        if (strpos($fileText, self::COPYRIGHT_MAGENTO_TEXT) !== false
+        if (
+            strpos($fileText, self::COPYRIGHT_MAGENTO_TEXT) !== false
             || preg_match(self::COPYRIGHT_ADOBE, $fileText)
         ) {
             return;

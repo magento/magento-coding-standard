@@ -81,7 +81,8 @@ class FunctionDeclarations
         $tokens         = $phpcsFile->getTokens();
         $arrowOpenClose = self::getArrowFunctionOpenClose($phpcsFile, $stackPtr);
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || ($tokens[$stackPtr]['code'] !== \T_FUNCTION
                 && $tokens[$stackPtr]['code'] !== \T_CLOSURE
                 && $arrowOpenClose === false)
@@ -169,7 +170,8 @@ class FunctionDeclarations
                     break;
                 }
 
-                if ($tokens[$i]['type'] === 'T_NULLABLE'
+                if (
+                    $tokens[$i]['type'] === 'T_NULLABLE'
                     // Handle nullable tokens in PHPCS < 2.8.0.
                     || (\defined('T_NULLABLE') === false && $tokens[$i]['code'] === \T_INLINE_THEN)
                     // Handle nullable tokens with arrow functions in PHPCS 2.8.0 - 2.9.0.
@@ -242,14 +244,16 @@ class FunctionDeclarations
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || isset(Collections::arrowFunctionTokensBC()[$tokens[$stackPtr]['code']]) === false
             || \strtolower($tokens[$stackPtr]['content']) !== 'fn'
         ) {
             return false;
         }
 
-        if ($tokens[$stackPtr]['type'] === 'T_FN'
+        if (
+            $tokens[$stackPtr]['type'] === 'T_FN'
             && isset($tokens[$stackPtr]['scope_closer']) === true
             && \version_compare(Helper::getVersion(), '3.5.4', '>') === true
         ) {
@@ -304,7 +308,8 @@ class FunctionDeclarations
             true
         );
 
-        if ($arrow === false
+        if (
+            $arrow === false
             || ($tokens[$arrow]['code'] !== \T_DOUBLE_ARROW && $tokens[$arrow]['type'] !== 'T_FN_ARROW')
         ) {
             return false;
@@ -315,11 +320,13 @@ class FunctionDeclarations
         $lastEndToken                = null;
 
         for ($scopeCloser = ($arrow + 1); $scopeCloser < $phpcsFile->numTokens; $scopeCloser++) {
-            if (isset(self::$arrowFunctionEndTokens[$tokens[$scopeCloser]['code']]) === true
+            if (
+                isset(self::$arrowFunctionEndTokens[$tokens[$scopeCloser]['code']]) === true
                 // BC for misidentified ternary else in some PHPCS versions.
                 && ($tokens[$scopeCloser]['code'] !== \T_COLON || $inTernary === false)
             ) {
-                if ($lastEndToken !== null
+                if (
+                    $lastEndToken !== null
                     && $tokens[$scopeCloser]['code'] === \T_CLOSE_PARENTHESIS
                     && $tokens[$scopeCloser]['parenthesis_opener'] < $arrow
                 ) {
@@ -338,7 +345,8 @@ class FunctionDeclarations
                 }
             }
 
-            if (isset($tokens[$scopeCloser]['scope_closer']) === true
+            if (
+                isset($tokens[$scopeCloser]['scope_closer']) === true
                 && $tokens[$scopeCloser]['code'] !== \T_INLINE_ELSE
                 && $tokens[$scopeCloser]['code'] !== \T_END_HEREDOC
                 && $tokens[$scopeCloser]['code'] !== \T_END_NOWDOC
@@ -488,7 +496,8 @@ class FunctionDeclarations
         $tokens         = $phpcsFile->getTokens();
         $arrowOpenClose = self::getArrowFunctionOpenClose($phpcsFile, $stackPtr);
 
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || ($tokens[$stackPtr]['code'] !== \T_FUNCTION
                 && $tokens[$stackPtr]['code'] !== \T_CLOSURE
                 && $tokens[$stackPtr]['code'] !== \T_USE
@@ -500,7 +509,8 @@ class FunctionDeclarations
         if ($tokens[$stackPtr]['code'] === \T_USE) {
             // This will work PHPCS 3.x/4.x cross-version without much overhead.
             $opener = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-            if ($opener === false
+            if (
+                $opener === false
                 || $tokens[$opener]['code'] !== \T_OPEN_PARENTHESIS
                 || UseStatements::isClosureUse($phpcsFile, $stackPtr) === false
             ) {
@@ -732,13 +742,15 @@ class FunctionDeclarations
             return false;
         }
 
-        if ($tokens[$stackPtr]['type'] === 'T_FN'
+        if (
+            $tokens[$stackPtr]['type'] === 'T_FN'
             && isset($tokens[$stackPtr]['scope_closer']) === true
         ) {
             return true;
         }
 
-        if (isset(Collections::arrowFunctionTokensBC()[$tokens[$stackPtr]['code']]) === false
+        if (
+            isset(Collections::arrowFunctionTokensBC()[$tokens[$stackPtr]['code']]) === false
             || \strtolower($tokens[$stackPtr]['content']) !== 'fn'
         ) {
             return false;

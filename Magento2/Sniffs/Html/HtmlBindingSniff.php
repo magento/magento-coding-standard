@@ -75,7 +75,8 @@ class HtmlBindingSniff implements Sniff
             $htmlBindings[] = trim($magentoBinding);
         }
         foreach ($htmlBindings as $htmlBinding) {
-            if (!preg_match('/^[0-9\\\'\"]/ims', $htmlBinding)
+            if (
+                !preg_match('/^[0-9\\\'\"]/ims', $htmlBinding)
                 && !preg_match('/UnsanitizedHtml(\(.*?\))*?$/', $htmlBinding)
             ) {
                 $phpcsFile->addError(

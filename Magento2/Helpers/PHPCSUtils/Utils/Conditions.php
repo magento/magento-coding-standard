@@ -86,7 +86,8 @@ class Conditions
         }
 
         foreach ($conditions as $ptr => $type) {
-            if (isset($tokens[$ptr]) === true
+            if (
+                isset($tokens[$ptr]) === true
                 && \in_array($type, $types, true) === true
             ) {
                 // We found a token with the required type.

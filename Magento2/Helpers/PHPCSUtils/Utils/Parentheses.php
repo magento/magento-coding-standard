@@ -82,7 +82,8 @@ class Parentheses
          * {@internal As the 'parenthesis_owner' index is only set on parentheses, we didn't need to do any
          * input validation before, but now we do.}
          */
-        if (isset($tokens[$stackPtr]) === false
+        if (
+            isset($tokens[$stackPtr]) === false
             || ($tokens[$stackPtr]['code'] !== \T_OPEN_PARENTHESIS
                 && $tokens[$stackPtr]['code'] !== \T_CLOSE_PARENTHESIS)
         ) {
@@ -97,7 +98,8 @@ class Parentheses
         $skip[\T_BITWISE_AND] = \T_BITWISE_AND;
 
         $prevNonEmpty = $phpcsFile->findPrevious($skip, ($stackPtr - 1), null, true);
-        if ($prevNonEmpty !== false
+        if (
+            $prevNonEmpty !== false
             && (isset(self::$extraParenthesesOwners[$tokens[$prevNonEmpty]['code']])
                 // Possibly an arrow function.
                 || FunctionDeclarations::isArrowFunction($phpcsFile, $prevNonEmpty) === true)

@@ -331,7 +331,8 @@ abstract class UtilityMethodTestCase extends TestCase
     public static function usesPhp8NameTokens()
     {
         $version = Helper::getVersion();
-        if ((\version_compare(\PHP_VERSION_ID, '80000', '>=') === true
+        if (
+            (\version_compare(\PHP_VERSION_ID, '80000', '>=') === true
                 && \version_compare($version, '3.5.7', '<') === true)
             || \version_compare($version, '4.0.0', '>=') === true
         ) {

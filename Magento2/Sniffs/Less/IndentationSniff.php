@@ -88,7 +88,8 @@ class IndentationSniff implements Sniff
             }
 
             $expectedIndent = ($indentLevel * $this->indent);
-            if (!($expectedIndent > 0 && strpos($tokens[$i]['content'], $phpcsFile->eolChar) !== false)
+            if (
+                !($expectedIndent > 0 && strpos($tokens[$i]['content'], $phpcsFile->eolChar) !== false)
                 && ($foundIndent !== $expectedIndent)
                 && (!in_array($tokens[$i + 1]['code'], $this->styleCodesToSkip))
             ) {
