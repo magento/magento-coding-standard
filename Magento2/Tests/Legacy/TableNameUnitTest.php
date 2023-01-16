@@ -19,7 +19,7 @@ class TableNameUnitTest extends AbstractSniffUnitTest
             7 => 1,
             16 => 1,
             20 => 1,
-            38 => 1,
+            40 => 1,
         ];
     }
 

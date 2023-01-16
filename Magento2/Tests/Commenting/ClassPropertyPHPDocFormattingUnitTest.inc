@@ -194,4 +194,10 @@ class correctlyFormattedClassMemberDocBlock
      * @see Message with some reference
      */
     protected string $itIsCorrect;
+
+    /**
+     * @var string
+     * @deprecated This property will be removed in version 1.0.0 without replacement
+     */
+    protected string $deprecatedWithKeyword;
 }
