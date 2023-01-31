@@ -39,5 +39,6 @@
         <each></each>
         <translate></translate>
         <scope></scope>
+        <span></span>
     </body>
 </html>

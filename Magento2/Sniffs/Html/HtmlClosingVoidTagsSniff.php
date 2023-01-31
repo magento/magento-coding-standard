@@ -53,6 +53,9 @@ class HtmlClosingVoidTagsSniff implements Sniff
         'wbr',
     ];
 
+    /** @var int */
+    private int $lastPointer = 0;
+
     /**
      * @inheritdoc
      */
@@ -82,14 +85,29 @@ class HtmlClosingVoidTagsSniff implements Sniff
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
-                    $fix = $phpcsFile->addFixableWarning(
-                        sprintf(self::WARNING_MESSAGE, $match[0]),
-                        null,
-                        self::WARNING_CODE
-                    );
+                    $ptr = $this->findPointer($phpcsFile, $match[0]);
+                    if ($ptr) {
+                        $fix = $phpcsFile->addFixableWarning(
+                            sprintf(self::WARNING_MESSAGE, $match[0]),
+                            $ptr,
+                            self::WARNING_CODE
+                        );
 
-                    if ($fix) {
-                        $this->fixClosingTag($phpcsFile, $match[0]);
+                        if ($fix) {
+                            $token = $phpcsFile->getTokens()[$ptr];
+                            $original = $match[0];
+                            $replacement = str_replace('/>', '>', $original);
+                            $phpcsFile->fixer->replaceToken(
+                                $ptr,
+                                str_replace($original, $replacement, $token['content'])
+                            );
+                        }
+                    } else {
+                        $phpcsFile->addWarning(
+                            sprintf(self::WARNING_MESSAGE, $match[0]),
+                            null,
+                            self::WARNING_CODE
+                        );
                     }
                 }
             }
@@ -101,22 +119,25 @@ class HtmlClosingVoidTagsSniff implements Sniff
      *
      * @param File $phpcsFile
      * @param string $needle
+     * @return int|null
      */
-    public function fixClosingTag(File $phpcsFile, string $needle): void
+    public function findPointer(File $phpcsFile, string $needle): ?int
     {
         foreach ($phpcsFile->getTokens() as $ptr => $token) {
+            if ($ptr < $this->lastPointer) {
+                continue;
+            }
+
             if ($token['code'] !== T_INLINE_HTML) {
                 continue;
             }
 
             if (str_contains($token['content'], $needle)) {
-                $original = $needle;
-                $replacement = str_replace('/>', '>', $original);
-
-                $phpcsFile->fixer->replaceToken($ptr, str_replace($original, $replacement, $token['content']));
-
-                break;
+                $this->lastPointer = $ptr;
+                return $ptr;
             }
         }
+
+        return null;
     }
 }

@@ -39,6 +39,9 @@ class HtmlSelfClosingTagsSniff implements Sniff
         'wbr',
     ];
 
+    /** @var int */
+    private int $lastPointer = 0;
+
     /**
      * @inheritDoc
      */
@@ -68,15 +71,32 @@ class HtmlSelfClosingTagsSniff implements Sniff
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (!in_array($match[1], self::HTML_VOID_ELEMENTS)) {
-                    $fix = $phpcsFile->addFixableError(
-                        'Avoid using self-closing tag with non-void html element'
-                        . ' - "' . $match[0]  . PHP_EOL,
-                        null,
-                        'HtmlSelfClosingNonVoidTag'
-                    );
+                    $ptr = $this->findPointer($phpcsFile, $match[0]);
+                    if ($ptr) {
+                        $fix = $phpcsFile->addFixableError(
+                            'Avoid using self-closing tag with non-void html element'
+                            . ' - "' . $match[0] . PHP_EOL,
+                            $ptr,
+                            'HtmlSelfClosingNonVoidTag'
+                        );
 
-                    if ($fix) {
-                        $this->fixClosingTag($phpcsFile, $match);
+                        if ($fix) {
+                            $token = $phpcsFile->getTokens()[$ptr];
+                            $original = $match[0];
+                            $replacement = str_replace('/>', '></' . $match[1] . '>', $original);
+                            $phpcsFile->fixer->replaceToken(
+                                $ptr,
+                                str_replace($original, $replacement, $token['content'])
+                            );
+
+                        }
+                    } else {
+                        $phpcsFile->addError(
+                            'Avoid using self-closing tag with non-void html element'
+                            . ' - "' . $match[0]  . PHP_EOL,
+                            null,
+                            'HtmlSelfClosingNonVoidTag'
+                        );
                     }
                 }
             }
@@ -86,24 +106,27 @@ class HtmlSelfClosingTagsSniff implements Sniff
     /**
      * Apply a fix for the detected issue
      *
-     * @param File  $phpcsFile
-     * @param array $match
+     * @param File $phpcsFile
+     * @param string $needle
+     * @return int|null
      */
-    private function fixClosingTag(File $phpcsFile, array $match): void
+    private function findPointer(File $phpcsFile, string $needle): ?int
     {
         foreach ($phpcsFile->getTokens() as $ptr => $token) {
+            if ($ptr < $this->lastPointer) {
+                continue;
+            }
+
             if ($token['code'] !== T_INLINE_HTML) {
                 continue;
             }
 
-            if (str_contains($token['content'], $match[0])) {
-                $original = $match[0];
-                $replacement = str_replace('/>', '></' . $match[1] . '>', $original);
-
-                $phpcsFile->fixer->replaceToken($ptr, str_replace($original, $replacement, $token['content']));
-
-                return;
+            if (str_contains($token['content'], $needle)) {
+                $this->lastPointer = $ptr;
+                return $ptr;
             }
         }
+
+        return null;
     }
 }
