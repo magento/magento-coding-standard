@@ -22,10 +22,8 @@
         <hr/>
         <img src="" alt=""/>
         <input type="text" id="test_input"/>
-        <keygen/>
         <link/>
         <meta/>
-        <param name="" value=""/>
         <video>
             <source/>
             <track src=""/>

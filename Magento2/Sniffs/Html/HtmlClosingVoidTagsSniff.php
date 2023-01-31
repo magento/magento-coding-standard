@@ -44,15 +44,13 @@ class HtmlClosingVoidTagsSniff implements Sniff
         'col',
         'embed',
         'hr',
+        'img',
         'input',
-        'keygen',
         'link',
-        'menuitem',
         'meta',
-        'param',
         'source',
         'track',
-        'wbr'
+        'wbr',
     ];
 
     /**

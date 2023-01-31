@@ -14,7 +14,9 @@ class HtmlSelfClosingTagsUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList()
     {
-        return [1 => 9];
+        return [
+            1 => 9,
+        ];
     }
 
     /**

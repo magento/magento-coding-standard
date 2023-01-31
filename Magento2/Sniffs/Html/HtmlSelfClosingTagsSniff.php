@@ -17,13 +17,13 @@ use PHP_CodeSniffer\Files\File;
 class HtmlSelfClosingTagsSniff implements Sniff
 {
     /**
-     * List of void elements
+     * List of void elements.
      *
-     * https://www.w3.org/TR/html51/syntax.html#writing-html-documents-elements
+     * https://html.spec.whatwg.org/multipage/syntax.html#void-elements
      *
      * @var string[]
      */
-    private $voidElements = [
+    private const HTML_VOID_ELEMENTS = [
         'area',
         'base',
         'br',
@@ -32,11 +32,8 @@ class HtmlSelfClosingTagsSniff implements Sniff
         'hr',
         'img',
         'input',
-        'keygen',
         'link',
-        'menuitem',
         'meta',
-        'param',
         'source',
         'track',
         'wbr',
@@ -70,7 +67,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
 
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
-                if (!in_array($match[1], $this->voidElements)) {
+                if (!in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $phpcsFile->addError(
                         'Avoid using self-closing tag with non-void html element'
                         . ' - "' . $match[0]  . PHP_EOL,
