@@ -68,13 +68,41 @@ class HtmlSelfClosingTagsSniff implements Sniff
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (!in_array($match[1], self::HTML_VOID_ELEMENTS)) {
-                    $phpcsFile->addError(
+                    $fix = $phpcsFile->addFixableError(
                         'Avoid using self-closing tag with non-void html element'
                         . ' - "' . $match[0]  . PHP_EOL,
                         null,
                         'HtmlSelfClosingNonVoidTag'
                     );
+
+                    if ($fix) {
+                        $this->fixClosingTag($phpcsFile, $match);
+                    }
                 }
+            }
+        }
+    }
+
+    /**
+     * Apply a fix for the detected issue
+     *
+     * @param File  $phpcsFile
+     * @param array $match
+     */
+    private function fixClosingTag(File $phpcsFile, array $match): void
+    {
+        foreach ($phpcsFile->getTokens() as $ptr => $token) {
+            if ($token['code'] !== T_INLINE_HTML) {
+                continue;
+            }
+
+            if (str_contains($token['content'], $match[0])) {
+                $original = $match[0];
+                $replacement = str_replace('/>', '></' . $match[1] . '>', $original);
+
+                $phpcsFile->fixer->replaceToken($ptr, str_replace($original, $replacement, $token['content']));
+
+                return;
             }
         }
     }

@@ -82,12 +82,40 @@ class HtmlClosingVoidTagsSniff implements Sniff
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
-                    $phpcsFile->addWarning(
+                    $fix = $phpcsFile->addFixableWarning(
                         sprintf(self::WARNING_MESSAGE, $match[0]),
                         null,
                         self::WARNING_CODE
                     );
+
+                    if ($fix) {
+                        $this->fixClosingTag($phpcsFile, $match[0]);
+                    }
                 }
+            }
+        }
+    }
+
+    /**
+     * Apply a fix for the detected issue
+     *
+     * @param File $phpcsFile
+     * @param string $needle
+     */
+    public function fixClosingTag(File $phpcsFile, string $needle): void
+    {
+        foreach ($phpcsFile->getTokens() as $ptr => $token) {
+            if ($token['code'] !== T_INLINE_HTML) {
+                continue;
+            }
+
+            if (str_contains($token['content'], $needle)) {
+                $original = $needle;
+                $replacement = str_replace('/>', '>', $original);
+
+                $phpcsFile->fixer->replaceToken($ptr, str_replace($original, $replacement, $token['content']));
+
+                break;
             }
         }
     }
