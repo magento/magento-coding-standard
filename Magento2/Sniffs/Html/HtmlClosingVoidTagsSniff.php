@@ -96,7 +96,8 @@ class HtmlClosingVoidTagsSniff implements Sniff
                         if ($fix) {
                             $token = $phpcsFile->getTokens()[$ptr];
                             $original = $match[0];
-                            $replacement = str_replace('/>', '>', $original);
+                            $replacement = str_replace(' />', '>', $original);
+                            $replacement = str_replace('/>', '>', $replacement);
                             $phpcsFile->fixer->replaceToken(
                                 $ptr,
                                 str_replace($original, $replacement, $token['content'])

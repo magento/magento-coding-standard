@@ -30,5 +30,6 @@
     </video>
     <wbr/>
     <hr/>
+    <hr style="color: red" />
 </body>
 </html>

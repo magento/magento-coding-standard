@@ -40,5 +40,6 @@
         <translate></translate>
         <scope></scope>
         <span></span>
+        <span style="color: red"></span>
     </body>
 </html>

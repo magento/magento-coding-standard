@@ -38,6 +38,7 @@ class HtmlClosingVoidTagsUnitTest extends AbstractSniffUnitTest
             29 => 1,
             31 => 1,
             32 => 1,
+            33 => 1,
         ];
     }
 }
