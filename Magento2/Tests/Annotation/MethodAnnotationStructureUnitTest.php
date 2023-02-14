@@ -31,13 +31,15 @@ class MethodAnnotationStructureUnitTest extends AbstractSniffUnitTest
             185 => 1,
             227 => 1,
             235 => 1,
+            261 => 1,
             268 => 2,
             269 => 1,
             277 => 1,
             278 => 1,
             288 => 1,
             289 => 1,
-            298 => 1
+            298 => 1,
+            396 => 1,
         ];
     }
 
