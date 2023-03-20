@@ -567,7 +567,8 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentOpenPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, 0);
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
-            if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
+            $methodName = $tokens[$stackPtr + 2]['content'];
+            if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr) && $methodName !== '__construct') {
                 $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
             }
