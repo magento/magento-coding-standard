@@ -135,6 +135,7 @@ class XssTemplateSniff implements Sniff
             $statement = array_shift($this->statements);
             $this->detectUnescapedString($statement);
         }
+        $this->hasDisallowedAnnotation = false;
     }
 
     /**
