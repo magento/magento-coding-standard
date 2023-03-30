@@ -60,9 +60,9 @@ class EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author is actually ok
+ * @author should not be used
  * @category is irrelevant
- * @package is not ment to be used
+ * @package should not be used
  * @subpackage does not belong here
  */
 class ExampleHandler
@@ -162,3 +162,20 @@ class OldHandler
 {
 
 }
+
+/**
+ * @deprecated This class will be removed in version 1.0.0 without replacement
+ */
+class DeprecatedButHandler
+{
+
+}
+
+/**
+ * @deprecated It's also deprecated - This class will be removed in version 1.0.0 without replacement
+ */
+class AlsoDeprecatedButHandler
+{
+
+}
+
