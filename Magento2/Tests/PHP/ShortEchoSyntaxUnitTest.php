@@ -24,6 +24,7 @@ class ShortEchoSyntaxUnitTest extends AbstractSniffUnitTest
     {
         return [
             5 => 1,
+            7 => 1,
         ];
     }
 }
