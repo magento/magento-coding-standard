@@ -44,7 +44,6 @@ interface EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author is actually ok
  */
 interface ExampleHandler
 {
