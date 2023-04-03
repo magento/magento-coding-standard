@@ -70,7 +70,17 @@ class Profiler
     const KEYWORD_PHRASE = false;
 
     /**
+    * @deprecated This constant will be removed in version 123.45.6789 without replacement
+    */
+    const KEYWORD_PHRASE_LONG_VERSION = false;
+
+    /**
      * @deprecated It's awesome - This constant will be removed in version 1.0.0 without replacement
      */
     const WITH_KEYWORD_PHRASE = false;
+
+    /**
+     * @deprecated It's awesome - This constant will be removed in version 123.45.6789 without replacement
+     */
+    const WITH_KEYWORD_PHRASE_LONG_VERSION = false;
 }

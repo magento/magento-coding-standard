@@ -4,6 +4,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Helpers\Commenting;
 
 use PHP_CodeSniffer\Files\File;
@@ -18,6 +19,7 @@ class PHPDocFormattingValidator
      *
      * @param int $startPtr
      * @param File $phpcsFile
+     *
      * @return int
      */
     public function findPHPDoc($startPtr, $phpcsFile)
@@ -53,6 +55,7 @@ class PHPDocFormattingValidator
      * @param int $namePtr
      * @param int $commentStartPtr
      * @param array $tokens
+     *
      * @return bool
      */
     public function providesMeaning($namePtr, $commentStartPtr, $tokens)
@@ -113,6 +116,7 @@ class PHPDocFormattingValidator
      *
      * @param int $commentStartPtr
      * @param array $tokens
+     *
      * @return bool
      */
     public function hasDeprecatedWellFormatted($commentStartPtr, $tokens)
@@ -129,6 +133,7 @@ class PHPDocFormattingValidator
             )) {
                 return true;
             }
+
             return false;
         }
 
@@ -141,6 +146,7 @@ class PHPDocFormattingValidator
      * @param string $tag
      * @param int $commentStartPtr
      * @param array $tokens
+     *
      * @return int
      */
     private function getTagPosition($tag, $commentStartPtr, $tokens)
