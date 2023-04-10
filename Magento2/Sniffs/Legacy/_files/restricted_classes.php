@@ -395,5 +395,10 @@ return [
                 'Magento/Ui/Test/Unit/Model/ManagerTest.php',
                 'Magento/Framework/View/Element/UiComponent/Config/Provider/Component/Definition.php',
             ]
+    ],
+    'GraphQL\Language\Parser' => [
+        'warning_code' => 'GraphQLLanguageParserIsRestricted',
+        'replacement' => 'Magento\Framework\GraphQl\Query\QueryParser',
+        'exclude' => []
     ]
 ];
