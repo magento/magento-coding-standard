@@ -194,6 +194,13 @@ class correctlyFormattedClassMemberDocBlock
      * @see Message with some reference
      */
     protected string $itIsCorrect;
+
+    /**
+     * @var string
+     * @deprecated This property will be removed in version 1.0.0 without replacement
+     */
+    protected string $deprecatedWithKeyword;
+
     private string $typedPropertyWithoutComment;
 
     private string $typedPropertyWithoutComment2;
@@ -205,6 +212,6 @@ class correctlyFormattedClassMemberDocBlock
     private Test $typedPropertyWithoutComment5;
 
     private Test|Test2 $typedPropertyWithoutComment6;
-    
-    private ?Test $typedPropertyWithoutComment7;    
+
+    private ?Test $typedPropertyWithoutComment7;
 }

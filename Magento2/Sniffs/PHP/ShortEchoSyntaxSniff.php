@@ -37,11 +37,30 @@ class ShortEchoSyntaxSniff implements Sniff
 
         $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
         if ($tokens[$nextToken]['code'] == T_ECHO) {
-            $phpcsFile->addWarning(
+            $fix = $phpcsFile->addFixableWarning(
                 'Short echo tag syntax must be used; expected "<?=" but found "<?php echo"',
                 $stackPtr,
                 'ShortEchoTag'
             );
+
+            if ($fix) {
+                $phpcsFile->fixer->beginChangeset();
+
+                if (($nextToken - $stackPtr) === 1) {
+                    $phpcsFile->fixer->replaceToken($stackPtr, '<?=');
+                } else {
+                    $phpcsFile->fixer->replaceToken($stackPtr, '<?= ');
+                }
+
+                for ($i = $stackPtr + 1; $i < $nextToken; $i++) {
+                    if ($tokens[$i]['code'] === T_WHITESPACE) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+                }
+
+                $phpcsFile->fixer->replaceToken($nextToken, '');
+                $phpcsFile->fixer->endChangeset();
+            }
         }
     }
 }

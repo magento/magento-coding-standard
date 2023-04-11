@@ -369,4 +369,24 @@ class MethodAnnotationFixture
     {
         return true;
     }
+
+    /**
+     * This deprecated function is correct even though it only contains the @deprecated tag.
+     *
+     * @deprecated This method will be removed in version 1.0.0 without replacement
+     */
+    public function correctBecauseOfKeywordPhrase()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is correct even though it only contains the @deprecated tag.
+     *
+     * @deprecated WOW! This method will be removed in version 1.0.0 without replacement
+     */
+    public function alsoCorrectBecauseOfKeywordPhrase()
+    {
+        return false;
+    }
 }
