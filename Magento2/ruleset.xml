@@ -94,6 +94,10 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
+    <rule ref="Magento2.Security.XssTemplate.FoundUnescaped">
+        <severity>10</severity>
+        <type>error</type>
+    </rule>
     <rule ref="PSR1.Classes.ClassDeclaration">
         <severity>10</severity>
         <type>error</type>
