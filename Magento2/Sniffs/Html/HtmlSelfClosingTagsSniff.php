@@ -59,10 +59,13 @@ class HtmlSelfClosingTagsSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        if ($stackPtr !== 0) {
+        static $lastFile;
+        if ($lastFile === $phpcsFile->getFilename()) {
             return;
         }
-        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
+        $lastFile = $phpcsFile->getFilename();
+
+        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()) - $stackPtr);
 
         if (empty($html)) {
             return;

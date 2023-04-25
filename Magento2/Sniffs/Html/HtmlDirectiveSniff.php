@@ -50,11 +50,14 @@ class HtmlDirectiveSniff implements Sniff
     {
         $this->usedVariables = [];
         $this->unfilteredVariables = [];
-        if ($stackPtr !== 0) {
+
+        static $lastFile;
+        if ($lastFile === $phpcsFile->getFilename()) {
             return;
         }
+        $lastFile = $phpcsFile->getFilename();
 
-        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
+        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()) - $stackPtr);
 
         if (empty($html)) {
             return;
