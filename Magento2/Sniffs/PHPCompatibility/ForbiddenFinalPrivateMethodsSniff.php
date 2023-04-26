@@ -12,8 +12,8 @@ namespace Magento2\Sniffs\PHPCompatibility;
 
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
-use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
-use Magento2\Helpers\PHPCSUtils\Utils\Scopes;
+use PHPCSUtils\Utils\FunctionDeclarations;
+use PHPCSUtils\Utils\Scopes;
 
 /**
  * Applying the final modifier on a private method will produce a warning since PHP 8.0

@@ -13,7 +13,7 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCompatibility\AbstractFunctionCallParameterSniff;
-use Magento2\Helpers\PHPCSUtils\BackCompat\BCTokens;
+use PHPCSUtils\BackCompat\BCTokens;
 
 /**
  * Detect calls to functions where the expected type of a parameter has been changed from integer to boolean.
