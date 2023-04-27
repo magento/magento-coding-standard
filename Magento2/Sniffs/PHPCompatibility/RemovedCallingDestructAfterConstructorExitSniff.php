@@ -13,11 +13,12 @@ namespace Magento2\Sniffs\PHPCompatibility;
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
-use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
-use Magento2\Helpers\PHPCSUtils\Utils\ObjectDeclarations;
-use Magento2\Helpers\PHPCSUtils\Utils\Scopes;
-use Magento2\Helpers\PHPCSUtils\Utils\UseStatements;
+use PHPCSUtils\Tokens\Collections;
+use PHPCSUtils\Utils\FunctionDeclarations;
+use PHPCSUtils\Utils\MessageHelper;
+use PHPCSUtils\Utils\ObjectDeclarations;
+use PHPCSUtils\Utils\Scopes;
+use PHPCSUtils\Utils\UseStatements;
 
 /**
  * As of PHP 8.0, when an object constructor exit()s, the destructor will no longer be called.
@@ -100,7 +101,7 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
 
             // Skip over nested closed scopes as possible for efficiency.
             // Ignore arrow functions as they aren't closed scopes.
-            if (isset(Collections::$closedScopes[$tokens[$current]['code']]) === true
+            if (isset(Collections::closedScopes()[$tokens[$current]['code']]) === true
                 && isset($tokens[$current]['scope_closer']) === true
             ) {
                 $current = $tokens[$current]['scope_closer'];
@@ -201,7 +202,7 @@ class RemovedCallingDestructAfterConstructorExitSniff extends Sniff
         }
 
         foreach ($exits as $ptr) {
-            $this->addMessage($phpcsFile, $error, $ptr, $isError, $errorCode, [$tokens[$ptr]['content']]);
+            MessageHelper::addMessage($phpcsFile, $error, $ptr, $isError, $errorCode, [$tokens[$ptr]['content']]);
         }
     }
 }
