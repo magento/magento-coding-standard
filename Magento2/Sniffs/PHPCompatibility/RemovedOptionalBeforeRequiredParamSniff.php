@@ -10,12 +10,11 @@
 
 namespace Magento2\Sniffs\PHPCompatibility;
 
-use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCompatibility\Sniff;
-use Magento2\Helpers\PHPCSUtils\Tokens\Collections;
-use Magento2\Helpers\PHPCSUtils\Utils\FunctionDeclarations;
+use PHPCSUtils\Tokens\Collections;
+use PHPCSUtils\Utils\FunctionDeclarations;
 
 /**
  * Declaring a required function parameter after an optional parameter is deprecated since PHP 8.0.
@@ -58,7 +57,7 @@ class RemovedOptionalBeforeRequiredParamSniff extends Sniff
     {
         $this->allowedInDefault += Tokens::$emptyTokens;
 
-        return Collections::functionDeclarationTokensBC();
+        return Collections::functionDeclarationTokens();
     }
 
     /**
@@ -78,14 +77,9 @@ class RemovedOptionalBeforeRequiredParamSniff extends Sniff
             return;
         }
 
-        try {
-            // Get all parameters from the function signature.
-            $parameters = FunctionDeclarations::getParameters($phpcsFile, $stackPtr);
-            if (empty($parameters)) {
-                return;
-            }
-        } catch (RuntimeException $e) {
-            // Most likely a T_STRING which wasn't an arrow function.
+        // Get all parameters from the function signature.
+        $parameters = FunctionDeclarations::getParameters($phpcsFile, $stackPtr);
+        if (empty($parameters)) {
             return;
         }
 
