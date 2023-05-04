@@ -20,17 +20,17 @@ class DeprecatedEncodingsForMBStringFunctionsUnitTest extends BaseSniffTest
      */
     private $messages = [
         'qprint' => 'Handling QPrint via mbstring is deprecated since PHP 8.2;' .
-            ' use quoted_printable_encode/quoted_printable_decode instead',
+            ' Use quoted_printable_encode/quoted_printable_decode instead',
         'quoted-printable' => 'Handling QPrint via mbstring is deprecated since PHP 8.2;' .
-            ' use quoted_printable_encode/quoted_printable_decode instead',
+            ' Use quoted_printable_encode/quoted_printable_decode instead',
         'base64' => 'Handling Base64 via mbstring is deprecated since PHP 8.2;' .
-            ' use base64_encode/base64_decode instead',
+            ' Use base64_encode/base64_decode instead',
         'uuencode' => 'Handling Uuencode via mbstring is deprecated since PHP 8.2;' .
-            ' use convert_uuencode/convert_uudecode instead',
+            ' Use convert_uuencode/convert_uudecode instead',
         'html-entities' => 'Handling HTML entities via mbstring is deprecated since PHP 8.2;' .
-            ' use htmlspecialchars, htmlentities, or mb_encode_numericentity/mb_decode_numericentity instead',
+            ' Use htmlspecialchars, htmlentities, or mb_encode_numericentity/mb_decode_numericentity instead',
         'html' => 'Handling HTML entities via mbstring is deprecated since PHP 8.2;' .
-            ' use htmlspecialchars, htmlentities, or mb_encode_numericentity/mb_decode_numericentity instead'
+            ' Use htmlspecialchars, htmlentities, or mb_encode_numericentity/mb_decode_numericentity instead'
     ];
 
     /**

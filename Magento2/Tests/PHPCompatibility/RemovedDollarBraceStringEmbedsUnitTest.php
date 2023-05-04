@@ -67,7 +67,7 @@ class RemovedDollarBraceStringEmbedsUnitTest extends BaseSniffTest
             [57, '${foo}'],
             [58, '${foo[\'bar\']}'],
             [59, '${foo}'],
-            [59, '${text}'],
+            [59, '${t}'],
             [62, '${foo}'],
             [65, '${foo}'],
         ];
