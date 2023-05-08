@@ -56,7 +56,7 @@ echo "$\{foo} and $foo";
 // Type 3: Braces after the dollar sign.
 echo "${foo}";
 echo "${foo['bar']}";
-$text = "some text ${foo} some ${text}";
+$text = "some text ${foo} some ${t}";
 
 $heredoc = <<<EOD
 some text ${foo} some text

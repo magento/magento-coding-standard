@@ -119,7 +119,7 @@ class RemovedDollarBraceStringEmbedsSniff extends Sniff
             // Type 4.
             $message = 'Using %s (variable variables) in strings is deprecated since PHP 8.2, use {${expr}} instead.';
             $code    = 'DeprecatedExpressionSyntax';
-            if (\preg_match('`^\$\{(?P<varname>[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)(?:\[([\'"])?[^\$\{\}\]]+(?:\2)?\])?\}$`', $embed) === 1) {
+            if (\preg_match('`^\$\{(?P<varname>[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)(?:\[([\'"])?[^\$\{\}\]]+(?:\2)?\])?\}$`', $embed) === 1) {
                 // Type 3.
                 $message = 'Using ${var} in strings is deprecated since PHP 8.2, use {$var} instead. Found: %s';
                 $code    = 'DeprecatedVariableSyntax';
