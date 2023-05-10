@@ -1,11 +1,7 @@
 <?php
 /**
- * PHPCompatibility, an external standard for PHP_CodeSniffer.
- *
- * @package   PHPCompatibility
- * @copyright 2012-2020 PHPCompatibility Contributors
- * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
- * @link      https://github.com/PHPCompatibility/PHPCompatibility
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento2\Tests\PHPCompatibility;
@@ -15,12 +11,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 /**
  * Test the ForbiddenFinalPrivateMethods sniff.
  *
- * @group forbiddenFinalPrivateMethods
- * @group functiondeclarations
- *
  * @covers \Magento2\Sniffs\PHPCompatibility\ForbiddenFinalPrivateMethodsSniff
- *
- * @since 10.0.0
  */
 class ForbiddenFinalPrivateMethodsUnitTest extends AbstractSniffUnitTest
 {
@@ -35,15 +26,40 @@ class ForbiddenFinalPrivateMethodsUnitTest extends AbstractSniffUnitTest
     /**
      * @inheritdoc
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
+        if ($testFile === 'ForbiddenFinalPrivateMethodsUnitTest.inc') {
+            return [
+                34 => 1,
+                35 => 1,
+                39 => 1,
+                40 => 1,
+                45 => 1,
+                46 => 1,
+                54 => 1,
+                60 => 1,
+            ];
+        }
         return [
+            5 => 1,
             6 => 1,
-            7 => 1,
-            14 => 1,
-            15 => 1,
-            23 => 1,
-            25 => 1,
+            11 => 1,
+            12 => 1,
+            13 => 1,
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getTestFiles($testFileBase)
+    {
+        $files = parent::getTestFiles($testFileBase);
+        return array_merge(
+            $files,
+            [
+                dirname(__FILE__, 4) . '/PHPCompatibility/Tests/FunctionDeclarations/ForbiddenFinalPrivateMethodsUnitTest.inc',
+            ]
+        );
     }
 }

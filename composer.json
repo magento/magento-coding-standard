@@ -19,7 +19,8 @@
         "phpcsstandards/phpcsutils": "~1.0.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5.8"
+        "phpunit/phpunit": "^9.5.8",
+        "yoast/phpunit-polyfills": "^1.0"
     },
     "autoload-dev": {
         "files": [
@@ -28,7 +29,8 @@
     },
     "autoload": {
         "classmap": [
-            "PHP_CodeSniffer/Tokenizers/"
+            "PHP_CodeSniffer/Tokenizers/",
+            "PHPCompatibility/"
         ],
         "psr-4": {
             "Magento2\\": "Magento2/",

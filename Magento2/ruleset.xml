@@ -168,7 +168,7 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
-    <rule ref="Magento2.PHPCompatibility.RemovedFunctions">
+    <rule ref="PHPCompatibility.FunctionUse.RemovedFunctions">
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -771,8 +771,6 @@
         <!-- Following sniffs have an equivalent in PHPCS -->
         <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
         <exclude name="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared" />
-        <!-- Following sniffs have an equivalent in Magento2 -->
-        <exclude name="PHPCompatibility.FunctionUse.RemovedFunctions" />
     </rule>
     <!--
      All these rules belong to the unreleased PhpCompatibility 10. Remove them once PHPCompatibility is

@@ -11,7 +11,7 @@ namespace Magento2\Tests\PHPCompatibility;
  *
  * @covers \Magento2\Sniffs\PHPCompatibility\DeprecatedEncodingsForMBStringFunctionsSniff
  */
-class DeprecatedEncodingsForMBStringFunctionsUnitTest extends BaseSniffTest
+class DeprecatedEncodingsForMBStringFunctionsUnitTest extends \PHPCompatibility\Tests\BaseSniffTest
 {
     /**
      * Message per encoding
@@ -94,5 +94,13 @@ class DeprecatedEncodingsForMBStringFunctionsUnitTest extends BaseSniffTest
     {
         $file = $this->sniffFile(__FILE__, '8.1');
         $this->assertNoViolation($file);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getSniffCode()
+    {
+        return 'Magento2.PHPCompatibility.DeprecatedEncodingsForMBStringFunctions';
     }
 }
