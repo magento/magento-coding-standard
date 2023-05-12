@@ -6,6 +6,7 @@
 
 namespace Magento2\Sniffs\PHPCompatibility;
 
+use Magento2\Helpers\Assert;
 use PHP_CodeSniffer\Files\File;
 use PHPCompatibility\Sniff;
 use PHP_CodeSniffer_Tokens as Tokens;
@@ -20,39 +21,11 @@ use PHP_CodeSniffer_Tokens as Tokens;
 class DeprecatedEncodingsForMBStringFunctionsSniff extends Sniff
 {
     /**
-     * List of tokens which when they precede the $stackPtr indicate that this
-     * is not a function call.
-     *
-     * @var array
-     */
-    private $ignoreTokens = [
-        \T_DOUBLE_COLON => true,
-        \T_OBJECT_OPERATOR => true,
-        \T_FUNCTION => true,
-        \T_NEW => true,
-        \T_CONST => true,
-        \T_USE => true,
-    ];
-
-    /**
-     * Text string tokens to examine.
-     *
-     * @var array
-     */
-    private $textStringTokens = [
-        \T_CONSTANT_ENCAPSED_STRING => true,
-        \T_DOUBLE_QUOTED_STRING => true,
-        \T_INLINE_HTML => true,
-        \T_HEREDOC => true,
-        \T_NOWDOC => true,
-    ];
-
-    /**
      * A list of MBString functions that emits deprecation notice
      *
      * @var \int[][]
      */
-    protected $targetFunctions = [
+    private $targetFunctions = [
         'mb_check_encoding' => [2],
         'mb_chr' => [2],
         'mb_convert_case' => [3],
@@ -124,21 +97,7 @@ class DeprecatedEncodingsForMBStringFunctionsSniff extends Sniff
         $function = $tokens[$stackPtr]['content'];
         $functionLc = strtolower($function);
 
-        if (strpos($functionLc, 'mb_') !== 0) {
-            return;
-        }
-
-        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-
-        if (isset($this->ignoreTokens[$tokens[$prevNonEmpty]['code']]) === true) {
-            // Not a call to a PHP function.
-            return;
-        }
-
-        if ($tokens[$prevNonEmpty]['code'] === \T_NS_SEPARATOR
-            && $tokens[$prevNonEmpty - 1]['code'] === \T_STRING
-        ) {
-            // Namespaced function.
+        if (!isset($this->targetFunctions[$functionLc]) || !Assert::isBuiltinFunctionCall($phpcsFile, $stackPtr)) {
             return;
         }
 
@@ -161,7 +120,7 @@ class DeprecatedEncodingsForMBStringFunctionsSniff extends Sniff
     public function processParameter(File $phpcsFile, string $function, int $index, array $parameter)
     {
         $functionLc = strtolower($function);
-        if (!isset($this->targetFunctions[$functionLc]) || !in_array($index, $this->targetFunctions[$functionLc])) {
+        if (!in_array($index, $this->targetFunctions[$functionLc])) {
             return;
         }
 
@@ -175,6 +134,14 @@ class DeprecatedEncodingsForMBStringFunctionsSniff extends Sniff
             $items = [$parameter];
         }
 
+        $textStringTokens = [
+            \T_CONSTANT_ENCAPSED_STRING => true,
+            \T_DOUBLE_QUOTED_STRING => true,
+            \T_INLINE_HTML => true,
+            \T_HEREDOC => true,
+            \T_NOWDOC => true,
+        ];
+
         foreach ($items as $item) {
             for ($i = $item['start']; $i <= $item['end']; $i++) {
                 if ($tokens[$i]['code'] === \T_STRING
@@ -184,7 +151,7 @@ class DeprecatedEncodingsForMBStringFunctionsSniff extends Sniff
                     break;
                 }
 
-                if (isset($this->textStringTokens[$tokens[$i]['code']]) === true) {
+                if (isset($textStringTokens[$tokens[$i]['code']]) === true) {
                     $encoding = $this->stripQuotes(strtolower(trim($tokens[$i]['content'])));
                     $encodings = array_flip(explode(',', $encoding));
                     if (count(array_intersect_key($encodings, $this->messages)) > 0) {
