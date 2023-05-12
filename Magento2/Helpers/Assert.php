@@ -17,7 +17,7 @@ use PHPCSUtils\Tokens\Collections;
 class Assert
 {
     /**
-     * Checks whether the function call is a built-in function call.
+     * Checks whether it is a built-in function call.
      *
      * @param File $phpcsFile
      * @param int $stackPtr
@@ -35,16 +35,18 @@ class Assert
         }
 
         $prevPtr = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        $ignorePrevToken = [\T_NEW => true] + Collections::objectOperators();
-        if (isset($ignorePrevToken[$tokens[$prevPtr]['code']])) {
-            return false;
-        }
-
-        if ($tokens[$prevPtr]['code'] === \T_NS_SEPARATOR) {
-            $prevPrevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prevPtr - 1), null, true);
-            if ($tokens[$prevPrevToken]['code'] === \T_STRING || $tokens[$prevPrevToken]['code'] === \T_NAMESPACE
+        if ($prevPtr !== false) {
+            if (isset(Collections::objectOperators()[$tokens[$prevPtr]['code']])
+                || $tokens[$prevPtr]['code'] === \T_NEW
             ) {
                 return false;
+            }
+
+            if ($tokens[$prevPtr]['code'] === \T_NS_SEPARATOR) {
+                $prevPrevPr = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prevPtr - 1), null, true);
+                if ($prevPrevPr !== false && \in_array($tokens[$prevPrevPr]['code'], [\T_STRING, \T_NAMESPACE], true)) {
+                    return false;
+                }
             }
         }
 
