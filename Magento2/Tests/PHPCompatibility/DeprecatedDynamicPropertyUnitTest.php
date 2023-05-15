@@ -11,7 +11,7 @@ namespace Magento2\Tests\PHPCompatibility;
  *
  * @covers \Magento2\Sniffs\PHPCompatibility\DeprecatedEncodingsForMBStringFunctionsSniff
  */
-class DeprecatedDynamicPropertyUnitTest extends BaseSniffTest
+class DeprecatedDynamicPropertyUnitTest extends \PHPCompatibility\Tests\BaseSniffTest
 {
     const TEST_FILE_WITH_AUTOLOADABLE_CLASS = 'DeprecatedDynamicPropertyUnitTest.autoload.inc';
 
@@ -109,5 +109,13 @@ class DeprecatedDynamicPropertyUnitTest extends BaseSniffTest
                 ]
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getSniffCode()
+    {
+        return 'Magento2.PHPCompatibility.DeprecatedDynamicProperty';
     }
 }
