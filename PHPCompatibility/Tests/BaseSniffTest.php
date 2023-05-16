@@ -8,11 +8,12 @@
  * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
-namespace Magento2\Tests\PHPCompatibility;
+namespace PHPCompatibility\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHP_CodeSniffer\Files\File;
 use PHPCSUtils\BackCompat\Helper;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertStringContains;
 
 /**
  * Base sniff test class file.
@@ -27,10 +28,11 @@ use PHPCSUtils\BackCompat\Helper;
  * @since 8.0.0  Compatible with PHP_CodeSniffer 3+.
  * @since 8.2.0  Allows for sniffs in multiple categories.
  * @since 9.0.0  Dropped support for PHP_CodeSniffer 1.x.
- * @since 10.0.0 Updated for preliminary support of PHP_CodeSniffer 4.
+ * @since 10.0.0 Updated for preliminary support of PHP_CodeSniffer 4 and dropped support for PHPCS 2.x.
  */
-abstract class BaseSniffTest extends TestCase
+class BaseSniffTest extends TestCase
 {
+    use AssertStringContains;
 
     /**
      * The name of the standard as registered with PHPCS.
@@ -39,18 +41,7 @@ abstract class BaseSniffTest extends TestCase
      *
      * @var string
      */
-    private const STANDARD_NAME = 'Magento2';
-
-    /**
-     * The PHP_CodeSniffer object used for testing.
-     *
-     * Used by PHPCS 2.x.
-     *
-     * @since 5.5
-     *
-     * @var \PHP_CodeSniffer
-     */
-    protected static $phpcs = null;
+    const STANDARD_NAME = 'PHPCompatibility';
 
     /**
      * An array of PHPCS results by filename and PHP version.
@@ -89,42 +80,12 @@ abstract class BaseSniffTest extends TestCase
     }
 
     /**
-     * Sets up this unit test.
-     *
-     * @before
-     *
-     * @since 5.5
-     * @since 10.0.0 Renamed the method from `setUp()` to `setUpPHPCS()` and now using
-     *               the `@before` annotation to allow for PHPUnit cross-version compatibility.
-     *
-     * @return void
-     */
-    protected function setUpPHPCS()
-    {
-        if (\class_exists('\PHP_CodeSniffer') === true) {
-            /*
-             * PHPCS 2.x.
-             */
-            if (self::$phpcs === null) {
-                self::$phpcs = new \PHP_CodeSniffer();
-            }
-
-            self::$phpcs->cli->setCommandLineValues(['-pq', '--colors']);
-
-            // Restrict the sniffing of the test case files to the particular sniff being tested.
-            self::$phpcs->initStandard(self::STANDARD_NAME, [$this->getSniffCode()]);
-
-            self::$phpcs->setIgnorePatterns([]);
-        }
-    }
-
-    /**
      * Reset the testVersion after each test.
      *
      * @after
      *
      * @since 5.5
-     * @since 10.0.0 Renamed the method from `tearDwon()` to `resetTestVersion()` and now using
+     * @since 10.0.0 Renamed the method from `tearDown()` to `resetTestVersion()` and now using
      *               the `@after` annotation to allow for PHPUnit cross-version compatibility.
      *
      * @return void
@@ -180,8 +141,9 @@ abstract class BaseSniffTest extends TestCase
             return self::$sniffFiles[$pathToFile][$targetPhpVersion];
         }
 
-        try {
-            if (\class_exists('\PHP_CodeSniffer\Files\LocalFile')) {
+        // Set up the Config and tokenize the test case file only once.
+        if (isset(self::$sniffFiles[$pathToFile]['only_parsed']) === false) {
+            try {
                 // PHPCS 3.x, 4.x.
                 $config            = new \PHP_CodeSniffer\Config();
                 $config->cache     = false;
@@ -189,28 +151,29 @@ abstract class BaseSniffTest extends TestCase
                 $config->sniffs    = [$this->getSniffCode()];
                 $config->ignored   = [];
 
-                if ($targetPhpVersion !== 'none') {
-                    Helper::setConfigData('testVersion', $targetPhpVersion, true, $config);
-                }
-
                 self::$lastConfig = $config;
 
                 $ruleset = new \PHP_CodeSniffer\Ruleset($config);
 
-                self::$sniffFiles[$pathToFile][$targetPhpVersion] = new \PHP_CodeSniffer\Files\LocalFile($pathToFile, $ruleset, $config);
-                self::$sniffFiles[$pathToFile][$targetPhpVersion]->process();
-            } else {
-                // PHPCS 2.x.
-                self::$lastConfig = null;
-
-                if ($targetPhpVersion !== 'none') {
-                    Helper::setConfigData('testVersion', $targetPhpVersion, true);
-                }
-
-                self::$sniffFiles[$pathToFile][$targetPhpVersion] = self::$phpcs->processFile($pathToFile);
+                self::$sniffFiles[$pathToFile]['only_parsed'] = new \PHP_CodeSniffer\Files\LocalFile($pathToFile, $ruleset, $config);
+                self::$sniffFiles[$pathToFile]['only_parsed']->parse();
+            } catch (\Exception $e) {
+                $this->fail('An unexpected exception has been caught when parsing file "' . $pathToFile . '" : ' . $e->getMessage());
+                return false;
             }
+        }
+
+        // Now process the file against the target testVersion setting and cache the results.
+        self::$sniffFiles[$pathToFile][$targetPhpVersion] = clone self::$sniffFiles[$pathToFile]['only_parsed'];
+
+        if ($targetPhpVersion !== 'none') {
+            Helper::setConfigData('testVersion', $targetPhpVersion, true, self::$sniffFiles[$pathToFile][$targetPhpVersion]->config);
+        }
+
+        try {
+            self::$sniffFiles[$pathToFile][$targetPhpVersion]->process();
         } catch (\Exception $e) {
-            $this->fail('An unexpected exception has been caught when loading file "' . $pathToFile . '" : ' . $e->getMessage());
+            $this->fail('An unexpected exception has been caught when processing file "' . $pathToFile . '" : ' . $e->getMessage());
             return false;
         }
 
@@ -284,11 +247,6 @@ abstract class BaseSniffTest extends TestCase
         $insteadMessagesString = \implode(', ', $insteadFoundMessages);
 
         $msg = "Expected $type message '$expectedMessage' on line $lineNumber not found. Instead found: $insteadMessagesString.";
-
-        if (\method_exists($this, 'assertStringContainsString') === false) {
-            // PHPUnit < 7.
-            return $this->assertContains($expectedMessage, $insteadMessagesString, $msg);
-        }
 
         return $this->assertStringContainsString($expectedMessage, $insteadMessagesString, $msg);
     }

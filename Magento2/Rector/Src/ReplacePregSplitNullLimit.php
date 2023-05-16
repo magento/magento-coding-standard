@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Magento2\Rector\Src;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Scalar\LNumber;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -29,11 +29,12 @@ class ReplacePregSplitNullLimit extends AbstractRector
      */
     public function refactor(Node $node): ?Node
     {
-        if (!$this->isName($node->name, 'preg_split')) {
+        if (!$this->isName($node->name, 'preg_split') || !isset($node->args[2])) {
             return null;
         }
+        $value = $node->args[2]->value;
 
-        if ($node->args[2] !== LNumber::class) {
+        if ($value instanceof ConstFetch && $value->name->toString() === 'null') {
             $node->args[2] = $this->nodeFactory->createArg(-1);
             return $node;
         }
