@@ -10,6 +10,11 @@ class Fixture
     public function notOk()
     {
         $this->create('Magento\CustomerSegment\Model\Segment\Condition\Customer\Address');
+        $this->create('Magento\\CustomerSegment\\Model\\Segment\\Condition\\Customer\\Address');
+        $this->create("Magento\\CustomerSegment\\Model\\Segment\\Condition\\Customer\\Address");
+        $this->create('\Magento\CustomerSegment\Model\Segment\Condition\Customer\Address');
+        $this->create('\Magento\\CustomerSegment\\Model\\Segment\\Condition\\Customer\\Address');
+        $this->create("\Magento\\CustomerSegment\\Model\\Segment\\Condition\\Customer\\Address");
     }
 
     public function thisIsFine(string $class)
