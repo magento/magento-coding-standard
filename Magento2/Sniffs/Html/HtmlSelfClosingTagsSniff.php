@@ -55,7 +55,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
      *
      * @param File $phpcsFile
      * @param int $stackPtr
-     * @return int|void
+     * @return void
      */
     public function process(File $phpcsFile, $stackPtr)
     {
