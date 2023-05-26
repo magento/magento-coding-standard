@@ -53,12 +53,16 @@ class MultipleEmptyLinesSniff implements Sniff
                 $next = $phpcsFile->findNext(T_WHITESPACE, $stackPtr, null, true);
                 $lines = $tokens[$next]['line'] - $tokens[$stackPtr]['line'];
                 if ($lines > 1) {
-                    $phpcsFile->addWarning(
+                    $fix = $phpcsFile->addFixableWarning(
                         $this->warningMessage,
                         $stackPtr,
                         $this->warningCode,
                         [$lines]
                     );
+
+                    if ($fix) {
+                        $phpcsFile->fixer->replaceToken($stackPtr, '');
+                    }
                 }
             }
         }
