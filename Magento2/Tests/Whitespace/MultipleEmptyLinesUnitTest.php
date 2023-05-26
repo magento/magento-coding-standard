@@ -25,6 +25,8 @@ class MultipleEmptyLinesUnitTest extends AbstractSniffUnitTest
         return [
             6 => 1,
             12 => 1,
+            15 => 1,
+            19 => 1,
         ];
     }
 }
