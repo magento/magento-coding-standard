@@ -111,7 +111,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
      * @param string $needle
      * @return int|null
      */
-    private function findPointer(File $phpcsFile, string $needle): ?int
+    protected function findPointer(File $phpcsFile, string $needle): ?int
     {
         foreach ($phpcsFile->getTokens() as $ptr => $token) {
             if ($ptr < $this->lastPointer) {

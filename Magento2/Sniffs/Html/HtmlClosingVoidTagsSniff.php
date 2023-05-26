@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Sniff for void closing tags.
  */
-class HtmlClosingVoidTagsSniff implements Sniff
+class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
 {
     /**
      * String representation of warning.
@@ -52,9 +52,6 @@ class HtmlClosingVoidTagsSniff implements Sniff
         'track',
         'wbr',
     ];
-
-    /** @var int */
-    private int $lastPointer = 0;
 
     /**
      * @inheritdoc
@@ -113,32 +110,5 @@ class HtmlClosingVoidTagsSniff implements Sniff
                 }
             }
         }
-    }
-
-    /**
-     * Apply a fix for the detected issue
-     *
-     * @param File $phpcsFile
-     * @param string $needle
-     * @return int|null
-     */
-    public function findPointer(File $phpcsFile, string $needle): ?int
-    {
-        foreach ($phpcsFile->getTokens() as $ptr => $token) {
-            if ($ptr < $this->lastPointer) {
-                continue;
-            }
-
-            if ($token['code'] !== T_INLINE_HTML) {
-                continue;
-            }
-
-            if (str_contains($token['content'], $needle)) {
-                $this->lastPointer = $ptr;
-                return $ptr;
-            }
-        }
-
-        return null;
     }
 }
