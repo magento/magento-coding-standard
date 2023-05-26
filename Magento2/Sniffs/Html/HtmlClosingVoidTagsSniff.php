@@ -94,6 +94,11 @@ class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
                         $original = $token['content'];
                         $replacement = str_replace(' />', '>', $original);
                         $replacement = str_replace('/>', '>', $replacement);
+
+                        if (preg_match('{^\s* />}', $original)) {
+                            $replacement = ' ' . $replacement;
+                        }
+
                         $phpcsFile->fixer->replaceToken($ptr, $replacement);
                     }
                 }
