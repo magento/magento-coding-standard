@@ -31,37 +31,6 @@ class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
     private const WARNING_CODE = 'HtmlClosingVoidElements';
 
     /**
-     * List of void elements.
-     *
-     * https://html.spec.whatwg.org/multipage/syntax.html#void-elements
-     *
-     * @var string[]
-     */
-    private const HTML_VOID_ELEMENTS = [
-        'area',
-        'base',
-        'br',
-        'col',
-        'embed',
-        'hr',
-        'img',
-        'input',
-        'link',
-        'meta',
-        'source',
-        'track',
-        'wbr',
-    ];
-
-    /**
-     * @inheritdoc
-     */
-    public function register(): array
-    {
-        return [T_INLINE_HTML];
-    }
-
-    /**
      * Detect use of self-closing tag with void html element.
      *
      * @param File $phpcsFile

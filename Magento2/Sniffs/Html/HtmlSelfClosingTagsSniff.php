@@ -23,7 +23,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
      *
      * @var string[]
      */
-    private const HTML_VOID_ELEMENTS = [
+    protected const HTML_VOID_ELEMENTS = [
         'area',
         'base',
         'br',
