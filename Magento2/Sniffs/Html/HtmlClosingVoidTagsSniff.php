@@ -83,29 +83,18 @@ class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $ptr = $this->findPointer($phpcsFile, $match[0]);
-                    if (!str_contains($match[0], "\n")) {
-                        $fix = $phpcsFile->addFixableWarning(
-                            sprintf(self::WARNING_MESSAGE, $match[0]),
-                            $ptr,
-                            self::WARNING_CODE
-                        );
+                    $fix = $phpcsFile->addFixableWarning(
+                        sprintf(self::WARNING_MESSAGE, $match[0]),
+                        $ptr,
+                        self::WARNING_CODE
+                    );
 
-                        if ($fix) {
-                            $token = $phpcsFile->getTokens()[$ptr];
-                            $original = $match[0];
-                            $replacement = str_replace(' />', '>', $original);
-                            $replacement = str_replace('/>', '>', $replacement);
-                            $phpcsFile->fixer->replaceToken(
-                                $ptr,
-                                str_replace($original, $replacement, $token['content'])
-                            );
-                        }
-                    } else {
-                        $phpcsFile->addWarning(
-                            sprintf(self::WARNING_MESSAGE, $match[0]),
-                            $ptr,
-                            self::WARNING_CODE
-                        );
+                    if ($fix) {
+                        $token = $phpcsFile->getTokens()[$ptr];
+                        $original = $token['content'];
+                        $replacement = str_replace(' />', '>', $original);
+                        $replacement = str_replace('/>', '>', $replacement);
+                        $phpcsFile->fixer->replaceToken($ptr, $replacement);
                     }
                 }
             }

@@ -72,32 +72,19 @@ class HtmlSelfClosingTagsSniff implements Sniff
             foreach ($matches as $match) {
                 if (!in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $ptr = $this->findPointer($phpcsFile, $match[0]);
-                    if (!str_contains($match[0], "\n")) {
-                        $fix = $phpcsFile->addFixableError(
-                            'Avoid using self-closing tag with non-void html element'
-                            . ' - "' . $match[0] . PHP_EOL,
-                            $ptr,
-                            'HtmlSelfClosingNonVoidTag'
-                        );
+                    $fix = $phpcsFile->addFixableError(
+                        'Avoid using self-closing tag with non-void html element'
+                        . ' - "' . $match[0] . PHP_EOL,
+                        $ptr,
+                        'HtmlSelfClosingNonVoidTag'
+                    );
 
-                        if ($fix) {
-                            $token = $phpcsFile->getTokens()[$ptr];
-                            $original = $match[0];
-                            $replacement = str_replace(' />', '></' . $match[1] . '>', $original);
-                            $replacement = str_replace('/>', '></' . $match[1] . '>', $replacement);
-                            $phpcsFile->fixer->replaceToken(
-                                $ptr,
-                                str_replace($original, $replacement, $token['content'])
-                            );
-
-                        }
-                    } else {
-                        $phpcsFile->addError(
-                            'Avoid using self-closing tag with non-void html element'
-                            . ' - "' . $match[0]  . PHP_EOL,
-                            $ptr,
-                            'HtmlSelfClosingNonVoidTag'
-                        );
+                    if ($fix) {
+                        $token = $phpcsFile->getTokens()[$ptr];
+                        $original = $token['content'];
+                        $replacement = str_replace(' />', '></' . $match[1] . '>', $original);
+                        $replacement = str_replace('/>', '></' . $match[1] . '>', $replacement);
+                        $phpcsFile->fixer->replaceToken($ptr, $replacement);
                     }
                 }
             }

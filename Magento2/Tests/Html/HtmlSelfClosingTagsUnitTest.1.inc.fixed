@@ -40,9 +40,9 @@
         <label for="test_input"></label>
         <label
                for="multi-line-input"
-               />
+              ></label>
         <label
-               for="multi-line-input2" />
+               for="multi-line-input2"></label>
         <style type="text/css"></style>
         <div></div>
         <span></span>
