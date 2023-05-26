@@ -83,7 +83,7 @@ class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $ptr = $this->findPointer($phpcsFile, $match[0]);
-                    if ($ptr) {
+                    if (!str_contains($match[0], "\n")) {
                         $fix = $phpcsFile->addFixableWarning(
                             sprintf(self::WARNING_MESSAGE, $match[0]),
                             $ptr,
@@ -103,7 +103,7 @@ class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
                     } else {
                         $phpcsFile->addWarning(
                             sprintf(self::WARNING_MESSAGE, $match[0]),
-                            null,
+                            $ptr,
                             self::WARNING_CODE
                         );
                     }
