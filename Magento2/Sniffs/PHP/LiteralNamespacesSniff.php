@@ -53,11 +53,15 @@ class LiteralNamespacesSniff implements Sniff
         }
 
         if (preg_match($this->literalNamespacePattern, $content) === 1) {
-            $phpcsFile->addWarning(
+            $fix = $phpcsFile->addFixableWarning(
                 "Use ::class notation instead.",
                 $stackPtr,
                 'LiteralClassUsage'
             );
+
+            if ($fix) {
+                $phpcsFile->fixer->replaceToken($stackPtr, '\\' . trim($content, '\\') . '::class');
+            }
         }
     }
 }
