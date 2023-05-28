@@ -350,7 +350,7 @@
         <severity>8</severity>
         <type>warning</type>
     </rule>
-   
+
     <!-- Severity 7 warnings: General code issues. -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <severity>7</severity>
@@ -762,7 +762,7 @@
     </rule>
 
     <!-- PHPCompatibility configuration. -->
-    <config name="testVersion" value="7.4-"/>
+    <config name="testVersion" value="8.1-8.2"/>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
         <!-- Following sniffs have been updated or renamed in PHPCompatibility 10 -->
