@@ -28,6 +28,7 @@ class FileProxy extends \PHP_CodeSniffer\Files\File
     {
         $this->file = $file;
         $this->proxies = $proxies;
+        $this->fixer = $file->fixer;
         // parent constructor is not called intentionally
     }
 
