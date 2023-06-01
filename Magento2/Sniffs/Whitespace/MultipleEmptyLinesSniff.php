@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Whitespace;
 
 use PHP_CodeSniffer\Files\File;
@@ -61,7 +63,16 @@ class MultipleEmptyLinesSniff implements Sniff
                     );
 
                     if ($fix) {
-                        $phpcsFile->fixer->replaceToken($stackPtr, '');
+                        // $stackPtr + 1 to keep one empty line.
+                        // $next - 1 to keep the indentation
+                        for ($i = $stackPtr + 1; $i < $next - 1; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        // Handle case where the next line isn't indented
+                        if ($tokens[$next - 1]['content'] === PHP_EOL) {
+                            $phpcsFile->fixer->replaceToken($next - 1, '');
+                        }
                     }
                 }
             }

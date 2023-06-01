@@ -19,6 +19,61 @@ class Foo
 
 
 
+        $someValue = 40;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $someValue = 'newlines and spaces and tabs';
+
+
+        
+
+		
+
+
+
+
+
+
+$someValue = 'no indentation';
+
+
 
         return $someValue;
     }
