@@ -1,21 +1,14 @@
 <?php
-
 /**
- * Bootstrap file for tests.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
-if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
-    define('PHP_CODESNIFFER_IN_TESTS', true);
+/**
+ * Define PHP 8.1 tokens
+ */
+if (!defined('T_READONLY')) {
+    define('T_READONLY', 42401);
 }
 
-// The below two defines are needed for PHPCS 3.x.
-if (defined('PHP_CODESNIFFER_CBF') === false) {
-    define('PHP_CODESNIFFER_CBF', false);
-}
-
-if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
-    define('PHP_CODESNIFFER_VERBOSITY', 0);
-}
-
-require_once __DIR__ . '/vendor/squizlabs/php_codesniffer/autoload.php';
-require_once __DIR__ . '/vendor/phpcompatibility/php-compatibility/PHPCSAliases.php';
+require_once __DIR__ . '/vendor/squizlabs/php_codesniffer/tests/bootstrap.php';
