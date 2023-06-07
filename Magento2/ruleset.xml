@@ -168,7 +168,7 @@
         <severity>10</severity>
         <type>error</type>
     </rule>
-    <rule ref="Magento2.PHPCompatibility.RemovedFunctions">
+    <rule ref="PHPCompatibility.FunctionUse.RemovedFunctions">
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -484,7 +484,6 @@
         </properties>
         <severity>6</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
     </rule>
     <rule ref="Generic.Formatting.DisallowMultipleStatements">
         <severity>6</severity>
@@ -765,25 +764,8 @@
     <config name="testVersion" value="8.1-8.2"/>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
-        <!-- Following sniffs have been updated or renamed in PHPCompatibility 10 -->
-        <exclude name="PHPCompatibility.Constants.NewMagicClassConstant.Found" />
-        <exclude name="PHPCompatibility.Classes.ForbiddenAbstractPrivateMethods.Found" />
         <!-- Following sniffs have an equivalent in PHPCS -->
         <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
         <exclude name="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared" />
-        <!-- Following sniffs have an equivalent in Magento2 -->
-        <exclude name="PHPCompatibility.FunctionUse.RemovedFunctions" />
     </rule>
-    <!--
-     All these rules belong to the unreleased PhpCompatibility 10. Remove them once PHPCompatibility is
-     updated to version 10
-     -->
-    <rule ref="Magento2.PHPCompatibility.ForbiddenFinalPrivateMethods" />
-    <rule ref="Magento2.PHPCompatibility.RemovedCallingDestructAfterConstructorExit" />
-    <rule ref="Magento2.PHPCompatibility.RemovedOptionalBeforeRequiredParam" />
-    <rule ref="Magento2.PHPCompatibility.ChangedIntToBoolParamType" />
-    <rule ref="Magento2.PHPCompatibility.RemovedAssertStringAssertion" />
-    <rule ref="Magento2.PHPCompatibility.RemovedGetDefinedFunctionsExcludeDisabledFalse" />
-    <rule ref="Magento2.PHPCompatibility.RemovedSplAutoloadRegisterThrowFalse" />
-    <rule ref="Magento2.PHPCompatibility.RemovedDollarBraceStringEmbeds" />
 </ruleset>
