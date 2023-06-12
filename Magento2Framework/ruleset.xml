@@ -7,7 +7,6 @@
     <rule ref="Magento2Framework.Header.License">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
     </rule>
     <rule ref="Magento2Framework.Header.CopyrightAnotherExtensionsFiles">
         <severity>5</severity>
@@ -18,7 +17,6 @@
     <rule ref="Magento2Framework.Header.Copyright">
         <severity>5</severity>
         <type>warning</type>
-        <exclude-pattern>*/PHPCompatibility/*</exclude-pattern>
         <include-pattern>*\.php$</include-pattern>
         <include-pattern>*\.phtml$</include-pattern>
         <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
