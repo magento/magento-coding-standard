@@ -59,7 +59,10 @@ class PhtmlTemplateUnitTest extends AbstractSniffUnitTest
                 9 => 1,
                 20 => 1,
                 23 => 1,
-                27 => 1
+                27 => 1,
+                44 => 1,
+                45 => 1,
+                46 => 1,
             ];
         }
         if ($testFile === 'PhtmlTemplateUnitTest.3.phtml') {
@@ -68,6 +71,9 @@ class PhtmlTemplateUnitTest extends AbstractSniffUnitTest
                 20 => 1,
                 23 => 1,
                 27 => 1,
+                44 => 1,
+                45 => 1,
+                46 => 1,
             ];
         }
         return [];

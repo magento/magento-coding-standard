@@ -38,3 +38,12 @@ $this->helper();
 ?>
 <script type="jquery/ui">
 </script>
+
+<p>This sniff should remove the any <code> type="text/javascript" </code> attributes from &lt;script&gt; tags, but not from elsewhere in the document.</p>
+
+<script></script>
+<script></script>
+<SCRIPT></SCRIPT>
+<script>
+    const type="text/javascript";
+</script>
