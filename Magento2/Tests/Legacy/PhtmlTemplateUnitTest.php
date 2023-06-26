@@ -37,7 +37,7 @@ class PhtmlTemplateUnitTest extends AbstractSniffUnitTest
 
         // Put them in order.
         sort($testFiles);
-        
+
         return $testFiles;
     }
 
@@ -54,28 +54,14 @@ class PhtmlTemplateUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile = '')
     {
-        if ($testFile === 'PhtmlTemplateUnitTest.1.phtml' || $testFile === 'PhtmlTemplateUnitTest.2.phtml') {
-            return [
-                9 => 1,
-                20 => 1,
-                23 => 1,
-                27 => 1,
-                44 => 1,
-                45 => 1,
-                46 => 1,
-            ];
-        }
-        if ($testFile === 'PhtmlTemplateUnitTest.3.phtml') {
-            return [
-                9 => 1,
-                20 => 1,
-                23 => 1,
-                27 => 1,
-                44 => 1,
-                45 => 1,
-                46 => 1,
-            ];
-        }
-        return [];
+        return [
+            9 => 1,
+            20 => 1,
+            23 => 1,
+            27 => 1,
+            44 => 1,
+            45 => 1,
+            46 => 1,
+        ];
     }
 }
