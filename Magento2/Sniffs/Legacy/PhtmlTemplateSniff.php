@@ -74,9 +74,9 @@ class PhtmlTemplateSniff implements Sniff
     private function checkHtml(File $phpcsFile, int $stackPtr): void
     {
         $content = $phpcsFile->getTokensAsString($stackPtr, 1);
-        $pattern = '_\s+type=(["\'])text/javascript\1_i';
+        $pattern = '_(<script[^>\s]*)\stype=(["\'])text/javascript\2_i';
 
-        if (preg_match($pattern, $content)) {
+        if (preg_match($pattern, $content, $matches)) {
             $fix = $phpcsFile->addFixableWarning(
                 'Please do not use "text/javascript" type attribute.',
                 $stackPtr,
@@ -84,7 +84,7 @@ class PhtmlTemplateSniff implements Sniff
             );
 
             if ($fix) {
-                $content = preg_replace($pattern, '', $content);
+                $content = preg_replace($pattern, $matches[1], $content);
                 $phpcsFile->fixer->replaceToken($stackPtr, $content);
             }
         }
