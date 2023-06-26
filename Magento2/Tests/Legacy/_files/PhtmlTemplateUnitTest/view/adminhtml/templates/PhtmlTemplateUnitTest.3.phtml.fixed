@@ -44,6 +44,12 @@ $this->helper();
 <script></script>
 <script></script>
 <SCRIPT></SCRIPT>
+<script></script>
+<script async></script>
+<script defer></script>
+<script defer></script>
+<script crossorigin="anonymous" async src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://unpkg.com/alpinejs" defer></script>
 <script>
     const type="text/javascript";
 </script>
