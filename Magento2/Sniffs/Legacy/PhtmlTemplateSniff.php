@@ -74,7 +74,7 @@ class PhtmlTemplateSniff implements Sniff
     private function checkHtml(File $phpcsFile, int $stackPtr): void
     {
         $content = $phpcsFile->getTokensAsString($stackPtr, 1);
-        $pattern = '_(<script[^>\s]*)\stype=(["\'])text/javascript\2_i';
+        $pattern = '_(<script[^>]*?)\s+type=(["\'])text/javascript\2_i';
 
         if (preg_match($pattern, $content, $matches)) {
             $fix = $phpcsFile->addFixableWarning(
