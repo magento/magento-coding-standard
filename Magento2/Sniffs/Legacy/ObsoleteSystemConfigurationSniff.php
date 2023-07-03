@@ -41,13 +41,13 @@ class ObsoleteSystemConfigurationSniff implements Sniff
             $this->invalidXML($phpcsFile, $stackPtr);
             return;
         }
-        
+
         $foundElements = $xml->xpath('/config/tabs|/config/sections');
-        
+
         if ($foundElements === false) {
             return;
         }
-        
+
         foreach ($foundElements as $element) {
             $phpcsFile->addWarning(
                 "Obsolete system configuration structure detected in file.",
@@ -79,6 +79,7 @@ class ObsoleteSystemConfigurationSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)

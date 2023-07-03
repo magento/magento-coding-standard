@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -50,6 +52,7 @@ class ObsoleteAclSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)

@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -57,7 +59,7 @@ class ObsoleteConnectionSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
         $stringPos = $phpcsFile->findNext(T_STRING, $stackPtr + 1);
-        
+
         foreach ($this->obsoleteMethods as $method) {
             if ($tokens[$stringPos]['content'] === $method) {
                 $phpcsFile->addWarning(

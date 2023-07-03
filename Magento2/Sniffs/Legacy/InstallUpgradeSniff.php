@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -85,7 +87,7 @@ class InstallUpgradeSniff implements Sniff
         if ($stackPtr > 0) {
             return;
         }
-        
+
         $fileInfo = new SplFileInfo($phpcsFile->getFilename());
 
         foreach (self::WRONG_PREFIXES as $code => $data) {

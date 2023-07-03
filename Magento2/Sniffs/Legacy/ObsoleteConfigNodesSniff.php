@@ -8,8 +8,8 @@
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConfigNodesSniff implements Sniff
 {
@@ -55,6 +55,7 @@ class ObsoleteConfigNodesSniff implements Sniff
             if (empty($matches)) {
                 continue;
             }
+
             foreach ($matches as $match) {
                 $phpcsFile->addError(
                     sprintf(
@@ -62,7 +63,7 @@ class ObsoleteConfigNodesSniff implements Sniff
                         $xpath,
                         $suggestion
                     ),
-                    dom_import_simplexml($match)->getLineNo()-1,
+                    dom_import_simplexml($match)->getLineNo() - 1,
                     self::ERROR_CODE_CONFIG
                 );
             }
@@ -73,6 +74,7 @@ class ObsoleteConfigNodesSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)
@@ -147,7 +149,7 @@ class ObsoleteConfigNodesSniff implements Sniff
             '/config/global/dev' =>
                 'This configuration moved to Di configuration of \Magento\Framework\App\Action\Context',
             '/config/global/webapi' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 ' \Magento\Webapi\Controller\Request\Rest\Interpreter\Factory' .
                 ' and \Magento\Webapi\Controller\Response\Rest\Renderer\Factory',
             '/config/global/cms' =>
@@ -156,10 +158,10 @@ class ObsoleteConfigNodesSniff implements Sniff
             '/config/global/widget' =>
                 'This configuration moved to Di configuration of \Magento\Cms\Model\Template\FilterProvider',
             '/config/global/catalog/product/flat/max_index_count' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 '\Magento\Catalog\Model\ResourceModel\Product\Flat\Indexer',
             '/config/global/catalog/product/flat/attribute_groups' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 '\Magento\Catalog\Model\ResourceModel\Product\Flat\Indexer',
             '/config/global/catalog/product/flat/add_filterable_attributes' =>
                 'This configuration moved to Di configuration of \Magento\Catalog\Helper\Product\Flat\Indexer',

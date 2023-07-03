@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Sniffs\Functions;
@@ -77,7 +79,7 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
             );
             return;
         }
-        
+
         $fix = $phpcsFile->addFixableWarning(
             sprintf(self::WARNING_MESSAGE, $functionName),
             $stackPtr,

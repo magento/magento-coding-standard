@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -248,11 +250,12 @@ class LayoutSniff implements Sniff
             if (!isset($this->obsoleteReferences[$handleAttribute])) {
                 continue;
             }
+
             foreach ($handle->xpath('//reference | //referenceContainer | //referenceBlock') as $reference) {
                 if (in_array((string)$reference['name'], $this->obsoleteReferences[$handleAttribute]) !== false) {
                     $phpcsFile->addError(
                         'The block being referenced is removed.',
-                        dom_import_simplexml($reference)->getLineNo()-1,
+                        dom_import_simplexml($reference)->getLineNo() - 1,
                         self::ERROR_CODE_OBSOLETE_BLOCK
                     );
                 }
@@ -264,6 +267,7 @@ class LayoutSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)
@@ -286,7 +290,7 @@ class LayoutSniff implements Sniff
         if (!empty($elements)) {
             $phpcsFile->addError(
                 'output="toHtml" is obsolete. Use output="1"',
-                dom_import_simplexml($elements[0])->getLineNo()-1,
+                dom_import_simplexml($elements[0])->getLineNo() - 1,
                 self::ERROR_CODE_OBSOLETE_TOHTML_ATTRIBUTE
             );
         };
@@ -297,6 +301,7 @@ class LayoutSniff implements Sniff
      *
      * @param SimpleXMLElement $element
      * @param string $name
+     *
      * @return string|null
      */
     private function getAttribute(SimpleXMLElement $element, string $name): string
@@ -317,14 +322,15 @@ class LayoutSniff implements Sniff
             if (strpos($this->getAttribute($action, 'helper'), '/') !== false) {
                 $phpcsFile->addError(
                     "'helper' attribute contains '/'",
-                    dom_import_simplexml($action)->getLineNo()-1,
+                    dom_import_simplexml($action)->getLineNo() - 1,
                     self::ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_NOT_ALLOWED
                 );
             }
+
             if (strpos($this->getAttribute($action, 'helper'), '::') === false) {
                 $phpcsFile->addError(
                     "'helper' attribute does not contain '::'",
-                    dom_import_simplexml($action)->getLineNo()-1,
+                    dom_import_simplexml($action)->getLineNo() - 1,
                     self::ERROR_CODE_HELPER_ATTRIBUTE_CHARACTER_EXPECTED
                 );
             }
@@ -344,7 +350,7 @@ class LayoutSniff implements Sniff
             $phpcsFile->addError(
                 'The class \Magento\Framework\View\Element\Text\ListText' .
                 ' is not supposed to be used in layout anymore.',
-                dom_import_simplexml($elements[0])->getLineNo()-1,
+                dom_import_simplexml($elements[0])->getLineNo() - 1,
                 self::ERROR_CODE_OBSOLETE_CLASS
             );
         }
@@ -366,7 +372,7 @@ class LayoutSniff implements Sniff
                     'Call of method "%s" via layout instruction <action> is not allowed.',
                     $attributes['method']
                 ),
-                dom_import_simplexml($node)->getLineNo()-1,
+                dom_import_simplexml($node)->getLineNo() - 1,
                 self::ERROR_CODE_METHOD_NOT_ALLOWED
             );
         }

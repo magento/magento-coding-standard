@@ -4,6 +4,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Commenting;
 
 use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
@@ -107,6 +108,7 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
      * @param File $phpcsFile
      * @param int $commentStartPtr
      * @param array $tokens
+     *
      * @return bool
      */
     private function validateTags(File $phpcsFile, $commentStartPtr, $tokens)

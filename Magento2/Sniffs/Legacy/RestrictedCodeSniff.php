@@ -1,14 +1,16 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Tests to find usage of restricted code
@@ -67,6 +69,7 @@ class RestrictedCodeSniff implements Sniff
             if ($this->isExcluded($token, $phpcsFile)) {
                 return;
             }
+
             $phpcsFile->addError(
                 sprintf(
                     self::ERROR_MESSAGE,
@@ -85,6 +88,7 @@ class RestrictedCodeSniff implements Sniff
      *
      * @param string $token
      * @param File $phpcsFile
+     *
      * @return bool
      */
     private function isExcluded(string $token, File $phpcsFile): bool
@@ -92,11 +96,13 @@ class RestrictedCodeSniff implements Sniff
         if (in_array($phpcsFile->getFilename(), $this->fixtureFiles)) {
             return true;
         }
+
         foreach ($this->classes[$token]['exclude'] as $exclude) {
             if (strpos($phpcsFile->getFilename(), $exclude) !== false) {
                 return true;
             }
         }
+
         return false;
     }
 }

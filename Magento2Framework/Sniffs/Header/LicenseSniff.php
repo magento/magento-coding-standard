@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2Framework\Sniffs\Header;
 
@@ -45,9 +47,11 @@ class LicenseSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_STRING) {
             $content = $tokens[$stackPtr]['content'];
         }
+
         if ($tokens[$stackPtr]['code'] === T_INLINE_HTML) {
             $content = $phpcsFile->getTokensAsString($stackPtr, 1);
         }
+
         if ($content !== null) {
             $this->checkLicense($content, $stackPtr, $phpcsFile);
         }
@@ -66,6 +70,7 @@ class LicenseSniff implements Sniff
         if (stripos($commentContent, 'copyright') === false) {
             return;
         }
+
         foreach (self::LEGACY_TEXTS as $legacyText) {
             if (stripos($commentContent, $legacyText) !== false) {
                 $phpcsFile->addWarning(

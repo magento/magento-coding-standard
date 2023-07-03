@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -83,6 +85,7 @@ class TableNameSniff implements Sniff
      * Check if passed file is a resource but not a collection
      *
      * @param string $filePath
+     *
      * @return bool
      */
     private function isResourceButNotCollection(string $filePath): bool
@@ -106,6 +109,7 @@ class TableNameSniff implements Sniff
         if (array_key_exists($methodName, $this->argPositionInMethods) === false) {
             return;
         }
+
         $firstArgumentPos = $phpcsFile->findNext([T_CONSTANT_ENCAPSED_STRING, T_VARIABLE], $methodNamePos + 1);
 
         foreach ($this->argPositionInMethods[$methodName] as $argPosition) {
@@ -117,6 +121,7 @@ class TableNameSniff implements Sniff
                     $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $paramPos + 1)
                 );
             }
+
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
                 $phpcsFile->addError(
                     sprintf(
@@ -223,6 +228,7 @@ class TableNameSniff implements Sniff
      *
      * @param string $haystack
      * @param string $needle
+     *
      * @return bool
      */
     private function endsWith(string $haystack, string $needle): bool
@@ -231,6 +237,7 @@ class TableNameSniff implements Sniff
         if ($length === 0) {
             return true;
         }
+
         return substr($haystack, -$length) === $needle;
     }
 }

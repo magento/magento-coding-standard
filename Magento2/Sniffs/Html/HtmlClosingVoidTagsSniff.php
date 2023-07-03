@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Sniffs\Html;
@@ -75,6 +77,7 @@ class HtmlClosingVoidTagsSniff implements Sniff
         if ($stackPtr !== 0) {
             return;
         }
+
         $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
 
         if (empty($html)) {

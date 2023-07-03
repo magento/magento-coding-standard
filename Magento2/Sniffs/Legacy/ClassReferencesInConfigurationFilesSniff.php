@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -72,6 +74,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (stripos($element['value'], 'Magento') === false) {
                 continue;
             }
+
             if (preg_match('/^([A-Z][a-z\d\\\\]+)+$/', $element['value']) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_CONFIG,
@@ -105,6 +108,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)
@@ -119,6 +123,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * Parse an XML for references to PHP class names in selected tags or attributes
      *
      * @param SimpleXMLElement $xml
+     *
      * @return array
      */
     private function collectClassesInConfig(SimpleXMLElement $xml): array
@@ -166,6 +171,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      *
      * @param SimpleXMLElement $xml
      * @param string $xPath
+     *
      * @return array
      */
     private function getValuesFromXmlTagContent(SimpleXMLElement $xml, string $xPath): array
@@ -174,7 +180,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return array_map(function ($item) {
             return [
                 'value' => (string)$item,
-                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
             ];
         }, $nodes);
     }
@@ -184,6 +190,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      *
      * @param SimpleXMLElement $xml
      * @param string $xPath
+     *
      * @return array
      */
     private function getValuesFromXmlTagName(SimpleXMLElement $xml, string $xPath): array
@@ -192,7 +199,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return array_map(function ($item) {
             return [
                 'value' => $item->getName(),
-                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
             ];
         }, $nodes);
     }
@@ -203,6 +210,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * @param SimpleXMLElement $xml
      * @param string $xPath
      * @param string $attr
+     *
      * @return array
      */
     private function getValuesFromXmlTagAttribute(SimpleXMLElement $xml, string $xPath, string $attr): array
@@ -213,7 +221,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (isset($nodeArray['@attributes'][$attr])) {
                 return [
                     'value' => $nodeArray['@attributes'][$attr],
-                    'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                    'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
                 ];
             }
         }, $nodes);

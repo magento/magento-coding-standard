@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Methods;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -49,6 +51,7 @@ class DeprecatedModelMethodSniff implements Sniff
             T_OBJECT_OPERATOR
         ];
     }
+
     /**
      * @inheritdoc
      */

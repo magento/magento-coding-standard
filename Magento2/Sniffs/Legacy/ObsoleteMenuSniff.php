@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -15,7 +17,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class ObsoleteMenuSniff implements Sniff
 {
     private const WARNING_OBSOLETE_MENU_STRUCTURE = 'ObsoleteMenuStructure';
-    
+
     /**
      * @var string
      */
@@ -55,6 +57,7 @@ class ObsoleteMenuSniff implements Sniff
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
+     *
      * @return false|string
      */
     private function getFormattedXML(File $phpcsFile)
