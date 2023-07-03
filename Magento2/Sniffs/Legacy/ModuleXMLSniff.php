@@ -17,6 +17,8 @@ use SimpleXMLElement;
  */
 class ModuleXMLSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const WARNING_CODE = 'FoundObsoleteAttribute';
     private const ERROR_CODE = 'WrongXML';
 
@@ -76,25 +78,6 @@ class ModuleXMLSniff implements Sniff
                     self::WARNING_CODE
                 );
             }
-        }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     *
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        try {
-            $doc = new DomDocument('1.0');
-            $doc->formatOutput = true;
-            $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-            return $doc->saveXML();
-        } catch (\Exception $e) {
-            return false;
         }
     }
 }

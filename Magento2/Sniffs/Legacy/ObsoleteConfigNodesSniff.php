@@ -13,6 +13,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConfigNodesSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const ERROR_MESSAGE_CONFIG = "Nodes identified by XPath '%s' are obsolete. %s";
     private const ERROR_CODE_CONFIG = 'ObsoleteNodeInConfig';
 
@@ -67,25 +69,6 @@ class ObsoleteConfigNodesSniff implements Sniff
                     ]
                 );
             }
-        }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     *
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        try {
-            $doc = new DomDocument('1.0');
-            $doc->formatOutput = true;
-            $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-            return $doc->saveXML();
-        } catch (\Exception $e) {
-            return false;
         }
     }
 

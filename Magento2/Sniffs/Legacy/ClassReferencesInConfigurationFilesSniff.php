@@ -16,6 +16,8 @@ use SimpleXMLElement;
 
 class ClassReferencesInConfigurationFilesSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const ERROR_MESSAGE_CONFIG = 'Incorrect format of PHP class reference';
     private const ERROR_CODE_CONFIG = 'IncorrectClassReference';
     private const ERROR_MESSAGE_MODULE = 'Incorrect format of module reference';
@@ -101,25 +103,6 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
                     self::ERROR_CODE_MODULE,
                 );
             }
-        }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     *
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        try {
-            $doc = new DomDocument('1.0');
-            $doc->formatOutput = true;
-            $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-            return $doc->saveXML();
-        } catch (\Exception $e) {
-            return false;
         }
     }
 

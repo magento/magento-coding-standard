@@ -16,6 +16,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ObsoleteAclSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const WARNING_OBSOLETE_ACL_STRUCTURE = 'ObsoleteAclStructure';
 
     /**
@@ -45,25 +47,6 @@ class ObsoleteAclSniff implements Sniff
                 dom_import_simplexml($element)->getLineNo() - 1,
                 self::WARNING_OBSOLETE_ACL_STRUCTURE
             );
-        }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     *
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        try {
-            $doc = new DomDocument('1.0');
-            $doc->formatOutput = true;
-            $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-            return $doc->saveXML();
-        } catch (\Exception $e) {
-            return false;
         }
     }
 }
