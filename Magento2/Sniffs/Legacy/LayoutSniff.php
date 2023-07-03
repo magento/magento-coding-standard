@@ -220,12 +220,12 @@ class LayoutSniff implements Sniff
 
         if ($layout === false) {
             $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
+                "Couldn't parse contents of '%s', check that they are in valid XML format",
                 $stackPtr,
-                self::ERROR_CODE_XML
+                self::ERROR_CODE_XML,
+                [
+                    $phpcsFile->getFilename(),
+                ]
             );
             return;
         }
@@ -368,12 +368,12 @@ class LayoutSniff implements Sniff
         foreach ($layout->xpath('//action[' . $methodFilter . ']') as $node) {
             $attributes = $node->attributes();
             $phpcsFile->addError(
-                sprintf(
-                    'Call of method "%s" via layout instruction <action> is not allowed.',
-                    $attributes['method']
-                ),
+                'Call of method "%s" via layout instruction <action> is not allowed.',
                 dom_import_simplexml($node)->getLineNo() - 1,
-                self::ERROR_CODE_METHOD_NOT_ALLOWED
+                self::ERROR_CODE_METHOD_NOT_ALLOWED,
+                [
+                    $attributes['method'],
+                ]
             );
         }
     }

@@ -46,12 +46,12 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
             $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
+                "Couldn't parse contents of '%s', check that they are in valid XML format",
                 $stackPtr,
-                self::ERROR_CODE_CONFIG
+                self::ERROR_CODE_CONFIG,
+                [
+                    $phpcsFile->getFilename(),
+                ]
             );
         }
 

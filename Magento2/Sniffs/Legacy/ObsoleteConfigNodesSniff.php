@@ -41,12 +41,12 @@ class ObsoleteConfigNodesSniff implements Sniff
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
             $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
+                "Couldn't parse contents of '%s', check that they are in valid XML format",
                 $stackPtr,
-                self::ERROR_CODE_CONFIG
+                self::ERROR_CODE_CONFIG,
+                [
+                    $phpcsFile->getFilename(),
+                ]
             );
         }
 
@@ -58,13 +58,13 @@ class ObsoleteConfigNodesSniff implements Sniff
 
             foreach ($matches as $match) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE_CONFIG,
-                        $xpath,
-                        $suggestion
-                    ),
+                    self::ERROR_MESSAGE_CONFIG,
                     dom_import_simplexml($match)->getLineNo() - 1,
-                    self::ERROR_CODE_CONFIG
+                    self::ERROR_CODE_CONFIG,
+                    [
+                        $xpath,
+                        $suggestion,
+                    ]
                 );
             }
         }

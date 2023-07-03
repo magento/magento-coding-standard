@@ -70,9 +70,12 @@ class DeprecatedModelMethodSniff implements Sniff
             $methodPosition = $phpcsFile->findNext([T_STRING, T_VARIABLE], $resourcePosition + 1, $endOfStatement);
             if ($methodPosition !== false && in_array($tokens[$methodPosition]['content'], $this->methods, true)) {
                 $phpcsFile->addWarning(
-                    sprintf($this->warningMessage, $tokens[$methodPosition]['content']),
+                    $this->warningMessage,
                     $stackPtr,
-                    $this->warningCode
+                    $this->warningCode,
+                    [
+                        $tokens[$methodPosition]['content'],
+                    ]
                 );
             }
         }

@@ -101,11 +101,15 @@ class InstallUpgradeSniff implements Sniff
 
         if ($folderName === 'data' || $folderName === 'sql') {
             $phpcsFile->addError(
-                $fileInfo->getFilename()." is in an invalid directory ".$fileInfo->getPath().":\n"
+                "%s is in an invalid directory %s:\n"
                 . "- Create a data patch within module's Setup/Patch/Data folder for data upgrades.\n"
                 . "- Use declarative schema approach in module's etc/db_schema.xml file for schema changes.",
                 0,
-                self::INVALID_DIRECTORIES_ERROR_CODES[$folderName]
+                self::INVALID_DIRECTORIES_ERROR_CODES[$folderName],
+                [
+                    $fileInfo->getFilename(),
+                    $fileInfo->getPath(),
+                ]
             );
         }
     }

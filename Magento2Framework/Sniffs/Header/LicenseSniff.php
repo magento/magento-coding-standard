@@ -74,9 +74,12 @@ class LicenseSniff implements Sniff
         foreach (self::LEGACY_TEXTS as $legacyText) {
             if (stripos($commentContent, $legacyText) !== false) {
                 $phpcsFile->addWarning(
-                    sprintf("The copyright license contains legacy text: %s.", $legacyText),
+                    "The copyright license contains legacy text: %s.",
                     $stackPtr,
-                    self::WARNING_CODE
+                    self::WARNING_CODE,
+                    [
+                        $legacyText,
+                    ]
                 );
             }
         }

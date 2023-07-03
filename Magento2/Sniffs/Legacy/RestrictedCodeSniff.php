@@ -71,14 +71,14 @@ class RestrictedCodeSniff implements Sniff
             }
 
             $phpcsFile->addError(
-                sprintf(
-                    self::ERROR_MESSAGE,
-                    $token,
-                    $phpcsFile->getFilename(),
-                    $this->classes[$token]['replacement']
-                ),
+                self::ERROR_MESSAGE,
                 $stackPtr,
                 $this->classes[$token]['warning_code'],
+                [
+                    $token,
+                    $phpcsFile->getFilename(),
+                    $this->classes[$token]['replacement'],
+                ]
             );
         }
     }

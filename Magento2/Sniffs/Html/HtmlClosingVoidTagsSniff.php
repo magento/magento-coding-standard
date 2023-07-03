@@ -88,9 +88,12 @@ class HtmlClosingVoidTagsSniff implements Sniff
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $phpcsFile->addWarning(
-                        sprintf(self::WARNING_MESSAGE, $match[0]),
+                        self::WARNING_MESSAGE,
                         null,
-                        self::WARNING_CODE
+                        self::WARNING_CODE,
+                        [
+                            $match[0],
+                        ]
                     );
                 }
             }

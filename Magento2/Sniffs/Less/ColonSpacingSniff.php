@@ -108,8 +108,14 @@ class ColonSpacingSniff implements Sniff
             if (false !== strpos($content, ' ')) {
                 $length  = strlen($content);
                 if ($length !== 1) {
-                    $error = sprintf('Expected 1 space after colon in style definition; %s found', $length);
-                    $phpcsFile->addError($error, $stackPtr, 'After');
+                    $phpcsFile->addError(
+                        'Expected 1 space after colon in style definition; %s found',
+                        $stackPtr,
+                        'After',
+                        [
+                            $length,
+                        ]
+                    );
                 }
             }
         }

@@ -124,12 +124,12 @@ class TableNameSniff implements Sniff
 
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE,
-                        $tokens[$paramPos]['content'],
-                    ),
+                    self::ERROR_MESSAGE,
                     $paramPos,
-                    self::ERROR_CODE
+                    self::ERROR_CODE,
+                    [
+                        $tokens[$paramPos]['content'],
+                    ]
                 );
             }
         }
@@ -142,12 +142,12 @@ class TableNameSniff implements Sniff
             $paramPos = $phpcsFile->findNext(T_PARAM_NAME, $stackPtr + 1);
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE,
-                        $tokens[$paramPos]['content'],
-                    ),
+                    self::ERROR_MESSAGE,
                     $paramPos,
-                    self::ERROR_CODE
+                    self::ERROR_CODE,
+                    [
+                        $tokens[$paramPos]['content'],
+                    ]
                 );
             }
         }
@@ -174,12 +174,12 @@ class TableNameSniff implements Sniff
 
         if (strpos($tokens[$tableNamePos]['content'], '/') !== false) {
             $phpcsFile->addError(
-                sprintf(
-                    self::ERROR_MESSAGE,
-                    $tokens[$tableNamePos]['content'],
-                ),
+                self::ERROR_MESSAGE,
                 $tableNamePos,
-                self::ERROR_CODE
+                self::ERROR_CODE,
+                [
+                    $tokens[$tableNamePos]['content'],
+                ]
             );
         }
     }
@@ -213,12 +213,12 @@ class TableNameSniff implements Sniff
 
         if (strpos($tokens[$tableNamePos]['content'], '/') !== false) {
             $phpcsFile->addError(
-                sprintf(
-                    self::ERROR_MESSAGE,
-                    $tokens[$tableNamePos]['content'],
-                ),
+                self::ERROR_MESSAGE,
                 $tableNamePos,
-                self::ERROR_CODE
+                self::ERROR_CODE,
+                [
+                    $tokens[$tableNamePos]['content'],
+                ]
             );
         }
     }

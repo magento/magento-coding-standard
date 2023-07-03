@@ -68,12 +68,12 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
 
         if ($this->PHPDocFormattingValidator->providesMeaning($namePtr, $commentStartPtr, $tokens) !== true) {
             $fix = $phpcsFile->addFixableWarning(
-                sprintf(
-                    '%s description must contain meaningful information beyond what its name provides or be removed.',
-                    ucfirst($tokens[$stackPtr]['content'])
-                ),
+                '%s description must contain meaningful information beyond what its name provides or be removed.',
                 $stackPtr,
-                'InvalidDescription'
+                'InvalidDescription',
+                [
+                    ucfirst($tokens[$stackPtr]['content']),
+                ]
             );
 
             if ($fix) {
@@ -122,9 +122,12 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
 
             if (in_array($tokens[$i]['content'], $this->forbiddenTags) === true) {
                 $fix = $phpcsFile->addFixableWarning(
-                    sprintf('Tag %s MUST NOT be used.', $tokens[$i]['content']),
+                    'Tag %s MUST NOT be used.',
                     $i,
-                    'ForbiddenTags'
+                    'ForbiddenTags',
+                    [
+                        $tokens[$i]['content'],
+                    ]
                 );
 
                 if ($fix) {
