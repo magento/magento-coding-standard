@@ -9,6 +9,7 @@ namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Common;
 
 trait ParseXMLTrait
 {
@@ -32,7 +33,7 @@ trait ParseXMLTrait
                 0,
                 'WrongXML',
                 [
-                    $phpcsFile->getFilename(),
+                    Common::stripBasepath($phpcsFile->getFilename(), $phpcsFile->config->basepath),
                 ]
             );
             return false;

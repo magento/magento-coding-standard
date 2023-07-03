@@ -11,6 +11,7 @@ namespace Magento2\Sniffs\Legacy;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 use SplFileInfo;
 
 class InstallUpgradeSniff implements Sniff
@@ -108,7 +109,7 @@ class InstallUpgradeSniff implements Sniff
                 self::INVALID_DIRECTORIES_ERROR_CODES[$folderName],
                 [
                     $fileInfo->getFilename(),
-                    $fileInfo->getPath(),
+                    Common::stripBasepath($fileInfo->getPath(), $phpcsFile->config->basepath),
                 ]
             );
         }

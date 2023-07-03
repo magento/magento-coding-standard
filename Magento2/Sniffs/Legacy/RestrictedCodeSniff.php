@@ -11,6 +11,7 @@ namespace Magento2\Sniffs\Legacy;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 
 /**
  * Tests to find usage of restricted code
@@ -76,7 +77,7 @@ class RestrictedCodeSniff implements Sniff
                 $this->classes[$token]['warning_code'],
                 [
                     $token,
-                    $phpcsFile->getFilename(),
+                    Common::stripBasepath($phpcsFile->getFilename(), $phpcsFile->config->basepath),
                     $this->classes[$token]['replacement'],
                 ]
             );
