@@ -221,14 +221,6 @@ class LayoutSniff implements Sniff
         $layout = simplexml_load_string($this->getFormattedXML($phpcsFile));
 
         if ($layout === false) {
-            $phpcsFile->addError(
-                "Couldn't parse contents of '%s', check that they are in valid XML format",
-                $stackPtr,
-                self::ERROR_CODE_XML,
-                [
-                    $phpcsFile->getFilename(),
-                ]
-            );
             return;
         }
 

@@ -44,7 +44,6 @@ class WidgetXMLSniff implements Sniff
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
 
         if ($xml === false) {
-            $this->invalidXML($phpcsFile, $stackPtr);
             return;
         }
 

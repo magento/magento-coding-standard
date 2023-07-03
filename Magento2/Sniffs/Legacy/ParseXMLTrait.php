@@ -13,24 +13,6 @@ use PHP_CodeSniffer\Files\File;
 trait ParseXMLTrait
 {
     /**
-     * Adds an invalid XML error
-     *
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     */
-    private function invalidXML(File $phpcsFile, int $stackPtr): void
-    {
-        $phpcsFile->addError(
-            "Couldn't parse contents of '%s', check that they are in valid XML format.",
-            $stackPtr,
-            'WrongXML',
-            [
-                $phpcsFile->getFilename(),
-            ]
-        );
-    }
-
-    /**
      * Format the incoming XML to avoid tags split into several lines.
      *
      * @param File $phpcsFile
@@ -45,6 +27,14 @@ trait ParseXMLTrait
             $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
             return $doc->saveXML();
         } catch (\Exception $e) {
+            $phpcsFile->addError(
+                "Couldn't parse contents of '%s', check that they are in valid XML format.",
+                0,
+                'WrongXML',
+                [
+                    $phpcsFile->getFilename(),
+                ]
+            );
             return false;
         }
     }

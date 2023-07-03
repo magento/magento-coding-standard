@@ -42,14 +42,7 @@ class ObsoleteConfigNodesSniff implements Sniff
         // instead, as it is the one we compare with $stackPtr later on.
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
-            $phpcsFile->addError(
-                "Couldn't parse contents of '%s', check that they are in valid XML format",
-                $stackPtr,
-                self::ERROR_CODE_CONFIG,
-                [
-                    $phpcsFile->getFilename(),
-                ]
-            );
+            return;
         }
 
         foreach ($this->getObsoleteNodes() as $xpath => $suggestion) {
