@@ -272,10 +272,14 @@ class LayoutSniff implements Sniff
      */
     private function getFormattedXML(File $phpcsFile)
     {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-        return $doc->saveXML();
+        try {
+            $doc = new DomDocument('1.0');
+            $doc->formatOutput = true;
+            $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
+            return $doc->saveXML();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
