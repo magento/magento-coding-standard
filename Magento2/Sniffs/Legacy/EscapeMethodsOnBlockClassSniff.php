@@ -26,6 +26,9 @@ class EscapeMethodsOnBlockClassSniff implements Sniff
         'escapeXssInUrl' => true,
     ];
 
+    /**
+     * @inheritDoc
+     */
     public function register()
     {
         return [
@@ -33,6 +36,9 @@ class EscapeMethodsOnBlockClassSniff implements Sniff
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
