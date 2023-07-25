@@ -16,6 +16,7 @@ class CopyrightSniff implements Sniff
 
     private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
     private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
+    private const COPYRIGHT_ADOBE_TEXT = 'ADOBE CONFIDENTIAL';
 
     /**
      * @inheritdoc
@@ -48,7 +49,9 @@ class CopyrightSniff implements Sniff
         $content = $phpcsFile->getTokens()[$positionComment]['content'];
         $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $content);
 
-        if (strpos($content, self::COPYRIGHT_MAGENTO_TEXT) !== false || $adobeCopyrightFound) {
+        if (strpos($content, self::COPYRIGHT_MAGENTO_TEXT) !== false ||
+                $adobeCopyrightFound ||
+                    strpos($content, self::COPYRIGHT_ADOBE_TEXT) !== false) {
             return;
         }
 
