@@ -66,7 +66,10 @@ class ClassNamingSniff implements Sniff
                 [implode("", $matches[0])]
             );
         }
-        if (strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false) {
+
+        if (strlen($className) > 1 && strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false
+            && !str_starts_with($className, 'admin__')
+        ) {
             $phpcsFile->addError(
                 'CSS class names should be separated with "-" (dash) instead of "_" (underscore)',
                 $stackPtr,

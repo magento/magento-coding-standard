@@ -1,0 +1,7 @@
+<?= "foo" ?>
+
+<?php $foo = bar; ?>
+
+<?= "foo" ?>
+
+<?= /* @noEscape */ 'baz'; ?>
