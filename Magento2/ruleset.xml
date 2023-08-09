@@ -761,7 +761,7 @@
     </rule>
 
     <!-- PHPCompatibility configuration. -->
-    <config name="testVersion" value="7.4-"/>
+    <config name="testVersion" value="8.1-8.2"/>
     <rule ref="PHPCompatibility">
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
         <!-- Following sniffs have an equivalent in PHPCS -->
