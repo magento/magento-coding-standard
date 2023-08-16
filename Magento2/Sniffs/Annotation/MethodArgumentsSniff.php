@@ -568,6 +568,25 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
             if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
+                $foundAllParameterTypes = true;
+                $methodParameters = $phpcsFile->getMethodParameters($stackPtr);
+                foreach ($methodParameters as $parameter) {
+                    if (!$parameter['type_hint']) {
+                        $foundAllParameterTypes = false;
+                        break;
+                    }
+                }
+                if ($foundAllParameterTypes) {
+                    $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
+                    $foundReturnType = !!$methodProperties['return_type'];
+                    if ($foundReturnType) {
+                        return; // We don't need comment if all parameters and return value are typed
+                    }
+                    $methodName = $phpcsFile->getDeclarationName($stackPtr);
+                    if ('__construct' == $methodName || '__destruct' == $methodName) {
+                        return; // __construct and __destruct can't have return types, so they don't need comment
+                    }
+                }
                 $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
             }
