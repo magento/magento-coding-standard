@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85706157c667b84ac6386062a90f04cb",
+    "content-hash": "ed90b6398ecbe9407a63634ecf205431",
     "packages": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -284,21 +284,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.16.0",
+            "version": "0.17.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "2125ff71ea05b079562a8f59ca48a97eb78dc07f"
+                "reference": "af3a14a8a9fffa3100b730571c356f6c658d5e09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/2125ff71ea05b079562a8f59ca48a97eb78dc07f",
-                "reference": "2125ff71ea05b079562a8f59ca48a97eb78dc07f",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/af3a14a8a9fffa3100b730571c356f6c658d5e09",
+                "reference": "af3a14a8a9fffa3100b730571c356f6c658d5e09",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.10.14"
+                "phpstan/phpstan": "^1.10.26"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -310,11 +310,6 @@
                 "bin/rector"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "0.15-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -333,7 +328,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.16.0"
+                "source": "https://github.com/rectorphp/rector/tree/0.17.12"
             },
             "funding": [
                 {
@@ -341,7 +336,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-05T12:12:17+00:00"
+            "time": "2023-08-10T15:22:02+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
