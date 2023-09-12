@@ -28,7 +28,7 @@
             }
         ],
         "max-depth": [2, 2],
-        "max-len": [2, 120, 4],
+        "max-len": [2, 140, 4],
         "max-nested-callbacks": [2, 3],
         "newline-after-var": 2,
         "no-alert": 2,

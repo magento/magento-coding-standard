@@ -1,4 +1,11 @@
-# Magento Coding Standard
+# Magento Coding Standard - Acmark version
+
+## Fork changes:
+- removed SuperGlobals sniff (global $db - allowed now) - Magento2/Sniffs/Security/SuperglobalSniff.php
+- removed Magento Framework from DiscouragedFunctions sniff (Filesystem, Translate...) - Magento2/Sniffs/Functions/DiscouragedFunctionSniff.php
+- removed curl from DiscouragedFunctions sniff - Magento2/Sniffs/Functions/DiscouragedFunctionSniff.php
+
+## Description
 
 A set of Magento rules for [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) tool.
 

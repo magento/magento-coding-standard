@@ -75,22 +75,22 @@ class SuperglobalSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-        $var = $tokens[$stackPtr]['content'];
-        if (in_array($var, $this->superGlobalErrors)) {
-            $phpcsFile->addError(
-                $this->errorMessage,
-                $stackPtr,
-                $this->errorCode,
-                [$var]
-            );
-        } elseif (in_array($var, $this->superGlobalWarning)) {
-            $phpcsFile->addWarning(
-                $this->warningMessage,
-                $stackPtr,
-                $this->warningCode,
-                [$var]
-            );
-        }
+        // $tokens = $phpcsFile->getTokens();
+        // $var = $tokens[$stackPtr]['content'];
+        // if (in_array($var, $this->superGlobalErrors)) {
+        //     $phpcsFile->addError(
+        //         $this->errorMessage,
+        //         $stackPtr,
+        //         $this->errorCode,
+        //         [$var]
+        //     );
+        // } elseif (in_array($var, $this->superGlobalWarning)) {
+        //     $phpcsFile->addWarning(
+        //         $this->warningMessage,
+        //         $stackPtr,
+        //         $this->warningCode,
+        //         [$var]
+        //     );
+        // }
     }
 }
