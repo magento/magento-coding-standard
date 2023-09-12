@@ -41,40 +41,42 @@ class DirectThrowSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-        $endOfStatement = $phpcsFile->findEndOfStatement($stackPtr);
-        $posOfException = $phpcsFile->findNext(T_STRING, $stackPtr, $endOfStatement);
+        // NOTE: not used for now
 
-        $fullExceptionString = $this->getFullClassNameAndAlias($tokens, $stackPtr, $endOfStatement);
-        $exceptionString = 'Exception';
-        $customExceptionFound = false;
-        foreach ($tokens as $key => $token) {
-            if ($token['code'] !== T_USE) {
-                continue;
-            }
-            $endOfUse = $phpcsFile->findEndOfStatement($key);
-            $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
-            //we safely consider use statement has alias will not be a direct exception class
-            if (empty($useStatementValue['alias'])) {
-                if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
-                    && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
-                    && $useStatementValue['name'] !== $exceptionString
-                ) {
-                    $customExceptionFound = true;
-                    break;
-                }
-            }
-        }
-        if (($tokens[$posOfException]['content'] === 'Exception' && !$customExceptionFound)
-            || $fullExceptionString['name'] === '\Exception'
-        ) {
-            $phpcsFile->addWarning(
-                $this->warningMessage,
-                $stackPtr,
-                $this->warningCode,
-                [$posOfException]
-            );
-        }
+        // $tokens = $phpcsFile->getTokens();
+        // $endOfStatement = $phpcsFile->findEndOfStatement($stackPtr);
+        // $posOfException = $phpcsFile->findNext(T_STRING, $stackPtr, $endOfStatement);
+
+        // $fullExceptionString = $this->getFullClassNameAndAlias($tokens, $stackPtr, $endOfStatement);
+        // $exceptionString = 'Exception';
+        // $customExceptionFound = false;
+        // foreach ($tokens as $key => $token) {
+        //     if ($token['code'] !== T_USE) {
+        //         continue;
+        //     }
+        //     $endOfUse = $phpcsFile->findEndOfStatement($key);
+        //     $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
+        //     //we safely consider use statement has alias will not be a direct exception class
+        //     if (empty($useStatementValue['alias'])) {
+        //         if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
+        //             && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
+        //             && $useStatementValue['name'] !== $exceptionString
+        //         ) {
+        //             $customExceptionFound = true;
+        //             break;
+        //         }
+        //     }
+        // }
+        // if (($tokens[$posOfException]['content'] === 'Exception' && !$customExceptionFound)
+        //     || $fullExceptionString['name'] === '\Exception'
+        // ) {
+        //     $phpcsFile->addWarning(
+        //         $this->warningMessage,
+        //         $stackPtr,
+        //         $this->warningCode,
+        //         [$posOfException]
+        //     );
+        // }
     }
 
     /**
