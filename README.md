@@ -3,8 +3,9 @@
 ## Fork changes:
 - removed SuperGlobals sniff (global $db - allowed now) - Magento2/Sniffs/Security/SuperglobalSniff.php
 - removed Magento Framework from DiscouragedFunctions sniff (Filesystem, Translate...) - Magento2/Sniffs/Functions/DiscouragedFunctionSniff.php
-- removed base functions curl, unlink... from DiscouragedFunctions sniff - Magento2/Sniffs/Functions/DiscouragedFunctionSniff.php
+- removed base functions curl, unlink, getenv... from DiscouragedFunctions sniff - Magento2/Sniffs/Functions/DiscouragedFunctionSniff.php
 - ignored Direct Throw of Generic Exception - Magento2/Sniffs/Exceptions/DirectThrowSniff.php
+- line length limit to 140 characters - Magento2/ruleset.xml
 
 
 ## Description
