@@ -32,7 +32,7 @@ class ValidTypeNameSniff extends AbstractGraphQLSniff
         //compose entity name by making use of the next strings that we find until we hit a non-string token
         $name = '';
         for ($i=$stackPtr+1; $tokens[$i]['code'] === T_STRING; ++$i) {
-            $name .= $tokens[$i]['content'];
+            $name .= rtrim($tokens[$i]['content']);
         }
 
         $valid = Common::isCamelCaps($name, true, true, false);
