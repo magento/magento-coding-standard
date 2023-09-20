@@ -1,0 +1,87 @@
+<?php
+/** @var Magento\Framework\View\Element\Template $block */
+/** @var Magento\Framework\Escaper $escaper */
+?>
+
+<section>
+    <h1>This unescaped output is fine here; other sniffs will complain about it though.</h1>
+
+    <?php echo $block->getSomeString(); ?>
+    <?= $block->getSomeString(); ?>
+    <?= /** @noEscape */ $block->getSomeString(); ?>
+    <?= /** @escapeNotVerified */ $block->getSomeString(); ?>
+</section>
+
+<section>
+    <h1>These should be using equivalent methods on the `$escaper` class, not the `$block` class.</h1>
+
+    Note that I couldn't find any use of this method in any templates within Magento.
+    <?= $escaper->escapeCss($block->getSomeString()); ?>
+
+    <?= $escaper->escapeHtml(__($block->getSomeString())) ?>
+    <?= $escaper->escapeHtml(__($block->getSomeString())); ?>
+    <?= $escaper->escapeHtml(__($block->getSomeString()), ['strong', 'em', 'span']) ?>
+
+    <div class="<?= $escaper->escapeHtmlAttr($block->getSomeString()) ?>"></div>
+    <div class="<?= $escaper->escapeHtmlAttr($block->getSomeString(), true) ?>"></div>
+    <div class="<?= $escaper->escapeHtmlAttr($block->getSomeString(), false); ?>"></div>
+
+    <script type="text/x-magento-init">
+    {
+        "#chart_<?= $escaper->escapeJs($block->getData('html_id')) ?>_period": {
+            "Magento_Backend/js/dashboard/chart": {}
+        }
+    }
+    </script>
+
+    The only example of this method being used was in a block class, rather than a template.
+    <?php
+    foreach ($block->getItems() as $item) {
+        $item['sku'] = $escaper->escapeJsQuote($item['sku']);
+    }
+    ?>
+
+    The only example of this method being used was in a block class, rather than a template.
+    <?= $escaper->escapeQuote(__($block->getData('welcome'))); ?>
+
+    <a href="<?= $escaper->escapeUrl($block->getUrl('adminhtml/notification/index')) ?>"> link text </a>
+
+    Note that I couldn't find any use of this method in any templates within Magento.
+    <?= $escaper->escapeXssInUrl($block->getSomeString()); ?>
+</section>
+
+<section>
+    <h1>These are edge cases for formatting differences</h1>
+
+    <?php
+        $escaper->escapeHtml('');
+        $escaper ->escapeHtml('');
+        $escaper-> escapeHtml('');
+        $escaper
+            ->escapeHtml('');
+        $escaper
+
+            ->escapeHtml('');
+        $escaper->
+            escapeHtml('');
+        $escaper-> // comment
+            escapeHtml('');
+        $escaper /* comment */
+            ->escapeHtml('');
+
+        $escaper /* comment */ -> /* comment */ escapeHtml('');
+    ?>
+</section>
+
+<section>
+    <h1>These close-matches shouldn't be flagged by this sniff.</h1>
+
+    <?= $block->escapeHTML(__($block->getSomeString())) ?>
+    <?= $block->escapeHtmlString(__($block->getSomeString())) ?>
+    <?= $block->escapeHtmlAttribute($block->getSomeString()) ?>
+    <?= $block->escapeCSS($block->getSomeString()); ?>
+    <?= $block->escapeJS($block->getData('html_id')) ?>
+    <?= $block->escapeJavaScript($block->getData('html_id')) ?>
+    <?= $block->escapeQuotes(__($block->getData('welcome'))); ?>
+    <?= $block->escapeURL($block->getUrl('adminhtml/notification/index')) ?>
+</section>
