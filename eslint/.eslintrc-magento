@@ -92,7 +92,7 @@
         "no-with": 2,
         "one-var": [2, "always"],
         "operator-assignment": [2, "always"],
-        "quotes": [2, "single"],
+        "quotes": [2, "single", {"allowTemplateLiterals": true}],
         "radix": 2,
         "semi": [2, "always"],
         "semi-spacing": 2,
