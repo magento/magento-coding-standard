@@ -14,7 +14,7 @@
         "ext-dom": "*",
         "phpcompatibility/php-compatibility": "^9.3",
         "squizlabs/php_codesniffer": "^3.6.1",
-        "rector/rector": "0.17.12",
+        "rector/rector": "^0.17.12",
         "symfony/polyfill": "^1.16",
         "phpcsstandards/phpcsutils": "^1.0.5"
     },
