@@ -5,12 +5,12 @@ module.exports = {
             description: 'Disallow the use of the deprecated `trim` function',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/jQuery.trim/'
+            url: 'https://api.jquery.com/jQuery.trim/',
         },
         schema: [],
         messages: {
-            trim: 'jQuery.trim is deprecated; use String.prototype.trim'
-        }
+            trim: 'jQuery.trim is deprecated; use String.prototype.trim',
+        },
     },
 
     /**
@@ -22,7 +22,7 @@ module.exports = {
     create: function (context) {
         'use strict';
 
-        var utils = require('./utils.js');
+        const utils = require('./utils.js');
 
         return {
             /**
@@ -31,17 +31,17 @@ module.exports = {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                if (node.callee.property.name !== 'trim') {return;}
+                if (node.callee.property.name !== 'trim') { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'trim'
+                        messageId: 'trim',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
