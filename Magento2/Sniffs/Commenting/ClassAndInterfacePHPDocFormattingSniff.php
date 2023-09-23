@@ -64,7 +64,7 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
         }
 
         if ($this->PHPDocFormattingValidator->providesMeaning($namePtr, $commentStartPtr, $tokens) !== true) {
-            $phpcsFile->addWarning(
+            $fix = $phpcsFile->addFixableWarning(
                 sprintf(
                     '%s description must contain meaningful information beyond what its name provides or be removed.',
                     ucfirst($tokens[$stackPtr]['content'])
@@ -72,13 +72,32 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
                 $stackPtr,
                 'InvalidDescription'
             );
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $startPtr = false;
+                $endPtr = false;
+                $searchPtr = $stackPtr;
+                while (!$startPtr || !$endPtr) {
+                    $searchPtr--;
+                    if ($tokens[$searchPtr]['code'] === T_DOC_COMMENT_OPEN_TAG) {
+                        $startPtr = $searchPtr;
+                    }
+                    if ($tokens[$searchPtr]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
+                        $endPtr = $searchPtr;
+                    }
+                }
+                for ($removing = $startPtr; $removing <= $endPtr; $removing++) {
+                    $phpcsFile->fixer->replaceToken($removing, '');
+                }
+                $phpcsFile->fixer->endChangeset();
+            }
         }
 
         if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
                 'Motivation behind the added @deprecated tag MUST be explained. '
-                    . '@see tag MUST be used with reference to new implementation when code is deprecated '
-                    . 'and there is a new alternative.',
+                . '@see tag MUST be used with reference to new implementation when code is deprecated '
+                . 'and there is a new alternative.',
                 $stackPtr,
                 'InvalidDeprecatedTagUsage'
             );
@@ -105,14 +124,43 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
             }
 
             if (in_array($tokens[$i]['content'], $this->forbiddenTags) === true) {
-                $phpcsFile->addWarning(
+                $fix = $phpcsFile->addFixableWarning(
                     sprintf('Tag %s MUST NOT be used.', $tokens[$i]['content']),
                     $i,
                     'ForbiddenTags'
                 );
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+                    $startOfLineToken = $i - 3;
+                    $endOfLineToken = $i + 3;
+
+                    $startFound = false;
+                    $startPtr = $i;
+                    while (!$startFound) {
+                        $startPtr--;
+                        $token = $tokens[$startPtr];
+                        if ($token['code'] === T_DOC_COMMENT_WHITESPACE && $token['content'] === "\n") {
+                            $startFound = true;
+                        }
+                    }
+                    $endFound = false;
+                    $endPtr = $i;
+                    while (!$endFound) {
+                        $endPtr++;
+                        $token = $tokens[$startPtr];
+                        if ($token['code'] === T_DOC_COMMENT_WHITESPACE && $token['content'] === "\n") {
+                            $endFound = true;
+                            $endPtr--;
+                        }
+                    }
+
+                    for ($removing = $startOfLineToken; $removing <= $endOfLineToken; $removing++) {
+                        $phpcsFile->fixer->replaceToken($removing, '');
+                    }
+                    $phpcsFile->fixer->endChangeset();
+                }
             }
         }
-
         return false;
     }
 }
