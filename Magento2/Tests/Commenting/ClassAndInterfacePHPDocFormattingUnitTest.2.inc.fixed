@@ -13,42 +13,26 @@ interface NotAnErrorHandler
 
 }
 
-/**
- * Faulty Handler
- */
 interface FaultyHandler
 {
 
 }
 
-/**
- * Interface SomeHandler
- */
 interface SomeHandler
 {
 
 }
 
-/**
- * YetAnotherHandler
- */
 interface YetAnotherHandler
 {
 
 }
 
-/**
- * GreenHandler
- * @api Do not confuse tag for faulty short description
- */
 interface GreenHandler
 {
 
 }
 
-/**
- *
- */
 interface EmptyHandler
 {
 
@@ -60,10 +44,6 @@ interface EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author should not be used
- * @category is irrelevant
- * @package should not be used
- * @subpackage does not belong here
  */
 interface ExampleHandler
 {
@@ -179,9 +159,6 @@ interface AlsoDeprecatedButHandler
 
 }
 
-/**
- * @package this tag should not be used
- */
 interface OnlyUselessCommentContent
 {
 
