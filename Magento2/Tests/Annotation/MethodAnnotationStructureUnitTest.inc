@@ -389,4 +389,12 @@ class MethodAnnotationFixture
     {
         return false;
     }
+
+    /** @var OutputInterface */
+    private $output;
+
+    private function thisMethodHasNoDocBlock(): bool
+    {
+        return false;
+    }
 }

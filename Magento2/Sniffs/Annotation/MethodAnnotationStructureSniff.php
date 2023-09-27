@@ -53,7 +53,8 @@ class MethodAnnotationStructureSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, ($stackPtr), 0);
         $commentEndPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, ($stackPtr), 0);
-        if (!$commentStartPtr) {
+        $prevSemicolon = $phpcsFile->findPrevious(T_SEMICOLON, $stackPtr, $commentEndPtr);
+        if (!$commentStartPtr || $prevSemicolon) {
             $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
             return;
         }
