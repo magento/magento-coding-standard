@@ -568,24 +568,8 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
             if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
-                $foundAllParameterTypes = true;
-                $methodParameters = $phpcsFile->getMethodParameters($stackPtr);
-                foreach ($methodParameters as $parameter) {
-                    if (!$parameter['type_hint']) {
-                        $foundAllParameterTypes = false;
-                        break;
-                    }
-                }
-                if ($foundAllParameterTypes) {
-                    $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
-                    $foundReturnType = !!$methodProperties['return_type'];
-                    if ($foundReturnType) {
-                        return; // We don't need comment if all parameters and return value are typed
-                    }
-                    $methodName = $phpcsFile->getDeclarationName($stackPtr);
-                    if ('__construct' == $methodName || '__destruct' == $methodName) {
-                        return; // __construct and __destruct can't have return types, so they don't need comment
-                    }
+                if (!$this->checkIfMethodNeedsDocBlock($phpcsFile, $stackPtr)) {
+                    return;
                 }
                 $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
@@ -634,6 +618,56 @@ class MethodArgumentsSniff implements Sniff
             $previousCommentOpenPtr,
             $previousCommentClosePtr
         );
+    }
+
+    /**
+     * Check method if it has defined return & parameter types, then it doesn't need DocBlock
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return bool
+     */
+    private function checkIfMethodNeedsDocBlock(File $phpcsFile, $stackPtr) : bool
+    {
+        if ($this->checkIfNamespaceContainsApi($phpcsFile)) {
+            // Note: API classes MUST have DocBlock because it uses them instead of reflection for types
+            return true;
+        }
+        $foundAllParameterTypes = true;
+        $methodParameters = $phpcsFile->getMethodParameters($stackPtr);
+        foreach ($methodParameters as $parameter) {
+            if (!$parameter['type_hint']) {
+                return true; // doesn't have type hint
+            }
+        }
+        $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
+        $foundReturnType = !!$methodProperties['return_type'];
+        if (!$foundReturnType) {
+            $methodName = $phpcsFile->getDeclarationName($stackPtr);
+            // Note: __construct and __destruct can't have return types
+            if ('__construct' !== $methodName && '__destruct' !== $methodName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if namespace contains API
+     *
+     * @param File $phpcsFile
+     * @return bool
+     */
+    private function checkIfNamespaceContainsApi(File $phpcsFile) : bool
+    {
+        $namespaceStackPtr = $phpcsFile->findNext(T_NAMESPACE, 0);
+        $tokens = $phpcsFile->getTokens();
+        for ($index = $namespaceStackPtr; 'T_SEMICOLON' !== $tokens[$index]['type']; $index++) {
+            if ('T_STRING' === $tokens[$index]['type'] && 'Api' === $tokens[$index]['content']) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
