@@ -38,6 +38,8 @@ class MethodArgumentsSniff implements Sniff
         'self'
     ];
 
+    private const MAXIMUM_COMPLEXITY_ALLOWED_FOR_NO_DOCBLOCK = 5;
+
     /**
      * @inheritdoc
      */
@@ -649,7 +651,8 @@ class MethodArgumentsSniff implements Sniff
                 return true;
             }
         }
-        return false;
+        $complexity = $this->getMethodComplexity($phpcsFile, $stackPtr);
+        return $complexity > static::MAXIMUM_COMPLEXITY_ALLOWED_FOR_NO_DOCBLOCK;
     }
 
     /**
@@ -668,6 +671,42 @@ class MethodArgumentsSniff implements Sniff
             }
         }
         return false;
+    }
+
+    /**
+     * Get method CyclomaticComplexity
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return int
+     */
+    private function getMethodComplexity(File $phpcsFile, $stackPtr) : int
+    {
+        $tokens = $phpcsFile->getTokens();
+        $start = $tokens[$stackPtr]['scope_opener'];
+        $end = $tokens[$stackPtr]['scope_closer'];
+        $predicateNodes = [
+            T_CASE => true,
+            T_DEFAULT => true,
+            T_CATCH => true,
+            T_IF => true,
+            T_FOR => true,
+            T_FOREACH => true,
+            T_WHILE => true,
+            T_ELSEIF => true,
+            T_INLINE_THEN => true,
+            T_COALESCE => true,
+            T_COALESCE_EQUAL => true,
+            T_MATCH_ARROW => true,
+            T_NULLSAFE_OBJECT_OPERATOR => true,
+        ];
+        $complexity = 1;
+        for ($stackPtr = $start + 1; $stackPtr < $end; $stackPtr++) {
+            if (isset($predicateNodes[$tokens[$stackPtr]['code']])) {
+                $complexity++;
+            }
+        }
+        return $complexity;
     }
 
     /**
