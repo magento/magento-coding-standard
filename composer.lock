@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a1a72f8272e9cd2cb0dd520a56aeea2",
+    "content-hash": "48f468df1de5e3e7239a0e87f1b63b00",
     "packages": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -86,47 +86,93 @@
         },
         {
             "name": "phpcompatibility/php-compatibility",
-            "version": "9.3.5",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
-                "reference": "9fb324479acf6f39452e0655d2429cc0d3914243"
+                "reference": "302dffedd8f1acfc0ed5c7ee096ea2237553ae1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibility/zipball/9fb324479acf6f39452e0655d2429cc0d3914243",
-                "reference": "9fb324479acf6f39452e0655d2429cc0d3914243",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibility/zipball/302dffedd8f1acfc0ed5c7ee096ea2237553ae1a",
+                "reference": "302dffedd8f1acfc0ed5c7ee096ea2237553ae1a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3",
-                "squizlabs/php_codesniffer": "^2.3 || ^3.0.2"
+                "php": ">=5.4",
+                "phpcsstandards/phpcsutils": "^1.0.5",
+                "squizlabs/php_codesniffer": "^3.7.1"
             },
-            "conflict": {
-                "squizlabs/php_codesniffer": "2.6.2"
+            "replace": {
+                "wimg/php-compatibility": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.5 || ^5.0 || ^6.0 || ^7.0"
+                "php-parallel-lint/php-console-highlighter": "^1.0.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3.2",
+                "phpcsstandards/phpcsdevcs": "^1.1.3",
+                "phpcsstandards/phpcsdevtools": "^1.2.0",
+                "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.3.4 || ^10.1.0",
+                "yoast/phpunit-polyfills": "^1.0.5 || ^2.0.0"
             },
             "suggest": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically.",
                 "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
             },
+            "default-branch": true,
             "type": "phpcodesniffer-standard",
-            "notification-url": "https://packagist.org/downloads/",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "9.x-dev",
+                    "dev-develop": "10.x-dev"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
+                ],
+                "test10": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit10.xml.dist --no-coverage"
+                ],
+                "coverage": [
+                    "@php ./vendor/phpunit/phpunit/phpunit"
+                ],
+                "coverage10": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit10.xml.dist"
+                ],
+                "coverage-local": [
+                    "@php ./vendor/phpunit/phpunit/phpunit --coverage-html ./build/logs"
+                ],
+                "coverage-local10": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit10.xml.dist --coverage-html ./build/logs"
+                ],
+                "lint": [
+                    "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --show-deprecated --exclude vendor --exclude .git"
+                ],
+                "check-complete": [
+                    "@php ./vendor/phpcsstandards/phpcsdevtools/bin/phpcs-check-feature-completeness -q ./PHPCompatibility"
+                ],
+                "check-complete-strict": [
+                    "@php ./vendor/phpcsstandards/phpcsdevtools/bin/phpcs-check-feature-completeness ./PHPCompatibility"
+                ],
+                "checkcs": [
+                    "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs"
+                ],
+                "fixcs": [
+                    "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+                ]
+            },
             "license": [
                 "LGPL-3.0-or-later"
             ],
             "authors": [
                 {
                     "name": "Wim Godden",
-                    "homepage": "https://github.com/wimg",
-                    "role": "lead"
+                    "role": "lead",
+                    "homepage": "https://github.com/wimg"
                 },
                 {
                     "name": "Juliette Reinders Folmer",
-                    "homepage": "https://github.com/jrfnl",
-                    "role": "lead"
+                    "role": "lead",
+                    "homepage": "https://github.com/jrfnl"
                 },
                 {
                     "name": "Contributors",
@@ -138,13 +184,14 @@
             "keywords": [
                 "compatibility",
                 "phpcs",
-                "standards"
+                "standards",
+                "static analysis"
             ],
             "support": {
                 "issues": "https://github.com/PHPCompatibility/PHPCompatibility/issues",
                 "source": "https://github.com/PHPCompatibility/PHPCompatibility"
             },
-            "time": "2019-12-27T09:44:58+00:00"
+            "time": "2023-09-13T12:40:15+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -2259,11 +2306,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phpcompatibility/php-compatibility": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~8.1.0 || ~8.2.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
         "ext-simplexml": "*",
         "ext-dom": "*"
     },
