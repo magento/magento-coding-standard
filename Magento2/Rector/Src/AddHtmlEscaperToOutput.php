@@ -29,20 +29,28 @@ class AddHtmlEscaperToOutput extends AbstractRector
      */
     public function refactor(Node $node): ?Node
     {
-       // if the echo already has escapeHtml called on $block or escaper, don't do anthing
+        // if the echo already has escapeHtml called on $block or escaper, don't do anthing
 
-       $echoContent  = $node->exprs[0];
+        $echoContent  = $node->exprs[0];
 
-       if($echoContent instanceof  Node\Expr\Variable || $echoContent instanceof Node\Expr\FuncCall){
-           $node->exprs[0] = new Node\Expr\MethodCall(new Node\Expr\Variable('escaper'),'escapeHtml',[new Node\Arg($echoContent)]);
-           return $node;
-       }
+        if ($echoContent instanceof  Node\Expr\Variable || $echoContent instanceof Node\Expr\FuncCall) {
+            $node->exprs[0] = new Node\Expr\MethodCall(
+                new Node\Expr\Variable('escaper'),
+                'escapeHtml',
+                [new Node\Arg($echoContent)]
+            );
+            return $node;
+        }
 
-       if($echoContent instanceof Node\Expr\MethodCall && $echoContent->name != 'escapeHtml'){
+        if ($echoContent instanceof Node\Expr\MethodCall && $echoContent->name != 'escapeHtml') {
 
-           $node->exprs[0] = new Node\Expr\MethodCall(new Node\Expr\Variable('escaper'),'escapeHtml',[new Node\Arg($echoContent)]);
-           return $node;
-       }
+            $node->exprs[0] = new Node\Expr\MethodCall(
+                new Node\Expr\Variable('escaper'),
+                'escapeHtml',
+                [new Node\Arg($echoContent)]
+            );
+            return $node;
+        }
 
         return null;
     }
