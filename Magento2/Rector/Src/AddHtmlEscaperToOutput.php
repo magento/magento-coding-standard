@@ -8,7 +8,6 @@ declare(strict_types=1);
 namespace Magento2\Rector\Src;
 
 use PhpParser\Node;
-use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Echo_;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -17,6 +16,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 class AddHtmlEscaperToOutput extends AbstractRector
 {
 
+    /**
+     * @var string[]
+     */
     private $_phpFunctionsToIgnore = ['\count','\strip_tags'];
 
     /**
@@ -75,6 +77,12 @@ class AddHtmlEscaperToOutput extends AbstractRector
         return null;
     }
 
+    /**
+     * We check if content of the echo should be escaped
+     *
+     * @param Node $echoContent
+     * @return bool
+     */
     private function canEscapeOutput(Node $echoContent):bool
     {
         if ($echoContent instanceof  Node\Expr\Variable) {
@@ -109,14 +117,21 @@ class AddHtmlEscaperToOutput extends AbstractRector
         return false;
     }
 
+    /**
+     * We do not want to escape __() output if the inner content contains html
+     *
+     * @param string $str
+     * @return bool
+     */
     private function stringContainsHtml(string $str)
     {
         return strlen($str) !== strlen(strip_tags($str));
     }
 
     /**
-     * If the developer has marked the output as noEscape by using the @noEscape
-     * we want to leave that code as it is
+     * If the developer has marked the output as noEscape by using the @noEscape we want to leave that code as it is
+     *
+     * @param Node $echoContent
      */
     private function hasNoEscapeAttribute(Node $echoContent):bool
     {
@@ -132,6 +147,8 @@ class AddHtmlEscaperToOutput extends AbstractRector
 
     /**
      * If method contains the keyword HTML we assume developer intends to output html
+     *
+     * @param Node\Expr\MethodCall $echoContent
      */
     private function methodReturnsValidHtmlOrUrl(Node\Expr\MethodCall $echoContent):bool
     {
@@ -140,8 +157,9 @@ class AddHtmlEscaperToOutput extends AbstractRector
     }
 
     /**
-     * Some php function return safe output. They need not be escaped.
-     * count, strip_tags are example
+     * Some php function return safe output. count, strip_tags need not be escaped.
+     *
+     * @param Node\Expr\FuncCall $funcNode
      */
     private function willFunctionReturnSafeOutput(Node\Expr\FuncCall $funcNode):bool
     {
