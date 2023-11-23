@@ -9,7 +9,7 @@
     "version": "32",
     "require": {
         "php": "~8.1.0 || ~8.2.0",
-        "webonyx/graphql-php": "^15.0",
+        "webonyx/graphql-php": "^14.9|^15.0",
         "ext-simplexml": "*",
         "ext-dom": "*",
         "phpcompatibility/php-compatibility": "^9.3",
