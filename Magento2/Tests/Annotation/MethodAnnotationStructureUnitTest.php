@@ -15,6 +15,7 @@ class MethodAnnotationStructureUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
+            2 => 1,
             10 => 1,
             18 => 1,
             30 => 1,
@@ -40,6 +41,9 @@ class MethodAnnotationStructureUnitTest extends AbstractSniffUnitTest
             289 => 1,
             298 => 1,
             396 => 1,
+            407 => 1,
+            418 => 1,
+            424 => 1,
         ];
     }
 
