@@ -770,6 +770,6 @@
         <exclude name="PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound" />
         <!-- Following sniffs have an equivalent in PHPCS -->
         <exclude name="PHPCompatibility.Syntax.ForbiddenCallTimePassByReference" />
-        <exclude name="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared" />
+        <exclude name="PHPCompatibility.Keywords.ForbiddenNames" />
     </rule>
 </ruleset>
