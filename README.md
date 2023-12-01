@@ -1,6 +1,6 @@
 # Magento Coding Standard
 
-A set of Magento rules for [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) tool.
+A set of Magento rules for [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) tool.
 
 ## Installation within a Magento 2 site
 
