@@ -758,6 +758,8 @@
         <exclude-pattern>*/Test/*</exclude-pattern>
         <exclude-pattern>*Test.php</exclude-pattern>
         <exclude-pattern>*/PHPCSUtils/*</exclude-pattern>
+        <!-- duplicates Magento2.Annotation.MethodAnnotationStructure.NoCommentBlock-->
+        <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
     </rule>
 
     <rule ref="Internal.NoCodeFound">
