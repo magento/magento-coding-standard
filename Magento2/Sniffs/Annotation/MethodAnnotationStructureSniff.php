@@ -71,7 +71,7 @@ class MethodAnnotationStructureSniff implements Sniff
         } while ($commentEndPtr !== false && !in_array($tokens[$commentEndPtr]['code'], $tokensToFind, true));
 
         if ($commentEndPtr === false || $tokens[$commentEndPtr]['code'] !== \T_DOC_COMMENT_CLOSE_TAG) {
-            $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
+            $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
             return;
         }
 
