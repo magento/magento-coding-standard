@@ -51,13 +51,32 @@ class MethodAnnotationStructureSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $commentStartPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, ($stackPtr), 0);
-        $commentEndPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, ($stackPtr), 0);
-        $prevSemicolon = $phpcsFile->findPrevious(T_SEMICOLON, $stackPtr, $commentEndPtr);
-        if (!$commentStartPtr || $prevSemicolon) {
-            $phpcsFile->addError('Comment block is missing', $stackPtr, 'MethodArguments');
+        $commentEndPtr = $stackPtr;
+        $tokensToFind = [
+            \T_SEMICOLON,
+            \T_OPEN_CURLY_BRACKET,
+            \T_CLOSE_CURLY_BRACKET,
+            \T_ATTRIBUTE_END,
+            \T_DOC_COMMENT_CLOSE_TAG
+        ];
+
+        do {
+            $commentEndPtr = $phpcsFile->findPrevious($tokensToFind, $commentEndPtr - 1);
+            if ($commentEndPtr !== false
+                && $tokens[$commentEndPtr]['code'] === \T_ATTRIBUTE_END
+                && isset($tokens[$commentEndPtr]['attribute_opener'])
+            ) {
+                $commentEndPtr = $tokens[$commentEndPtr]['attribute_opener'];
+            }
+        } while ($commentEndPtr !== false && !in_array($tokens[$commentEndPtr]['code'], $tokensToFind, true));
+
+        if ($commentEndPtr === false || $tokens[$commentEndPtr]['code'] !== \T_DOC_COMMENT_CLOSE_TAG) {
+            $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
             return;
         }
+
+        $commentStartPtr = $tokens[$commentEndPtr]['comment_opener']
+            ?? $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $commentEndPtr - 1);
 
         if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
             $phpcsFile->addWarning(
