@@ -664,8 +664,15 @@ class MethodArgumentsSniff implements Sniff
     private function checkIfNamespaceContainsApi(File $phpcsFile) : bool
     {
         $namespaceStackPtr = $phpcsFile->findNext(T_NAMESPACE, 0);
+        if (!is_int($namespaceStackPtr)) {
+            return false;
+        }
         $tokens = $phpcsFile->getTokens();
-        for ($index = $namespaceStackPtr; 'T_SEMICOLON' !== $tokens[$index]['type']; $index++) {
+        for (
+            $index = $namespaceStackPtr;
+            array_key_exists($index, $tokens) && 'T_SEMICOLON' !== $tokens[$index]['type'];
+            $index++
+        ) {
             if ('T_STRING' === $tokens[$index]['type'] && 'Api' === $tokens[$index]['content']) {
                 return true;
             }

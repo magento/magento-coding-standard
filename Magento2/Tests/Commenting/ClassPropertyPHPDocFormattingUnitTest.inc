@@ -201,3 +201,20 @@ class correctlyFormattedClassMemberDocBlock
      */
     protected string $deprecatedWithKeyword;
 }
+
+    class classWithPropertiesWithTypesAndWithoutDocBlock
+    {
+        protected string $test1 = 'asdf';
+
+        protected ?string $test2;
+
+        private array $array1 = [];
+
+        public array $array2;
+
+        protected readonly int $readOnlyInteger;
+
+        protected readonly string $readOnlyString;
+
+        private ?\Exception $exception;
+    }
