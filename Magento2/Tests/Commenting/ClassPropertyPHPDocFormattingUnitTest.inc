@@ -214,4 +214,14 @@ class correctlyFormattedClassMemberDocBlock
     private Test|Test2 $typedPropertyWithoutComment6;
 
     private ?Test $typedPropertyWithoutComment7;
+
+    /**
+     * @var string
+     */
+    protected readonly string $readOnlyString;
+
+    /**
+     * @var int
+     */
+    protected readonly int $readOnlyInteger;
 }

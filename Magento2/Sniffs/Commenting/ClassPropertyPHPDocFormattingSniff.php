@@ -32,6 +32,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         T_NULLABLE,
         T_BITWISE_AND,
         T_TYPE_UNION,
+        T_READONLY,
     ];
 
     /**

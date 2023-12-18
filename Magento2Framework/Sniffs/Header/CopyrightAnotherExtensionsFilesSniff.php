@@ -16,6 +16,7 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
 
     private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
     private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
+    private const COPYRIGHT_ADOBE_TEXT = 'ADOBE CONFIDENTIAL';
 
     /**
      * Defines the tokenizers that this sniff is using.
@@ -48,6 +49,7 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
 
         if (strpos($fileText, self::COPYRIGHT_MAGENTO_TEXT) !== false
             || preg_match(self::COPYRIGHT_ADOBE, $fileText)
+                || strpos($fileText, self::COPYRIGHT_ADOBE_TEXT) !== false
         ) {
             return;
         }
