@@ -5,9 +5,9 @@ module.exports = {
             description: 'Disallow the use of various deprecated methods methods',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -36,7 +36,7 @@ module.exports = {
                         'isArray': 'jQuery.isArray() is deprecated. ' +
                             'Use the native Array.isArray method instead',
                         'parseJSON' : 'jQuery.parseJSON() is deprecated. ' +
-                            'To parse JSON strings, use the native JSON.parse method instead'
+                            'To parse JSON strings, use the native JSON.parse method instead',
                     },
                     name,
                     message;
@@ -50,10 +50,10 @@ module.exports = {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: message
+                        message: message,
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

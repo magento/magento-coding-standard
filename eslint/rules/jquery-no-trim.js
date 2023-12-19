@@ -5,12 +5,12 @@ module.exports = {
             description: 'Disallow the use of the deprecated `trim` function',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/jQuery.trim/'
+            url: 'https://api.jquery.com/jQuery.trim/',
         },
         schema: [],
         messages: {
-            trim: 'jQuery.trim is deprecated; use String.prototype.trim'
-        }
+            trim: 'jQuery.trim is deprecated; use String.prototype.trim',
+        },
     },
 
     /**
@@ -38,10 +38,10 @@ module.exports = {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'trim'
+                        messageId: 'trim',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

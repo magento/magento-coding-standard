@@ -5,9 +5,9 @@ module.exports = {
             description: 'Disallow the use of shortcuts to input events via keyboard/mouse trigger events',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/bind/'
+            url: 'https://api.jquery.com/bind/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -43,10 +43,10 @@ module.exports = {
                     context.report({
                         node: node,
                         message: 'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
-                            '() use .trigger("' + name + '")'
+                            '() use .trigger("' + name + '")',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

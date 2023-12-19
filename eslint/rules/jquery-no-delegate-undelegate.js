@@ -5,12 +5,12 @@ module.exports = {
             description: 'Disallow the use of the deprecated $.delegate and $.undelegate',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/delegate/'
+            url: 'https://api.jquery.com/delegate/',
         },
         schema: [],
         messages: {
-            delegate: 'jQuery $.delegate and $.undelegate are deprecated, use $.on and $.off instead'
-        }
+            delegate: 'jQuery $.delegate and $.undelegate are deprecated, use $.on and $.off instead',
+        },
     },
 
     /**
@@ -38,10 +38,10 @@ module.exports = {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'delegate'
+                        messageId: 'delegate',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
