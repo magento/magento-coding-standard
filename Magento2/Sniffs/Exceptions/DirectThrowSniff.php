@@ -56,7 +56,8 @@ class DirectThrowSniff implements Sniff
             $useStatementValue = $this->getFullClassNameAndAlias($tokens, $key, $endOfUse);
             //we safely consider use statement has alias will not be a direct exception class
             if (empty($useStatementValue['alias'])) {
-                if (substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
+                if (
+                    substr($useStatementValue['name'], 0, strlen($exceptionString)) !== $exceptionString
                     && substr($useStatementValue['name'], -strlen($exceptionString)) === $exceptionString
                     && $useStatementValue['name'] !== $exceptionString
                 ) {
@@ -65,7 +66,8 @@ class DirectThrowSniff implements Sniff
                 }
             }
         }
-        if (($tokens[$posOfException]['content'] === 'Exception' && !$customExceptionFound)
+        if (
+            ($tokens[$posOfException]['content'] === 'Exception' && !$customExceptionFound)
             || $fullExceptionString['name'] === '\Exception'
         ) {
             $phpcsFile->addWarning(

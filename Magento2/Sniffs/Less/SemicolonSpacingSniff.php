@@ -78,7 +78,8 @@ class SemicolonSpacingSniff implements Sniff
      */
     private function validateSemicolon(File $phpcsFile, $stackPtr, array $tokens, $semicolonPtr)
     {
-        if ((false === $semicolonPtr || $tokens[$semicolonPtr]['line'] !== $tokens[$stackPtr]['line'])
+        if (
+            (false === $semicolonPtr || $tokens[$semicolonPtr]['line'] !== $tokens[$stackPtr]['line'])
             && (isset($tokens[$stackPtr - 1]) && !in_array($tokens[$stackPtr - 1]['code'], $this->styleCodesToSkip))
             && (T_COLON !== $tokens[$stackPtr]['code'])
         ) {

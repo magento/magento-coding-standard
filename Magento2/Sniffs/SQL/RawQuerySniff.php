@@ -64,7 +64,8 @@ class RawQuerySniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $ignoredTokens = array_merge([T_WHITESPACE, T_OPEN_PARENTHESIS], Tokens::$stringTokens);
         $prev = $tokens[$phpcsFile->findPrevious($ignoredTokens, $stackPtr - 1, null, true)];
-        if ($prev['code'] === T_EQUAL
+        if (
+            $prev['code'] === T_EQUAL
             || ($prev['code'] === T_STRING && in_array($prev['content'], $this->queryFunctions))
             || in_array($tokens[$stackPtr]['code'], [T_HEREDOC, T_NOWDOC])
         ) {

@@ -76,7 +76,8 @@ class SelectorDelimiterSniff implements Sniff
             $prevParenthesis = $phpcsFile->findPrevious(T_OPEN_PARENTHESIS, $stackPtr);
             $nextParenthesis = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $stackPtr);
 
-            if ((false !== $prevParenthesis) && (false !== $nextParenthesis)
+            if (
+                (false !== $prevParenthesis) && (false !== $nextParenthesis)
                 && ($tokens[$prevParenthesis]['line'] === $tokens[$stackPtr]['line'])
                 && ($tokens[$nextParenthesis]['line'] === $tokens[$stackPtr]['line'])
             ) {
