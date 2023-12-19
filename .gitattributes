@@ -1,0 +1,13 @@
+/.gitattributes export-ignore
+/.github/ export-ignore
+/.gitignore export-ignore
+/composer.lock export-ignore
+/Magento2/Rector/Tests/ export-ignore
+/Magento2/Tests/ export-ignore
+/Magento2Framework/Tests/ export-ignore
+/package-lock.json export-ignore
+/package.json export-ignore
+/PHP_CodeSniffer/Tests/ export-ignore
+/phpunit-bootstrap.php export-ignore
+/phpunit.xml.dist export-ignore
+/rector.php export-ignore
