@@ -38,3 +38,18 @@ $this->helper();
 ?>
 <script type="jquery/ui">
 </script>
+
+<p>This sniff should remove the any <code> type="text/javascript" </code> attributes from &lt;script&gt; tags, but not from elsewhere in the document.</p>
+
+<script type='text/javascript'></script>
+<script type="TEXT/JAVASCRIPT"></script>
+<SCRIPT TYPE="text/javascript"></SCRIPT>
+<script          type="text/javascript"></script>
+<script async type="text/javascript"></script>
+<script defer type="text/javascript"></script>
+<script type="text/javascript" defer></script>
+<script crossorigin="anonymous" async type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://unpkg.com/alpinejs" defer type="text/javascript"></script>
+<script>
+    const type="text/javascript";
+</script>
