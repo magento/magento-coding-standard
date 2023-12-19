@@ -5,9 +5,9 @@ module.exports = {
             description: 'Disallow the use of various deprecated methods methods',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -19,7 +19,7 @@ module.exports = {
     create: function (context) {
         'use strict';
 
-        var utils = require('./utils.js');
+        const utils = require('./utils.js');
 
         return {
             /**
@@ -28,32 +28,32 @@ module.exports = {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                var namesToMsg = {
-                        'isFunction': 'jQuery.isFunction() is deprecated. '
-                            + 'In most cases, it can be replaced by [typeof x === "function"]',
-                        'type': 'jQuery.type() is deprecated. ' +
-                            'Replace with an appropriate type check like [typeof x === "function"]',
-                        'isArray': 'jQuery.isArray() is deprecated. ' +
-                            'Use the native Array.isArray method instead',
-                        'parseJSON' : 'jQuery.parseJSON() is deprecated. ' +
-                            'To parse JSON strings, use the native JSON.parse method instead'
-                    },
-                    name,
-                    message;
+                const namesToMsg = {
+                    isFunction: 'jQuery.isFunction() is deprecated. ' +
+                        'In most cases, it can be replaced by [typeof x === "function"]',
+                    type: 'jQuery.type() is deprecated. ' +
+                        'Replace with an appropriate type check like [typeof x === "function"]',
+                    isArray: 'jQuery.isArray() is deprecated. ' +
+                        'Use the native Array.isArray method instead',
+                    parseJSON: 'jQuery.parseJSON() is deprecated. ' +
+                        'To parse JSON strings, use the native JSON.parse method instead',
+                };
 
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                name = node.callee.property.name;
-                if (!namesToMsg.hasOwnProperty(name)) {return;}
-                message = namesToMsg[name];
+                const name = node.callee.property.name;
+
+                if (!Object.prototype.hasOwnProperty.call(namesToMsg, name)) { return; }
+
+                const message = namesToMsg[name];
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: message
+                        message: message,
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

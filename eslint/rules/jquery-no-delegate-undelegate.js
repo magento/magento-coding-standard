@@ -5,12 +5,12 @@ module.exports = {
             description: 'Disallow the use of the deprecated $.delegate and $.undelegate',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/delegate/'
+            url: 'https://api.jquery.com/delegate/',
         },
         schema: [],
         messages: {
-            delegate: 'jQuery $.delegate and $.undelegate are deprecated, use $.on and $.off instead'
-        }
+            delegate: 'jQuery $.delegate and $.undelegate are deprecated, use $.on and $.off instead',
+        },
     },
 
     /**
@@ -22,7 +22,7 @@ module.exports = {
     create: function (context) {
         'use strict';
 
-        var utils = require('./utils.js');
+        const utils = require('./utils.js');
 
         return {
             /**
@@ -31,17 +31,17 @@ module.exports = {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                if (!['delegate', 'undelegate'].includes(node.callee.property.name)) {return;}
+                if (!['delegate', 'undelegate'].includes(node.callee.property.name)) { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'delegate'
+                        messageId: 'delegate',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

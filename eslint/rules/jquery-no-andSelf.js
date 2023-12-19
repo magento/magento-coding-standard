@@ -5,12 +5,12 @@ module.exports = {
             description: 'Disallow the use of the deprecated `andSelf` method',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/andself/'
+            url: 'https://api.jquery.com/andself/',
         },
         schema: [],
         messages: {
-            andSelf: 'jQuery.andSelf() removed, use jQuery.addBack()'
-        }
+            andSelf: 'jQuery.andSelf() removed, use jQuery.addBack()',
+        },
     },
 
     /**
@@ -22,7 +22,7 @@ module.exports = {
     create: function (context) {
         'use strict';
 
-        var utils = require('./utils.js');
+        const utils = require('./utils.js');
 
         return {
             /**
@@ -31,17 +31,17 @@ module.exports = {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                if (node.callee.property.name !== 'andSelf') {return;}
+                if (node.callee.property.name !== 'andSelf') { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'andSelf'
+                        messageId: 'andSelf',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
