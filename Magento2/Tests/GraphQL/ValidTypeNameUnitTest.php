@@ -23,21 +23,21 @@ class ValidTypeNameUnitTest extends AbstractGraphQLSniffUnitTestCase
     protected function getErrorList()
     {
         return [
-            7 => 1,
-            8 => 1,
             9 => 1,
             10 => 1,
             11 => 1,
             12 => 1,
-            15 => 1,
-            16 => 1,
+            13 => 1,
+            14 => 1,
             17 => 1,
-            21 => 1,
+            18 => 1,
+            19 => 1,
             23 => 1,
             25 => 1,
-            35 => 1,
-            39 => 1,
-            43 => 1,
+            27 => 1,
+            37 => 1,
+            41 => 1,
+            45 => 1,
         ];
     }
 
