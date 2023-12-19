@@ -40,10 +40,10 @@ class MethodAnnotationStructureUnitTest extends AbstractSniffUnitTest
             288 => 1,
             289 => 1,
             298 => 1,
-            396 => 1,
-            407 => 1,
-            418 => 1,
-            424 => 1,
+            416 => 1,
+            427 => 1,
+            438 => 1,
+            444 => 1,
         ];
     }
 

@@ -383,9 +383,29 @@ class MethodAnnotationFixture
     /**
      * This deprecated function is correct even though it only contains the @deprecated tag.
      *
+     * @deprecated This method will be removed in version 123.45.6789 without replacement
+     */
+    public function correctBecauseOfKeywordPhraseLongVersion()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is correct even though it only contains the @deprecated tag.
+     *
      * @deprecated WOW! This method will be removed in version 1.0.0 without replacement
      */
     public function alsoCorrectBecauseOfKeywordPhrase()
+    {
+        return false;
+    }
+
+    /**
+     * This deprecated function is correct even though it only contains the @deprecated tag.
+     *
+     * @deprecated WOW! This method will be removed in version 123.45.6789 without replacement
+     */
+    public function alsoCorrectBecauseOfKeywordPhraseLongVersion()
     {
         return false;
     }
