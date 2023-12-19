@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Sniff for void closing tags.
  */
-class HtmlClosingVoidTagsSniff implements Sniff
+class HtmlClosingVoidTagsSniff extends HtmlSelfClosingTagsSniff implements Sniff
 {
     /**
      * String representation of warning.
@@ -29,39 +29,6 @@ class HtmlClosingVoidTagsSniff implements Sniff
      * @var string
      */
     private const WARNING_CODE = 'HtmlClosingVoidElements';
-
-    /**
-     * List of void elements.
-     *
-     * https://html.spec.whatwg.org/multipage/syntax.html#void-elements
-     *
-     * @var string[]
-     */
-    private const HTML_VOID_ELEMENTS = [
-        'area',
-        'base',
-        'br',
-        'col',
-        'embed',
-        'hr',
-        'input',
-        'keygen',
-        'link',
-        'menuitem',
-        'meta',
-        'param',
-        'source',
-        'track',
-        'wbr'
-    ];
-
-    /**
-     * @inheritdoc
-     */
-    public function register(): array
-    {
-        return [T_INLINE_HTML];
-    }
 
     /**
      * Detect use of self-closing tag with void html element.
@@ -84,11 +51,25 @@ class HtmlClosingVoidTagsSniff implements Sniff
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
-                    $phpcsFile->addWarning(
+                    $ptr = $this->findPointer($phpcsFile, $match[0]);
+                    $fix = $phpcsFile->addFixableWarning(
                         sprintf(self::WARNING_MESSAGE, $match[0]),
-                        null,
+                        $ptr,
                         self::WARNING_CODE
                     );
+
+                    if ($fix) {
+                        $token = $phpcsFile->getTokens()[$ptr];
+                        $original = $token['content'];
+                        $replacement = str_replace(' />', '>', $original);
+                        $replacement = str_replace('/>', '>', $replacement);
+
+                        if (preg_match('{^\s* />}', $original)) {
+                            $replacement = ' ' . $replacement;
+                        }
+
+                        $phpcsFile->fixer->replaceToken($ptr, $replacement);
+                    }
                 }
             }
         }

@@ -37,21 +37,21 @@
         </video>
         <wbr/>
 
-        <label for="test_input"/>
+        <label for="test_input"></label>
         <label
                for="multi-line-input"
-               />
+               ></label>
         <label
-               for="multi-line-input2" />
-        <style type="text/css"/>
-        <div/>
-        <span/>
-        <text/>
-        <render/>
-        <each/>
-        <translate/>
-        <scope/>
-        <span/>
-        <span style="color: red" />
+               for="multi-line-input2"></label>
+        <style type="text/css"></style>
+        <div></div>
+        <span></span>
+        <text></text>
+        <render></render>
+        <each></each>
+        <translate></translate>
+        <scope></scope>
+        <span></span>
+        <span style="color: red"></span>
     </body>
 </html>

@@ -7,36 +7,36 @@
 
 <html>
 <head>
-    <base/>
-    <link/>
+    <base>
+    <link>
 </head>
 <body>
-    <area alt=""/>
-    <br/>
+    <area alt="">
+    <br>
     <table>
         <colgroup>
-            <col/>
+            <col>
         </colgroup>
     </table>
-    <embed/>
-    <hr/>
-    <img src="" alt=""/>
-    <input type="text" id="test_input"/>
+    <embed>
+    <hr>
+    <img src="" alt="">
+    <input type="text" id="test_input">
     <input type="text"
            id="multi-line-input"
            placeholder="Alert should be on last line"
-           />
+           >
     <input type="text"
            id="multi-line-input2"
-           placeholder="Alert should be on last line" />
-    <link/>
-    <meta/>
+           placeholder="Alert should be on last line">
+    <link>
+    <meta>
     <video>
-        <source/>
-        <track src=""/>
+        <source>
+        <track src="">
     </video>
-    <wbr/>
-    <hr/>
-    <hr style="color: red" />
+    <wbr>
+    <hr>
+    <hr style="color: red">
 </body>
 </html>

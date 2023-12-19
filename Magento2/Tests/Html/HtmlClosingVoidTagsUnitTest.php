@@ -22,6 +22,25 @@ class HtmlClosingVoidTagsUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [1 => 15];
+        return [
+            10 => 1,
+            11 => 1,
+            14 => 1,
+            15 => 1,
+            18 => 1,
+            21 => 1,
+            22 => 1,
+            23 => 1,
+            24 => 1,
+            28 => 1,
+            31 => 1,
+            32 => 1,
+            33 => 1,
+            35 => 1,
+            36 => 1,
+            38 => 1,
+            39 => 1,
+            40 => 1,
+        ];
     }
 }
