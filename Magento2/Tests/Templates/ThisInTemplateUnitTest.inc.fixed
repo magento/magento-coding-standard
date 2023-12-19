@@ -2,4 +2,4 @@
 echo $block->escapeHtml($block->getGroupCode());
 echo $block->escapeHtml($block->getGroupCode());
 $block->foo();
-$block->helper();
+$this->helper();
