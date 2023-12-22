@@ -668,15 +668,7 @@ class MethodArgumentsSniff implements Sniff
             return false;
         }
         $tokens = $phpcsFile->getTokens();
-        // phpcs:ignore Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterOpen,Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
-        for (
-            // phpcs:ignore Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterFirst
-            $index = $namespaceStackPtr;
-            // phpcs:ignore Squiz.ControlStructures.ForLoopDeclaration.SpacingAfterSecond
-            array_key_exists($index, $tokens) && 'T_SEMICOLON' !== $tokens[$index]['type'];
-            $index++
-            // phpcs:ignore Squiz.ControlStructures.ForLoopDeclaration.SpacingBeforeClose
-        ) {
+        for ($index = $namespaceStackPtr; 'T_SEMICOLON' !== ($tokens[$index]['type'] ?? 'T_SEMICOLON'); $index++) {
             if ('T_STRING' === $tokens[$index]['type'] && 'Api' === $tokens[$index]['content']) {
                 return true;
             }
