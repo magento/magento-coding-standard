@@ -38,6 +38,8 @@ class MethodArgumentsSniff implements Sniff
         'self'
     ];
 
+    private const MAXIMUM_COMPLEXITY_ALLOWED_FOR_NO_DOCBLOCK = 5;
+
     /**
      * @inheritdoc
      */
@@ -568,6 +570,9 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
             if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
+                if (!$this->checkIfMethodNeedsDocBlock($phpcsFile, $stackPtr)) {
+                    return;
+                }
                 $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
             }
@@ -615,6 +620,96 @@ class MethodArgumentsSniff implements Sniff
             $previousCommentOpenPtr,
             $previousCommentClosePtr
         );
+    }
+
+    /**
+     * Check method if it has defined return & parameter types, then it doesn't need DocBlock
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return bool
+     */
+    private function checkIfMethodNeedsDocBlock(File $phpcsFile, $stackPtr) : bool
+    {
+        if ($this->checkIfNamespaceContainsApi($phpcsFile)) {
+            // Note: API classes MUST have DocBlock because it uses them instead of reflection for types
+            return true;
+        }
+        $foundAllParameterTypes = true;
+        $methodParameters = $phpcsFile->getMethodParameters($stackPtr);
+        foreach ($methodParameters as $parameter) {
+            if (!$parameter['type_hint']) {
+                return true; // doesn't have type hint
+            }
+        }
+        $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
+        $foundReturnType = !!$methodProperties['return_type'];
+        if (!$foundReturnType) {
+            $methodName = $phpcsFile->getDeclarationName($stackPtr);
+            // Note: __construct and __destruct can't have return types
+            if ('__construct' !== $methodName && '__destruct' !== $methodName) {
+                return true;
+            }
+        }
+        $complexity = $this->getMethodComplexity($phpcsFile, $stackPtr);
+        return $complexity > static::MAXIMUM_COMPLEXITY_ALLOWED_FOR_NO_DOCBLOCK;
+    }
+
+    /**
+     * Check if namespace contains API
+     *
+     * @param File $phpcsFile
+     * @return bool
+     */
+    private function checkIfNamespaceContainsApi(File $phpcsFile) : bool
+    {
+        $namespaceStackPtr = $phpcsFile->findNext(T_NAMESPACE, 0);
+        if (!is_int($namespaceStackPtr)) {
+            return false;
+        }
+        $tokens = $phpcsFile->getTokens();
+        for ($index = $namespaceStackPtr; 'T_SEMICOLON' !== ($tokens[$index]['type'] ?? 'T_SEMICOLON'); $index++) {
+            if ('T_STRING' === $tokens[$index]['type'] && 'Api' === $tokens[$index]['content']) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get method CyclomaticComplexity
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return int
+     */
+    private function getMethodComplexity(File $phpcsFile, $stackPtr) : int
+    {
+        $tokens = $phpcsFile->getTokens();
+        $start = $tokens[$stackPtr]['scope_opener'];
+        $end = $tokens[$stackPtr]['scope_closer'];
+        $predicateNodes = [
+            T_CASE => true,
+            T_DEFAULT => true,
+            T_CATCH => true,
+            T_IF => true,
+            T_FOR => true,
+            T_FOREACH => true,
+            T_WHILE => true,
+            T_ELSEIF => true,
+            T_INLINE_THEN => true,
+            T_COALESCE => true,
+            T_COALESCE_EQUAL => true,
+            T_MATCH_ARROW => true,
+            T_NULLSAFE_OBJECT_OPERATOR => true,
+        ];
+        $complexity = 1;
+        for ($stackPtr = $start + 1; $stackPtr < $end; $stackPtr++) {
+            if (isset($predicateNodes[$tokens[$stackPtr]['code']])) {
+                $complexity++;
+            }
+        }
+        return $complexity;
     }
 
     /**

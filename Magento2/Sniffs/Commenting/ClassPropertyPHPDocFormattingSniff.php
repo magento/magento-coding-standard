@@ -65,6 +65,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         );
 
         if ($commentEnd === false || $tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
+            $propertyInfo = $phpcsFile->getMemberProperties($stackPtr);
+            if ($propertyInfo['type']) {
+                return;  // If variable has a type, it is okay to not have a DocBlock
+            }
             $phpcsFile->addWarning('Missing PHP DocBlock for class property.', $stackPtr, 'Missing');
             return;
         }
