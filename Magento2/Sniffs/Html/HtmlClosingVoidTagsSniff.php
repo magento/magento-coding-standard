@@ -68,20 +68,16 @@ class HtmlClosingVoidTagsSniff implements Sniff
      *
      * @param File $phpcsFile
      * @param int $stackPtr
-     * @return void
+     *
+     * @return int
      */
-    public function process(File $phpcsFile, $stackPtr): void
+    public function process(File $phpcsFile, $stackPtr): int
     {
-        static $lastFile;
-        if ($lastFile === $phpcsFile->getFilename()) {
-            return;
-        }
-        $lastFile = $phpcsFile->getFilename();
-
-        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()) - $stackPtr);
+        $tokenCount = count($phpcsFile->getTokens());
+        $html = $phpcsFile->getTokensAsString($stackPtr, $tokenCount - $stackPtr);
 
         if (empty($html)) {
-            return;
+            return $tokenCount + 1;
         }
 
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
@@ -95,5 +91,7 @@ class HtmlClosingVoidTagsSniff implements Sniff
                 }
             }
         }
+
+        return $tokenCount + 1;
     }
 }

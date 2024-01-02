@@ -29,20 +29,16 @@ class HtmlCollapsibleAttributeSniff implements Sniff
      *
      * @param File $phpcsFile
      * @param int $stackPtr
-     * @return int|void
+     *
+     * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr): int
     {
-        static $lastFile;
-        if ($lastFile === $phpcsFile->getFilename()) {
-            return;
-        }
-        $lastFile = $phpcsFile->getFilename();
-
-        $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()) - $stackPtr);
+        $tokenCount = count($phpcsFile->getTokens());
+        $html = $phpcsFile->getTokensAsString($stackPtr, $tokenCount - $stackPtr);
 
         if (empty($html)) {
-            return;
+            return $tokenCount + 1;
         }
 
         $pattern = '$<\w+.*?\s*(?=.*?\s*data-toggle="collapse")[^>]*?>.*?$';
@@ -57,5 +53,7 @@ class HtmlCollapsibleAttributeSniff implements Sniff
                 );
             }
         }
+
+        return $tokenCount + 1;
     }
 }
