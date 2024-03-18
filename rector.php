@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Magento2\Rector\Src\ReplaceMbStrposNullLimit;
 use Magento2\Rector\Src\ReplaceNewDateTimeNull;
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\ValueObject\PhpVersion;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
 use Rector\Php80\Rector\ClassMethod\FinalPrivateToPrivateVisibilityRector;
 use Rector\CodeQuality\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
