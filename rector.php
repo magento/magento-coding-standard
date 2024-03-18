@@ -17,9 +17,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
     $rectorConfig->phpVersion(PhpVersion::PHP_81);
 
-    // get services (needed for register a single rule)
-//    $services = $rectorConfig->services();
-
     // register a single rule
     $rectorConfig->singleton(FinalPrivateToPrivateVisibilityRector::class);
     $rectorConfig->singleton(OptionalParametersAfterRequiredRector::class);
