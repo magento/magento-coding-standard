@@ -55,8 +55,9 @@ class PhtmlTemplateObjectManagerSniff implements Sniff
         }
 
         $phpcsFile->addWarning(
-            'ObjectManager should not be used in .phtml template ' .
-            'as it\'s not a template\'s responsibility to create objects.',
+            'ObjectManager should not be used in .phtml template. ' .
+            'Templates must not instantiate new objects within their code. ' .
+            'All objects must be passed from the Block object.',
             $stackPtr,
             self::WARNING_CODE_OBJECT_MANAGER_USAGE
         );
