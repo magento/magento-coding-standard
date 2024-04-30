@@ -21,6 +21,14 @@ namespace Magento2\Sniffs\Phtml;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
+/**
+ * Class PhtmlTemplateObjectManagerSniff
+ *
+ * Templates must not instantiate new objects within their code.
+ * All objects must be passed from the Block object.
+ *
+ * @link https://developer.adobe.com/commerce/frontend-core/guide/templates/override/#getting-argument-values-from-layout
+ */
 class PhtmlTemplateObjectManagerSniff implements Sniff
 {
     private const WARNING_CODE_OBJECT_MANAGER_USAGE = 'ObjectManagerUsageFound';
@@ -48,7 +56,7 @@ class PhtmlTemplateObjectManagerSniff implements Sniff
 
         $phpcsFile->addWarning(
             'ObjectManager should not be used in .phtml template ' .
-            'as it’s not a template’s responsibility to create objects.',
+            'as it\'s not a template\'s responsibility to create objects.',
             $stackPtr,
             self::WARNING_CODE_OBJECT_MANAGER_USAGE
         );
