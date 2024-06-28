@@ -29,7 +29,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * @link https://developer.adobe.com/commerce/frontend-core/guide/layouts/xml-instructions/#obtain-arguments-examples-in-template
  * @link https://developer.adobe.com/commerce/frontend-core/guide/templates/override/#getting-argument-values-from-layout
  */
-class PhtmlTemplateObjectManagerSniff implements Sniff
+class ObjectManagerSniff implements Sniff
 {
     private const WARNING_CODE_OBJECT_MANAGER_USAGE = 'ObjectManagerUsageFound';
 

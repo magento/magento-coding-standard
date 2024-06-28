@@ -16,20 +16,20 @@
  */
 declare(strict_types = 1);
 
-namespace Magento2\Tests\Phtml;
+namespace Magento2\Tests\Templates;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class PhtmlTemplateObjectManagerUnitTest extends AbstractSniffUnitTest
+class ObjectManagerUnitTest extends AbstractSniffUnitTest
 {
     /**
      * @inheritdoc
      */
     public function getWarningList($filename = '')
     {
-        if ($filename === 'PhtmlTemplateObjectManager.1.phtml.inc') {
+        if ($filename === 'ObjectManager.1.phtml.inc') {
             return [
-                7 => 1
+                18 => 1
             ];
         }
         return [];
