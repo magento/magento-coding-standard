@@ -27,7 +27,7 @@ class ObjectManagerUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($filename = '')
     {
-        if ($filename === 'ObjectManager.1.phtml.inc') {
+        if ($filename === 'ObjectManagerUnitTest.1.phtml.inc') {
             return [
                 18 => 1
             ];
