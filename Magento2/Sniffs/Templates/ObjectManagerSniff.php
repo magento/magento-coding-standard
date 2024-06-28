@@ -16,17 +16,17 @@
  */
 declare(strict_types = 1);
 
-namespace Magento2\Sniffs\Phtml;
+namespace Magento2\Sniffs\Templates;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
- * Class PhtmlTemplateObjectManagerSniff
- *
  * Templates must not instantiate new objects within their code.
  * All objects must be passed from the Block object.
  *
+ * @see https://developer.adobe.com/commerce/php/coding-standards/technical-guidelines/#62-presentation-layer 6.2.6
+ * @link https://developer.adobe.com/commerce/frontend-core/guide/layouts/xml-instructions/#obtain-arguments-examples-in-template
  * @link https://developer.adobe.com/commerce/frontend-core/guide/templates/override/#getting-argument-values-from-layout
  */
 class PhtmlTemplateObjectManagerSniff implements Sniff
