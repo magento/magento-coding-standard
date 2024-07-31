@@ -12,7 +12,7 @@
         "webonyx/graphql-php": "^15.0",
         "ext-simplexml": "*",
         "ext-dom": "*",
-        "squizlabs/php_codesniffer": "^3.6.1",
+        "squizlabs/php_codesniffer": "^3.10.0",
         "rector/rector": "^0.17.12",
         "phpcsstandards/phpcsutils": "^1.0.5",
         "magento/php-compatibility-fork": "^0.1"

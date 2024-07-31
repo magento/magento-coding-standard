@@ -210,4 +210,19 @@ class correctlyFormattedClassMemberDocBlock
      * @var int
      */
     protected readonly int $readOnlyInteger;
+
+    /**
+     * @var Foo|Bar
+     */
+    protected Foo|Bar $unionType;
+
+    /**
+     * @var Bar&Foo
+     */
+    protected Foo&Bar $pureIntersectionType;
+
+    /**
+     * @var array|(Bar&Foo)
+     */
+    protected (Foo&Bar)|array $unionIntersectionType;
 }
