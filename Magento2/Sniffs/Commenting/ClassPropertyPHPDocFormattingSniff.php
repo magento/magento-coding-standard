@@ -30,8 +30,10 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         T_STRING,
         T_COMMENT,
         T_NULLABLE,
-        T_BITWISE_AND,
+        T_TYPE_INTERSECTION,
         T_TYPE_UNION,
+        T_TYPE_OPEN_PARENTHESIS,
+        T_TYPE_CLOSE_PARENTHESIS,
         T_READONLY,
     ];
 
