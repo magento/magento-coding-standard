@@ -1,5 +1,5 @@
 # Copyright 2020 Adobe
-# See COPYING.txt for license details.
+# All Rights Reserved.
 
 enum PriceAdjustmentCodesEnum {
     WEEE @deprecated(reason: "WEEE code is deprecated, use fixed_product_taxes.label")
