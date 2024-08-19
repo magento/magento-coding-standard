@@ -49,7 +49,7 @@ class CopyrightSniff implements Sniff
 
         if ($this->isCopyrightYearValid($content) === false) {
             $phpcsFile->addWarningOnLine(
-                'Copyright is missing or has wrong format',
+                'Copyright is missing or Copyright content/year is not valid',
                 null,
                 self::WARNING_CODE
             );

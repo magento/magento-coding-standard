@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2021 Adobe
+ * All Rights Reserved.
  */
 declare(strict_types = 1);
 
@@ -44,7 +44,7 @@ class CopyrightGraphQLSniff implements Sniff
 
         if ($this->isCopyrightYearValid($content) === false) {
             $phpcsFile->addWarningOnLine(
-                'Copyright is missing or has wrong format',
+                'Copyright is missing or Copyright content/year is not valid',
                 null,
                 self::WARNING_CODE
             );
