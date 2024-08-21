@@ -11,7 +11,7 @@ trait CopyrightValidation
 {
 
   /**
-   * Check is copyright year valid or not
+   * Check if copyright content/year valid or not
    *
    * @param string $content
    * @return bool
