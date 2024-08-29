@@ -165,10 +165,10 @@
         <exclude-pattern>*\.js$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.ClassReferencesInConfigurationFiles">
-        <include-pattern>*\/etc/*.xml$</include-pattern>
-        <exclude-pattern>*\/etc/wsdl.xml$</exclude-pattern>
-        <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
-        <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
+        <include-pattern>*/etc/*.xml$</include-pattern>
+        <exclude-pattern>*/etc/wsdl.xml$</exclude-pattern>
+        <exclude-pattern>*/etc/wsdl2.xml$</exclude-pattern>
+        <exclude-pattern>*/etc/wsi.xml$</exclude-pattern>
         <severity>10</severity>
         <type>error</type>
     </rule>
