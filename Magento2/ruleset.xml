@@ -156,7 +156,7 @@
     <rule ref="Magento2.Legacy.Layout">
         <severity>10</severity>
         <type>error</type>
-        <include-pattern>*/view/(adminhtml|frontend|base)/*\/.xml</include-pattern>
+        <include-pattern>*/view/(adminhtml|frontend|base)/*/*.xml</include-pattern>
     </rule>
     <rule ref="Magento2.Legacy.RestrictedCode">
         <severity>10</severity>
