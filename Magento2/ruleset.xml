@@ -212,7 +212,7 @@
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Html.HtmlBinding">
-        <include-pattern>*\/.phtml$</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>9</severity>
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
