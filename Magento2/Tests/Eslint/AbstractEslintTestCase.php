@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Magento2\Tests\Eslint;
 
+use PHP_CodeSniffer\Config;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,6 +25,10 @@ abstract class AbstractEslintTestCase extends TestCase
      */
     protected function assertFileContainsError(string $testFile, array $expectedMessages): void
     {
+        if (Config::getExecutablePath('npm') === null) {
+            $this->markTestSkipped('npm is not installed here');
+        }
+
         // phpcs:ignore Magento2.Security.InsecureFunction.FoundWithAlternative
         exec(
             'npm run eslint -- Magento2/Tests/Eslint/' . $testFile,
