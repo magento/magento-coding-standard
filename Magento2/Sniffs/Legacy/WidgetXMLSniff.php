@@ -53,7 +53,7 @@ class WidgetXMLSniff implements Sniff
             if (!property_exists($element->attributes(), 'type')) {
                 continue;
             }
-            $type = $element['type'];
+            $type = (string) $element['type'];
             if (preg_match('/\//', $type)) {
                 $phpcsFile->addError(
                     "Factory name detected: {$type}.",
