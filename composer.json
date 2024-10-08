@@ -6,7 +6,7 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "34",
+    "version": "35",
     "require": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2 || ^1.0",
