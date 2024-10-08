@@ -13,42 +13,26 @@ class NotAnErrorHandler
 
 }
 
-/**
- * Faulty Handler
- */
 class FaultyHandler
 {
 
 }
 
-/**
- * Class SomeHandler
- */
 class SomeHandler
 {
 
 }
 
-/**
- * YetAnotherHandler
- */
 class YetAnotherHandler
 {
 
 }
 
-/**
- * GreenHandler
- * @api Do not confuse tag for faulty short description
- */
 class GreenHandler
 {
 
 }
 
-/**
- *
- */
 class EmptyHandler
 {
 
@@ -60,10 +44,6 @@ class EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author should not be used
- * @category is irrelevant
- * @package should not be used
- * @subpackage does not belong here
  */
 class ExampleHandler
 {
@@ -179,9 +159,6 @@ class AlsoDeprecatedButHandler
 
 }
 
-/**
- * @package this tag should not be used
- */
 class OnlyUselessCommentContent
 {
 

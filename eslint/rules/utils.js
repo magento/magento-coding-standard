@@ -75,18 +75,18 @@ function getExpressionId(node) {
 
     while (node) {
         switch (node.type) {
-            case 'CallExpression':
-                node = node.callee;
-                break;
+        case 'CallExpression':
+            node = node.callee;
+            break;
 
-            case 'MemberExpression':
-                node = node.object;
-                break;
+        case 'MemberExpression':
+            node = node.object;
+            break;
 
-            case 'Identifier':
-                return node;
-            default:
-                return null;
+        case 'Identifier':
+            return node;
+        default:
+            return null;
         }
     }
 }

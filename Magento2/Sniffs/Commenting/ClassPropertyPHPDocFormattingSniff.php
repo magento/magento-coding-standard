@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2019 Adobe
+ * All Rights Reserved.
  */
 declare(strict_types=1);
 
@@ -32,6 +32,7 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
         T_NULLABLE,
         T_BITWISE_AND,
         T_TYPE_UNION,
+        T_READONLY,
     ];
 
     /**

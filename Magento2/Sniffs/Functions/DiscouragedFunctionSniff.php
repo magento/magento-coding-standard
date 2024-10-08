@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2018 Adobe
+ * All Rights Reserved.
  */
 namespace Magento2\Sniffs\Functions;
 
@@ -104,6 +104,7 @@ class DiscouragedFunctionSniff extends ForbiddenFunctionsSniff
         '^parsekit_compile_string$' => null,
         '^pathinfo$' => 'Magento\Framework\Filesystem\Io\File::getPathInfo',
         '^pcntl_.*$' => null,
+        '^posix_isatty$' => 'stream_isatty',
         '^posix_.*$' => null,
         '^pfpro_.*$' => null,
         '^pfsockopen$' => null,
