@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2019 Adobe
+ * All Rights Reserved.
  */
 namespace Magento2\Sniffs\Commenting;
 
@@ -63,8 +63,10 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
             return;
         }
 
+        $commentCloserPtr = $tokens[$commentStartPtr]['comment_closer'];
+
         if ($this->PHPDocFormattingValidator->providesMeaning($namePtr, $commentStartPtr, $tokens) !== true) {
-            $phpcsFile->addWarning(
+            $fix = $phpcsFile->addFixableWarning(
                 sprintf(
                     '%s description must contain meaningful information beyond what its name provides or be removed.',
                     ucfirst($tokens[$stackPtr]['content'])
@@ -72,6 +74,18 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
                 $stackPtr,
                 'InvalidDescription'
             );
+
+            if ($fix) {
+                for ($i = $commentStartPtr; $i <= $commentCloserPtr; $i++) {
+                    $phpcsFile->fixer->replaceToken($i, '');
+                }
+
+                if ($tokens[$commentStartPtr - 1]['code'] === T_WHITESPACE
+                    && $tokens[$commentCloserPtr + 1]['code'] === T_WHITESPACE
+                ) {
+                    $phpcsFile->fixer->replaceToken($commentCloserPtr + 1, '');
+                }
+            }
         }
 
         if ($this->PHPDocFormattingValidator->hasDeprecatedWellFormatted($commentStartPtr, $tokens) !== true) {
@@ -105,11 +119,35 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
             }
 
             if (in_array($tokens[$i]['content'], $this->forbiddenTags) === true) {
-                $phpcsFile->addWarning(
+                $fix = $phpcsFile->addFixableWarning(
                     sprintf('Tag %s MUST NOT be used.', $tokens[$i]['content']),
                     $i,
                     'ForbiddenTags'
                 );
+
+                if ($fix) {
+                    for ($j = $i - 1; $j > $commentStartPtr; $j--) {
+                        if (!in_array($tokens[$j]['code'], [T_DOC_COMMENT_STAR, T_DOC_COMMENT_WHITESPACE], true)) {
+                            break;
+                        }
+
+                        if ($tokens[$j]['code'] === T_DOC_COMMENT_WHITESPACE && $tokens[$j]['content'] === "\n") {
+                            break;
+                        }
+
+                        $phpcsFile->fixer->replaceToken($j, '');
+                    }
+
+                    $phpcsFile->fixer->replaceToken($i, '');
+
+                    for ($j = $i + 1; $j < $commentCloserPtr; $j++) {
+                        $phpcsFile->fixer->replaceToken($j, '');
+
+                        if ($tokens[$j]['code'] === T_DOC_COMMENT_WHITESPACE && $tokens[$j]['content'] === "\n") {
+                            break;
+                        }
+                    }
+                }
             }
         }
 

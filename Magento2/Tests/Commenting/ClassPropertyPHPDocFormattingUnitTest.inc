@@ -200,6 +200,16 @@ class correctlyFormattedClassMemberDocBlock
      * @deprecated This property will be removed in version 1.0.0 without replacement
      */
     protected string $deprecatedWithKeyword;
+
+    /**
+     * @var string
+     */
+    protected readonly string $readOnlyString;
+
+    /**
+     * @var int
+     */
+    protected readonly int $readOnlyInteger;
 }
 
     class classWithPropertiesWithTypesAndWithoutDocBlock
