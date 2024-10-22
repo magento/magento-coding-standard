@@ -16,13 +16,13 @@ use PHP_CodeSniffer\Files\File;
 class HtmlSelfClosingTagsSniff implements Sniff
 {
     /**
-     * List of void elements
+     * List of void elements.
      *
-     * https://www.w3.org/TR/html51/syntax.html#writing-html-documents-elements
+     * https://html.spec.whatwg.org/multipage/syntax.html#void-elements
      *
      * @var string[]
      */
-    private $voidElements = [
+    protected const HTML_VOID_ELEMENTS = [
         'area',
         'base',
         'br',
@@ -31,15 +31,15 @@ class HtmlSelfClosingTagsSniff implements Sniff
         'hr',
         'img',
         'input',
-        'keygen',
         'link',
-        'menuitem',
         'meta',
-        'param',
         'source',
         'track',
         'wbr',
     ];
+
+    /** @var int */
+    private int $lastPointer = 0;
 
     /**
      * @inheritDoc
@@ -54,7 +54,7 @@ class HtmlSelfClosingTagsSniff implements Sniff
      *
      * @param File $phpcsFile
      * @param int $stackPtr
-     * @return int|void
+     * @return void
      */
     public function process(File $phpcsFile, $stackPtr)
     {
@@ -69,15 +69,63 @@ class HtmlSelfClosingTagsSniff implements Sniff
 
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
-                if (!in_array($match[1], $this->voidElements)) {
-                    $phpcsFile->addError(
+                if (!in_array($match[1], self::HTML_VOID_ELEMENTS)) {
+                    $ptr = $this->findPointer($phpcsFile, $match[0]);
+                    $fix = $phpcsFile->addFixableError(
                         'Avoid using self-closing tag with non-void html element'
-                        . ' - "' . $match[0]  . PHP_EOL,
-                        null,
+                        . ' - "' . $match[0] . PHP_EOL,
+                        $ptr,
                         'HtmlSelfClosingNonVoidTag'
                     );
+
+                    if ($fix) {
+                        $token = $phpcsFile->getTokens()[$ptr];
+                        $original = $token['content'];
+                        $replacement = str_replace(' />', '></' . $match[1] . '>', $original);
+                        $replacement = str_replace('/>', '></' . $match[1] . '>', $replacement);
+
+                        if (preg_match('{^\s* />}', $original)) {
+                            $replacement = ' ' . $replacement;
+                        }
+
+                        $phpcsFile->fixer->replaceToken($ptr, $replacement);
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Apply a fix for the detected issue
+     *
+     * @param File $phpcsFile
+     * @param string $needle
+     * @return int|null
+     */
+    protected function findPointer(File $phpcsFile, string $needle): ?int
+    {
+        if (str_contains($needle, "\n")) {
+            foreach (explode("\n", $needle) as $line) {
+                $result = $this->findPointer($phpcsFile, $line);
+            }
+            return $result;
+        }
+
+        foreach ($phpcsFile->getTokens() as $ptr => $token) {
+            if ($ptr < $this->lastPointer) {
+                continue;
+            }
+
+            if ($token['code'] !== T_INLINE_HTML) {
+                continue;
+            }
+
+            if (str_contains($token['content'], $needle)) {
+                $this->lastPointer = $ptr;
+                return $ptr;
+            }
+        }
+
+        return null;
     }
 }
