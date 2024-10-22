@@ -58,6 +58,13 @@ class ClassNamingSniff implements Sniff
         }
 
         $className = $tokens[$stackPtr + 1]['content'];
+
+        if (str_contains($className, '@')) {
+            // "class name" is actually a variable.
+            // @see https://lesscss.org/features/#variables-feature-variable-interpolation
+            return;
+        }
+
         if (preg_match_all('/[^a-z0-9\-_]/U', $className, $matches)) {
             $phpcsFile->addError(
                 'CSS class name does not follow class naming requirements: %s',
