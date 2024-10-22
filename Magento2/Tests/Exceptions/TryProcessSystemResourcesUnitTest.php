@@ -26,10 +26,11 @@ class TryProcessSystemResourcesUnitTest extends AbstractSniffUnitTest
     protected function getWarningList()
     {
         return [
-            22 => 1,
             24 => 1,
             26 => 1,
-            28 => 1
+            28 => 1,
+            30 => 1,
+            33 => 1,
         ];
     }
 }
