@@ -172,9 +172,25 @@ class DeprecatedButHandler
 }
 
 /**
+ * @deprecated This class will be removed in version 123.45.6789 without replacement
+ */
+class DeprecatedButHandlerLongVersion
+{
+
+}
+
+/**
  * @deprecated It's also deprecated - This class will be removed in version 1.0.0 without replacement
  */
 class AlsoDeprecatedButHandler
+{
+
+}
+
+/**
+ * @deprecated It's also deprecated - This class will be removed in version 123.45.6789 without replacement
+ */
+class AlsoDeprecatedButHandlerLongVersion
 {
 
 }
