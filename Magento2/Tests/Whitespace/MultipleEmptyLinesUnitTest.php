@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Tests\Whitespace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
@@ -25,6 +27,11 @@ class MultipleEmptyLinesUnitTest extends AbstractSniffUnitTest
         return [
             6 => 1,
             12 => 1,
+            15 => 1,
+            19 => 1,
+            23 => 1,
+            63 => 1,
+            75 => 1,
         ];
     }
 }
