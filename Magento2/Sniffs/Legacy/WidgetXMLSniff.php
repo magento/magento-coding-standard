@@ -3,6 +3,8 @@
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -51,7 +53,7 @@ class WidgetXMLSniff implements Sniff
             if (!property_exists($element->attributes(), 'type')) {
                 continue;
             }
-            $type = $element['type'];
+            $type = (string) $element['type'];
             if (preg_match('/\//', $type)) {
                 $phpcsFile->addError(
                     "Factory name detected: {$type}.",

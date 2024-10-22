@@ -3,6 +3,8 @@
  * Copyright 2018 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Translation;
 
 use PHP_CodeSniffer\Files\File;
