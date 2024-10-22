@@ -7,11 +7,13 @@
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConfigNodesSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const ERROR_MESSAGE_CONFIG = "Nodes identified by XPath '%s' are obsolete. %s";
     private const ERROR_CODE_CONFIG = 'ObsoleteNodeInConfig';
 
@@ -39,14 +41,7 @@ class ObsoleteConfigNodesSniff implements Sniff
         // instead, as it is the one we compare with $stackPtr later on.
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
-            $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
-                $stackPtr,
-                self::ERROR_CODE_CONFIG
-            );
+            return;
         }
 
         foreach ($this->getObsoleteNodes() as $xpath => $suggestion) {
@@ -54,32 +49,19 @@ class ObsoleteConfigNodesSniff implements Sniff
             if (empty($matches)) {
                 continue;
             }
+
             foreach ($matches as $match) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE_CONFIG,
+                    self::ERROR_MESSAGE_CONFIG,
+                    dom_import_simplexml($match)->getLineNo() - 1,
+                    self::ERROR_CODE_CONFIG,
+                    [
                         $xpath,
-                        $suggestion
-                    ),
-                    dom_import_simplexml($match)->getLineNo()-1,
-                    self::ERROR_CODE_CONFIG
+                        $suggestion,
+                    ]
                 );
             }
         }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
-        return $doc->saveXML();
     }
 
     /**
@@ -146,7 +128,7 @@ class ObsoleteConfigNodesSniff implements Sniff
             '/config/global/dev' =>
                 'This configuration moved to Di configuration of \Magento\Framework\App\Action\Context',
             '/config/global/webapi' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 ' \Magento\Webapi\Controller\Request\Rest\Interpreter\Factory' .
                 ' and \Magento\Webapi\Controller\Response\Rest\Renderer\Factory',
             '/config/global/cms' =>
@@ -155,10 +137,10 @@ class ObsoleteConfigNodesSniff implements Sniff
             '/config/global/widget' =>
                 'This configuration moved to Di configuration of \Magento\Cms\Model\Template\FilterProvider',
             '/config/global/catalog/product/flat/max_index_count' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 '\Magento\Catalog\Model\ResourceModel\Product\Flat\Indexer',
             '/config/global/catalog/product/flat/attribute_groups' =>
-                'This configuration moved to Di configuration of '.
+                'This configuration moved to Di configuration of ' .
                 '\Magento\Catalog\Model\ResourceModel\Product\Flat\Indexer',
             '/config/global/catalog/product/flat/add_filterable_attributes' =>
                 'This configuration moved to Di configuration of \Magento\Catalog\Helper\Product\Flat\Indexer',

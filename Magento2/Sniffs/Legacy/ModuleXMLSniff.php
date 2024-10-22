@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
@@ -15,6 +16,8 @@ use SimpleXMLElement;
  */
 class ModuleXMLSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const WARNING_CODE = 'FoundObsoleteAttribute';
     private const ERROR_CODE = 'WrongXML';
 
@@ -42,14 +45,6 @@ class ModuleXMLSniff implements Sniff
         // instead, as it is the one we compare with $stackPtr later on.
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
-            $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
-                $stackPtr,
-                self::ERROR_CODE
-            );
             return;
         }
 
@@ -58,7 +53,7 @@ class ModuleXMLSniff implements Sniff
             foreach ($foundElements as $element) {
                 $phpcsFile->addWarning(
                     'The "version" attribute is obsolete. Use "setup_version" instead.',
-                    dom_import_simplexml($element)->getLineNo()-1,
+                    dom_import_simplexml($element)->getLineNo() - 1,
                     self::WARNING_CODE
                 );
             }
@@ -68,26 +63,12 @@ class ModuleXMLSniff implements Sniff
         if ($foundElements !== false) {
             foreach ($foundElements as $element) {
                 $phpcsFile->addWarning(
-                    'The "active" attribute is obsolete. The list of active modules '.
+                    'The "active" attribute is obsolete. The list of active modules ' .
                     'is defined in deployment configuration.',
-                    dom_import_simplexml($element)->getLineNo()-1,
+                    dom_import_simplexml($element)->getLineNo() - 1,
                     self::WARNING_CODE
                 );
             }
         }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
-        return $doc->saveXML();
     }
 }

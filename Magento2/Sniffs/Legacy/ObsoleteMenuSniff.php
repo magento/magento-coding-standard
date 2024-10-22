@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -14,8 +16,10 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ObsoleteMenuSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const WARNING_OBSOLETE_MENU_STRUCTURE = 'ObsoleteMenuStructure';
-    
+
     /**
      * @var string
      */
@@ -49,19 +53,5 @@ class ObsoleteMenuSniff implements Sniff
                 self::WARNING_OBSOLETE_MENU_STRUCTURE
             );
         }
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
-        return $doc->saveXML();
     }
 }

@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2022 Adobe
  * All Rights Reserved.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Sniffs\Html;
@@ -75,6 +77,7 @@ class HtmlClosingVoidTagsSniff implements Sniff
         if ($stackPtr !== 0) {
             return;
         }
+
         $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
 
         if (empty($html)) {
@@ -85,9 +88,12 @@ class HtmlClosingVoidTagsSniff implements Sniff
             foreach ($matches as $match) {
                 if (in_array($match[1], self::HTML_VOID_ELEMENTS)) {
                     $phpcsFile->addWarning(
-                        sprintf(self::WARNING_MESSAGE, $match[0]),
+                        self::WARNING_MESSAGE,
                         null,
-                        self::WARNING_CODE
+                        self::WARNING_CODE,
+                        [
+                            $match[0],
+                        ]
                     );
                 }
             }
