@@ -246,7 +246,8 @@ class MethodArgumentsSniff implements Sniff
                     $stackPtr,
                     'InheritDoc'
                 );
-            } elseif ($this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)
+            } elseif (
+                $this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)
                 && !$inheritdocAnnotationWithoutBracesExists
             ) {
                 $phpcsFile->addError(
@@ -352,7 +353,8 @@ class MethodArgumentsSniff implements Sniff
         $parameterNames = $this->getMethodParameters($paramDefinitions);
         $paramDefinitionsCount = count($paramDefinitions);
         for ($ptr = 0; $ptr < $paramDefinitionsCount; $ptr++) {
-            if (isset($methodArguments[$ptr]) && isset($parameterNames[$ptr])
+            if (
+                isset($methodArguments[$ptr]) && isset($parameterNames[$ptr])
                 && in_array($methodArguments[$ptr], $parameterNames)
             ) {
                 if ($methodArguments[$ptr] != $parameterNames[$ptr]) {
@@ -390,7 +392,8 @@ class MethodArgumentsSniff implements Sniff
                 if (isset($paramDefinition['paramName'])) {
                     $parameterContent = $paramDefinition['paramName'];
                     foreach (array_slice($paramDefinitions, $i + 1) as $nextParamDefinition) {
-                        if (isset($nextParamDefinition['paramName'])
+                        if (
+                            isset($nextParamDefinition['paramName'])
                             && $parameterContent === $nextParamDefinition['paramName']
                         ) {
                             $duplicateParameters[] = $parameterContent;
@@ -647,8 +650,10 @@ class MethodArgumentsSniff implements Sniff
                     ? strrpos($paramContent, $paramDefinition['comment']) : null;
             }
         }
-        if (!$this->allParamsAligned($argumentPositions, $commentPositions)
-            && !$this->noneParamsAligned($argumentPositions, $commentPositions, $paramDefinitions)) {
+        if (
+            !$this->allParamsAligned($argumentPositions, $commentPositions)
+            && !$this->noneParamsAligned($argumentPositions, $commentPositions, $paramDefinitions)
+        ) {
             $phpcsFile->addError(
                 'Method arguments visual alignment must be consistent',
                 $paramPointers[0],
@@ -688,8 +693,10 @@ class MethodArgumentsSniff implements Sniff
                 continue;
             }
             $paramName = $paramDefinitions[$index]['paramName'];
-            if (($argumentPosition !== strlen($type) + 1) ||
-                (isset($commentPosition) && ($commentPosition !== $argumentPosition + strlen($paramName) + 1))) {
+            if (
+                ($argumentPosition !== strlen($type) + 1) ||
+                (isset($commentPosition) && ($commentPosition !== $argumentPosition + strlen($paramName) + 1))
+            ) {
                 $flag = false;
                 break;
             }

@@ -42,7 +42,7 @@ class CopyrightAnotherExtensionsFilesSniff implements Sniff
             return;
         }
 
-      // @phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
+        // @phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
         $content = file_get_contents($phpcsFile->getFilename());
 
         if ($this->isCopyrightYearValid($content) === false) {

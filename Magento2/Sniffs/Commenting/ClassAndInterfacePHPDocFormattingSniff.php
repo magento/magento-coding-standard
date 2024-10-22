@@ -80,7 +80,8 @@ class ClassAndInterfacePHPDocFormattingSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($i, '');
                 }
 
-                if ($tokens[$commentStartPtr - 1]['code'] === T_WHITESPACE
+                if (
+                    $tokens[$commentStartPtr - 1]['code'] === T_WHITESPACE
                     && $tokens[$commentCloserPtr + 1]['code'] === T_WHITESPACE
                 ) {
                     $phpcsFile->fixer->replaceToken($commentCloserPtr + 1, '');

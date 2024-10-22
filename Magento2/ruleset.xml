@@ -587,7 +587,7 @@
         <type>warning</type>
         <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
     </rule>
-    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+    <rule ref="PSR12.ControlStructures.ControlStructureSpacing">
         <severity>6</severity>
         <type>warning</type>
     </rule>

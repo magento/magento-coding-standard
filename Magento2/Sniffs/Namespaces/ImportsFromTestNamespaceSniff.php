@@ -48,7 +48,8 @@ class ImportsFromTestNamespaceSniff implements Sniff
         if (strpos($getTokenAsContent, $this->prohibitNamespace) !== false) {
             $phpcsFile->addWarning($this->warningMessage, $stackPtr, $this->warningCode);
         }
-        if ($next !== false
+        if (
+            $next !== false
             && $tokens[$next]['code'] !== T_SEMICOLON
             && $tokens[$next]['code'] !== T_CLOSE_TAG
         ) {
