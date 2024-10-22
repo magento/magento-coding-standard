@@ -9,6 +9,7 @@
     "version": "35",
     "require": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2 || ^1.0",
         "webonyx/graphql-php": "^15.0",
         "ext-simplexml": "*",
         "ext-dom": "*",
@@ -35,13 +36,9 @@
             "Magento2Framework\\": "Magento2Framework/"
         }
     },
-    "scripts": {
-        "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..,../../magento/php-compatibility-fork/PHPCompatibility",
-        "post-update-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..,../../magento/php-compatibility-fork/PHPCompatibility"
-    },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
