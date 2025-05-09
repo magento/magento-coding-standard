@@ -1,5 +1,5 @@
 <?php
-
+function functionWithNoPrecedingDocBlock() {}
 /**
 * Class for method structure for annotations test cases
 */
@@ -388,5 +388,65 @@ class MethodAnnotationFixture
     public function alsoCorrectBecauseOfKeywordPhrase()
     {
         return false;
+    }
+
+    /** @var OutputInterface */
+    private $output;
+
+    private function thisMethodHasNoDocBlock(): bool
+    {
+        return false;
+    }
+}
+
+/**
+ * Class with comment
+ */
+class ClassWithDocBlock
+{
+    private function methodWithNoDocBlock(): bool
+    {
+        return false;
+    }
+
+    #[
+        /**
+         * This docBloc is not for the method but for the attribute
+         */
+        \ReturnTypeWillChange
+    ]
+    public function methodWithDocBlockInsideAttributesDelimiters(string $text): string
+    {
+        return $text;
+    }
+
+    #[\ReturnTypeWillChange]
+    public function methodWithAttributeAndNoDocBlock(string $text): string
+    {
+        return $text;
+    }
+
+    /**
+     * Short description.
+     *
+     * @param string $text
+     * @return string
+     */
+    #[\ReturnTypeWillChange]
+    public function methodWithAttributeAndValidDocBlock(string $text): string
+    {
+        return $text;
+    }
+
+    #[\ReturnTypeWillChange]
+    /**
+     * Short description.
+     *
+     * @param string $text
+     * @return string
+     */
+    public function methodWithAttributeAndValidDocBlock2(string $text): string
+    {
+        return $text;
     }
 }

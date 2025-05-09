@@ -1,0 +1,25 @@
+{
+    "templateVersion": "0.2",
+    "product": {
+        "name": "magento/magento-coding-standard",
+        "description": "A set of Magento specific PHP CodeSniffer rules"
+    },
+    "contacts": {
+        "team": {
+            "name": "HAMMER",
+            "DL": "Grp-RQ-HAMMER",
+            "slackChannel": "gl-hammer-team"
+        }
+    },
+    "ticketTracker": {
+        "functionalJiraQueue": {
+            "projectKey": "AC",
+            "component": "Github"
+        },
+        "securityJiraQueue": {
+            "projectKey": "MAGREQ",
+            "component": "Commerce M2"
+        }
+    },
+    "productionCodeBranches": ["develop"]
+}

@@ -4,6 +4,8 @@
 
     <arg name="extensions" value="php,phtml,graphqls/GRAPHQL,less/CSS,html/CSS,css/CSS,xml,js/JS"/>
 
+    <rule ref="Magento2" />
+
     <rule ref="Magento2Framework.Header.License">
         <severity>5</severity>
         <type>warning</type>

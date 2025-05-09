@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2021 Adobe
+ * All Rights Reserved.
  */
 declare(strict_types = 1);
 
@@ -12,11 +12,9 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class CopyrightSniff implements Sniff
 {
-    private const WARNING_CODE = 'FoundCopyrightMissingOrWrongFormat';
+    use CopyrightValidation;
 
-    private const COPYRIGHT_MAGENTO_TEXT = 'Copyright © Magento, Inc. All rights reserved.';
-    private const COPYRIGHT_ADOBE = '/Copyright \d+ Adobe/';
-    private const COPYRIGHT_ADOBE_TEXT = 'ADOBE CONFIDENTIAL';
+    private const WARNING_CODE = 'FoundCopyrightMissingOrWrongFormat';
 
     /**
      * @inheritdoc
@@ -46,19 +44,15 @@ class CopyrightSniff implements Sniff
             return;
         }
 
-        $content = $phpcsFile->getTokens()[$positionComment]['content'];
-        $adobeCopyrightFound = preg_match(self::COPYRIGHT_ADOBE, $content);
+        // @phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
+        $content = file_get_contents($phpcsFile->getFilename());
 
-        if (strpos($content, self::COPYRIGHT_MAGENTO_TEXT) !== false ||
-                $adobeCopyrightFound ||
-                    strpos($content, self::COPYRIGHT_ADOBE_TEXT) !== false) {
-            return;
+        if ($this->isCopyrightYearValid($content) === false) {
+            $phpcsFile->addWarningOnLine(
+                'Copyright is missing or Copyright content/year is not valid',
+                null,
+                self::WARNING_CODE
+            );
         }
-
-        $phpcsFile->addWarningOnLine(
-            'Copyright is missing or has wrong format',
-            $phpcsFile->getTokens()[$positionComment]['line'],
-            self::WARNING_CODE
-        );
     }
 }

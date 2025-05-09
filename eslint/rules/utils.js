@@ -4,8 +4,6 @@
  * @returns object
  */
 function define (node) {
-    'use strict';
-
     const defineStmt = node.body.find(function (stmt) {
         return (
             stmt.type === 'ExpressionStatement' &&
@@ -22,16 +20,11 @@ function define (node) {
     }
 
     const args = defineStmt.expression.arguments;
-    let moduleNames = [];
-
-    if (args.length > 1) {
-        moduleNames = args[1].params;
-    }
 
     return {
         func: defineStmt.expression,
         modulePaths: args[0].elements,
-        moduleNames: moduleNames,
+        moduleNames: (args.length > 1 && args[1].params) || [],
     };
 }
 
@@ -41,12 +34,9 @@ function define (node) {
  * @returns {null|*}
  */
 function getJqueryName (defineObject) {
-    'use strict';
-
     if (!defineObject.modulePaths || !defineObject.moduleNames) {
         return null;
     }
-
     const jQueryPathIndex = defineObject.modulePaths.findIndex(function (paths) {
         return paths.value.toLowerCase() === 'jquery';
     });
@@ -54,7 +44,6 @@ function getJqueryName (defineObject) {
     if (jQueryPathIndex === -1 || jQueryPathIndex >= defineObject.moduleNames.length) {
         return null;
     }
-
     return defineObject.moduleNames[jQueryPathIndex];
 }
 
@@ -62,7 +51,6 @@ function getJqueryName (defineObject) {
  * Get Root Program node
  */
 function getProgramNode (node) {
-    'use strict';
     if (!node.parent) {
         return node;
     }
@@ -76,8 +64,6 @@ function getProgramNode (node) {
  * @returns {Object|Null}
  */
 function getExpressionId (node) {
-    'use strict';
-
     while (node) {
         switch (node.type) {
         case 'CallExpression':
@@ -90,7 +76,6 @@ function getExpressionId (node) {
 
         case 'Identifier':
             return node;
-
         default:
             return null;
         }
@@ -108,22 +93,19 @@ function getExpressionId (node) {
  */
 
 function isjQuery (node) {
-    'use strict';
-
     const parentNode = getProgramNode(node);
     const defineNode = define(parentNode);
 
     if (!defineNode) {
         return false;
     }
-
     const jQueryId = getJqueryName(defineNode);
     const id = getExpressionId(node);
 
     return id && jQueryId && id.name === jQueryId.name;
 }
 
-module.exports = {
+export default {
     traverse: getExpressionId,
     isjQuery: isjQuery,
 };

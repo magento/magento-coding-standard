@@ -1,4 +1,7 @@
-module.exports = {
+// Import utils using ES module syntax
+import utils from './utils.js';
+
+export default {
     meta: {
         type: 'suggestion',
         docs: {
@@ -17,10 +20,6 @@ module.exports = {
      * @returns {Object}
      */
     create: function (context) {
-        'use strict';
-
-        const utils = require('./utils.js');
-
         return {
             /**
              * Checks if shorthand event methods are used.
@@ -35,11 +34,9 @@ module.exports = {
 
                 if (node.callee.type !== 'MemberExpression') { return; }
 
-                const name = node.callee.property.name;
+                const message = namesToMsg[node.callee.property.name];
 
-                if (!Object.prototype.hasOwnProperty.call(namesToMsg, name)) { return; }
-
-                const message = namesToMsg[name];
+                if (!message) { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({

@@ -1,0 +1,12 @@
+{
+  "name": "magento-coding-standard-eslint-plugin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "resolutions": {
+    "eslint": "~9.22.0"
+  },
+  "eslintConfig": {
+    "plugins": ["magento-coding-standard-eslint-plugin"]
+  },
+  "type": "module"
+}

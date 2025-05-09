@@ -2,13 +2,14 @@
   "name": "js",
   "version": "1.0.0",
   "description": "",
-  "main": "eslint/.eslintrc",
+  "main": "eslint/eslint.config.mjs",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint -c eslint/.eslintrc --rulesdir eslint/rules"
+    "eslint": "./node_modules/.bin/eslint -c eslint/eslint.config.mjs"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.8.0"
+    "eslint": "~9.22.0",
+    "magento-coding-standard-eslint-plugin": "file:./eslint"
   }
 }

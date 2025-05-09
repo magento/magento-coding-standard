@@ -1,4 +1,7 @@
-module.exports = {
+// Import utils using ES module syntax
+import utils from './utils.js';
+
+export default {
     meta: {
         type: 'suggestion',
         docs: {
@@ -20,10 +23,6 @@ module.exports = {
      * @returns {Object}
      */
     create: function (context) {
-        'use strict';
-
-        const utils = require('./utils.js');
-
         return {
             /**
              * Checks if bind and unbind are used in the node and reports it.
