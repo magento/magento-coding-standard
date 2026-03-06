@@ -8,9 +8,9 @@ export default {
             description: 'Disallow the use of shortcuts to input events via keyboard/mouse trigger events',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/bind/'
+            url: 'https://api.jquery.com/bind/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -27,25 +27,24 @@ export default {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                var names, name;
-
-                names = ['blur', 'focus', 'focusin', 'focusout', 'resize', 'scroll', 'dblclick', 'mousedown',
-                    'mouseup', 'mousemove','mouseover', 'mouseout', 'mouseenter', 'mouseleave', 'change', 'select',
+                const names = ['blur', 'focus', 'focusin', 'focusout', 'resize', 'scroll', 'dblclick', 'mousedown',
+                    'mouseup', 'mousemove', 'mouseover', 'mouseout', 'mouseenter', 'mouseleave', 'change', 'select',
                     'submit', 'keydown', 'keypress', 'keyup', 'contextmenu', 'click'];
 
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                if (!names.includes(node.callee.property.name)) {return;}
+                if (!names.includes(node.callee.property.name)) { return; }
 
                 if (utils.isjQuery(node)) {
-                    name = node.callee.property.name;
+                    const name = node.callee.property.name;
+
                     context.report({
                         node: node,
                         message: 'Instead of .' + name + '(fn) use .on("' + name + '", fn). Instead of .' + name +
-                            '() use .trigger("' + name + '")'
+                            '() use .trigger("' + name + '")',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

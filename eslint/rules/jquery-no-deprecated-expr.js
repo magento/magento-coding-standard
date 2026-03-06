@@ -8,9 +8,9 @@ export default {
             description: 'Disallow the use of deprecated way to add to custom selectors',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -30,7 +30,7 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: 'jQuery.expr[":"] is deprecated; Use jQuery.expr.pseudos instead'
+                        message: 'jQuery.expr[":"] is deprecated; Use jQuery.expr.pseudos instead',
                     });
                 }
             },
@@ -44,10 +44,10 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: 'jQuery.expr.filters is deprecated; Use jQuery.expr.pseudos instead'
+                        message: 'jQuery.expr.filters is deprecated; Use jQuery.expr.pseudos instead',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
