@@ -7,7 +7,7 @@
  */
 
 import { defineConfig } from "eslint/config";
-import magentoCodingStandardEslintPlugin from "magento-coding-standard-eslint-plugin";
+import magentoCodingStandardEslintPlugin from "eslint-plugin-magento";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
@@ -29,7 +29,7 @@ export default defineConfig([
             "./.eslintrc-misc", // Miscellaneous Rules
         ),
         plugins: {
-            "magento-coding-standard-eslint-plugin": magentoCodingStandardEslintPlugin,  // This is in flat config format (object)
+            "eslint-plugin-magento": magentoCodingStandardEslintPlugin,  // This is in flat config format (object)
         }
     },
     {

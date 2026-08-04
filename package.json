@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "~9.22.0",
-    "magento-coding-standard-eslint-plugin": "file:./eslint"
+    "eslint": "~10.8.0",
+    "eslint-plugin-magento": "file:./eslint"
   }
 }

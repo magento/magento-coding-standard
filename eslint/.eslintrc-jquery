@@ -1,14 +1,14 @@
 {
     "ignorePatterns": ["**/vendor/**/*.js", "**/node_modules/**/*.js"],
     "rules": {
-        "magento-coding-standard-eslint-plugin/jquery-no-andSelf": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-bind-unbind": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-input-event-shorthand": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-delegate-undelegate": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-event-shorthand": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-size": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-trim": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-misc-deprecated-functions": 2,
-        "magento-coding-standard-eslint-plugin/jquery-no-deprecated-expr": 2
+        "eslint-plugin-magento/jquery-no-andSelf": 2,
+        "eslint-plugin-magento/jquery-no-bind-unbind": 2,
+        "eslint-plugin-magento/jquery-no-input-event-shorthand": 2,
+        "eslint-plugin-magento/jquery-no-delegate-undelegate": 2,
+        "eslint-plugin-magento/jquery-no-event-shorthand": 2,
+        "eslint-plugin-magento/jquery-no-size": 2,
+        "eslint-plugin-magento/jquery-no-trim": 2,
+        "eslint-plugin-magento/jquery-no-misc-deprecated-functions": 2,
+        "eslint-plugin-magento/jquery-no-deprecated-expr": 2
     }
 }
