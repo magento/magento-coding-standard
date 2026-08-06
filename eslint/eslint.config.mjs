@@ -21,14 +21,6 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 export default defineConfig([
-    // ignores-only object = global ignores (do not lint the ESM plugin itself)
-    {
-        ignores: [
-            "**/magento-coding-standard/eslint/**/*.js",
-            "**/eslint/rules/**/*.js",
-            "**/eslint/index.js"
-        ]
-    },
     {
         extends: compat.extends(
             "./.eslintrc-reset", // Resets all rules before applying custom ones
@@ -41,6 +33,7 @@ export default defineConfig([
         }
     },
     {
+        ignores: ['**/eslint/rules/*.js'],
         languageOptions: {
             sourceType: "script" // ensures non-module (classic script) parsing
         },
