@@ -106,6 +106,34 @@ class MethodArgumentsSniff implements Sniff
     }
 
     /**
+     * Find matching closing parenthesis for given opening parenthesis
+     * @param File $phpcsFile
+     * @param int $openParenthesisPtr
+     * @param int $numTokens
+     * @return int
+     */
+    private function findMatchingParenthesis(File $phpcsFile, int $openParenthesisPtr, int $numTokens): int
+    {
+        $tokens = $phpcsFile->getTokens();
+        $parenthesisCount = 1;
+
+        for ($i = $openParenthesisPtr + 1; $i < $numTokens; $i++) {
+            $tokenCode = $tokens[$i]['code'];
+
+            if ($tokenCode === T_OPEN_PARENTHESIS) {
+                $parenthesisCount++;
+            } elseif ($tokenCode === T_CLOSE_PARENTHESIS) {
+                $parenthesisCount--;
+                if ($parenthesisCount === 0) {
+                    return $i;
+                }
+            }
+        }
+
+        return $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $openParenthesisPtr + 1, $numTokens);
+    }
+
+    /**
      * Get arguments from method signature
      *
      * @param File $phpcsFile
@@ -575,7 +603,7 @@ class MethodArgumentsSniff implements Sniff
             return;
         }
         $openParenthesisPtr = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $stackPtr + 1, $numTokens);
-        $closedParenthesisPtr = $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $stackPtr + 1, $numTokens);
+        $closedParenthesisPtr = $this->findMatchingParenthesis($phpcsFile, $openParenthesisPtr, $numTokens);
         $methodArguments = $this->getMethodArguments($phpcsFile, $openParenthesisPtr, $closedParenthesisPtr);
         $paramPointers = $paramDefinitions = [];
         for ($tempPtr = $previousCommentOpenPtr; $tempPtr < $previousCommentClosePtr; $tempPtr++) {
