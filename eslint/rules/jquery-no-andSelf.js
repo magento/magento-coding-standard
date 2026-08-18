@@ -8,12 +8,12 @@ export default {
             description: 'Disallow the use of the deprecated `andSelf` method',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/andself/'
+            url: 'https://api.jquery.com/andself/',
         },
         schema: [],
         messages: {
-            andSelf: 'jQuery.andSelf() removed, use jQuery.addBack()'
-        }
+            andSelf: 'jQuery.andSelf() removed, use jQuery.addBack()',
+        },
     },
 
     /**
@@ -37,10 +37,10 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'andSelf'
+                        messageId: 'andSelf',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

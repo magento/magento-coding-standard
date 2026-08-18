@@ -12,7 +12,7 @@
         "node": true
     },
     "rules": {
-        "comma-dangle": [2, "never"],
+        "comma-dangle": [2, "always-multiline"],
         "comma-style": [2, "last"],
         "curly": [2, "all"],
         "eol-last": 2,

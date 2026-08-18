@@ -8,9 +8,9 @@ export default {
             description: 'Disallow the use of shorthand event methods',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -29,7 +29,7 @@ export default {
             CallExpression: function (node) {
                 var namesToMsg = {
                         'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
-                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
+                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)',
                     },
                     name,
                     message;
@@ -43,10 +43,10 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: message
+                        message: message,
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

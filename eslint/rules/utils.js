@@ -25,7 +25,7 @@ function define(node) {
     return {
         func: defineStmt.expression,
         modulePaths: args[0].elements,
-        moduleNames: args.length > 1 && args[1].params || []
+        moduleNames: args.length > 1 && args[1].params || [],
     };
 }
 
@@ -113,5 +113,5 @@ function isjQuery(node) {
 
 export default {
     traverse: getExpressionId,
-    isjQuery: isjQuery
+    isjQuery: isjQuery,
 };

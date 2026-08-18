@@ -8,12 +8,12 @@ export default {
             description: 'Disallow the use of the deprecated $.bind and $.unbind',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/bind/'
+            url: 'https://api.jquery.com/bind/',
         },
         schema: [],
         messages: {
-            bind: 'jQuery $.bind and $.unbind are deprecated, use $.on and $.off instead'
-        }
+            bind: 'jQuery $.bind and $.unbind are deprecated, use $.on and $.off instead',
+        },
     },
 
     /**
@@ -37,10 +37,10 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'bind'
+                        messageId: 'bind',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
