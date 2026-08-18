@@ -41,13 +41,63 @@ public function invalidDocBlockShouldNotCauseFatalErrorInSniff(int $number): int
  * @return string
  */
 #[\ReturnTypeWillChange]
-public function methodWithAttributeAndValidDocblock(string $text): string
+public function methodWithAttributeAndValidDocblockWithTypes(string $text): string
+{
+    return $text;
+}
+
+/**
+ * Short description.
+ *
+ * @param string $text
+ * @return string
+ */
+#[\ReturnTypeWillChange]
+public function methodWithAttributeAndValidDocblockWithoutTypes()
 {
     return $text;
 }
 
 #[\ReturnTypeWillChange]
-public function methodWithAttributeAndWithoutDocblock(string $text): string
+public function methodWithAttributeAndWithoutDocblockWithTypes(string $text): string
+{
+    return $text;
+}
+
+#[\ReturnTypeWillChange]
+public function methodWithAttributeAndWithoutDocblockWithoutTypes($text)
+{
+    return $text;
+}
+
+public function methodWithoutDockblockWithParameterTypeWithoutReturnType(string $text)
+{
+    return $text;
+}
+
+public function methodWithoutDockblockWithoutParameterTypeWithReturnType($text) : string
+{
+    return $text;
+}
+
+/**
+ * Short description.
+ *
+ * @param string $text
+ * @return string
+ */
+public function methodWithDockblockWithParameterTypeWithoutReturnType(string $text)
+{
+    return $text;
+}
+
+/**
+ * Short description.
+ *
+ * @param mixed $text
+ * @return string
+ */
+public function methodWithDockblockWithoutParameterTypeWithReturnType($text) : string
 {
     return $text;
 }
