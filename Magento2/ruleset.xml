@@ -493,6 +493,7 @@
         </properties>
         <severity>6</severity>
         <type>warning</type>
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Generic.Formatting.DisallowMultipleStatements">
         <severity>6</severity>
