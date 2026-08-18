@@ -3,6 +3,8 @@
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Performance;
 
 use PHP_CodeSniffer\Files\File;

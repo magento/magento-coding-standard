@@ -4,6 +4,8 @@
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Helpers\Commenting;
 
 use PHP_CodeSniffer\Files\File;

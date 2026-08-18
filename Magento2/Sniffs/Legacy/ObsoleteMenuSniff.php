@@ -3,6 +3,8 @@
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -15,7 +17,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class ObsoleteMenuSniff implements Sniff
 {
     private const WARNING_OBSOLETE_MENU_STRUCTURE = 'ObsoleteMenuStructure';
-    
+
     /**
      * @var string
      */

@@ -3,6 +3,8 @@
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Less;
 
 use PHP_CodeSniffer\Files\File;
