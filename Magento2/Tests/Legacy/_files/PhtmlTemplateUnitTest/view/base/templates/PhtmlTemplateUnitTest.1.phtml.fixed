@@ -6,7 +6,7 @@
 ?>
 <script type="text/x-magento-init">
 </script>
-<script type="text/javascript">
+<script>
 </script>
 <div id="block-testing"
      class="block shipping"
@@ -41,15 +41,15 @@ $this->helper();
 
 <p>This sniff should remove the any <code> type="text/javascript" </code> attributes from &lt;script&gt; tags, but not from elsewhere in the document.</p>
 
-<script type='text/javascript'></script>
-<script type="TEXT/JAVASCRIPT"></script>
-<SCRIPT TYPE="text/javascript"></SCRIPT>
-<script          type="text/javascript"></script>
-<script async type="text/javascript"></script>
-<script defer type="text/javascript"></script>
-<script type="text/javascript" defer></script>
-<script crossorigin="anonymous" async type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://unpkg.com/alpinejs" defer type="text/javascript"></script>
+<script></script>
+<script></script>
+<SCRIPT></SCRIPT>
+<script></script>
+<script async></script>
+<script defer></script>
+<script defer></script>
+<script crossorigin="anonymous" async src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://unpkg.com/alpinejs" defer></script>
 <script>
     const type="text/javascript";
 </script>

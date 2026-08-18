@@ -14,7 +14,7 @@ class PhtmlTemplateSniff implements Sniff
 {
     private const WARNING_CODE_TEXT_JAVASCRIPT = 'TextJavascriptTypeFound';
     private const WARNING_CODE_PROTECTED_PRIVATE_BLOCK_ACCESS = 'ProtectedPrivateBlockAccess';
-    
+
     /**
      * @inheritdoc
      */
@@ -40,7 +40,7 @@ class PhtmlTemplateSniff implements Sniff
             $this->checkHtml($phpcsFile, $stackPtr);
         }
     }
-    
+
     /**
      * Check access to protected and private members of Block
      *
@@ -74,13 +74,19 @@ class PhtmlTemplateSniff implements Sniff
     private function checkHtml(File $phpcsFile, int $stackPtr): void
     {
         $content = $phpcsFile->getTokensAsString($stackPtr, 1);
-        
-        if (preg_match('/type="text\/javascript"/', $content)) {
-            $phpcsFile->addWarning(
+        $pattern = '_(<script[^>]*?)\s+type=(["\'])text/javascript\2_i';
+
+        if (preg_match($pattern, $content, $matches)) {
+            $fix = $phpcsFile->addFixableWarning(
                 'Please do not use "text/javascript" type attribute.',
                 $stackPtr,
                 self::WARNING_CODE_TEXT_JAVASCRIPT
             );
+
+            if ($fix) {
+                $content = preg_replace($pattern, $matches[1], $content);
+                $phpcsFile->fixer->replaceToken($stackPtr, $content);
+            }
         }
     }
 }
