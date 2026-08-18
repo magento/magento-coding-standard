@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "resolutions": {
-    "eslint": "~9.22.0"
+    "eslint": "~9.39.5"
   },
   "eslintConfig": {
     "plugins": ["magento-coding-standard-eslint-plugin"]
