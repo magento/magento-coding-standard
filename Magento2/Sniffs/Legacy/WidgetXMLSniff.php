@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
@@ -14,10 +15,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class WidgetXMLSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const ERROR_CODE_OBSOLETE_SUPPORTED_BLOCKS = 'FoundObsoleteNodeSupportedBlocks';
     private const ERROR_CODE_OBSOLETE_BLOCK_NAME = 'FoundObsoleteNodeBlockName';
     private const ERROR_CODE_FACTORY = 'FoundFactory';
-    private const ERROR_CODE_XML = 'WrongXML';
 
     /**
      * @inheritdoc
@@ -41,7 +43,6 @@ class WidgetXMLSniff implements Sniff
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
 
         if ($xml === false) {
-            $this->invalidXML($phpcsFile, $stackPtr);
             return;
         }
 
@@ -51,6 +52,7 @@ class WidgetXMLSniff implements Sniff
             if (!property_exists($element->attributes(), 'type')) {
                 continue;
             }
+
             $type = $element['type'];
             if (preg_match('/\//', $type)) {
                 $phpcsFile->addError(
@@ -78,37 +80,5 @@ class WidgetXMLSniff implements Sniff
                 self::ERROR_CODE_OBSOLETE_BLOCK_NAME
             );
         }
-    }
-
-    /**
-     * Adds an invalid XML error
-     *
-     * @param File $phpcsFile
-     * @param int $stackPtr
-     */
-    protected function invalidXML(File $phpcsFile, int $stackPtr): void
-    {
-        $phpcsFile->addError(
-            sprintf(
-                "Couldn't parse contents of '%s', check that they are in valid XML format",
-                $phpcsFile->getFilename(),
-            ),
-            $stackPtr,
-            self::ERROR_CODE_XML
-        );
-    }
-
-    /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, 999999));
-        return $doc->saveXML();
     }
 }

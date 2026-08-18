@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -14,6 +16,8 @@ use SimpleXMLElement;
 
 class ClassReferencesInConfigurationFilesSniff implements Sniff
 {
+    use ParseXMLTrait;
+
     private const ERROR_MESSAGE_CONFIG = 'Incorrect format of PHP class reference';
     private const ERROR_CODE_CONFIG = 'IncorrectClassReference';
     private const ERROR_MESSAGE_MODULE = 'Incorrect format of module reference';
@@ -43,14 +47,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         // instead, as it is the one we compare with $stackPtr later on.
         $xml = simplexml_load_string($this->getFormattedXML($phpcsFile));
         if ($xml === false) {
-            $phpcsFile->addError(
-                sprintf(
-                    "Couldn't parse contents of '%s', check that they are in valid XML format",
-                    $phpcsFile->getFilename(),
-                ),
-                $stackPtr,
-                self::ERROR_CODE_CONFIG
-            );
+            return;
         }
 
         $classes = $this->collectClassesInConfig($xml);
@@ -72,6 +69,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (stripos($element['value'], 'Magento') === false) {
                 continue;
             }
+
             if (preg_match('/^([A-Z][a-z\d\\\\]+)+$/', $element['value']) !== 1) {
                 $phpcsFile->addError(
                     self::ERROR_MESSAGE_CONFIG,
@@ -102,23 +100,10 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
     }
 
     /**
-     * Format the incoming XML to avoid tags split into several lines.
-     *
-     * @param File $phpcsFile
-     * @return false|string
-     */
-    private function getFormattedXML(File $phpcsFile)
-    {
-        $doc = new DomDocument('1.0');
-        $doc->formatOutput = true;
-        $doc->loadXML($phpcsFile->getTokensAsString(0, count($phpcsFile->getTokens())));
-        return $doc->saveXML();
-    }
-
-    /**
      * Parse an XML for references to PHP class names in selected tags or attributes
      *
      * @param SimpleXMLElement $xml
+     *
      * @return array
      */
     private function collectClassesInConfig(SimpleXMLElement $xml): array
@@ -166,6 +151,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      *
      * @param SimpleXMLElement $xml
      * @param string $xPath
+     *
      * @return array
      */
     private function getValuesFromXmlTagContent(SimpleXMLElement $xml, string $xPath): array
@@ -174,7 +160,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return array_map(function ($item) {
             return [
                 'value' => (string)$item,
-                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
             ];
         }, $nodes);
     }
@@ -184,6 +170,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      *
      * @param SimpleXMLElement $xml
      * @param string $xPath
+     *
      * @return array
      */
     private function getValuesFromXmlTagName(SimpleXMLElement $xml, string $xPath): array
@@ -192,7 +179,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
         return array_map(function ($item) {
             return [
                 'value' => $item->getName(),
-                'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
             ];
         }, $nodes);
     }
@@ -203,6 +190,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
      * @param SimpleXMLElement $xml
      * @param string $xPath
      * @param string $attr
+     *
      * @return array
      */
     private function getValuesFromXmlTagAttribute(SimpleXMLElement $xml, string $xPath, string $attr): array
@@ -213,7 +201,7 @@ class ClassReferencesInConfigurationFilesSniff implements Sniff
             if (isset($nodeArray['@attributes'][$attr])) {
                 return [
                     'value' => $nodeArray['@attributes'][$attr],
-                    'lineNumber' => dom_import_simplexml($item)->getLineNo()-1,
+                    'lineNumber' => dom_import_simplexml($item)->getLineNo() - 1,
                 ];
             }
         }, $nodes);

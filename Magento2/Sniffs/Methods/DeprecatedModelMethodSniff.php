@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
+
 namespace Magento2\Sniffs\Methods;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -49,6 +51,7 @@ class DeprecatedModelMethodSniff implements Sniff
             T_OBJECT_OPERATOR
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -67,9 +70,12 @@ class DeprecatedModelMethodSniff implements Sniff
             $methodPosition = $phpcsFile->findNext([T_STRING, T_VARIABLE], $resourcePosition + 1, $endOfStatement);
             if ($methodPosition !== false && in_array($tokens[$methodPosition]['content'], $this->methods, true)) {
                 $phpcsFile->addWarning(
-                    sprintf($this->warningMessage, $tokens[$methodPosition]['content']),
+                    $this->warningMessage,
                     $stackPtr,
-                    $this->warningCode
+                    $this->warningCode,
+                    [
+                        $tokens[$methodPosition]['content'],
+                    ]
                 );
             }
         }

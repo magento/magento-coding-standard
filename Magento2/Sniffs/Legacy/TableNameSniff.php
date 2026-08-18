@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Magento2\Sniffs\Legacy;
 
@@ -83,6 +85,7 @@ class TableNameSniff implements Sniff
      * Check if passed file is a resource but not a collection
      *
      * @param string $filePath
+     *
      * @return bool
      */
     private function isResourceButNotCollection(string $filePath): bool
@@ -106,6 +109,7 @@ class TableNameSniff implements Sniff
         if (array_key_exists($methodName, $this->argPositionInMethods) === false) {
             return;
         }
+
         $firstArgumentPos = $phpcsFile->findNext([T_CONSTANT_ENCAPSED_STRING, T_VARIABLE], $methodNamePos + 1);
 
         foreach ($this->argPositionInMethods[$methodName] as $argPosition) {
@@ -117,14 +121,15 @@ class TableNameSniff implements Sniff
                     $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $paramPos + 1)
                 );
             }
+
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE,
-                        $tokens[$paramPos]['content'],
-                    ),
+                    self::ERROR_MESSAGE,
                     $paramPos,
-                    self::ERROR_CODE
+                    self::ERROR_CODE,
+                    [
+                        $tokens[$paramPos]['content'],
+                    ]
                 );
             }
         }
@@ -137,12 +142,12 @@ class TableNameSniff implements Sniff
             $paramPos = $phpcsFile->findNext(T_PARAM_NAME, $stackPtr + 1);
             if (strpos($tokens[$paramPos]['content'], '/') !== false) {
                 $phpcsFile->addError(
-                    sprintf(
-                        self::ERROR_MESSAGE,
-                        $tokens[$paramPos]['content'],
-                    ),
+                    self::ERROR_MESSAGE,
                     $paramPos,
-                    self::ERROR_CODE
+                    self::ERROR_CODE,
+                    [
+                        $tokens[$paramPos]['content'],
+                    ]
                 );
             }
         }
@@ -169,12 +174,12 @@ class TableNameSniff implements Sniff
 
         if (strpos($tokens[$tableNamePos]['content'], '/') !== false) {
             $phpcsFile->addError(
-                sprintf(
-                    self::ERROR_MESSAGE,
-                    $tokens[$tableNamePos]['content'],
-                ),
+                self::ERROR_MESSAGE,
                 $tableNamePos,
-                self::ERROR_CODE
+                self::ERROR_CODE,
+                [
+                    $tokens[$tableNamePos]['content'],
+                ]
             );
         }
     }
@@ -208,12 +213,12 @@ class TableNameSniff implements Sniff
 
         if (strpos($tokens[$tableNamePos]['content'], '/') !== false) {
             $phpcsFile->addError(
-                sprintf(
-                    self::ERROR_MESSAGE,
-                    $tokens[$tableNamePos]['content'],
-                ),
+                self::ERROR_MESSAGE,
                 $tableNamePos,
-                self::ERROR_CODE
+                self::ERROR_CODE,
+                [
+                    $tokens[$tableNamePos]['content'],
+                ]
             );
         }
     }
@@ -223,6 +228,7 @@ class TableNameSniff implements Sniff
      *
      * @param string $haystack
      * @param string $needle
+     *
      * @return bool
      */
     private function endsWith(string $haystack, string $needle): bool
@@ -231,6 +237,7 @@ class TableNameSniff implements Sniff
         if ($length === 0) {
             return true;
         }
+
         return substr($haystack, -$length) === $needle;
     }
 }

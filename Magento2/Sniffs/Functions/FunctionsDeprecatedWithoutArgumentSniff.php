@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Sniffs\Functions;
@@ -71,17 +73,23 @@ class FunctionsDeprecatedWithoutArgumentSniff implements Sniff
 
         if (self::DEPRECATED_FUNCTIONS_AND_FIXES[$functionName] === false) {
             $phpcsFile->addWarning(
-                sprintf(self::WARNING_MESSAGE, $functionName),
+                self::WARNING_MESSAGE,
                 $stackPtr,
-                self::WARNING_CODE
+                self::WARNING_CODE,
+                [
+                    $functionName,
+                ]
             );
             return;
         }
-        
+
         $fix = $phpcsFile->addFixableWarning(
-            sprintf(self::WARNING_MESSAGE, $functionName),
+            self::WARNING_MESSAGE,
             $stackPtr,
-            self::WARNING_CODE
+            self::WARNING_CODE,
+            [
+                $functionName,
+            ]
         );
 
         if ($fix === true) {
