@@ -4,6 +4,8 @@ namespace Foo\Bar;
 
 use Exception;
 
+use function stream_get_contents;
+
 class StreamHandler
 {
     public function handleException()
@@ -26,4 +28,8 @@ function executeStream()
     socket_bind($sock);
     // Rule find: Try block detected when processing system resources
     socket_close($sock);
+
+    $func = function () use (&$strChar) {
+        $strChar = stream_get_contents(STDIN, 1);
+    }
 }
