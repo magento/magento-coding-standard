@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Sniffs\Annotation;
@@ -52,6 +54,7 @@ class MethodArgumentsSniff implements Sniff
      * Validates whether valid token exists before closing comment tag
      *
      * @param string $type
+     *
      * @return bool
      */
     private function isTokenBeforeClosingCommentTagValid(string $type): bool
@@ -65,6 +68,7 @@ class MethodArgumentsSniff implements Sniff
      * @param File $phpcsFile
      * @param int $previousCommentClosePtr
      * @param int $stackPtr
+     *
      * @return bool
      */
     private function validateCommentBlockExists(File $phpcsFile, int $previousCommentClosePtr, int $stackPtr): bool
@@ -82,6 +86,7 @@ class MethodArgumentsSniff implements Sniff
             if ($attributeFlag) {
                 continue;
             }
+
             if ($tokenCode === T_ATTRIBUTE) {
                 $attributeFlag = true;
                 continue;
@@ -91,6 +96,7 @@ class MethodArgumentsSniff implements Sniff
                 return false;
             }
         }
+
         return true;
     }
 
@@ -98,6 +104,7 @@ class MethodArgumentsSniff implements Sniff
      * Checks whether the parameter type is invalid
      *
      * @param string $type
+     *
      * @return bool
      */
     private function isInvalidType(string $type): bool
@@ -111,6 +118,7 @@ class MethodArgumentsSniff implements Sniff
      * @param File $phpcsFile
      * @param int $openParenthesisPtr
      * @param int $closedParenthesisPtr
+     *
      * @return array
      */
     private function getMethodArguments(File $phpcsFile, int $openParenthesisPtr, int $closedParenthesisPtr): array
@@ -127,6 +135,7 @@ class MethodArgumentsSniff implements Sniff
                 $i = $argumentsPtr - 1;
             }
         }
+
         return $methodArguments;
     }
 
@@ -134,6 +143,7 @@ class MethodArgumentsSniff implements Sniff
      * Get parameters from method annotation
      *
      * @param array $paramDefinitions
+     *
      * @return array
      */
     private function getMethodParameters(array $paramDefinitions): array
@@ -144,6 +154,7 @@ class MethodArgumentsSniff implements Sniff
                 $paramName[] = $paramDefinition['paramName'];
             }
         }
+
         return $paramName;
     }
 
@@ -194,6 +205,7 @@ class MethodArgumentsSniff implements Sniff
      * @param int $previousCommentOpenPtr
      * @param int $previousCommentClosePtr
      * @param string $inheritdocAnnotation
+     *
      * @return bool
      */
     private function validateInheritdocAnnotationExists(
@@ -208,6 +220,7 @@ class MethodArgumentsSniff implements Sniff
                 return true;
             }
         }
+
         return false;
     }
 
@@ -398,6 +411,7 @@ class MethodArgumentsSniff implements Sniff
                     }
                 }
             }
+
             foreach ($duplicateParameters as $value) {
                 $phpcsFile->addError(
                     $value . ' duplicate found in method annotation',
@@ -449,6 +463,7 @@ class MethodArgumentsSniff implements Sniff
                         'NotValidType'
                     );
                 }
+
                 $this->validateParameterPresentInMethodSignature(
                     $ptr,
                     ltrim($paramDefinitions[1], '&'),
@@ -567,13 +582,17 @@ class MethodArgumentsSniff implements Sniff
         $previousCommentOpenPtr = $phpcsFile->findPrevious(T_DOC_COMMENT_OPEN_TAG, $stackPtr - 1, 0);
         $previousCommentClosePtr = $phpcsFile->findPrevious(T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, 0);
         if ($previousCommentClosePtr && $previousCommentOpenPtr) {
-            if (!$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)) {
+            $methodName = $tokens[$stackPtr + 2]['content'];
+            if ($methodName !== '__construct'
+                && !$this->validateCommentBlockExists($phpcsFile, $previousCommentClosePtr, $stackPtr)
+            ) {
                 $phpcsFile->addError('Comment block is missing', $stackPtr, 'NoCommentBlock');
                 return;
             }
         } else {
             return;
         }
+
         $openParenthesisPtr = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $stackPtr + 1, $numTokens);
         $closedParenthesisPtr = $phpcsFile->findNext(T_CLOSE_PARENTHESIS, $stackPtr + 1, $numTokens);
         $methodArguments = $this->getMethodArguments($phpcsFile, $openParenthesisPtr, $closedParenthesisPtr);
@@ -606,6 +625,7 @@ class MethodArgumentsSniff implements Sniff
                 }
             }
         }
+
         $this->validateMethodParameterAnnotations(
             $stackPtr,
             $paramDefinitions,
@@ -643,12 +663,15 @@ class MethodArgumentsSniff implements Sniff
                 if (isset($paramDefinition['paramName'])) {
                     $argumentPositions[] = strpos($paramContent, $paramDefinition['paramName']);
                 }
+
                 $commentPositions[] = $paramDefinition['comment']
                     ? strrpos($paramContent, $paramDefinition['comment']) : null;
             }
         }
+
         if (!$this->allParamsAligned($argumentPositions, $commentPositions)
-            && !$this->noneParamsAligned($argumentPositions, $commentPositions, $paramDefinitions)) {
+            && !$this->noneParamsAligned($argumentPositions, $commentPositions, $paramDefinitions)
+        ) {
             $phpcsFile->addError(
                 'Method arguments visual alignment must be consistent',
                 $paramPointers[0],
@@ -662,6 +685,7 @@ class MethodArgumentsSniff implements Sniff
      *
      * @param array $argumentPositions
      * @param array $commentPositions
+     *
      * @return bool
      */
     private function allParamsAligned(array $argumentPositions, array $commentPositions): bool
@@ -676,6 +700,7 @@ class MethodArgumentsSniff implements Sniff
      * @param array $argumentPositions
      * @param array $commentPositions
      * @param array $paramDefinitions
+     *
      * @return bool
      */
     private function noneParamsAligned(array $argumentPositions, array $commentPositions, array $paramDefinitions): bool
@@ -687,9 +712,11 @@ class MethodArgumentsSniff implements Sniff
             if ($type === null) {
                 continue;
             }
+
             $paramName = $paramDefinitions[$index]['paramName'];
             if (($argumentPosition !== strlen($type) + 1) ||
-                (isset($commentPosition) && ($commentPosition !== $argumentPosition + strlen($paramName) + 1))) {
+                (isset($commentPosition) && ($commentPosition !== $argumentPosition + strlen($paramName) + 1))
+            ) {
                 $flag = false;
                 break;
             }

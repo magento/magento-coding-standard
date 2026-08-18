@@ -51,3 +51,13 @@ public function methodWithAttributeAndWithoutDocblock(string $text): string
 {
     return $text;
 }
+
+class ConstructorCommentNotRequired
+{
+    private $property = false;
+
+    public function __construct()
+    {
+        $this->property = true;
+    }
+}
