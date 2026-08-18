@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright 2023 Adobe
  * All Rights Reserved.
  */
+
 declare(strict_types=1);
 
 namespace Magento2\Helpers;
@@ -21,13 +23,15 @@ class Assert
      *
      * @param File $phpcsFile
      * @param int $stackPtr
+     *
      * @return bool
      */
     public static function isBuiltinFunctionCall(File $phpcsFile, int $stackPtr): bool
     {
         $tokens = $phpcsFile->getTokens();
         $nextPtr = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        if ($nextPtr === false
+        if (
+            $nextPtr === false
             || $tokens[$nextPtr]['code'] !== \T_OPEN_PARENTHESIS
             || isset($tokens[$nextPtr]['parenthesis_owner'])
         ) {
@@ -36,7 +40,8 @@ class Assert
 
         $prevPtr = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
         if ($prevPtr !== false) {
-            if (isset(Collections::objectOperators()[$tokens[$prevPtr]['code']])
+            if (
+                isset(Collections::objectOperators()[$tokens[$prevPtr]['code']])
                 || $tokens[$prevPtr]['code'] === \T_NEW
             ) {
                 return false;

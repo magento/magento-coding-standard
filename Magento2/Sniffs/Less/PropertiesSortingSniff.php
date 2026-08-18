@@ -60,14 +60,16 @@ class PropertiesSortingSniff implements Sniff
         $currentToken = $tokens[$stackPtr];
 
         // if variables, mixins, extends area used - skip
-        if ((T_ASPERAND === $tokens[$stackPtr - 1]['code'])
+        if (
+            (T_ASPERAND === $tokens[$stackPtr - 1]['code'])
             || in_array($tokens[$stackPtr]['content'], $this->styleSymbolsToSkip)
         ) {
             return;
         }
 
         $nextCurlyBracket = $phpcsFile->findNext(T_OPEN_CURLY_BRACKET, $stackPtr + 1);
-        if (in_array($currentToken['code'], [T_OPEN_CURLY_BRACKET, T_CLOSE_CURLY_BRACKET])
+        if (
+            in_array($currentToken['code'], [T_OPEN_CURLY_BRACKET, T_CLOSE_CURLY_BRACKET])
             || ((false !== $nextCurlyBracket) && ($tokens[$nextCurlyBracket]['line'] === $tokens[$stackPtr]['line']))
         ) {
             if ($this->properties) {

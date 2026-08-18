@@ -55,7 +55,8 @@ class CommentLevelsSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if ((T_STRING !== $tokens[$stackPtr]['code'])
+        if (
+            (T_STRING !== $tokens[$stackPtr]['code'])
             || (self::COMMENT_STRING !== $tokens[$stackPtr]['content'])
             || (1 === $tokens[$stackPtr]['line'])
         ) {
@@ -65,7 +66,8 @@ class CommentLevelsSniff implements Sniff
         $textInSameLine = $phpcsFile->findPrevious([T_STRING, T_STYLE], $stackPtr - 1);
 
         // is inline comment
-        if ((false !== $textInSameLine)
+        if (
+            (false !== $textInSameLine)
             && ($tokens[$textInSameLine]['line'] === $tokens[$stackPtr]['line'])
         ) {
             $this->validateInlineComment($phpcsFile, $stackPtr, $tokens);
@@ -164,7 +166,8 @@ class CommentLevelsSniff implements Sniff
             return $correct;
         }
 
-        if (($tokens[$nextLine]['content'] !== TokenizerSymbolsInterface::NEW_LINE)
+        if (
+            ($tokens[$nextLine]['content'] !== TokenizerSymbolsInterface::NEW_LINE)
             || ($tokens[$nextLine + 1]['content'] !== TokenizerSymbolsInterface::NEW_LINE)
         ) {
             return $correct;
@@ -178,7 +181,8 @@ class CommentLevelsSniff implements Sniff
                 continue;
             }
 
-            if (($tokens[$commentLinePtr - 1]['content'] === TokenizerSymbolsInterface::NEW_LINE)
+            if (
+                ($tokens[$commentLinePtr - 1]['content'] === TokenizerSymbolsInterface::NEW_LINE)
                 && ($tokens[$commentLinePtr - 2]['content'] === TokenizerSymbolsInterface::NEW_LINE)
             ) {
                 $correct = true;
@@ -198,7 +202,8 @@ class CommentLevelsSniff implements Sniff
      */
     private function validateCommentLevel(File $phpcsFile, int $stackPtr, array $tokens): void
     {
-        if ($tokens[$stackPtr + 2]['content'] !== 'magento_import' &&
+        if (
+            $tokens[$stackPtr + 2]['content'] !== 'magento_import' &&
             !in_array(
                 $tokens[$stackPtr + 1]['content'],
                 [

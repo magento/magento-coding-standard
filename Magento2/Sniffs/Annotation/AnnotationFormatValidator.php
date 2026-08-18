@@ -57,7 +57,8 @@ class AnnotationFormatValidator
             $commentEndPtr
         );
         $shortPtrEndContent = $tokens[$shortPtrEnd]['content'];
-        if (preg_match('/^[a-z]/', $shortPtrEndContent)
+        if (
+            preg_match('/^[a-z]/', $shortPtrEndContent)
             && $shortPtrEnd != $shortPtr
             && !preg_match('/\bSee\b/', $shortPtrEndContent)
             && $tokens[$shortPtr]['line'] + 1 === $tokens[$shortPtrEnd]['line']
@@ -89,7 +90,8 @@ class AnnotationFormatValidator
             $commentEndPtr
         );
         $shortPtrEndContent = $tokens[$shortPtrEnd]['content'];
-        if (preg_match('/^[A-Z]/', $shortPtrEndContent)
+        if (
+            preg_match('/^[A-Z]/', $shortPtrEndContent)
             && !preg_match('/\bSee\b/', $shortPtrEndContent)
             && $tokens[$shortPtr]['line'] + 1 === $tokens[$shortPtrEnd]['line']
             && $tokens[$shortPtrEnd]['code'] !== T_DOC_COMMENT_TAG
@@ -199,7 +201,8 @@ class AnnotationFormatValidator
             $firstTagPtr = $tokens[$commentStartPtr]['comment_tags'][0];
             $commentTagPtrContent = $tokens[$firstTagPtr]['content'];
             $prevPtr = $phpcsFile->findPrevious($emptyTypeTokens, $firstTagPtr - 1, $commentStartPtr, true);
-            if ($tokens[$firstTagPtr]['line'] !== $tokens[$prevPtr]['line'] + 2
+            if (
+                $tokens[$firstTagPtr]['line'] !== $tokens[$prevPtr]['line'] + 2
                 && strtolower($commentTagPtrContent) !== '@inheritdoc'
             ) {
                 $error = 'There must be exactly one blank line before tags';
@@ -237,8 +240,10 @@ class AnnotationFormatValidator
             }
 
             if (strtolower($tokens[$tag]['content']) === '@param') {
-                if ($paramGroupId !== null
-                    && $paramGroupId !== $groupId) {
+                if (
+                    $paramGroupId !== null
+                    && $paramGroupId !== $groupId
+                ) {
                     $error = 'Parameter tags must be grouped together';
                     $phpcsFile->addError($error, $tag, 'MethodAnnotation');
                 }
@@ -271,8 +276,10 @@ class AnnotationFormatValidator
             }
         }
 
-        if (!$this->allTagsAligned($actualPositions)
-            && !$this->noneTagsAligned($actualPositions, $noAlignmentPositions)) {
+        if (
+            !$this->allTagsAligned($actualPositions)
+            && !$this->noneTagsAligned($actualPositions, $noAlignmentPositions)
+        ) {
             $phpcsFile->addError(
                 'Tags visual alignment must be consistent',
                 $stackPtr,
@@ -343,11 +350,13 @@ class AnnotationFormatValidator
         array $emptyTypeTokens
     ): void {
         $tokens = $phpcsFile->getTokens();
-        if (isset($tokens[$commentStartPtr]['comment_tags'][0])
+        if (
+            isset($tokens[$commentStartPtr]['comment_tags'][0])
         ) {
             $commentTagPtr = $tokens[$commentStartPtr]['comment_tags'][0];
             $commentTagPtrContent = $tokens[$commentTagPtr]['content'];
-            if ($tokens[$shortPtr]['code'] !== T_DOC_COMMENT_STRING
+            if (
+                $tokens[$shortPtr]['code'] !== T_DOC_COMMENT_STRING
                 && strtolower($commentTagPtrContent) !== '@inheritdoc'
             ) {
                 $error = 'Missing short description';

@@ -55,7 +55,8 @@ class EscapeMethodsOnBlockClassSniff implements Sniff
             }
         }
 
-        if ($tokens[$objectPtr]['code'] !== T_VARIABLE
+        if (
+            $tokens[$objectPtr]['code'] !== T_VARIABLE
             || $tokens[$objectPtr]['content'] !== '$block'
         ) {
             return;
@@ -70,7 +71,8 @@ class EscapeMethodsOnBlockClassSniff implements Sniff
             }
         }
 
-        if ($tokens[$methodPtr]['code'] !== T_STRING
+        if (
+            $tokens[$methodPtr]['code'] !== T_STRING
             || !isset(self::ESCAPER_METHODS[$tokens[$methodPtr]['content']])
         ) {
             return;

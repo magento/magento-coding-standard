@@ -45,7 +45,8 @@ class ClassNamingSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (T_WHITESPACE !== $tokens[$stackPtr - 1]['code']
+        if (
+            T_WHITESPACE !== $tokens[$stackPtr - 1]['code']
             && !in_array(
                 $tokens[$stackPtr - 1]['content'],
                 [
@@ -67,7 +68,9 @@ class ClassNamingSniff implements Sniff
             );
         }
 
-        if (strlen($className) > 1 && strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false
+        if (
+            strlen($className) > 1
+            && strpos($className, self::STRING_HELPER_CLASSES_PREFIX, 2) !== false
             && !str_starts_with($className, 'admin__')
         ) {
             $phpcsFile->addError(

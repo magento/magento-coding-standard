@@ -42,7 +42,8 @@ class ImportantPropertySniff implements Sniff
         // Will be implemented in MAGETWO-49778
         //$phpcsFile->addWarning('!important is used', $stackPtr, '!ImportantIsUsed');
 
-        if (($tokens[$stackPtr + 1]['content'] === 'important')
+        if (
+            ($tokens[$stackPtr + 1]['content'] === 'important')
             && ($tokens[$stackPtr - 1]['content'] !== TokenizerSymbolsInterface::WHITESPACE)
         ) {
             $phpcsFile->addError('Space before !important is missing', $stackPtr, 'NoSpace');

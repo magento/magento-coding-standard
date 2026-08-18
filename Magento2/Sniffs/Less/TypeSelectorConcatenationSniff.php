@@ -47,7 +47,8 @@ class TypeSelectorConcatenationSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (0 === strpos($tokens[$stackPtr + 1]['content'], '-')
+        if (
+            0 === strpos($tokens[$stackPtr + 1]['content'], '-')
             && in_array($tokens[$stackPtr - 1]['content'], $this->symbolsBeforeConcat)
         ) {
             $phpcsFile->addError('Concatenation is used', $stackPtr, 'ConcatenationUsage');

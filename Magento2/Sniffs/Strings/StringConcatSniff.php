@@ -49,7 +49,8 @@ class StringConcatSniff implements Sniff
         }
         $beforePrev = $phpcsFile->findPrevious(T_WHITESPACE, $prev - 1, null, true);
         $stringTokens = Tokens::$stringTokens;
-        if ($tokens[$beforePrev]['code'] === T_STRING_CONCAT
+        if (
+            $tokens[$beforePrev]['code'] === T_STRING_CONCAT
             || in_array($tokens[$prev]['code'], $stringTokens)
             || in_array($tokens[$next]['code'], $stringTokens)
         ) {

@@ -80,7 +80,8 @@ class TypeSelectorsSniff implements Sniff
         }
 
         // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
-        if ((T_STRING === $tokens[$stackPtr - 1]['code'])
+        if (
+            (T_STRING === $tokens[$stackPtr - 1]['code'])
             && in_array($tokens[$stackPtr - 1]['content'], $this->tags)
         ) {
             // Will be implemented in MAGETWO-49778

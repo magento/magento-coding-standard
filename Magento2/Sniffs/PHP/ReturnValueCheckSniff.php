@@ -120,7 +120,8 @@ class ReturnValueCheckSniff implements Sniff
         $this->leftLimit = $open = $this->tokens[$stackPtr]['parenthesis_opener'];
         $this->rightLimit = $close = $this->tokens[$stackPtr]['parenthesis_closer'];
         for ($i = ($open + 1); $i < $close; $i++) {
-            if (($this->tokens[$i]['code'] === T_STRING && in_array($this->tokens[$i]['content'], $this->functions))
+            if (
+                ($this->tokens[$i]['code'] === T_STRING && in_array($this->tokens[$i]['content'], $this->functions))
                 && (!$this->findIdentical($i - 1, $this->findFunctionParenthesisCloser($i) + 1))
             ) {
                 $foundFunctionName = $this->tokens[$i]['content'];
