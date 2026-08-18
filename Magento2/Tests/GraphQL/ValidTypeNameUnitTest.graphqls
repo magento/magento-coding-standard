@@ -1,5 +1,7 @@
 # Valid type names.
 type ValidCamelCaseType {}
+type ValidCamelCaseTypeNewLineBrace
+{}
 interface ValidCamelCaseInterface {}
 enum ValidCamelCaseEnum {}
 
