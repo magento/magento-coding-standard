@@ -30,7 +30,7 @@ class CopyrightGraphQLUnitTest extends AbstractGraphQLSniffUnitTestCase
         if ($testFile === 'CopyrightGraphQLUnitTest.3.graphqls' ||
         $testFile === 'CopyrightGraphQLUnitTest.4.graphqls') {
             return [
-            null => 1
+            1 => 1
             ];
         }
 

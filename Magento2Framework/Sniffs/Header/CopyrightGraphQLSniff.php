@@ -45,7 +45,7 @@ class CopyrightGraphQLSniff implements Sniff
         if ($this->isCopyrightYearValid($content) === false) {
             $phpcsFile->addWarningOnLine(
                 'Copyright is missing or Copyright content/year is not valid',
-                null,
+                1,
                 self::WARNING_CODE
             );
         }
