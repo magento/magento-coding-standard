@@ -7,8 +7,8 @@
 namespace Magento2\Sniffs\Commenting;
 
 use Magento2\Helpers\Commenting\PHPDocFormattingValidator;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects PHPDoc formatting for classes and interfaces.

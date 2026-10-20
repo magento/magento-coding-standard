@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\Methods;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects possible use of deprecated model methods.

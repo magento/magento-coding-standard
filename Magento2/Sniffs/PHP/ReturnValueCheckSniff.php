@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\PHP;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects misusing of IS_IDENTICAL operators.

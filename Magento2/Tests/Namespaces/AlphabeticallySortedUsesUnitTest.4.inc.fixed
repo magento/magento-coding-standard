@@ -1,0 +1,20 @@
+<?php
+namespace Vendor\First {
+    use Magento\Framework\App;
+    use Magento\Framework\DataObject;
+
+    class First
+    {
+    }
+}
+
+namespace Vendor\Second {
+    use Magento\Catalog\Model\Product;
+    use Magento\Framework\{Escaper, Registry};
+    use Magento\Framework\App;
+    use Magento\Framework\DataObject;
+
+    class Second
+    {
+    }
+}

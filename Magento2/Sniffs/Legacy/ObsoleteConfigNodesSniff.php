@@ -7,8 +7,8 @@
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ObsoleteConfigNodesSniff implements Sniff
 {

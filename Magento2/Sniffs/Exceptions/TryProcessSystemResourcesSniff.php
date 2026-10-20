@@ -5,9 +5,9 @@
  */
 namespace Magento2\Sniffs\Exceptions;
 
-use function array_slice;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use function array_slice;
 
 /**
  * Detects missing try-catch block when processing system resources.

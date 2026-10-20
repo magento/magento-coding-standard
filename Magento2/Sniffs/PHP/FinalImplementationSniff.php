@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\PHP;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Magento is a highly extensible and customizable platform. The use of final classes and methods is prohibited.

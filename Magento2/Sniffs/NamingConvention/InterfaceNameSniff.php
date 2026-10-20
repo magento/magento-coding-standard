@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\NamingConvention;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects possible interface declaration without 'Interface' suffix.
