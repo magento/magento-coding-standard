@@ -10,20 +10,6 @@ To use within your Magento 2 project you can use:
 composer require --dev magento/magento-coding-standard
 ```
 
-Due to security, when installed this way the Magento standard for phpcs cannot be added automatically.
-You can achieve this by adding the following to your project's `composer.json`:
-
-```json
-"scripts": {
-    "post-install-cmd": [
-      "([ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/)"
-    ],
-    "post-update-cmd": [
-      "([ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/phpcs --config-set installed_paths ../../magento/magento-coding-standard/)"
-    ]
-}
-```
-
 ### Installation for development
 
 You can install Magento Coding Standard by cloning this GitHub repo:
@@ -122,7 +108,7 @@ The rules from rector that are applied are set inside the config file: `rector.p
 The option `--dry-run` displays errors found, but code is not automatically fixed.
 
 To run rector for `magento` projects you need to:
-- Specify the magento path and the autoload file for the magento project: 
+- Specify the magento path and the autoload file for the magento project:
 ```bash
 vendor/bin/rector process MAGENTO_PATH --dry-run --autoload-file MAGENTO_AUTOLOAD_FILE
 ```
