@@ -6,15 +6,15 @@
         "AFL-3.0"
     ],
     "type": "phpcodesniffer-standard",
-    "version": "41",
+    "version": "42",
     "require": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
-        "webonyx/graphql-php": "^15.0",
+        "webonyx/graphql-php": "^15.33",
         "ext-simplexml": "*",
         "ext-dom": "*",
-        "squizlabs/php_codesniffer": "^3.10.2",
+        "squizlabs/php_codesniffer": "^3.13.2",
         "rector/rector": "^1.2.4 || ^2.0.0",
-        "phpcsstandards/phpcsutils": "^1.2.2",
+        "phpcsstandards/phpcsutils": "^1.2.3",
         "magento/php-compatibility-fork": "^0.1"
     },
     "require-dev": {
