@@ -3,6 +3,7 @@
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
 
 /**
  * Classes that are restricted to use directly.

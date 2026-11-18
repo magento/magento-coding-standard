@@ -4,6 +4,8 @@
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
+declare(strict_types=1);
+
 namespace Magento2\Sniffs\Legacy;
 
 use DOMDocument;
@@ -40,13 +42,13 @@ class ObsoleteSystemConfigurationSniff implements Sniff
             $this->invalidXML($phpcsFile, $stackPtr);
             return;
         }
-        
+
         $foundElements = $xml->xpath('/config/tabs|/config/sections');
-        
+
         if ($foundElements === false) {
             return;
         }
-        
+
         foreach ($foundElements as $element) {
             $phpcsFile->addWarning(
                 "Obsolete system configuration structure detected in file.",
