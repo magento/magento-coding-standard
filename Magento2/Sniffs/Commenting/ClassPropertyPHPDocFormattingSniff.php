@@ -123,11 +123,13 @@ class ClassPropertyPHPDocFormattingSniff extends AbstractVariableSniff
             false
         );
 
-        if ($this->PHPDocFormattingValidator->providesMeaning(
-            $shortDescriptionAfterVarPosition,
-            $commentStart,
-            $tokens
-        ) !== true) {
+        if (
+            $this->PHPDocFormattingValidator->providesMeaning(
+                $shortDescriptionAfterVarPosition,
+                $commentStart,
+                $tokens
+            ) !== true
+        ) {
             preg_match(
                 '`^((?:\|?(?:array\([^\)]*\)|[\\\\\[\]]+))*)( .*)?`i',
                 $tokens[($varAnnotationPosition + 2)]['content'],

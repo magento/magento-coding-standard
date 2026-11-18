@@ -40,7 +40,8 @@ class LiteralNamespacesSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        if ($phpcsFile->findPrevious(T_STRING_CONCAT, $stackPtr, $stackPtr - 3) ||
+        if (
+            $phpcsFile->findPrevious(T_STRING_CONCAT, $stackPtr, $stackPtr - 3) ||
             $phpcsFile->findNext(T_STRING_CONCAT, $stackPtr, $stackPtr + 3)
         ) {
             return;

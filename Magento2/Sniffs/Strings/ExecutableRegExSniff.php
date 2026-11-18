@@ -73,7 +73,8 @@ class ExecutableRegExSniff implements Sniff
             return;
         }
         $nextToken = $phpcsFile->findNext([T_WHITESPACE, T_OPEN_PARENTHESIS], $stackPtr + 1, null, true);
-        if (in_array($tokens[$nextToken]['code'], Tokens::$stringTokens)
+        if (
+            in_array($tokens[$nextToken]['code'], Tokens::$stringTokens)
             && preg_match('/[#\/|~\}\)][imsxADSUXJu]*e[imsxADSUXJu]*.$/', $tokens[$nextToken]['content'])
         ) {
             $phpcsFile->addError(

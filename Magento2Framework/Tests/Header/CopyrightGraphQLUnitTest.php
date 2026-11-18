@@ -9,17 +9,17 @@ use Magento2\Tests\GraphQL\AbstractGraphQLSniffUnitTestCase;
 
 class CopyrightGraphQLUnitTest extends AbstractGraphQLSniffUnitTestCase
 {
-  /**
-   * @inheritdoc
-   */
+    /**
+     * @inheritdoc
+     */
     public function getErrorList(): array
     {
         return [];
     }
 
-  /**
-   * @inheritdoc
-   */
+    /**
+     * @inheritdoc
+     */
     public function getWarningList($testFile = ''): array
     {
         if ($testFile === 'CopyrightGraphQLUnitTest.1.graphqls' ||

@@ -62,7 +62,8 @@ class MethodAnnotationStructureSniff implements Sniff
 
         do {
             $commentEndPtr = $phpcsFile->findPrevious($tokensToFind, $commentEndPtr - 1);
-            if ($commentEndPtr !== false
+            if (
+                $commentEndPtr !== false
                 && $tokens[$commentEndPtr]['code'] === \T_ATTRIBUTE_END
                 && isset($tokens[$commentEndPtr]['attribute_opener'])
             ) {

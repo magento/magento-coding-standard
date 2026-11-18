@@ -56,8 +56,10 @@ class IncludeFileSniff implements Sniff
         $isUrl = false;
         $hasVariable = false;
         $includePath = '';
-        while ($tokens[$nextToken]['code'] !== T_SEMICOLON &&
-            $tokens[$nextToken]['code'] !== T_CLOSE_TAG) {
+        while (
+            $tokens[$nextToken]['code'] !== T_SEMICOLON &&
+            $tokens[$nextToken]['code'] !== T_CLOSE_TAG
+        ) {
             switch ($tokens[$nextToken]['code']) {
                 case T_CONSTANT_ENCAPSED_STRING:
                     $includePath = trim($tokens[$nextToken]['content'], '"\'');
