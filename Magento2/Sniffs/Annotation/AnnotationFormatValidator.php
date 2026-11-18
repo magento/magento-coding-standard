@@ -125,10 +125,15 @@ class AnnotationFormatValidator
             $error = 'No blank lines are allowed before short description';
             $phpcsFile->addError($error, $shortPtr, 'MethodAnnotation');
         }
+
         if (strtolower($tokens[$shortPtr]['content']) === '{@inheritdoc}') {
             $error = 'If the @inheritdoc not inline it shouldn’t have braces';
-            $phpcsFile->addError($error, $shortPtr, 'MethodAnnotation');
+            $fix = $phpcsFile->addFixableError($error, $shortPtr, 'MethodAnnotation');
+            if ($fix === true) {
+                $phpcsFile->fixer->replaceToken($shortPtr, '@inheritDoc');
+            }
         }
+
         $shortPtrContent = $tokens[$shortPtr]['content'];
         if (preg_match('/^\p{Ll}/u', $shortPtrContent) === 1) {
             $error = 'Short description must start with a capital letter';
