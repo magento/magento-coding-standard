@@ -32,11 +32,12 @@ class ThisInTemplateSniff implements Sniff
         if ($phpcsFile->getTokensAsString($stackPtr, 1) !== '$this') {
             return;
         }
+
         $isHelperCall = $phpcsFile->findNext(T_STRING, $stackPtr, null, false, 'helper', true);
+
         if ($isHelperCall) {
             $phpcsFile->addWarning(self::MESSAGE_HELPER, $stackPtr, 'FoundHelper');
-        }
-        if ($phpcsFile->addFixableWarning(self::MESSAGE_THIS, $stackPtr, 'FoundThis') === true) {
+        } elseif ($phpcsFile->addFixableWarning(self::MESSAGE_THIS, $stackPtr, 'FoundThis') === true) {
             $phpcsFile->fixer->beginChangeset();
             $phpcsFile->fixer->replaceToken($stackPtr, '$block');
             $phpcsFile->fixer->endChangeset();
