@@ -22,10 +22,15 @@
         <hr/>
         <img src="" alt=""/>
         <input type="text" id="test_input"/>
-        <keygen/>
+        <input type="text"
+               id="multi-line-input"
+               placeholder="Alert should be on last line"
+               />
+        <input type="text"
+               id="multi-line-input2"
+               placeholder="Alert should be on last line" />
         <link/>
         <meta/>
-        <param name="" value=""/>
         <video>
             <source/>
             <track src=""/>
@@ -33,6 +38,11 @@
         <wbr/>
 
         <label for="test_input"/>
+        <label
+               for="multi-line-input"
+               />
+        <label
+               for="multi-line-input2" />
         <style type="text/css"/>
         <div/>
         <span/>
@@ -41,5 +51,7 @@
         <each/>
         <translate/>
         <scope/>
+        <span/>
+        <span style="color: red" />
     </body>
 </html>

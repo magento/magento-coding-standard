@@ -1,0 +1,57 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<html>
+    <head>
+        <base/>
+        <link/>
+    </head>
+    <body>
+        <area alt=""/>
+        <br/>
+        <table>
+            <colgroup>
+                <col/>
+            </colgroup>
+        </table>
+        <embed/>
+        <hr/>
+        <img src="" alt=""/>
+        <input type="text" id="test_input"/>
+        <input type="text"
+               id="multi-line-input"
+               placeholder="Alert should be on last line"
+               />
+        <input type="text"
+               id="multi-line-input2"
+               placeholder="Alert should be on last line" />
+        <link/>
+        <meta/>
+        <video>
+            <source/>
+            <track src=""/>
+        </video>
+        <wbr/>
+
+        <label for="test_input"></label>
+        <label
+               for="multi-line-input"
+               ></label>
+        <label
+               for="multi-line-input2"></label>
+        <style type="text/css"></style>
+        <div></div>
+        <span></span>
+        <text></text>
+        <render></render>
+        <each></each>
+        <translate></translate>
+        <scope></scope>
+        <span></span>
+        <span style="color: red"></span>
+    </body>
+</html>
