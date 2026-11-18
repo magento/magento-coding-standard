@@ -40,3 +40,11 @@
 .admin__allowed {
   background: green;
 }
+
+// @see https://github.com/magento/magento-coding-standard/issues/434
+.mixin-example(@my-selector) {
+  .@{my-selector} {
+    background: #fff
+  }
+}
+.mixin-example(input-box)
