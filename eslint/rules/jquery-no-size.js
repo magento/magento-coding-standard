@@ -8,12 +8,12 @@ export default {
             description: 'Disallow the use of the deprecated `size` method',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/size/'
+            url: 'https://api.jquery.com/size/',
         },
         schema: [],
         messages: {
-            size: 'jQuery.size() removed, use jQuery.length'
-        }
+            size: 'jQuery.size() removed, use jQuery.length',
+        },
     },
 
     /**
@@ -37,10 +37,10 @@ export default {
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        messageId: 'size'
+                        messageId: 'size',
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
