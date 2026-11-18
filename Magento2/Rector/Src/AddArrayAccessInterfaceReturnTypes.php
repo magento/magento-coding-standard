@@ -47,7 +47,7 @@ class AddArrayAccessInterfaceReturnTypes extends AbstractRector
             }
         }
 
-        return null;
+        return $node;
     }
 
     /**
