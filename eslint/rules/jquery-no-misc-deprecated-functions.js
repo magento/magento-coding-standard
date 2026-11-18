@@ -8,9 +8,9 @@ export default {
             description: 'Disallow the use of various deprecated methods methods',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -27,32 +27,30 @@ export default {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                var namesToMsg = {
-                        'isFunction': 'jQuery.isFunction() is deprecated. '
-                            + 'In most cases, it can be replaced by [typeof x === "function"]',
-                        'type': 'jQuery.type() is deprecated. ' +
+                const namesToMsg = {
+                    isFunction: 'jQuery.isFunction() is deprecated. ' +
+                            'In most cases, it can be replaced by [typeof x === "function"]',
+                    type: 'jQuery.type() is deprecated. ' +
                             'Replace with an appropriate type check like [typeof x === "function"]',
-                        'isArray': 'jQuery.isArray() is deprecated. ' +
+                    isArray: 'jQuery.isArray() is deprecated. ' +
                             'Use the native Array.isArray method instead',
-                        'parseJSON' : 'jQuery.parseJSON() is deprecated. ' +
-                            'To parse JSON strings, use the native JSON.parse method instead'
-                    },
-                    name,
-                    message;
+                    parseJSON: 'jQuery.parseJSON() is deprecated. ' +
+                            'To parse JSON strings, use the native JSON.parse method instead',
+                };
 
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                name = node.callee.property.name;
-                if (!namesToMsg.hasOwnProperty(name)) {return;}
-                message = namesToMsg[name];
+                const message = namesToMsg[node.callee.property.name];
+
+                if (!message) { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: message
+                        message: message,
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };

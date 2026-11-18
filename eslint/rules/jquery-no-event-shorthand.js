@@ -8,9 +8,9 @@ export default {
             description: 'Disallow the use of shorthand event methods',
             category: 'jQuery deprecated functions',
             recommended: true,
-            url: 'https://api.jquery.com/load/'
+            url: 'https://api.jquery.com/load/',
         },
-        schema: []
+        schema: [],
     },
 
     /**
@@ -27,26 +27,24 @@ export default {
              * @param {Object} node - The node to check.
              */
             CallExpression: function (node) {
-                var namesToMsg = {
-                        'unload': 'jQuery.unload() was removed, use .on("unload", fn) instead.',
-                        'ready': 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)'
-                    },
-                    name,
-                    message;
+                const namesToMsg = {
+                    unload: 'jQuery.unload() was removed, use .on("unload", fn) instead.',
+                    ready: 'jQuery.ready(handler) is deprecated and should be replaced with jQuery(handler)',
+                };
 
-                if (node.callee.type !== 'MemberExpression') {return;}
+                if (node.callee.type !== 'MemberExpression') { return; }
 
-                name = node.callee.property.name;
-                if (!namesToMsg.hasOwnProperty(name)) {return;}
-                message = namesToMsg[name];
+                const message = namesToMsg[node.callee.property.name];
+
+                if (!message) { return; }
 
                 if (utils.isjQuery(node)) {
                     context.report({
                         node: node,
-                        message: message
+                        message: message,
                     });
                 }
-            }
+            },
         };
-    }
+    },
 };
