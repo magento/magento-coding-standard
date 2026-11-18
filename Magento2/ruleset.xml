@@ -156,7 +156,7 @@
     <rule ref="Magento2.Legacy.Layout">
         <severity>10</severity>
         <type>error</type>
-        <include-pattern>*/view/(adminhtml|frontend|base)/*\/.xml</include-pattern>
+        <include-pattern>*/view/(adminhtml|frontend|base)/*/*.xml</include-pattern>
     </rule>
     <rule ref="Magento2.Legacy.RestrictedCode">
         <severity>10</severity>
@@ -165,10 +165,10 @@
         <exclude-pattern>*\.js$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.ClassReferencesInConfigurationFiles">
-        <include-pattern>*\/etc/*.xml$</include-pattern>
-        <exclude-pattern>*\/etc/wsdl.xml$</exclude-pattern>
-        <exclude-pattern>*\/etc/wsdl2.xml$</exclude-pattern>
-        <exclude-pattern>*\/etc/wsi.xml$</exclude-pattern>
+        <include-pattern>*/etc/*.xml$</include-pattern>
+        <exclude-pattern>*/etc/wsdl.xml$</exclude-pattern>
+        <exclude-pattern>*/etc/wsdl2.xml$</exclude-pattern>
+        <exclude-pattern>*/etc/wsi.xml$</exclude-pattern>
         <severity>10</severity>
         <type>error</type>
     </rule>
@@ -212,7 +212,7 @@
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Html.HtmlBinding">
-        <include-pattern>*\/.phtml$</include-pattern>
+        <include-pattern>*\.phtml$</include-pattern>
         <severity>9</severity>
         <type>warning</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
@@ -307,12 +307,12 @@
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Legacy.ModuleXML">
-        <include-pattern>*\/module.xml$</include-pattern>
+        <include-pattern>*/module.xml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
     <rule ref="Magento2.Legacy.DiConfig">
-        <include-pattern>*\/di.xml$</include-pattern>
+        <include-pattern>*/di.xml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
@@ -322,7 +322,7 @@
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
     <rule ref="Magento2.Legacy.WidgetXML">
-        <include-pattern>*\/widget.xml$</include-pattern>
+        <include-pattern>*/widget.xml$</include-pattern>
         <severity>8</severity>
         <type>warning</type>
     </rule>
