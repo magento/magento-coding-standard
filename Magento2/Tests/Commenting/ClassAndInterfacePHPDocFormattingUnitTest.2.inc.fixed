@@ -152,9 +152,25 @@ interface DeprecatedButHandler
 }
 
 /**
+ * @deprecated This interface will be removed in version 123.45.6789 without replacement
+ */
+interface DeprecatedButHandlerLongVersion
+{
+
+}
+
+/**
  * @deprecated Yeah! This interface will be removed in version 1.0.0 without replacement
  */
 interface AlsoDeprecatedButHandler
+{
+
+}
+
+/**
+ * @deprecated Yeah! This interface will be removed in version 123.45.6789 without replacement
+ */
+interface AlsoDeprecatedButHandlerLongVersion
 {
 
 }

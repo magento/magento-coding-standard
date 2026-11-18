@@ -4,6 +4,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento2\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
@@ -37,7 +38,7 @@ class ClassAndInterfacePHPDocFormattingUnitTest extends AbstractSniffUnitTest
             109 => 1,
             118 => 1,
             127 => 1,
-            183 => 1,
+            199 => 1,
         ];
     }
 }

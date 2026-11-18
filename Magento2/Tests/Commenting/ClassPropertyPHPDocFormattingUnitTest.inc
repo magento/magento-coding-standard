@@ -203,6 +203,12 @@ class correctlyFormattedClassMemberDocBlock
 
     /**
      * @var string
+     * @deprecated This property will be removed in version 123.45.6789 without replacement
+     */
+    protected string $deprecatedWithKeywordLongVersion;
+
+    /**
+     * @var string
      */
     protected readonly string $readOnlyString;
 
