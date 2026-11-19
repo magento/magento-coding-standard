@@ -31,6 +31,15 @@
             <track src=""/>
         </video>
         <wbr/>
+        <svg width="24" height="24" viewBox="0 0 24 24">
+            <rect x="12" width="439" height="344" fill="url(#pattern0)"/>
+            <path d="M0 0h24v24H0z"/>
+        </svg>
+        <svg viewBox="0 0 1 1"/>
+        <svg-icon/>
+        <section/>
+        <SVG><circle r="1"/></SVG>
+        <math><mspace width="1em"/></math>
 
         <label for="test_input"/>
         <style type="text/css"/>
