@@ -25,7 +25,6 @@ class InsecureFunctionSniff extends ForbiddenFunctionsSniff
         'passthru' => null,
         'pcntl_exec' => null,
         'popen' => null,
-        'proc_open' => null,
         'serialize' => '\Magento\Framework\Serialize\SerializerInterface::serialize',
         'shell_exec' => null,
         'system' => null,
