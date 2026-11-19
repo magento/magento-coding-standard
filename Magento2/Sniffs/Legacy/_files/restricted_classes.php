@@ -360,7 +360,12 @@ return [
             'Magento/Framework/Unserialize/Test/Unit/UnserializeTest.php',
             'Magento/Framework/Test/Unit/FlagTest.php',
             'Magento/Staging/Test/Unit/Model/Update/FlagTest.php',
-            'Magento/Logging/Test/Unit/Setup/ObjectConverterTest.php'
+            'Magento/Logging/Test/Unit/Setup/ObjectConverterTest.php',
+            'Magento/Framework/Unserialize/Unserialize.php',
+            'Magento/Framework/Cache/Frontend/Adapter/SymfonyAdapterProvider.php',
+            'Magento/Framework/Cache/Frontend/Adapter/Symfony/MagentoDatabaseAdapter.php',
+            'Magento/Framework/Cache/Test/Unit/Frontend/Adapter/Symfony/MagentoDatabaseAdapterTest.php',
+            'Magento/Framework/App/Test/Unit/Cache/Frontend/FactoryTest.php'
         ]
     ],
     'ArrayObject' => [
@@ -399,6 +404,8 @@ return [
     'GraphQL\Language\Parser' => [
         'warning_code' => 'GraphQLLanguageParserIsRestricted',
         'replacement' => 'Magento\Framework\GraphQl\Query\QueryParser',
-        'exclude' => []
+        'exclude' => [
+            'Magento/Framework/GraphQl/Query/QueryParser.php'
+        ]
     ]
 ];

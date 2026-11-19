@@ -63,6 +63,14 @@ class RestrictedCodeSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
         $token = $tokens[$stackPtr]['content'];
+        if ($this->isQualifiedNameStart($phpcsFile, $stackPtr)) {
+            // A qualified name is split into T_STRING and T_NS_SEPARATOR tokens, so it has to be put together.
+            $nameEnd = $phpcsFile->findNext([T_STRING, T_NS_SEPARATOR], $stackPtr, null, true) ?: count($tokens);
+            $name = $phpcsFile->getTokensAsString($stackPtr, $nameEnd - $stackPtr);
+            if (array_key_exists($name, $this->classes)) {
+                $token = $name;
+            }
+        }
         if (array_key_exists($token, $this->classes)) {
             if ($this->isExcluded($token, $phpcsFile)) {
                 return;
@@ -78,6 +86,24 @@ class RestrictedCodeSniff implements Sniff
                 $this->classes[$token]['warning_code'],
             );
         }
+    }
+
+    /**
+     * Checks if the token is the first part of a qualified class name
+     *
+     * @param File $phpcsFile
+     * @param int $stackPtr
+     * @return bool
+     */
+    private function isQualifiedNameStart(File $phpcsFile, int $stackPtr): bool
+    {
+        $tokens = $phpcsFile->getTokens();
+        if ($tokens[$stackPtr]['code'] !== T_STRING || ($tokens[$stackPtr + 1]['code'] ?? null) !== T_NS_SEPARATOR) {
+            return false;
+        }
+
+        return $tokens[$stackPtr - 1]['code'] !== T_NS_SEPARATOR
+            || !in_array($tokens[$stackPtr - 2]['code'], [T_STRING, T_NAMESPACE], true);
     }
 
     /**

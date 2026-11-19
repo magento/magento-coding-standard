@@ -47,6 +47,15 @@ class RestrictedCodeUnitTest extends AbstractSniffUnitTest
         if ($testFile === 'FileWithRestrictedClass.inc') {
             return [
                 5 => 1,
+                14 => 1,
+                21 => 1,
+                24 => 1,
+                29 => 1,
+            ];
+        }
+        if ($testFile === 'QualifiedNameAtEndOfFile.inc') {
+            return [
+                3 => 1,
             ];
         }
         return [];
