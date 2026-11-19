@@ -67,6 +67,9 @@ class HtmlSelfClosingTagsSniff implements Sniff
             return;
         }
 
+        // SVG and MathML are XML, self-closing tags are valid inside them
+        $html = preg_replace('#<(svg|math)(?=[\s/>])[^>]*(?:(?<=/)>|>.*?</\1>)#is', '', $html) ?? $html;
+
         if (preg_match_all('$<(\w{2,})\s?[^<]*\/>$', $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 if (!in_array($match[1], $this->voidElements)) {
