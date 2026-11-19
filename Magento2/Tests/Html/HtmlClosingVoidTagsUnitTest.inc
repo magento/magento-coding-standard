@@ -31,5 +31,6 @@
         <track src=""/>
     </video>
     <wbr/>
+    <!-- <br/> and <img src="x"/> are not checked -->
 </body>
 </html>
