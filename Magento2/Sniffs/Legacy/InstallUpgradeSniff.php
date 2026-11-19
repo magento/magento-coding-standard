@@ -88,8 +88,11 @@ class InstallUpgradeSniff implements Sniff
         
         $fileInfo = new SplFileInfo($phpcsFile->getFilename());
 
+        // Data and schema patches are free to use any class name, including the names of the obsolete scripts.
+        $isPatch = preg_match('#(^|[/\\\\])Setup[/\\\\]Patch[/\\\\](Data|Schema)$#', $fileInfo->getPath()) === 1;
+
         foreach (self::WRONG_PREFIXES as $code => $data) {
-            if (strpos($fileInfo->getFilename(), $data['pattern']) === 0) {
+            if (!$isPatch && strpos($fileInfo->getFilename(), $data['pattern']) === 0) {
                 $phpcsFile->addError($data['message'], 0, $code);
             }
         }

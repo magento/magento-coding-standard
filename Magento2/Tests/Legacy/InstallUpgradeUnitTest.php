@@ -6,6 +6,7 @@
 namespace Magento2\Tests\Legacy;
 
 use DirectoryIterator;
+use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -28,6 +29,22 @@ class InstallUpgradeUnitTest extends AbstractSniffUnitTest
         'file.inc',
         'file2.inc',
     ];
+
+    /**
+     * @var string
+     */
+    private $currentFile = '';
+
+    /**
+     * @inheritdoc
+     */
+    public function generateFailureMessages(LocalFile $file)
+    {
+        // getErrorList() only receives the base name, which is not enough to tell patches from obsolete scripts.
+        $this->currentFile = $file->getFilename();
+
+        return parent::generateFailureMessages($file);
+    }
 
     /**
      * @inheritdoc
@@ -63,6 +80,9 @@ class InstallUpgradeUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList($testFile = '')
     {
+        if (preg_match('#[/\\\\]Setup[/\\\\]Patch[/\\\\](Data|Schema)$#', dirname($this->currentFile)) === 1) {
+            return [];
+        }
         if (in_array($testFile, $this->wrongFileNames)) {
             return [
                 1 => 1
