@@ -112,6 +112,41 @@ You can execute ESLint as follows:
 npm run eslint -- path/to/analyze
 ```
 
+#### ESLint in a Magento project
+
+When the coding standard is installed as a Composer dependency, `npm run eslint` is executed inside `vendor/magento/magento-coding-standard`.
+ESLint 9 uses the current working directory as its base path, so files of the project are skipped with the warning `File ignored because outside of base path` and the exit code is `0`.
+
+Install the packages and run the ESLint binary from the root of the Magento project instead:
+```bash
+npm install --prefix vendor/magento/magento-coding-standard
+vendor/magento/magento-coding-standard/node_modules/.bin/eslint -c vendor/magento/magento-coding-standard/eslint/eslint.config.mjs path/to/analyze
+```
+
+ESLint 9 does not read `.eslintignore`. To exclude files, pass `--ignore-pattern`:
+```bash
+vendor/magento/magento-coding-standard/node_modules/.bin/eslint -c vendor/magento/magento-coding-standard/eslint/eslint.config.mjs --ignore-pattern "**/web/js/lib/**" path/to/analyze
+```
+
+Or create `eslint.config.mjs` in the root of the Magento project that extends the configuration of the coding standard:
+```js
+import magentoConfig from "./vendor/magento/magento-coding-standard/eslint/eslint.config.mjs";
+
+export default [
+    ...magentoConfig,
+    {
+        ignores: [
+            "**/web/js/lib/**"
+        ]
+    }
+];
+```
+
+ESLint finds this file automatically, so the `-c` option is not needed:
+```bash
+vendor/magento/magento-coding-standard/node_modules/.bin/eslint path/to/analyze
+```
+
 ### RECTOR PHP
 From `magento-coding-standard` project, you can execute rector php as follows:
 ```bash
