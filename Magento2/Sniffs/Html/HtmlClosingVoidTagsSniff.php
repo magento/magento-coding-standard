@@ -76,6 +76,8 @@ class HtmlClosingVoidTagsSniff implements Sniff
             return;
         }
         $html = $phpcsFile->getTokensAsString($stackPtr, count($phpcsFile->getTokens()));
+        // tags inside HTML comments are not rendered, so they are not checked
+        $html = preg_replace('/<!--.*?-->/s', '', $html);
 
         if (empty($html)) {
             return;

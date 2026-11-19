@@ -41,5 +41,9 @@
         <each/>
         <translate/>
         <scope/>
+        <!-- Comment <http://site.com/path/> and <div/> are not checked -->
+        <!--
+            <span/>
+        -->
     </body>
 </html>
