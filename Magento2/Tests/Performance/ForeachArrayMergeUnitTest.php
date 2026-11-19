@@ -29,7 +29,15 @@ class ForeachArrayMergeUnitTest extends AbstractSniffUnitTest
         return [
             11 => 1,
             19 => 1,
-            41 => 1
+            41 => 1,
+            57 => 1,
+            63 => 1,
+            76 => 1,
+            80 => 1,
+            86 => 1,
+            130 => 1,
+            131 => 1,
+            147 => 1
         ];
     }
 }
