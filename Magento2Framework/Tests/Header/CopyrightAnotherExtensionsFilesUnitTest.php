@@ -43,12 +43,12 @@ class CopyrightAnotherExtensionsFilesUnitTest extends AbstractSniffUnitTest
     {
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.1.xml') {
             return [
-                null => 1,
+                1 => 1,
             ];
         }
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.2.js') {
             return [
-                null => 1,
+                1 => 1,
             ];
         }
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.3.xml') {
@@ -59,7 +59,7 @@ class CopyrightAnotherExtensionsFilesUnitTest extends AbstractSniffUnitTest
         }
         if ($testFile === 'CopyrightAnotherExtensionsFilesUnitTest.5.less') {
             return [
-                null => 1,
+                1 => 1,
             ];
         }
         return [];
