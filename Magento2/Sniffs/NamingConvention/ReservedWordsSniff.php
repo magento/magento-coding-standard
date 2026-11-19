@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\NamingConvention;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Validates that class name is not reserved word.

@@ -7,8 +7,8 @@ declare(strict_types = 1);
 
 namespace Magento2\Sniffs\Legacy;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Coverage of obsolete table names usage

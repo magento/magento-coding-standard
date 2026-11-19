@@ -1,0 +1,14 @@
+<?php
+namespace Vendor\Module\Model;
+
+use Magento\Framework\App;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\AppInterface;
+use Magento\Framework\DataObject as MagentoDataObject;
+use Psr\Log\LoggerInterface;
+use function array_map;
+use const PHP_EOL;
+
+class Unsorted
+{
+}

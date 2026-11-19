@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\Html;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Sniffing improper HTML bindings.

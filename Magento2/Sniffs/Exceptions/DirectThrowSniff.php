@@ -5,8 +5,8 @@
  */
 namespace Magento2\Sniffs\Exceptions;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Detects possible direct throws of Exceptions.
