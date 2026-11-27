@@ -59,6 +59,24 @@
         <type>error</type>
         <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
+    <rule ref="Magento2.Security.AdminhtmlControllerAcl">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*/Test/*/Controller/Adminhtml/*</exclude-pattern>
+        <exclude-pattern>*/dev/tests/*</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Security.AdminhtmlControllerAuthorization">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*/Test/*/Controller/Adminhtml/*</exclude-pattern>
+        <exclude-pattern>*/dev/tests/*</exclude-pattern>
+    </rule>
+    <rule ref="Magento2.Security.AdminhtmlControllerContext">
+        <severity>10</severity>
+        <type>error</type>
+        <exclude-pattern>*/Test/*/Controller/Adminhtml/*</exclude-pattern>
+        <exclude-pattern>*/dev/tests/*</exclude-pattern>
+    </rule>
     <rule ref="Magento2.Security.IncludeFile">
         <severity>10</severity>
         <type>error</type>
