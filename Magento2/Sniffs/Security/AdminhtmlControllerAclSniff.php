@@ -96,7 +96,7 @@ class AdminhtmlControllerAclSniff implements Sniff
                 return true;
             }
             if ($declaration === null) {
-                return null;
+                return $this->resolver->isMagentoController($className) ? true : null;
             }
             $declared = $this->getDeclaredProtection(...$declaration);
             if ($declared !== null) {

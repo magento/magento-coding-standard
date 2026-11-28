@@ -10,7 +10,7 @@ Every non-abstract named action class under `/Controller/Adminhtml/` is checked 
 - an `ADMIN_RESOURCE` constant with a non-empty value
 - an `_isAllowed()` method
 
-The parent chain is followed the same way as in `Magento2.Security.AdminhtmlControllerAuthorization`. Magento core Adminhtml controllers and classes from `allowedParentClasses` are trusted to declare the resource.
+The parent chain is followed the same way as in `Magento2.Security.AdminhtmlControllerAuthorization`. Classes from `allowedParentClasses` are trusted to declare the resource. So are Magento Adminhtml controllers whose file is outside the scanned module; otherwise their declarations are checked.
 
 Error codes:
 - `MissingAdminResource`: no declaration was found before reaching `Magento\Backend\App\Action` or `Magento\Backend\App\AbstractAction`, a class that cannot be resolved, or no parent.

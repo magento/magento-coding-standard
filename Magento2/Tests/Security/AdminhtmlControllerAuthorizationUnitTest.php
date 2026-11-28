@@ -40,6 +40,8 @@ class AdminhtmlControllerAuthorizationUnitTest extends AbstractSniffUnitTest
     {
         $errors = [
             'AbstractInvalidBase.inc' => [4 => 1],
+            'CoreFrameworkBase.inc' => [4 => 1],
+            'CoreFrameworkBaseChild.inc' => [4 => 1],
             'FrameworkParent.inc' => [8 => 1],
             'FullyQualifiedFrameworkParent.inc' => [4 => 1],
             'InvalidBaseChild.inc' => [4 => 1],

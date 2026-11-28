@@ -40,6 +40,7 @@ class AdminhtmlControllerAclUnitTest extends AbstractSniffUnitTest
         $errors = [
             'AbstractActionParent.inc' => [11 => 1],
             'AdminResource.inc' => [6 => 1, 24 => 1],
+            'CoreAbstractWithoutAclChild.inc' => [4 => 1],
             'FullyQualifiedFrameworkParent.inc' => [4 => 1],
             'MissingParent.inc' => [4 => 1],
             'MultipleClasses.inc' => [25 => 1],

@@ -31,7 +31,7 @@ class AdminhtmlControllerResolver
 
     private const CONTROLLER_PATH_PATTERN = '#[\\\\/]Controller[\\\\/]Adminhtml[\\\\/]#';
 
-    private const CORE_CONTROLLER_PATTERN = '#^Magento\\\\[^\\\\]+\\\\Controller\\\\Adminhtml\\\\#i';
+    private const MAGENTO_CONTROLLER_PATTERN = '#^Magento\\\\[^\\\\]+\\\\Controller\\\\Adminhtml\\\\#i';
 
     /**
      * @var File[]
@@ -54,6 +54,7 @@ class AdminhtmlControllerResolver
      *
      * The class or one of its resolved ancestors declares execute() or implements an action interface,
      * or the first ancestor that cannot be resolved is a controller or action class.
+     * A class without a parent must implement an action interface.
      *
      * @param File $file
      * @param int $classPtr
@@ -157,6 +158,31 @@ class AdminhtmlControllerResolver
             if ($this->isTrustedParent($className, $allowedParentClasses)) {
                 return true;
             }
+            if ($declaration === null) {
+                return $this->isMagentoController($className);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks whether the class is a backend action or an allowed parent.
+     *
+     * @param string $className
+     * @param string[] $allowedParentClasses
+     * @return bool
+     */
+    public function isTrustedParent(string $className, array $allowedParentClasses): bool
+    {
+        if ($this->isBackendAction($className)) {
+            return true;
+        }
+
+        foreach ($allowedParentClasses as $allowedParentClass) {
+            if (strcasecmp($className, ltrim($allowedParentClass, '\\')) === 0) {
+                return true;
+            }
         }
 
         return false;
@@ -180,25 +206,14 @@ class AdminhtmlControllerResolver
     }
 
     /**
-     * Checks whether the class is a backend action, an allowed parent or a Magento core Adminhtml controller.
+     * Checks whether the class name is a Magento Adminhtml controller.
      *
      * @param string $className
-     * @param string[] $allowedParentClasses
      * @return bool
      */
-    public function isTrustedParent(string $className, array $allowedParentClasses): bool
+    public function isMagentoController(string $className): bool
     {
-        if ($this->isBackendAction($className) || preg_match(self::CORE_CONTROLLER_PATTERN, $className) === 1) {
-            return true;
-        }
-
-        foreach ($allowedParentClasses as $allowedParentClass) {
-            if (strcasecmp($className, ltrim($allowedParentClass, '\\')) === 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return preg_match(self::MAGENTO_CONTROLLER_PATTERN, $className) === 1;
     }
 
     /**
@@ -222,7 +237,7 @@ class AdminhtmlControllerResolver
     }
 
     /**
-     * Checks whether the class declares execute() or implements an action interface.
+     * Checks whether the class implements an action interface or declares execute() and has a parent.
      *
      * @param File $file
      * @param int $classPtr
@@ -230,7 +245,9 @@ class AdminhtmlControllerResolver
      */
     private function declaresAction(File $file, int $classPtr): bool
     {
-        if (isset(array_change_key_case(ObjectDeclarations::getDeclaredMethods($file, $classPtr))['execute'])) {
+        if (ObjectDeclarations::findExtendedClassName($file, $classPtr) !== false
+            && isset(array_change_key_case(ObjectDeclarations::getDeclaredMethods($file, $classPtr))['execute'])
+        ) {
             return true;
         }
 
