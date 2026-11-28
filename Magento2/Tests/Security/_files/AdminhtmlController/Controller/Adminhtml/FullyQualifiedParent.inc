@@ -1,0 +1,13 @@
+<?php
+namespace Vendor\Module\Controller\Adminhtml;
+
+class FullyQualifiedParent extends /* backend action */
+    \Magento\Backend\App\Action
+{
+    public const ADMIN_RESOURCE = 'Vendor_Module::entity';
+
+    public function __construct(\Magento\Backend\App\Action\Context $context)
+    {
+        parent::__construct($context);
+    }
+}
